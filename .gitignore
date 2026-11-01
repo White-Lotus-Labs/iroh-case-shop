@@ -1,0 +1,17 @@
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+.env*
+!.env.example
+playwright-report/
+test-results/
+docs/perf-runs/latest.json
+.DS_Store
+prisma/*.db
+prisma/*.db-*
+prisma/*.sqlite
+prisma/*.sqlite-*
+
+next-env.d.ts
+.idea

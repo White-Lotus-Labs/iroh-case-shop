@@ -1,0 +1,15 @@
+{
+  "data": [
+    {
+      "smart_trader_longs_usd": 56405744.624450006,
+      "smart_trader_shorts_usd": 23832891.49696,
+      "smart_trader_total_usd": 80238636.12140998,
+      "whale_longs_usd": 1275228696.5159297,
+      "whale_shorts_usd": 1129785012.6386204,
+      "whale_total_usd": 2405013709.15455,
+      "public_figure_longs_usd": 89251012.23467,
+      "public_figure_shorts_usd": 60535995.44629,
+      "public_figure_total_usd": 149787007.68096
+    }
+  ]
+}

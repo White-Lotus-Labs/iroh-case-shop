@@ -1,0 +1,29 @@
+{
+  "data": {
+    "name": "Venice Token",
+    "symbol": "VVV",
+    "contract_address": "0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf",
+    "logo": "https://coin-images.coingecko.com/coins/images/54023/small/VVV_Token_Transparent.png?1741856877",
+    "token_details": {
+      "token_deployment_date": "2025-01-23 16:28:31",
+      "website": "https://venice.ai/home",
+      "x": "AskVenice",
+      "telegram": "",
+      "market_cap_usd": 1430787139.174647,
+      "fdv_usd": 2406161245.85801,
+      "circulating_supply": 48164886.1719461,
+      "total_supply": 81054353.9337218
+    },
+    "spot_metrics": {
+      "volume_total_usd": 95704114.7699762,
+      "buy_volume_usd": 46451396.86003341,
+      "sell_volume_usd": 49252717.9099428,
+      "total_buys": 79979,
+      "total_sells": 89272,
+      "unique_buyers": 1954,
+      "unique_sellers": 4586,
+      "liquidity_usd": 21071959.850087166,
+      "total_holders": 25633
+    }
+  }
+}

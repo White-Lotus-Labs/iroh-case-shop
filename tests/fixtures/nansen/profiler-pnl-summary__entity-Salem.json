@@ -1,0 +1,49 @@
+{
+  "pagination": {
+    "page": 1,
+    "per_page": 1,
+    "is_last_page": true
+  },
+  "top5_tokens": [
+    {
+      "realized_pnl": 3721724.6499900357,
+      "realized_roi": 3.6666115140029056,
+      "token_address": "0x2e8c31162b855a2ffa90f6f8634643ad6f111e18",
+      "token_symbol": "AI",
+      "chain": "robinhood"
+    },
+    {
+      "realized_pnl": 166715.59813287295,
+      "realized_roi": 0.030977498461939434,
+      "token_address": "0x0bd7d308f8e1639fab988df18a8011f41eacad73",
+      "token_symbol": "WETH",
+      "chain": "robinhood"
+    },
+    {
+      "realized_pnl": 49702.91580626998,
+      "realized_roi": 11.73630754355114,
+      "token_address": "0x89da5167eb1a0067f9b3e39a544ef8d4b9c41e18",
+      "token_symbol": "SIT",
+      "chain": "robinhood"
+    },
+    {
+      "realized_pnl": -57548.55572934563,
+      "realized_roi": -0.08989306570141867,
+      "token_address": "0x9d0e8f5b25384c7310cb8c6ae32c8fbeb645d083",
+      "token_symbol": "DRV",
+      "chain": "base"
+    },
+    {
+      "realized_pnl": -113492.09210265992,
+      "realized_roi": -0.3287406638186067,
+      "token_address": "0x385f4f8ae47651ce5f58f5265395a669f8281e18",
+      "token_symbol": "MEME",
+      "chain": "robinhood"
+    }
+  ],
+  "traded_token_count": 80,
+  "traded_times": 618,
+  "realized_pnl_usd": 3786385.3232421414,
+  "realized_pnl_percent": 0.29717140117504204,
+  "win_rate": 0.075
+}

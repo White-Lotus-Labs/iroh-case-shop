@@ -1,0 +1,45 @@
+.music-toggle {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid rgba(212, 175, 120, 0.28);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(243, 234, 217, 0.78);
+}
+
+.music-toggle svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.music-toggle[aria-pressed='true'] {
+  color: #f3ead9;
+  border-color: rgba(233, 201, 131, 0.7);
+  background: rgba(212, 175, 120, 0.14);
+}
+
+.music-toggle:hover,
+.music-toggle:focus-visible {
+  border-color: rgba(233, 201, 131, 0.7);
+  color: #f3ead9;
+}
+
+.music-toggle:focus-visible {
+  outline: 2px solid #e9c983;
+  outline-offset: 2px;
+}
+
+/* Portaled into the waiting room's header row while it covers the top bar. */
+.music-toggle.is-floating {
+  flex: none;
+  background: rgba(20, 14, 10, 0.55);
+  cursor: pointer;
+}

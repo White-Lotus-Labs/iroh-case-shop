@@ -1,0 +1,256 @@
+{
+  "measuredAt": "2026-09-27T12:30:02.251Z",
+  "base": "http://127.0.0.1:3112",
+  "runs": [
+    {
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "deviceScaleFactor": 2,
+      "throttle": "none",
+      "throttleApplied": false,
+      "throttleError": null,
+      "cpuRate": 1,
+      "entranceMs": null,
+      "loaderGoneMs": 35660,
+      "stepInsideEnabled": true,
+      "atEntrance": {
+        "document": 18546,
+        "js": 1764932,
+        "css": 208372,
+        "image": 3506282,
+        "font": 125512,
+        "other": 24,
+        "total": 5623668
+      },
+      "settled": {
+        "document": 18546,
+        "js": 1764932,
+        "css": 208372,
+        "image": 3746547,
+        "font": 125512,
+        "other": 24,
+        "total": 5863933
+      },
+      "top": [
+        {
+          "url": "/_next/static/chunks/0a-rz-831f710.js",
+          "type": "js",
+          "bytes": 881553
+        },
+        {
+          "url": "/_next/static/chunks/0qsso0ptze1fs.js",
+          "type": "js",
+          "bytes": 332167
+        },
+        {
+          "url": "/images/waiting-room/exterior.jpg",
+          "type": "image",
+          "bytes": 271182
+        },
+        {
+          "url": "/images/waiting-room/sketch-shop-front.jpg",
+          "type": "image",
+          "bytes": 240265
+        },
+        {
+          "url": "/images/waiting-room/sketch-shop-front.jpg",
+          "type": "image",
+          "bytes": 240265
+        },
+        {
+          "url": "/_next/static/chunks/34wvn5zw0a69w.js",
+          "type": "js",
+          "bytes": 204596
+        },
+        {
+          "url": "/images/waiting-room/team-david.jpg",
+          "type": "image",
+          "bytes": 187716
+        },
+        {
+          "url": "/images/waiting-room/team-david.jpg",
+          "type": "image",
+          "bytes": 187716
+        },
+        {
+          "url": "/_next/static/chunks/2y-qil67-a0c0.js",
+          "type": "js",
+          "bytes": 178147
+        },
+        {
+          "url": "/images/waiting-room/team-panda.jpg",
+          "type": "image",
+          "bytes": 176599
+        },
+        {
+          "url": "/images/waiting-room/team-panda.jpg",
+          "type": "image",
+          "bytes": 176599
+        },
+        {
+          "url": "/images/waiting-room/team-takezo.jpg",
+          "type": "image",
+          "bytes": 169523
+        },
+        {
+          "url": "/images/waiting-room/team-takezo.jpg",
+          "type": "image",
+          "bytes": 169523
+        },
+        {
+          "url": "/images/tea-host-diorama-body.5c7c91.webp",
+          "type": "image",
+          "bytes": 151268
+        },
+        {
+          "url": "/images/waiting-room/team-iroh.jpg",
+          "type": "image",
+          "bytes": 149634
+        },
+        {
+          "url": "/images/waiting-room/team-iroh.jpg",
+          "type": "image",
+          "bytes": 149634
+        },
+        {
+          "url": "/images/waiting-room/team-tldde.jpg",
+          "type": "image",
+          "bytes": 141330
+        },
+        {
+          "url": "/images/waiting-room/team-tldde.jpg",
+          "type": "image",
+          "bytes": 141330
+        }
+      ]
+    },
+    {
+      "profile": "mobile-390x844-fast4g",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 2,
+      "throttle": "fast4g",
+      "throttleApplied": true,
+      "throttleError": null,
+      "cpuRate": 4,
+      "entranceMs": 15044,
+      "loaderGoneMs": 15124,
+      "stepInsideEnabled": true,
+      "atEntrance": {
+        "document": 18546,
+        "js": 1764932,
+        "css": 208372,
+        "image": 958308,
+        "font": 125512,
+        "other": 24,
+        "total": 3075694
+      },
+      "settled": {
+        "document": 18546,
+        "js": 1764932,
+        "css": 208372,
+        "image": 1629384,
+        "font": 125512,
+        "other": 24,
+        "total": 3746770
+      },
+      "top": [
+        {
+          "url": "/_next/static/chunks/0a-rz-831f710.js",
+          "type": "js",
+          "bytes": 881553
+        },
+        {
+          "url": "/_next/static/chunks/0qsso0ptze1fs.js",
+          "type": "js",
+          "bytes": 332167
+        },
+        {
+          "url": "/images/waiting-room/exterior.jpg",
+          "type": "image",
+          "bytes": 271182
+        },
+        {
+          "url": "/images/waiting-room/sketch-shop-front.jpg",
+          "type": "image",
+          "bytes": 240265
+        },
+        {
+          "url": "/_next/static/chunks/34wvn5zw0a69w.js",
+          "type": "js",
+          "bytes": 204596
+        },
+        {
+          "url": "/_next/static/chunks/2y-qil67-a0c0.js",
+          "type": "js",
+          "bytes": 178147
+        },
+        {
+          "url": "/images/tea-host-diorama-body.5c7c91.webp",
+          "type": "image",
+          "bytes": 151268
+        },
+        {
+          "url": "/images/theses/ai-600w.webp",
+          "type": "image",
+          "bytes": 128974
+        },
+        {
+          "url": "/images/theses/bullrun-600w.webp",
+          "type": "image",
+          "bytes": 124958
+        },
+        {
+          "url": "/images/theses/robinhood-600w.webp",
+          "type": "image",
+          "bytes": 121576
+        },
+        {
+          "url": "/images/tea-back-wall.bbdb12.webp",
+          "type": "image",
+          "bytes": 119166
+        },
+        {
+          "url": "/images/tea-back-wall.bbdb12.webp",
+          "type": "image",
+          "bytes": 119166
+        },
+        {
+          "url": "/_next/static/chunks/0_p3entpfrj26.css",
+          "type": "css",
+          "bytes": 104495
+        },
+        {
+          "url": "/images/shelf/spirit-1.webp",
+          "type": "image",
+          "bytes": 104136
+        },
+        {
+          "url": "/images/shelf/spirit-2.webp",
+          "type": "image",
+          "bytes": 98256
+        },
+        {
+          "url": "/images/shelf/spirit-3.webp",
+          "type": "image",
+          "bytes": 93176
+        },
+        {
+          "url": "/_next/static/chunks/2keiecr_gh02-.js",
+          "type": "js",
+          "bytes": 85969
+        },
+        {
+          "url": "/_next/static/chunks/0a54xfs-3fzqz.css",
+          "type": "css",
+          "bytes": 71477
+        }
+      ]
+    }
+  ]
+}

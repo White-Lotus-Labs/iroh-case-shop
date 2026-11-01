@@ -1,0 +1,1056 @@
+.waiting-room:has(.sb) {
+  --wr-backdrop-blur: 2px;
+}
+
+.sb {
+  --sb-ink: #2b2721;
+  --sb-ink-soft: rgba(43, 39, 33, 0.66);
+  --sb-ink-faint: rgba(43, 39, 33, 0.42);
+  --sb-earth: #9a6a3e;
+  --sb-moss: #566548;
+  --sb-seal: #a8382a;
+  --sb-paper: #f1eadb;
+  /* Cold-press tooth: raking light over fine relief, as shade and glint. */
+  --sb-tooth: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='280' height='280'><filter id='t' x='0' y='0' width='100%' height='100%' color-interpolation-filters='sRGB'><feTurbulence type='fractalNoise' baseFrequency='.19' numOctaves='3' seed='3' stitchTiles='stitch'/><feDiffuseLighting surfaceScale='1.1' diffuseConstant='1' lighting-color='%23fff' result='l'><feDistantLight azimuth='225' elevation='55'/></feDiffuseLighting><feColorMatrix in='l' result='s' values='0 0 0 0 .3 0 0 0 0 .22 0 0 0 0 .12 -.22 0 0 0 .19'/><feColorMatrix in='l' result='h' values='0 0 0 0 1 0 0 0 0 .99 0 0 0 0 .95 .62 0 0 0 -.53'/><feMerge><feMergeNode in='s'/><feMergeNode in='h'/></feMerge></filter><rect width='100%' height='100%' filter='url(%23t)'/></svg>");
+  /* Watercolour paper is never one flat tone: slow warm clouds. */
+  --sb-mottle: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='520' height='520'><filter id='m' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='.006' numOctaves='3' seed='11' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .58 0 0 0 0 .44 0 0 0 0 .26 .22 0 0 0 -.07'/></filter><rect width='100%' height='100%' filter='url(%23m)'/></svg>");
+  /* Book cloth: warp and weft. */
+  --sb-weave: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='w' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='.9 .045' numOctaves='2' seed='2' stitchTiles='stitch' result='a'/><feTurbulence type='fractalNoise' baseFrequency='.045 .9' numOctaves='2' seed='5' stitchTiles='stitch' result='b'/><feBlend in='a' in2='b' mode='multiply'/><feColorMatrix values='0 0 0 0 .05 0 0 0 0 .06 0 0 0 0 .04 -1.5 0 0 0 .62'/></filter><rect width='100%' height='100%' filter='url(%23w)'/></svg>");
+  height: 100%;
+  display: grid;
+  /* Tabs, book and hint travel as one group, so the tabs sit on the book. */
+  grid-template-rows: auto minmax(0, auto) auto;
+  grid-template-areas:
+    'nav'
+    'book'
+    'hint';
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  padding: 0 12px 6px;
+}
+
+.sb-front-petals {
+  z-index: 3;
+  filter: blur(1.6px);
+}
+.sb[data-budget='light'] .sb-front-petals,
+.sb[data-budget='light'] .sb-cast::before,
+.sb[data-budget='light'] .sb-cast::after {
+  filter: none;
+}
+.sb-stage {
+  grid-area: book;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  animation: sb-arrive 1.1s var(--wr-ease-out) 0.2s both;
+}
+.sb-3d {
+  position: relative;
+  flex: none;
+  width: min(980px, 80vw, calc((100svh - 380px) * 1.5));
+  perspective: 1800px;
+  perspective-origin: 50% 36%;
+  touch-action: pan-y;
+  cursor: grab;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.sb-3d:active {
+  cursor: grabbing;
+}
+.sb-tilt {
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(calc(6deg + var(--rx, 0deg))) rotateY(var(--ry, 0deg));
+}
+.sb-book {
+  --pw: calc(var(--bw, 900px) / 2);
+  --strips: 18;
+  --sw: calc(var(--pw) / var(--strips));
+  position: relative;
+  aspect-ratio: 3 / 2;
+  transform-style: preserve-3d;
+}
+.sb[data-mode='single'] .sb-3d {
+  width: min(92vw, 600px, calc((100svh - 250px) * 0.75));
+}
+.sb[data-mode='single'] .sb-book {
+  --pw: var(--bw, 360px);
+  aspect-ratio: 3 / 4;
+}
+
+/* The book rests on the step: a wide pool of shade and a tight contact
+   line, both easing off while a leaf is in the air. */
+.sb-cast {
+  position: absolute;
+  inset: 0;
+  transform: translateZ(-3px);
+  pointer-events: none;
+}
+.sb-cast::before,
+.sb-cast::after {
+  content: '';
+  position: absolute;
+}
+.sb-cast::before {
+  left: 2%;
+  right: 2%;
+  top: 30%;
+  bottom: -10%;
+  background: radial-gradient(
+    50% 50% at 50% 58%,
+    rgba(8, 5, 3, 0.64),
+    rgba(8, 5, 3, 0.32) 42%,
+    transparent 74%
+  );
+  filter: blur(24px);
+  opacity: calc(1 - var(--shade, 0) * 0.35);
+}
+.sb-cast::after {
+  left: 5%;
+  right: 5%;
+  top: 84%;
+  bottom: -4%;
+  background: radial-gradient(
+    50% 46% at 50% 40%,
+    rgba(5, 3, 2, 0.7),
+    rgba(5, 3, 2, 0.3) 48%,
+    transparent 78%
+  );
+  filter: blur(9px);
+  opacity: calc(1 - var(--shade, 0) * 0.5);
+}
+/* Cloth over board: weave, a worn lip that catches the lantern light, and
+   the spine hinge showing above and below the pages. */
+.sb-cover {
+  position: absolute;
+  inset: -8px -10px;
+  border-radius: 14px;
+  background:
+    var(--sb-weave),
+    linear-gradient(
+      90deg,
+      transparent 48.6%,
+      rgba(8, 10, 6, 0.4) 49.4%,
+      rgba(8, 10, 6, 0.4) 50.6%,
+      transparent 51.4%
+    ),
+    radial-gradient(
+      120% 90% at 30% 0%,
+      rgba(255, 236, 200, 0.12),
+      transparent 60%
+    ),
+    linear-gradient(180deg, #42523c, #2c382a);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 240, 210, 0.22),
+    inset 0 0 0 1px rgba(255, 240, 210, 0.06),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.35),
+    0 1px 1px rgba(8, 5, 3, 0.6),
+    0 3px 6px rgba(8, 5, 3, 0.4),
+    0 22px 44px rgba(8, 5, 3, 0.42);
+  transform: translateZ(-1px);
+}
+.sb[data-mode='single'] .sb-cover {
+  inset: -8px -10px -8px -7px;
+  border-radius: 6px 14px 14px 6px;
+}
+/* ---- pages ---- */
+.sb-half {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--pw);
+}
+.sb-half.is-left {
+  left: 0;
+}
+.sb-half.is-right {
+  right: 0;
+}
+.sb-page {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  container-type: inline-size;
+  color: var(--sb-ink);
+  background-color: var(--sb-paper);
+  background-image:
+    var(--sb-mottle),
+    radial-gradient(
+      120% 90% at 50% 36%,
+      rgba(255, 253, 246, 0.7),
+      rgba(255, 253, 246, 0) 72%
+    );
+}
+.sb-page.is-left {
+  --gutter: 270deg;
+  --fore: 90deg;
+  border-radius: 12px 0 0 12px;
+}
+.sb-page.is-right {
+  --gutter: 90deg;
+  --fore: 270deg;
+  border-radius: 0 12px 12px 0;
+}
+/* Over the ink: the tooth, then the gutter where the paper dips into the
+   binding and rises again in a lit ridge, then the edges falling away. */
+.sb-page::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    var(--sb-tooth),
+    linear-gradient(
+      var(--gutter),
+      rgba(40, 28, 14, 0.46) 0,
+      rgba(40, 28, 14, 0.2) 1.4%,
+      rgba(40, 28, 14, 0.06) 4.5%,
+      rgba(255, 250, 238, 0.12) 8%,
+      rgba(255, 250, 238, 0) 17%
+    ),
+    linear-gradient(var(--fore), rgba(60, 44, 22, 0.12), transparent 5%),
+    linear-gradient(
+      180deg,
+      rgba(60, 44, 22, 0.08),
+      transparent 4%,
+      transparent 94%,
+      rgba(60, 44, 22, 0.1)
+    );
+  background-size:
+    280px 280px,
+    auto,
+    auto,
+    auto;
+}
+/* The page block: sheets showing along the outer edge, their tone uneven. */
+.sb-half.is-left .sb-page {
+  box-shadow:
+    -1px 0 0 #cfc2a6,
+    -2px 0.5px 0 #eee6d4,
+    -3px 1px 0 #d6c9ad,
+    -4px 1.5px 0 #e8dfcb,
+    -5px 2px 0 #c7b99c,
+    -6px 2.5px 1px rgba(20, 14, 8, 0.4);
+}
+.sb-half.is-right .sb-page {
+  box-shadow:
+    1px 0 0 #cfc2a6,
+    2px 0.5px 0 #eee6d4,
+    3px 1px 0 #d6c9ad,
+    4px 1.5px 0 #e8dfcb,
+    5px 2px 0 #c7b99c,
+    6px 2.5px 1px rgba(20, 14, 8, 0.4);
+}
+.sb[data-riffle] .sb-half .sb-page-inner {
+  filter: url(#sb-blur-1);
+}
+.sb[data-riffle='fast'] .sb-half .sb-page-inner {
+  filter: url(#sb-blur-2);
+}
+.sb[data-budget='light'][data-riffle] .sb-half .sb-page-inner,
+.sb[data-budget='light'][data-riffle='fast'] .sb-half .sb-page-inner {
+  filter: none;
+}
+.sb-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.gutter-shade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 46%;
+  pointer-events: none;
+  opacity: calc(var(--shade, 0) * 0.62);
+}
+.sb-half.is-left .gutter-shade {
+  right: 0;
+  background: linear-gradient(270deg, rgba(52, 38, 20, 0.3), transparent 82%);
+}
+.sb-half.is-right .gutter-shade {
+  left: 0;
+  background: linear-gradient(90deg, rgba(52, 38, 20, 0.26), transparent 82%);
+}
+
+/* ---- the turning leaf ---- */
+.curl {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: var(--pw);
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+.curl.next,
+.curl.single {
+  left: 50%;
+  transform-origin: left center;
+  transform: rotateY(calc(-1 * var(--tt, 0deg)));
+}
+.curl.single {
+  left: 0;
+}
+.curl.prev {
+  right: 50%;
+  transform-origin: right center;
+  transform: rotateY(var(--tt, 0deg));
+}
+.strip {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: var(--sw);
+  transform-style: preserve-3d;
+}
+.curl.next .strip,
+.curl.single .strip {
+  transform-origin: left center;
+}
+.curl.prev .strip {
+  transform-origin: right center;
+}
+.curl.next > .strip,
+.curl.single > .strip {
+  left: 0;
+}
+.curl.prev > .strip {
+  right: 0;
+}
+.curl.next .strip .strip,
+.curl.single .strip .strip {
+  left: 100%;
+  transform: rotateY(var(--td, 0deg));
+}
+.curl.prev .strip .strip {
+  right: 100%;
+  transform: rotateY(calc(-1 * var(--td, 0deg)));
+}
+.face {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: -1.1px;
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.face.back {
+  transform: rotateY(180deg);
+}
+.face-page {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--pw);
+}
+.face-page.as-right {
+  left: calc(var(--i) * var(--sw) * -1);
+}
+.face-page.as-left {
+  left: calc((var(--i) + 1) * var(--sw) - var(--pw));
+}
+/* A back face mirrors about its own centre, and .face is 1.1px wider than
+   its strip, so a landed leaf would show its page 1.1px off the flat page. */
+.face.back .face-page {
+  margin-left: 1.1px;
+}
+/* The face-page is already shifted with `left` so overflow clips one
+   strip. Pin the JPEG to that box — a second background-position shift
+   showed empty paper on the curling leaf. */
+.face-page.is-shot {
+  background-color: var(--sb-paper);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: 0 0;
+}
+.face-page.is-shot.as-left {
+  border-radius: 12px 0 0 12px;
+}
+.face-page.is-shot.as-right {
+  border-radius: 0 12px 12px 0;
+}
+.face .sh,
+.face .gl {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.curl.next .face.front .sh,
+.curl.single .face.front .sh,
+.curl.prev .face.back .sh {
+  background: linear-gradient(
+    90deg,
+    rgba(58, 43, 20, var(--a1, 0)),
+    rgba(58, 43, 20, var(--a2, 0))
+  );
+}
+.curl.next .face.back .sh,
+.curl.single .face.back .sh,
+.curl.prev .face.front .sh {
+  background: linear-gradient(
+    90deg,
+    rgba(58, 43, 20, var(--a2, 0)),
+    rgba(58, 43, 20, var(--a1, 0))
+  );
+}
+.face .gl {
+  background: #fffaf0;
+  opacity: calc(var(--shade, 0) * var(--lit, 1) * var(--lit, 1) * 0.2);
+}
+.sb-verso {
+  border-radius: 10px 0 0 10px;
+}
+
+/* ---- page type ---- */
+.sb-page-inner {
+  position: absolute;
+  inset: 0;
+  font-variant-numeric: lining-nums;
+  display: flex;
+  flex-direction: column;
+  padding: 8cqi 8cqi 10cqi 8cqi;
+  font-family: var(--wr-serif);
+}
+.sb-page.is-left .sb-page-inner {
+  padding-right: 11cqi;
+}
+.sb-page.is-right .sb-page-inner {
+  padding-left: 11cqi;
+}
+.sb-kicker {
+  margin: 0 0 2.4cqi;
+  font:
+    700 max(9.5px, 2.15cqi) / 1.2 Arial,
+    Helvetica,
+    sans-serif;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sb-moss);
+}
+.sb-name {
+  margin: 0;
+  font-family: var(--wr-serif);
+  font-size: 12.5cqi;
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  color: var(--sb-ink);
+}
+.sb-tagline {
+  margin: 3cqi 0 0;
+  font-size: max(13px, 4.3cqi);
+  font-style: italic;
+  line-height: 1.35;
+  color: var(--sb-ink-soft);
+}
+.sb-rule {
+  display: block;
+  width: 16cqi;
+  height: 1px;
+  margin: 5.5cqi 0 5cqi;
+  background: var(--sb-earth);
+  opacity: 0.6;
+}
+.sb-body {
+  margin: 0;
+  font-size: max(12.5px, 3.45cqi);
+  line-height: 1.62;
+  color: var(--sb-ink);
+  text-wrap: pretty;
+}
+.sb-fine {
+  margin: auto 0 0;
+  max-width: 34ch;
+  font:
+    max(10.5px, 2.45cqi) / 1.5 Arial,
+    Helvetica,
+    sans-serif;
+  color: var(--sb-ink-soft);
+}
+.sb-heading {
+  margin: 0 0 3.2cqi;
+  font-size: max(18px, 6.4cqi);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--sb-ink);
+  text-wrap: balance;
+}
+.sb-caption-hand {
+  margin: 3cqi 0 0;
+  font-size: max(12.5px, 3.4cqi);
+  font-style: italic;
+  line-height: 1.4;
+  text-align: center;
+  color: var(--sb-ink-soft);
+}
+.sb-folio {
+  position: absolute;
+  bottom: 4.6cqi;
+  font: italic max(10px, 2.4cqi) var(--wr-serif);
+  color: var(--sb-ink-faint);
+}
+.sb-page.is-left .sb-folio {
+  left: 8cqi;
+}
+.sb-page.is-right .sb-folio {
+  right: 8cqi;
+}
+.sb-seal {
+  position: absolute;
+  right: 9cqi;
+  bottom: 12cqi;
+  display: grid;
+  place-items: center;
+  padding: 1cqi 0.7cqi;
+  border: max(1.5px, 0.4cqi) solid var(--sb-seal);
+  border-radius: 0.8cqi;
+  font:
+    700 max(11px, 3cqi) / 1.05 'Hiragino Mincho ProN',
+    'Songti SC',
+    serif;
+  writing-mode: vertical-rl;
+  color: var(--sb-seal);
+  opacity: 0.85;
+  transform: rotate(-5deg);
+  mix-blend-mode: multiply;
+}
+.sb-link {
+  align-self: flex-start;
+  display: inline-flex;
+  gap: 0.5em;
+  margin-top: auto;
+  padding: 1.6cqi 0;
+  font:
+    700 max(10.5px, 2.35cqi) / 1.2 Arial,
+    Helvetica,
+    sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--sb-ink);
+  background: linear-gradient(currentColor, currentColor) 0
+    calc(100% - 1.2cqi) / 100% 1px no-repeat;
+  transition:
+    color 0.2s ease,
+    background-size 0.2s ease;
+}
+.sb-link:hover {
+  color: var(--sb-earth);
+}
+/* X handles are case-sensitive; show them exactly. */
+.sb-link-x {
+  font-size: max(12px, 2.7cqi);
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+.sb-link:focus-visible,
+.sb-hello a:focus-visible {
+  outline: 2px solid var(--sb-earth);
+  outline-offset: 3px;
+}
+
+.sb-sketch {
+  display: block;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: radial-gradient(closest-side, #000 86%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 86%, transparent 100%);
+}
+.sb-cover-art {
+  justify-content: center;
+}
+.sb-cover-art .sb-sketch {
+  width: 112%;
+  margin: 0 -6%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+.sb-title .sb-kicker {
+  margin-top: 2cqi;
+  margin-bottom: 5cqi;
+}
+.sb-mark {
+  position: absolute;
+  top: 6.5cqi;
+  right: 8cqi;
+  width: 13cqi;
+  color: var(--sb-ink-soft);
+  pointer-events: none;
+}
+.sb-turn-hint {
+  position: absolute;
+  right: 8cqi;
+  bottom: 4.6cqi;
+  margin: 0 5cqi 0 0;
+  font: italic max(11px, 2.7cqi) var(--wr-serif);
+  color: var(--sb-earth);
+}
+.sb-room-art {
+  width: calc(100% + 12cqi);
+  margin: -2cqi -6cqi 3cqi;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+.sb-stations ol {
+  flex: 1;
+  display: grid;
+  align-content: space-between;
+  gap: 6cqi;
+  margin: 2cqi 0 0;
+  padding: 0;
+  list-style: none;
+}
+.sb-stations li {
+  display: grid;
+  grid-template-columns: 9.5cqi minmax(0, 1fr);
+  gap: 3cqi;
+  align-items: start;
+}
+.sb-stations .station-dock__paints {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+.sb-step-icon {
+  display: block;
+  width: 9.5cqi;
+  height: 9.5cqi;
+  min-width: 26px;
+  min-height: 26px;
+}
+.sb-step-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.sb-stations h3 {
+  margin: 0 0 1cqi;
+  font-size: max(15px, 4.4cqi);
+  font-weight: 400;
+  line-height: 1.15;
+}
+.sb-stations h3 small {
+  margin-left: 0.4em;
+  font:
+    700 max(9px, 2cqi) Arial,
+    Helvetica,
+    sans-serif;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--sb-moss);
+}
+.sb-stations p {
+  margin: 0;
+  font-size: max(12px, 3.1cqi);
+  line-height: 1.5;
+  color: var(--sb-ink-soft);
+  text-wrap: pretty;
+}
+/* Small spreads hit the px floors, so the busiest page tightens its rhythm
+   to keep the closing line clear of the folio. */
+@container (max-width: 400px) {
+  .sb-stations {
+    padding-top: 6.5cqi;
+  }
+  .sb-stations ol {
+    gap: 4.5cqi;
+  }
+  .sb-stations h3 {
+    margin-bottom: 0.5cqi;
+  }
+  .sb-stations p {
+    line-height: 1.38;
+  }
+  .sb-stations .sb-caption-hand {
+    padding-top: 2cqi;
+    font-size: max(11.5px, 3cqi);
+    line-height: 1.3;
+  }
+}
+.sb-figure {
+  position: relative;
+  align-self: center;
+  width: 86%;
+  aspect-ratio: 1;
+  margin: -5cqi 0 0;
+}
+.sb-portrait {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.sb-notes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.sb-notes svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  fill: none;
+  stroke: var(--sb-earth);
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.8;
+}
+.sb-notes svg path {
+  vector-effect: non-scaling-stroke;
+}
+.sb-notes > span {
+  position: absolute;
+  font-family: var(--wr-serif);
+  font-size: max(11px, 2.9cqi);
+  font-style: italic;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--sb-earth);
+  transform: rotate(-4deg);
+}
+.sb-handle {
+  margin: 0;
+  font-size: max(22px, 7.6cqi);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+}
+.sb-roles {
+  margin: 1.6cqi 0 2.6cqi;
+  font:
+    700 max(9px, 2.1cqi) / 1.4 Arial,
+    Helvetica,
+    sans-serif;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--sb-earth);
+}
+.sb-note {
+  margin: 0;
+  font-size: max(12.5px, 3.5cqi);
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--sb-ink);
+  text-wrap: pretty;
+}
+.sb-member .sb-link {
+  margin-top: auto;
+}
+.sb-hello ul {
+  display: grid;
+  gap: 0.4cqi;
+  margin: 1cqi 0 4cqi;
+  padding: 0;
+  list-style: none;
+}
+.sb-hello li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 3cqi;
+  border-bottom: 1px solid rgba(43, 39, 33, 0.14);
+}
+.sb-hello li a {
+  padding: 1.7cqi 0;
+  font-size: max(14px, 4cqi);
+  text-decoration: none;
+  color: var(--sb-ink);
+  transition: color 0.2s ease;
+}
+.sb-hello li a:hover {
+  color: var(--sb-earth);
+}
+.sb-hello li span {
+  font:
+    700 max(9px, 2cqi) Arial,
+    Helvetica,
+    sans-serif;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--sb-ink-faint);
+}
+.sb-hello .sb-link {
+  margin-top: 0;
+}
+.sb-sign {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 4cqi;
+  margin-top: auto;
+  padding-top: 3cqi;
+}
+.sb-sign .sb-caption-hand {
+  margin: 0;
+  text-align: left;
+}
+.sb-sign .sb-seal {
+  position: static;
+  flex: none;
+  margin-right: 1cqi;
+}
+
+/* ---- controls around the book ---- */
+.sb-arrow {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin: 0 clamp(20px, 1.4vw, 18px);
+  padding: 0;
+  border: 1px solid var(--wr-rule);
+  border-radius: 50%;
+  background: var(--wr-glass);
+  color: var(--wr-cream-dim);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    opacity 0.2s ease;
+}
+.sb-arrow svg {
+  width: 9px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.sb-arrow:hover:not(:disabled) {
+  color: var(--wr-cream);
+  border-color: rgba(230, 189, 132, 0.5);
+}
+.sb-arrow:disabled {
+  cursor: default;
+  opacity: 0.3;
+}
+.sb-arrow:focus-visible {
+  outline: 2px solid var(--wr-gold-hi);
+  outline-offset: 2px;
+}
+.sb-index {
+  grid-area: nav;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+  margin: 4px 0 22px;
+  animation: waiting-rise 0.9s var(--wr-ease-out) 0.5s both;
+}
+.sb-index-counter {
+  display: none;
+}
+.sb-index button {
+  min-height: 36px;
+  padding: 0 10px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--wr-cream-dim);
+  font-family: var(--wr-serif);
+  font-size: 14px;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+.sb-index button:hover {
+  color: var(--wr-cream);
+}
+.sb-index button[aria-current] {
+  color: var(--wr-gold-hi);
+  border-color: var(--wr-rule);
+  background: var(--wr-glass);
+}
+.sb-index button:focus-visible {
+  outline: 2px solid var(--wr-gold-hi);
+  outline-offset: 2px;
+}
+.sb-hint {
+  grid-area: hint;
+  margin: 18px 0 0;
+  font-size: 10.5px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: rgba(246, 236, 216, 0.45);
+  transition: opacity 0.5s ease;
+}
+.sb-hint.is-gone {
+  opacity: 0;
+}
+.sb-hint .on-touch,
+.sb-stations .sb-caption-hand {
+  display: none;
+}
+.sb-stations .sb-caption-hand {
+  display: block;
+  margin-top: 4cqi;
+  padding-right: 4cqi;
+  text-align: left;
+}
+@media (hover: none) {
+  .sb-hint .on-touch {
+    display: inline;
+  }
+  .sb-hint .on-mouse {
+    display: none;
+  }
+}
+
+@keyframes sb-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(26px) scale(0.97);
+  }
+}
+
+@media (max-width: 720px) and (min-height: 501px) {
+  /* The dots jump by spread, so the arrows move beside them to step by page. */
+  .sb {
+    grid-template-columns: 1fr max-content 1fr;
+    grid-template-areas:
+      'index index index'
+      'book book book'
+      'prev hint next';
+    padding: 0 0 6px;
+  }
+  .sb-stage {
+    display: contents;
+  }
+  .sb-3d {
+    grid-area: book;
+    animation: sb-arrive 1.1s var(--wr-ease-out) 0.2s both;
+  }
+  .sb-arrow {
+    z-index: 9999;
+    grid-area: prev;
+    justify-self: end;
+    margin: 18px 0 0;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    animation: waiting-rise 0.9s var(--wr-ease-out) 0.5s both;
+  }
+  .sb-hint,
+  .waiting-status,
+  .sb-index-list {
+    display: none;
+  }
+  .sb-index-counter {
+    display: block;
+    font-size: 14px;
+  }
+  .sb-index button::after {
+    border: 1px solid var(--wr-gold-hi);
+  }
+  .sb-arrow.is-next {
+    grid-area: next;
+    justify-self: start;
+    position: absolute;
+    right: 10px;
+  }
+  .sb-arrow.is-prev {
+    grid-area: next;
+    justify-self: start;
+    position: absolute;
+    left: 10px;
+  }
+  .sb-index {
+    grid-area: index;
+    gap: 0;
+    margin: 0 0 8px;
+  }
+  .sb-hint {
+    grid-area: hint;
+  }
+  /* Dots on phones: the titles stay for screen readers. */
+  .sb-index button {
+    position: relative;
+    width: 40px;
+    min-height: 40px;
+    padding: 0;
+    font-size: 0;
+    border: 0;
+    background: transparent;
+  }
+  .sb-index button::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(246, 236, 216, 0.35);
+    transition:
+      background 0.2s ease,
+      transform 0.2s ease;
+  }
+  .sb-index button[aria-current] {
+    background: transparent;
+  }
+  .sb-index button[aria-current]::after {
+    background: var(--wr-gold-hi);
+    transform: scale(1.3);
+  }
+  .sb-hint {
+    font-size: 9.5px;
+  }
+}
+
+/* Landscape phones: one page at a size its text fits, arrows beside it; the
+   stage scrolls rather than shrink the page. */
+@media (max-height: 500px) {
+  .sb {
+    grid-template-rows: auto auto auto;
+    align-content: start;
+    padding-top: 6px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
+  }
+  .sb::-webkit-scrollbar {
+    display: none;
+  }
+  .sb[data-mode='single'] .sb-3d {
+    width: min(80vw, 340px);
+  }
+  .sb-index {
+    margin: 0 0 10px;
+  }
+  .sb-index button {
+    min-height: 32px;
+    padding: 0 10px;
+    font-size: 12.5px;
+  }
+  .sb-hint {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sb-stage,
+  .sb-3d,
+  .sb-arrow,
+  .sb-index {
+    animation: none;
+  }
+}

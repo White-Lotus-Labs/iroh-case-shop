@@ -1,0 +1,15 @@
+{
+  "data": [
+    {
+      "address": "0x3ca19474c3d1fe5f826ee078e1857cae97b66120",
+      "address_label": "🤓 180D Smart Trader [0x3ca194]",
+      "bought_token_volume": 0.0,
+      "sold_token_volume": 500000.0,
+      "token_trade_volume": 500000.0,
+      "bought_volume_usd": 0.0,
+      "sold_volume_usd": 119149.61267947781,
+      "trade_volume_usd": 119149.61267947781
+    }
+  ],
+  "pagination": { "page": 1, "per_page": 10, "is_last_page": true }
+}

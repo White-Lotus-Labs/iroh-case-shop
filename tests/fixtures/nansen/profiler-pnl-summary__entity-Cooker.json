@@ -1,0 +1,49 @@
+{
+  "pagination": {
+    "page": 1,
+    "per_page": 1,
+    "is_last_page": true
+  },
+  "top5_tokens": [
+    {
+      "realized_pnl": 951999.4521579647,
+      "realized_roi": 1.4868419567139408,
+      "token_address": "0x39dbed3a2bd333467115de45665cc57f813c4571",
+      "token_symbol": "PONS",
+      "chain": "robinhood"
+    },
+    {
+      "realized_pnl": 345518.260110923,
+      "realized_roi": 2.3176121989445146,
+      "token_address": "0xd270d4e1ec6e6e0d28c0ecb8be966ec75997ffff",
+      "token_symbol": "4STOCK",
+      "chain": "bsc"
+    },
+    {
+      "realized_pnl": 177958.89422755258,
+      "realized_roi": 1.3859777090253587,
+      "token_address": "0xab093def657f15df31b33922a95e047add645b29",
+      "token_symbol": "SHROOM",
+      "chain": "robinhood"
+    },
+    {
+      "realized_pnl": 39299.75852774222,
+      "realized_roi": 0.08280919180340417,
+      "token_address": "0x88ad8ddf1e3898412146a534538d418c6f8a9062",
+      "token_symbol": "STANDARD",
+      "chain": "robinhood"
+    },
+    {
+      "realized_pnl": -38749.326118295394,
+      "realized_roi": -0.7970376552133627,
+      "token_address": "FZqdw6oSDCbHtKYxmhnfbi97SnyVy8jaYpdCoMrrjKa2",
+      "token_symbol": "PISTACIO",
+      "chain": "solana"
+    }
+  ],
+  "traded_token_count": 429,
+  "traded_times": 15578,
+  "realized_pnl_usd": 1625514.5367736344,
+  "realized_pnl_percent": 0.3467836678550058,
+  "win_rate": 0.31934731934731936
+}

@@ -1,0 +1,34 @@
+/* Scroll design tokens. Lane A owns the values; every lane uses the names. */
+:root {
+  --scroll-paper: #f5ecd6;
+  --scroll-paper-deep: #e8d7b2;
+  --scroll-ink: #211911;
+  --scroll-muted: #65563f;
+  --scroll-line: rgba(74, 47, 29, 0.2);
+  --seal: #a3261c;
+  --brocade: #6b2a21;
+  --rod: #3d2515;
+  --gold: #b8913f;
+  --gold-bright: #e9c983;
+  --jade: #2c6e52;
+
+  /* next/font sets the *-face variables on <html>; the names after them are fallbacks. */
+  --font-display:
+    var(--font-display-face, 'Cormorant Garamond'), 'Iowan Old Style', Georgia,
+    serif;
+  --font-body:
+    var(--font-body-face, 'Inter'), system-ui, -apple-system, 'Segoe UI',
+    sans-serif;
+  /* Seal glyphs use installed CJK serifs only, so no webfont is fetched. */
+  --font-cjk:
+    'Noto Serif SC', 'Noto Serif CJK SC', 'Source Han Serif SC', 'Songti SC',
+    STSong, SimSun, serif;
+
+  --ease-unroll: cubic-bezier(0.45, 0.05, 0.15, 1);
+  --ease-lift: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-overshoot: cubic-bezier(0.34, 1.45, 0.64, 1);
+  --ease-roll-up: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-unroll: 700ms;
+  --dur-roll-up: 380ms;
+  --dur-ink: 520ms;
+}

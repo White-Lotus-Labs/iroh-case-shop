@@ -1,0 +1,264 @@
+{
+  "measuredAt": "2026-09-27T12:41:32.582Z",
+  "base": "http://127.0.0.1:3112",
+  "runs": [
+    {
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "deviceScaleFactor": 2,
+      "throttle": "none",
+      "throttleApplied": false,
+      "throttleError": null,
+      "cpuRate": 1,
+      "entranceMs": 9453,
+      "loaderGoneMs": 9469,
+      "stepInsideEnabled": true,
+      "wire": {
+        "transfer": 1834171,
+        "decoded": 3565609
+      },
+      "atEntrance": {
+        "document": 19064,
+        "js": 1675945,
+        "css": 209813,
+        "image": 1401937,
+        "font": 125512,
+        "other": 24,
+        "total": 3432295
+      },
+      "settled": {
+        "document": 19064,
+        "js": 1675945,
+        "css": 209813,
+        "image": 1554315,
+        "font": 125512,
+        "other": 24,
+        "total": 3584673
+      },
+      "top": [
+        {
+          "url": "/_next/static/chunks/1hrdn9jem8_tb.js",
+          "type": "js",
+          "bytes": 866160
+        },
+        {
+          "url": "/_next/static/chunks/19warmw-r34r6.js",
+          "type": "js",
+          "bytes": 209861
+        },
+        {
+          "url": "/_next/static/chunks/34wvn5zw0a69w.js",
+          "type": "js",
+          "bytes": 204596
+        },
+        {
+          "url": "/_next/static/chunks/2y-qil67-a0c0.js",
+          "type": "js",
+          "bytes": 178147
+        },
+        {
+          "url": "/images/tea-host-diorama-body.5c7c91.webp",
+          "type": "image",
+          "bytes": 151268
+        },
+        {
+          "url": "/images/theses/ai-600w.webp",
+          "type": "image",
+          "bytes": 128974
+        },
+        {
+          "url": "/images/theses/bullrun-600w.webp",
+          "type": "image",
+          "bytes": 124958
+        },
+        {
+          "url": "/images/theses/robinhood-600w.webp",
+          "type": "image",
+          "bytes": 121576
+        },
+        {
+          "url": "/images/tea-back-wall.bbdb12.webp",
+          "type": "image",
+          "bytes": 119166
+        },
+        {
+          "url": "/images/waiting-room/sketch-shop-front.webp",
+          "type": "image",
+          "bytes": 113234
+        },
+        {
+          "url": "/images/waiting-room/sketch-shop-front.webp",
+          "type": "image",
+          "bytes": 113234
+        },
+        {
+          "url": "/_next/static/chunks/0_p3entpfrj26.css",
+          "type": "css",
+          "bytes": 104495
+        },
+        {
+          "url": "/_next/static/chunks/369ikoxz3x9y7.js",
+          "type": "js",
+          "bytes": 85898
+        },
+        {
+          "url": "/_next/static/chunks/0xg8nj6j4ioa5.css",
+          "type": "css",
+          "bytes": 72150
+        },
+        {
+          "url": "/images/waiting-room/exterior.webp",
+          "type": "image",
+          "bytes": 71708
+        },
+        {
+          "url": "/images/waiting-room/team-david.webp",
+          "type": "image",
+          "bytes": 57772
+        },
+        {
+          "url": "/images/waiting-room/team-david.webp",
+          "type": "image",
+          "bytes": 57772
+        },
+        {
+          "url": "/images/waiting-room/team-panda.webp",
+          "type": "image",
+          "bytes": 52288
+        }
+      ]
+    },
+    {
+      "profile": "mobile-390x844-fast4g",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "deviceScaleFactor": 2,
+      "throttle": "fast4g",
+      "throttleApplied": true,
+      "throttleError": null,
+      "cpuRate": 4,
+      "entranceMs": 10274,
+      "loaderGoneMs": 10511,
+      "stepInsideEnabled": true,
+      "wire": {
+        "transfer": 1301804,
+        "decoded": 2670141
+      },
+      "atEntrance": {
+        "document": 19064,
+        "js": 1648693,
+        "css": 209813,
+        "image": 412711,
+        "font": 125512,
+        "other": 24,
+        "total": 2415817
+      },
+      "settled": {
+        "document": 19064,
+        "js": 1684308,
+        "css": 237340,
+        "image": 622957,
+        "font": 125512,
+        "other": 24,
+        "total": 2689205
+      },
+      "top": [
+        {
+          "url": "/_next/static/chunks/1hrdn9jem8_tb.js",
+          "type": "js",
+          "bytes": 866160
+        },
+        {
+          "url": "/_next/static/chunks/19warmw-r34r6.js",
+          "type": "js",
+          "bytes": 209861
+        },
+        {
+          "url": "/_next/static/chunks/34wvn5zw0a69w.js",
+          "type": "js",
+          "bytes": 204596
+        },
+        {
+          "url": "/_next/static/chunks/2y-qil67-a0c0.js",
+          "type": "js",
+          "bytes": 178147
+        },
+        {
+          "url": "/images/tea-host-diorama-body.5c7c91.webp",
+          "type": "image",
+          "bytes": 151268
+        },
+        {
+          "url": "/images/tea-back-wall.bbdb12.webp",
+          "type": "image",
+          "bytes": 119166
+        },
+        {
+          "url": "/_next/static/chunks/0_p3entpfrj26.css",
+          "type": "css",
+          "bytes": 104495
+        },
+        {
+          "url": "/_next/static/chunks/369ikoxz3x9y7.js",
+          "type": "js",
+          "bytes": 85898
+        },
+        {
+          "url": "/_next/static/chunks/0xg8nj6j4ioa5.css",
+          "type": "css",
+          "bytes": 72150
+        },
+        {
+          "url": "/images/waiting-room/sketch-shop-front-640w.webp",
+          "type": "image",
+          "bytes": 55212
+        },
+        {
+          "url": "/images/waiting-room/sketch-shop-front-640w.webp",
+          "type": "image",
+          "bytes": 55212
+        },
+        {
+          "url": "/images/theses/ai-360w.webp",
+          "type": "image",
+          "bytes": 53652
+        },
+        {
+          "url": "/images/theses/bullrun-360w.webp",
+          "type": "image",
+          "bytes": 50606
+        },
+        {
+          "url": "/images/theses/robinhood-360w.webp",
+          "type": "image",
+          "bytes": 49082
+        },
+        {
+          "url": "/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+          "type": "font",
+          "bytes": 48432
+        },
+        {
+          "url": "/images/tea-host-diorama-head.47063b.webp",
+          "type": "image",
+          "bytes": 41814
+        },
+        {
+          "url": "/_next/static/media/8bd76523131fa0fc-s.p.1pvupmngxrt5z.woff2",
+          "type": "font",
+          "bytes": 39304
+        },
+        {
+          "url": "/_next/static/media/01e4147cff8141ee-s.p.3huc2loe0ie8a.woff2",
+          "type": "font",
+          "bytes": 37776
+        }
+      ]
+    }
+  ]
+}

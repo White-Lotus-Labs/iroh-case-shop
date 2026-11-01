@@ -1,0 +1,44 @@
+{
+  "name": "tea-after-pour",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "predev": "npm run db:migrate",
+    "dev": "next dev --hostname 127.0.0.1",
+    "build": "next build",
+    "start": "next start --hostname 127.0.0.1",
+    "typecheck": "next typegen && tsc --noEmit",
+    "db:migrate": "node scripts/migrate-db.mjs",
+    "postinstall": "node scripts/generate-prisma.mjs",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "format": "prettier --write src tests *.ts *.json README.md",
+    "format:check": "prettier --check src tests *.ts *.json README.md"
+  },
+  "dependencies": {
+    "@prisma/client": "6.4.1",
+    "@react-three/drei": "10.7.8",
+    "@react-three/fiber": "9.8.0",
+    "bcryptjs": "3.0.2",
+    "next": "16.3.6",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "three": "0.180.0",
+    "three-stdlib": "^2.36.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@types/node": "24.10.1",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "@types/three": "0.180.0",
+    "prettier": "3.6.2",
+    "prisma": "6.4.1",
+    "typescript": "5.9.3",
+    "vitest": "5.0.1"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

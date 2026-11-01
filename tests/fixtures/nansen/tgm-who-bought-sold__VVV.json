@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "address": "0xf03c41c8fce656dcf25bfb7d7e9eaf757266020a",
+      "address_label": "🤓 allervault.eth [0xf03c41]",
+      "bought_token_volume": 257.1083021573219,
+      "sold_token_volume": 0.0,
+      "token_trade_volume": 257.1083021573219,
+      "bought_volume_usd": 7945.531904752247,
+      "sold_volume_usd": 0.0,
+      "trade_volume_usd": 7945.531904752247
+    },
+    {
+      "address": "0x83817a0f7985d055684f01769427bf024373cf5a",
+      "address_label": "🤓 🤖 30D Smart Trader [0x83817a]",
+      "bought_token_volume": 191.94020003839063,
+      "sold_token_volume": 25.0,
+      "token_trade_volume": 166.94020003839063,
+      "bought_volume_usd": 5469.964038880475,
+      "sold_volume_usd": 823.6738342624349,
+      "trade_volume_usd": 4646.29020461804
+    }
+  ],
+  "pagination": { "page": 1, "per_page": 10, "is_last_page": true }
+}

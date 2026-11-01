@@ -1,0 +1,49 @@
+{
+  "pagination": {
+    "page": 1,
+    "per_page": 1,
+    "is_last_page": true
+  },
+  "top5_tokens": [
+    {
+      "realized_pnl": 2336425.4113634457,
+      "realized_roi": 14.54774489086868,
+      "token_address": "0x39dbed3a2bd333467115de45665cc57f813c4571",
+      "token_symbol": "PONS",
+      "chain": "robinhood"
+    },
+    {
+      "realized_pnl": 96001.58062768845,
+      "realized_roi": 19.316359418943474,
+      "token_address": "0x5a86828efd322bfb16d93cfed16ee9bc14940d7f",
+      "token_symbol": "QUOTRON",
+      "chain": "robinhood"
+    },
+    {
+      "realized_pnl": 41892.38278381794,
+      "realized_roi": 0.8062347438005423,
+      "token_address": "0x56910d4409f3a0c78c64dd8d0545ff0705389870",
+      "token_symbol": "INDEX",
+      "chain": "robinhood"
+    },
+    {
+      "realized_pnl": 29839.013406683083,
+      "realized_roi": 0.181059378712645,
+      "token_address": "6GmAFSYs4gk3FDao5FzzySQpPZaWsa4rUJHacpMpUNgx",
+      "token_symbol": "STONK",
+      "chain": "solana"
+    },
+    {
+      "realized_pnl": -60286.04201271241,
+      "realized_roi": -0.7980422761792664,
+      "token_address": "0x5f038759f6de38fd3a85c0440daff1240238bac8",
+      "token_symbol": "SEMI",
+      "chain": "robinhood"
+    }
+  ],
+  "traded_token_count": 163,
+  "traded_times": 3787,
+  "realized_pnl_usd": 2381278.116041062,
+  "realized_pnl_percent": 1.1946169910107136,
+  "win_rate": 0.10429447852760736
+}

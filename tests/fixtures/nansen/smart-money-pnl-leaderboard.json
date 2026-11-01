@@ -1,0 +1,1649 @@
+{
+  "data": [
+    {
+      "address": "0xb8f305f27ccc406373de0082cc06cb1d065504ea",
+      "address_label": "🤓 👤 👀 Salem [0xb8f305]",
+      "realized_pnl_usd": 3884816.747598371,
+      "unrealized_pnl_usd": 2036955.4073745161,
+      "total_pnl_usd": 5921772.154972887,
+      "avg_trade_roi": 0.32292615101297056,
+      "roi_percent_unrealised": 0.928075318704252,
+      "win_rate": 0.5333333333333333,
+      "n_trades": 390,
+      "n_tokens": 12,
+      "open_trades": 6,
+      "held_tokens_count": 6,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "0x2e8c31162b855a2ffa90f6f8634643ad6f111e18",
+          "symbol": "AI",
+          "name": "Artificial Inu",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176647/small/5ou9sb7h478ezv28urbjpzf1fl3e.?1788401429",
+          "chain": "robinhood",
+          "usd_value": "3721724.6499900357"
+        },
+        {
+          "token_address": "0x0bd7d308f8e1639fab988df18a8011f41eacad73",
+          "symbol": "WETH",
+          "name": "WETH",
+          "logo": "https://coin-images.coingecko.com/coins/images/102174283/small/weth-robinhood.jpeg?1782924507",
+          "chain": "robinhood",
+          "usd_value": "166715.59813287292"
+        },
+        {
+          "token_address": "0x89da5167eb1a0067f9b3e39a544ef8d4b9c41e18",
+          "symbol": "SIT",
+          "name": "Board Sit",
+          "logo": "https://cdn.dexscreener.com/cms/images/AGtp2rNPjIM-oZLb",
+          "chain": "robinhood",
+          "usd_value": "49702.91580626998"
+        },
+        {
+          "token_address": "0x5a8625d314fdd298101d87932a784b756a401e18",
+          "symbol": "AGI",
+          "name": "AGI Frog",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176796/small/agi.jpg?1788754300",
+          "chain": "robinhood",
+          "usd_value": "4675.509070832474"
+        },
+        {
+          "token_address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "symbol": "ETH",
+          "name": "Ethereum",
+          "logo": "https://coin-images.coingecko.com/coins/images/279/small/ethereum.png?1696501628",
+          "chain": "arbitrum",
+          "usd_value": "0.03402217376372528"
+        }
+      ]
+    },
+    {
+      "address": "0x3894c5f67e679a55af87ed49319ba8365e679abd",
+      "address_label": "🤓 30D Smart Trader [0x3894c5]",
+      "realized_pnl_usd": 3489160.7441264438,
+      "unrealized_pnl_usd": -409758.75211381284,
+      "total_pnl_usd": 3079401.992012631,
+      "avg_trade_roi": 0.4476231374273345,
+      "roi_percent_unrealised": -0.20946806819864727,
+      "win_rate": 0.35,
+      "n_trades": 423,
+      "n_tokens": 10,
+      "open_trades": 18,
+      "held_tokens_count": 18,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "0x2e8c31162b855a2ffa90f6f8634643ad6f111e18",
+          "symbol": "AI",
+          "name": "Artificial Inu",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176647/small/5ou9sb7h478ezv28urbjpzf1fl3e.?1788401429",
+          "chain": "robinhood",
+          "usd_value": "3464118.177553942"
+        },
+        {
+          "token_address": "0x22af33fe49fd1fa80c7149773dde5890d3c76f3b",
+          "symbol": "BNKR",
+          "name": "BankrCoin",
+          "logo": "https://coin-images.coingecko.com/coins/images/52626/small/bankr-static.png?1736405365",
+          "chain": "base",
+          "usd_value": "36102.59942273748"
+        },
+        {
+          "token_address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "symbol": "ETH",
+          "name": "Ether",
+          "logo": "https://coin-images.coingecko.com/coins/images/279/small/ethereum.png?1696501628",
+          "chain": "robinhood",
+          "usd_value": "19846.505807305006"
+        },
+        {
+          "token_address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "symbol": "ETH",
+          "name": "Ethereum",
+          "logo": "https://coin-images.coingecko.com/coins/images/279/small/ethereum.png?1696501628",
+          "chain": "base",
+          "usd_value": "473.71200231491093"
+        },
+        {
+          "token_address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "symbol": "ETH",
+          "name": "Ethereum",
+          "logo": "https://coin-images.coingecko.com/coins/images/279/small/ethereum.png?1696501628",
+          "chain": "ethereum",
+          "usd_value": "90.54732897736767"
+        }
+      ]
+    },
+    {
+      "address": "0x22055b5799d9b98e002b28f15fb2acb08ed5eee7",
+      "address_label": "🤓 180D Smart Trader [0x22055b]",
+      "realized_pnl_usd": 3307206.2871835446,
+      "unrealized_pnl_usd": 720337.4377497858,
+      "total_pnl_usd": 4027543.7249333304,
+      "avg_trade_roi": 1.0623574849533917,
+      "roi_percent_unrealised": 20.924696375013973,
+      "win_rate": 0.4,
+      "n_trades": 3212,
+      "n_tokens": 5,
+      "open_trades": 3,
+      "held_tokens_count": 3,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "0x2e8c31162b855a2ffa90f6f8634643ad6f111e18",
+          "symbol": "AI",
+          "name": "Artificial Inu",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176647/small/5ou9sb7h478ezv28urbjpzf1fl3e.?1788401429",
+          "chain": "robinhood",
+          "usd_value": "3322223.1507828594"
+        },
+        {
+          "token_address": "0xe0444ef8bf4ed74f74fd73686e2ddf4c1c5591e8",
+          "symbol": "NFLX",
+          "name": "Netflix • Robinhood Token",
+          "logo": "https://coin-images.coingecko.com/coins/images/102174165/small/0xe0444ef8bf4ed74f74fd73686e2ddf4c1c5591e8.png?1782444710",
+          "chain": "robinhood",
+          "usd_value": "1.0742298802554728"
+        },
+        {
+          "token_address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "symbol": "ETH",
+          "name": "Ether",
+          "logo": "https://coin-images.coingecko.com/coins/images/279/small/ethereum.png?1696501628",
+          "chain": "robinhood",
+          "usd_value": "-743.5725101203968"
+        },
+        {
+          "token_address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "symbol": "ETH",
+          "name": "Ethereum",
+          "logo": "https://coin-images.coingecko.com/coins/images/279/small/ethereum.png?1696501628",
+          "chain": "ethereum",
+          "usd_value": "-4387.377768616912"
+        },
+        {
+          "token_address": "0xbbf2c91fdcc488ba736e0c38adc82c9a92597deb",
+          "symbol": "CHILL",
+          "name": "Netflix & Chill",
+          "logo": "https://assets.geckoterminal.com/zcfjftz3lrmpo06sa0oqrufauasd",
+          "chain": "robinhood",
+          "usd_value": "-9886.987550457357"
+        }
+      ]
+    },
+    {
+      "address": "0x46a83dc1a264bff133db887023d2884167094837",
+      "address_label": "🤓 30D Smart Trader [0x46a83d]",
+      "realized_pnl_usd": 3039973.9544780394,
+      "unrealized_pnl_usd": -1525.5401203321446,
+      "total_pnl_usd": 3038448.4143577074,
+      "avg_trade_roi": 0.44958649180841476,
+      "roi_percent_unrealised": -0.006904578793703906,
+      "win_rate": 0.6666666666666666,
+      "n_trades": 26,
+      "n_tokens": 5,
+      "open_trades": 3,
+      "held_tokens_count": 4,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "0xcd5fe23c85820f7b72d0926fc9b05b43e359b7ee",
+          "symbol": "WEETH",
+          "name": "Wrapped eETH",
+          "logo": "https://coin-images.coingecko.com/coins/images/33033/small/weETH.png?1701438396",
+          "chain": "ethereum",
+          "usd_value": "2820171.76853009"
+        },
+        {
+          "token_address": "0x917cee801a67f933f2e6b33fc0cd1ed2d5909d88",
+          "symbol": "WEETHS",
+          "name": "Super Symbiotic LRT",
+          "logo": "https://coin-images.coingecko.com/coins/images/40058/small/weETHs.jpeg?1725450281",
+          "chain": "ethereum",
+          "usd_value": "164171.13329770326"
+        },
+        {
+          "token_address": "0x4200000000000000000000000000000000000006",
+          "symbol": "WETH",
+          "name": "Wrapped Ether",
+          "logo": "https://coin-images.coingecko.com/coins/images/39810/small/weth.png?1724139790",
+          "chain": "base",
+          "usd_value": "46862.29593554142"
+        },
+        {
+          "token_address": "0xd533a949740bb3306d119cc777fa900ba034cd52",
+          "symbol": "CRV",
+          "name": "Curve DAO Token",
+          "logo": "https://coin-images.coingecko.com/coins/images/12124/small/Curve.png?1696511967",
+          "chain": "ethereum",
+          "usd_value": "8849.210463952257"
+        },
+        {
+          "token_address": "0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf",
+          "symbol": "VVV",
+          "name": "Venice Token",
+          "logo": "https://coin-images.coingecko.com/coins/images/54023/small/VVV_Token_Transparent.png?1741856877",
+          "chain": "base",
+          "usd_value": "-80.4537492475572"
+        }
+      ]
+    },
+    {
+      "address": "AEtL29wgARtujVynpgoDtUMLvM7NmZ6WALcjD2NjU8Dk",
+      "address_label": "🤓 \"AEtL29\" on pump.fun [AEtL29wg]",
+      "realized_pnl_usd": 3029077.915747472,
+      "unrealized_pnl_usd": -80926.8359117904,
+      "total_pnl_usd": 2948151.0798356817,
+      "avg_trade_roi": 0.6367360073138453,
+      "roi_percent_unrealised": -0.12289396370804254,
+      "win_rate": 0.34375,
+      "n_trades": 1138,
+      "n_tokens": 24,
+      "open_trades": 20,
+      "held_tokens_count": 20,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "6GmAFSYs4gk3FDao5FzzySQpPZaWsa4rUJHacpMpUNgx",
+          "symbol": "STONK",
+          "name": "StonkFun",
+          "logo": "https://coin-images.coingecko.com/coins/images/102175239/small/tscmgapqpfx5j4hu8gbs3aj85s7a.?1785895603",
+          "chain": "solana",
+          "usd_value": "3096985.715441762"
+        },
+        {
+          "token_address": "4K1m7gAMDKzrxQn68yuZAd767w57Fw7Ykw69dG3umeta",
+          "symbol": "RAWR",
+          "name": "Jurassic",
+          "logo": "https://coin-images.coingecko.com/coins/images/102173337/small/rawr.jpg?1779087965",
+          "chain": "solana",
+          "usd_value": "40679.942480764454"
+        },
+        {
+          "token_address": "7ssJZGFT3twGqeYA1kvpoMWwZYvMZvrMEbjRaWgg46BL",
+          "symbol": "BUTTHOLE",
+          "name": "BUTTHOLE",
+          "logo": "https://assets.geckoterminal.com/x8ex2u1qzx8vt6vru8gges4fzj67",
+          "chain": "solana",
+          "usd_value": "3776.259834502975"
+        },
+        {
+          "token_address": "A7bdiYdS5GjqGFtxf17ppRHtDKPkkRqbKtR27dxvQXaS",
+          "symbol": "ZEC",
+          "name": "Zcash",
+          "logo": "https://coin-images.coingecko.com/coins/images/486/small/Brandmark-Yellow_%281%29.png?1785810558",
+          "chain": "solana",
+          "usd_value": "3562.9672085270154"
+        },
+        {
+          "token_address": "6UtY9iTZMQQ5QZVrbzFnNaJntV7oySm9k97mvwnuZcxr",
+          "symbol": "NEARKAT",
+          "name": "NearKat",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176913/small/nearkat.jpg?1789019515",
+          "chain": "solana",
+          "usd_value": "1262.0136216822673"
+        }
+      ]
+    },
+    {
+      "address": "EnaatNfHKJHifA6VsiZBm1dKKwY8z2aaqW8BhDYwvYJm",
+      "address_label": "🤓 90D Smart Trader [EnaatNfH]",
+      "realized_pnl_usd": 2936237.0752747776,
+      "unrealized_pnl_usd": 2285161.695012094,
+      "total_pnl_usd": 5221398.770286871,
+      "avg_trade_roi": 0.305903807699369,
+      "roi_percent_unrealised": 0.3308405261339293,
+      "win_rate": 0.6666666666666666,
+      "n_trades": 21,
+      "n_tokens": 3,
+      "open_trades": 1,
+      "held_tokens_count": 1,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn",
+          "symbol": "PUMP",
+          "name": "Pump",
+          "logo": "https://coin-images.coingecko.com/coins/images/67164/small/pump.jpg?1751949376",
+          "chain": "solana",
+          "usd_value": "2750862.0414481806"
+        },
+        {
+          "token_address": "6GmAFSYs4gk3FDao5FzzySQpPZaWsa4rUJHacpMpUNgx",
+          "symbol": "STONK",
+          "name": "StonkFun",
+          "logo": "https://coin-images.coingecko.com/coins/images/102175239/small/tscmgapqpfx5j4hu8gbs3aj85s7a.?1785895603",
+          "chain": "solana",
+          "usd_value": "185375.033826597"
+        }
+      ]
+    },
+    {
+      "address": "ARW9NzhpuBVYaYBZo6fW1P1U6LTNwUY6jfi7XC37Sa97",
+      "address_label": "🤓 \"kingpigger\" on pump.fun [ARW9Nzhp]",
+      "realized_pnl_usd": 2595467.065948335,
+      "unrealized_pnl_usd": 22121.17315594581,
+      "total_pnl_usd": 2617588.2391042807,
+      "avg_trade_roi": 60.05399344512114,
+      "roi_percent_unrealised": 10.074830935164277,
+      "win_rate": 0.41379310344827586,
+      "n_trades": 1834,
+      "n_tokens": 27,
+      "open_trades": 9,
+      "held_tokens_count": 9,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "6GmAFSYs4gk3FDao5FzzySQpPZaWsa4rUJHacpMpUNgx",
+          "symbol": "STONK",
+          "name": "StonkFun",
+          "logo": "https://coin-images.coingecko.com/coins/images/102175239/small/tscmgapqpfx5j4hu8gbs3aj85s7a.?1785895603",
+          "chain": "solana",
+          "usd_value": "2576604.4278863836"
+        },
+        {
+          "token_address": "8K5X85PAJHAAVSvYaAzgVPPAPsqqHmvx16ZyBiscYF8L",
+          "symbol": "CTO",
+          "name": "Vida Global CTO",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176760/small/vida.jpg?1788668355",
+          "chain": "solana",
+          "usd_value": "19384.456857556645"
+        },
+        {
+          "token_address": "2zCo6bUowJMvr89ajxuWsPadAqJ2F9akCkxumNsSdgsL",
+          "symbol": "XBTC",
+          "name": "xBTC",
+          "logo": "https://assets.geckoterminal.com/bgkm9qdpp5qrlxlzjxvda4kvzslx",
+          "chain": "solana",
+          "usd_value": "57.13826733065067"
+        },
+        {
+          "token_address": "3ZLekZYq2qkZiSpnSvabjit34tUkjSwD1JFuW9as9wBG",
+          "symbol": "WNEAR",
+          "name": "Wrapped NEAR fungible token",
+          "logo": "",
+          "chain": "solana",
+          "usd_value": "37.454163369205446"
+        },
+        {
+          "token_address": "7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs",
+          "symbol": "ETH",
+          "name": "Ether (Wormhole)",
+          "logo": "https://coin-images.coingecko.com/coins/images/22990/small/ETH_wh_small.png?1696522286",
+          "chain": "solana",
+          "usd_value": "8.292018784643611"
+        }
+      ]
+    },
+    {
+      "address": "0x0cc7cedb0935ceab0b4a6b38ee7dcfd403b19a7b",
+      "address_label": "🤓 👤 ogle [0x0cc7ce]",
+      "realized_pnl_usd": 2446834.5538458508,
+      "unrealized_pnl_usd": -62650.354273211444,
+      "total_pnl_usd": 2384184.1995726395,
+      "avg_trade_roi": 2.240428408901896,
+      "roi_percent_unrealised": -0.31739908868371813,
+      "win_rate": 0.5116279069767442,
+      "n_trades": 1503,
+      "n_tokens": 34,
+      "open_trades": 27,
+      "held_tokens_count": 27,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "0x39dbed3a2bd333467115de45665cc57f813c4571",
+          "symbol": "PONS",
+          "name": "Pons",
+          "logo": "https://coin-images.coingecko.com/coins/images/102174571/small/jhitvkisdq8fhxvimdkpcw7y3dx5.?1784093932",
+          "chain": "robinhood",
+          "usd_value": "2336428.4068124793"
+        },
+        {
+          "token_address": "0x5a86828efd322bfb16d93cfed16ee9bc14940d7f",
+          "symbol": "QUOTRON",
+          "name": "QUOTRONS",
+          "logo": "https://cdn.dexscreener.com/cms/images/kj-5ThhJsBxJyt1S",
+          "chain": "robinhood",
+          "usd_value": "96001.58062768845"
+        },
+        {
+          "token_address": "0x56910d4409f3a0c78c64dd8d0545ff0705389870",
+          "symbol": "INDEX",
+          "name": "The Index",
+          "logo": "https://coin-images.coingecko.com/coins/images/102174740/small/qffiSdBd_400x400_%281%29.jpg?1784708104",
+          "chain": "robinhood",
+          "usd_value": "41892.38278381794"
+        },
+        {
+          "token_address": "0xee5576fa1bcaa380e591d01245f406f3f384eb01",
+          "symbol": "DTF",
+          "name": "Down to Finance",
+          "logo": "https://coin-images.coingecko.com/coins/images/102175824/small/DTF.jpg?1787719411",
+          "chain": "robinhood",
+          "usd_value": "21488.34722284708"
+        },
+        {
+          "token_address": "0x57c0e45cb534413d1c20a4240955d6bb250bb4f1",
+          "symbol": "UP",
+          "name": "up",
+          "logo": "https://coin-images.coingecko.com/coins/images/102174542/small/tgeb6e7cyzun3qkeab3th5cj23qv.?1783957652",
+          "chain": "robinhood",
+          "usd_value": "11159.223698226802"
+        }
+      ]
+    },
+    {
+      "address": "0xde52c75041371b5e08d8a50b82c63734850628c1",
+      "address_label": "🤓 180D Smart Trader [0xde52c7]",
+      "realized_pnl_usd": 2353691.3908189777,
+      "unrealized_pnl_usd": 3632070.699190085,
+      "total_pnl_usd": 5985762.090009063,
+      "avg_trade_roi": 0.5395736545752137,
+      "roi_percent_unrealised": 21.263942309695338,
+      "win_rate": 0.5384615384615384,
+      "n_trades": 694,
+      "n_tokens": 25,
+      "open_trades": 7,
+      "held_tokens_count": 7,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "0xfe189e97832da1573e4e4ff034f4ffc3a15c7777",
+          "symbol": "MARSCOIN",
+          "name": "MarsCoin",
+          "logo": "https://coin-images.coingecko.com/coins/images/102175246/small/1000299474.png?1785934648",
+          "chain": "bsc",
+          "usd_value": "1437756.4962901045"
+        },
+        {
+          "token_address": "0x2e8c31162b855a2ffa90f6f8634643ad6f111e18",
+          "symbol": "AI",
+          "name": "Artificial Inu",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176647/small/5ou9sb7h478ezv28urbjpzf1fl3e.?1788401429",
+          "chain": "robinhood",
+          "usd_value": "565499.0587926253"
+        },
+        {
+          "token_address": "0x5a86828efd322bfb16d93cfed16ee9bc14940d7f",
+          "symbol": "QUOTRON",
+          "name": "QUOTRONS",
+          "logo": "https://cdn.dexscreener.com/cms/images/kj-5ThhJsBxJyt1S",
+          "chain": "robinhood",
+          "usd_value": "402984.6847141882"
+        },
+        {
+          "token_address": "0x18e674231a58c239dc7daedcffe15ec3a24cff5c",
+          "symbol": "HOOKR",
+          "name": "Hookr.fun",
+          "logo": "https://coin-images.coingecko.com/coins/images/102175265/small/hookr.jpg?1786013509",
+          "chain": "robinhood",
+          "usd_value": "67983.1520684236"
+        },
+        {
+          "token_address": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
+          "symbol": "CETS",
+          "name": "Cets On Gold",
+          "logo": "https://coin-images.coingecko.com/coins/images/102175639/small/cetsongold.jpg?1787209411",
+          "chain": "bsc",
+          "usd_value": "48515.914095158114"
+        }
+      ]
+    },
+    {
+      "address": "Gz3jNBsWMHNydXFRrJj3wzSCi22pLvL5TYpzwkGBKu6i",
+      "address_label": "🤓 180D Smart Trader [Gz3jNBsW]",
+      "realized_pnl_usd": 1863379.510160364,
+      "unrealized_pnl_usd": -11809.378024829473,
+      "total_pnl_usd": 1851570.1321355344,
+      "avg_trade_roi": 6.316933330043654,
+      "roi_percent_unrealised": -0.8801758371876034,
+      "win_rate": 0.4,
+      "n_trades": 277,
+      "n_tokens": 8,
+      "open_trades": 3,
+      "held_tokens_count": 3,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "6GmAFSYs4gk3FDao5FzzySQpPZaWsa4rUJHacpMpUNgx",
+          "symbol": "STONK",
+          "name": "StonkFun",
+          "logo": "https://coin-images.coingecko.com/coins/images/102175239/small/tscmgapqpfx5j4hu8gbs3aj85s7a.?1785895603",
+          "chain": "solana",
+          "usd_value": "1847584.3153050158"
+        },
+        {
+          "token_address": "A7bdiYdS5GjqGFtxf17ppRHtDKPkkRqbKtR27dxvQXaS",
+          "symbol": "ZEC",
+          "name": "Zcash",
+          "logo": "https://coin-images.coingecko.com/coins/images/486/small/Brandmark-Yellow_%281%29.png?1785810558",
+          "chain": "solana",
+          "usd_value": "15667.851786222154"
+        },
+        {
+          "token_address": "7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs",
+          "symbol": "ETH",
+          "name": "Ether (Wormhole)",
+          "logo": "https://coin-images.coingecko.com/coins/images/22990/small/ETH_wh_small.png?1696522286",
+          "chain": "solana",
+          "usd_value": "2921.7050742062956"
+        },
+        {
+          "token_address": "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn",
+          "symbol": "PUMP",
+          "name": "Pump",
+          "logo": "https://coin-images.coingecko.com/coins/images/67164/small/pump.jpg?1751949376",
+          "chain": "solana",
+          "usd_value": "285.972338374325"
+        },
+        {
+          "token_address": "Pren1FvFX6J3E4kXhJuCiAD5aDmGEb7qJRncwA8Lkhw",
+          "symbol": "ANTHRP",
+          "name": "Anthropic PreStocks",
+          "logo": "https://coin-images.coingecko.com/coins/images/69479/small/anthropic.png?1758715980",
+          "chain": "solana",
+          "usd_value": "-2.1419924512053514"
+        }
+      ]
+    },
+    {
+      "address": "0xe85458669e58c9440c0045a034edf6d3110609c5",
+      "address_label": "🤓 👤 UCY [0xe85458]",
+      "realized_pnl_usd": 1725207.3367719129,
+      "unrealized_pnl_usd": -70540.19829063378,
+      "total_pnl_usd": 1654667.1384812791,
+      "avg_trade_roi": 1.0900254711013515,
+      "roi_percent_unrealised": -0.6013510344195,
+      "win_rate": 0.5,
+      "n_trades": 98,
+      "n_tokens": 8,
+      "open_trades": 2,
+      "held_tokens_count": 2,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "0x2e8c31162b855a2ffa90f6f8634643ad6f111e18",
+          "symbol": "AI",
+          "name": "Artificial Inu",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176647/small/5ou9sb7h478ezv28urbjpzf1fl3e.?1788401429",
+          "chain": "robinhood",
+          "usd_value": "1273744.7724910155"
+        },
+        {
+          "token_address": "0x22af33fe49fd1fa80c7149773dde5890d3c76f3b",
+          "symbol": "BNKR",
+          "name": "BankrCoin",
+          "logo": "https://coin-images.coingecko.com/coins/images/52626/small/bankr-static.png?1736405365",
+          "chain": "base",
+          "usd_value": "305658.0639143697"
+        },
+        {
+          "token_address": "0x39dbed3a2bd333467115de45665cc57f813c4571",
+          "symbol": "PONS",
+          "name": "Pons",
+          "logo": "https://coin-images.coingecko.com/coins/images/102174571/small/jhitvkisdq8fhxvimdkpcw7y3dx5.?1784093932",
+          "chain": "robinhood",
+          "usd_value": "131142.06153606556"
+        },
+        {
+          "token_address": "0xd9db30bb0d2b8d2eae3826a1372117e058791e18",
+          "symbol": "MOO",
+          "name": "Memory cow Moo",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176669/small/QTB0jMQ7_400x400.jpg?1788425621",
+          "chain": "robinhood",
+          "usd_value": "28144.321502598337"
+        },
+        {
+          "token_address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "symbol": "ETH",
+          "name": "Ether",
+          "logo": "https://coin-images.coingecko.com/coins/images/279/small/ethereum.png?1696501628",
+          "chain": "robinhood",
+          "usd_value": "1002.5618852338052"
+        }
+      ]
+    },
+    {
+      "address": "0x26a2869488c4958c2aee366455a803757d8bfee7",
+      "address_label": "🤓 Smart Trader [0x26a286]",
+      "realized_pnl_usd": 1707013.3794406508,
+      "unrealized_pnl_usd": -137.7775504194001,
+      "total_pnl_usd": 1706875.6018902315,
+      "avg_trade_roi": 1.9783172360477586,
+      "roi_percent_unrealised": -0.21344424371279855,
+      "win_rate": 0.5714285714285714,
+      "n_trades": 348,
+      "n_tokens": 14,
+      "open_trades": 1,
+      "held_tokens_count": 1,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "0x2e8c31162b855a2ffa90f6f8634643ad6f111e18",
+          "symbol": "AI",
+          "name": "Artificial Inu",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176647/small/5ou9sb7h478ezv28urbjpzf1fl3e.?1788401429",
+          "chain": "robinhood",
+          "usd_value": "1121592.9600775526"
+        },
+        {
+          "token_address": "0x39dbed3a2bd333467115de45665cc57f813c4571",
+          "symbol": "PONS",
+          "name": "Pons",
+          "logo": "https://coin-images.coingecko.com/coins/images/102174571/small/jhitvkisdq8fhxvimdkpcw7y3dx5.?1784093932",
+          "chain": "robinhood",
+          "usd_value": "473235.21860601124"
+        },
+        {
+          "token_address": "0xd9db30bb0d2b8d2eae3826a1372117e058791e18",
+          "symbol": "MOO",
+          "name": "Memory cow Moo",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176669/small/QTB0jMQ7_400x400.jpg?1788425621",
+          "chain": "robinhood",
+          "usd_value": "96642.49140466427"
+        },
+        {
+          "token_address": "0x63ee32ac3077d1fbd8a77ebba2a6ed4b8e9c1e18",
+          "symbol": "INU",
+          "name": "iNu",
+          "logo": "https://coin-images.coingecko.com/coins/images/102178243/small/inu.jpg?1789199253",
+          "chain": "robinhood",
+          "usd_value": "19833.225553812215"
+        },
+        {
+          "token_address": "0x9936403a9cc72cf306063e3496ea387428a3aecd",
+          "symbol": "CINEMA",
+          "name": "ABSOLUTE CINEMA",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176708/small/dlsfhfhc42jwjvqim1h2nx1mncms.?1788516532",
+          "chain": "robinhood",
+          "usd_value": "3970.961045048822"
+        }
+      ]
+    },
+    {
+      "address": "Bmi9zf27MNN5pjCtyv2Y15TDQoYgcbcmPTxvEoQ6UwWs",
+      "address_label": "🤓 👤 Crypto Keys [Bmi9zf27]",
+      "realized_pnl_usd": 1654728.934988248,
+      "unrealized_pnl_usd": 1342262.4372061272,
+      "total_pnl_usd": 2996991.372194375,
+      "avg_trade_roi": 10.173194187282657,
+      "roi_percent_unrealised": 2.17166445620802,
+      "win_rate": 0.4649122807017544,
+      "n_trades": 9734,
+      "n_tokens": 65,
+      "open_trades": 78,
+      "held_tokens_count": 78,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "6GmAFSYs4gk3FDao5FzzySQpPZaWsa4rUJHacpMpUNgx",
+          "symbol": "STONK",
+          "name": "StonkFun",
+          "logo": "https://coin-images.coingecko.com/coins/images/102175239/small/tscmgapqpfx5j4hu8gbs3aj85s7a.?1785895603",
+          "chain": "solana",
+          "usd_value": "1517845.9688137702"
+        },
+        {
+          "token_address": "8RVBk8vxLiUHueLUW1f4izFVqN3nWippLhkohKg6EGkS",
+          "symbol": "KNOTS",
+          "name": "KNOTS",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176833/small/Untitled_Artwork_213.PNG?1788862086",
+          "chain": "solana",
+          "usd_value": "59479.01243524008"
+        },
+        {
+          "token_address": "2pouN3by7twkiZGy5aEKYUpf78ALDpKRTNu2WsQkpkqt",
+          "symbol": "BUTT",
+          "name": "Buttensor",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176816/small/mcsuwsnbkfuviivwkkrfk6xb9hof.?1788775297",
+          "chain": "solana",
+          "usd_value": "32996.24594482327"
+        },
+        {
+          "token_address": "8RNUw4N655VSrZKuhGdywhbSMDTrheguFPfxbpE2NZHQ",
+          "symbol": "PURR",
+          "name": "Hypurr",
+          "logo": "https://assets.geckoterminal.com/n5aex38uuckgf9bw5hxnz9f2ousu",
+          "chain": "solana",
+          "usd_value": "23734.605275078993"
+        },
+        {
+          "token_address": "MukLDtJ8Cx9DxLbeyLRSWPSposTMWuwHANbuaudpump",
+          "symbol": "OTC",
+          "name": "OTC",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176519/small/pn8lxl1irryda52qtilqq983b8ep.?1788018945",
+          "chain": "solana",
+          "usd_value": "15782.58269224657"
+        }
+      ]
+    },
+    {
+      "address": "0x50f27cdb650879a41fb07038bf2b818845c20e17",
+      "address_label": "🤓 👤 BUYINGYOURSTOPS [0x50f27c]",
+      "realized_pnl_usd": 1644271.8670779841,
+      "unrealized_pnl_usd": 608279.3678589013,
+      "total_pnl_usd": 2252551.2349368855,
+      "avg_trade_roi": 0.5212685757613182,
+      "roi_percent_unrealised": 0.5993119227728299,
+      "win_rate": 0.4782608695652174,
+      "n_trades": 1418,
+      "n_tokens": 23,
+      "open_trades": 9,
+      "held_tokens_count": 9,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "0x2e8c31162b855a2ffa90f6f8634643ad6f111e18",
+          "symbol": "AI",
+          "name": "Artificial Inu",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176647/small/5ou9sb7h478ezv28urbjpzf1fl3e.?1788401429",
+          "chain": "robinhood",
+          "usd_value": "1131309.8592593046"
+        },
+        {
+          "token_address": "0x98096d17e191b3da1d5f99a6d7b3584351b11e18",
+          "symbol": "BONER",
+          "name": "Boner Coin",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176671/small/boner.jpg?1788451067",
+          "chain": "robinhood",
+          "usd_value": "420161.7095111233"
+        },
+        {
+          "token_address": "0x88ad8ddf1e3898412146a534538d418c6f8a9062",
+          "symbol": "STANDARD",
+          "name": "STANDARD",
+          "logo": "https://coin-images.coingecko.com/coins/images/102178385/small/standard.png?1789445039",
+          "chain": "robinhood",
+          "usd_value": "44634.53618713456"
+        },
+        {
+          "token_address": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
+          "symbol": "CETS",
+          "name": "Cets On Gold",
+          "logo": "https://coin-images.coingecko.com/coins/images/102175639/small/cetsongold.jpg?1787209411",
+          "chain": "bsc",
+          "usd_value": "33913.63923354631"
+        },
+        {
+          "token_address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "symbol": "ETH",
+          "name": "Ether",
+          "logo": "https://coin-images.coingecko.com/coins/images/279/small/ethereum.png?1696501628",
+          "chain": "robinhood",
+          "usd_value": "32711.286687857086"
+        }
+      ]
+    },
+    {
+      "address": "0xb86f49b6387386badc4d74a217faa3273ad36c03",
+      "address_label": "🤓 👤 Cooker [0xb86f49]",
+      "realized_pnl_usd": 1342189.9696968268,
+      "unrealized_pnl_usd": -22321.086093620022,
+      "total_pnl_usd": 1319868.8836032068,
+      "avg_trade_roi": 0.5719472437906867,
+      "roi_percent_unrealised": -0.030302685789189158,
+      "win_rate": 0.5333333333333333,
+      "n_trades": 837,
+      "n_tokens": 14,
+      "open_trades": 5,
+      "held_tokens_count": 5,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "0x39dbed3a2bd333467115de45665cc57f813c4571",
+          "symbol": "PONS",
+          "name": "Pons",
+          "logo": "https://coin-images.coingecko.com/coins/images/102174571/small/jhitvkisdq8fhxvimdkpcw7y3dx5.?1784093932",
+          "chain": "robinhood",
+          "usd_value": "962976.7490245064"
+        },
+        {
+          "token_address": "0xd270d4e1ec6e6e0d28c0ecb8be966ec75997ffff",
+          "symbol": "4STOCK",
+          "name": "4Stock",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176822/small/4stock.webp?1788856122",
+          "chain": "bsc",
+          "usd_value": "345518.260110923"
+        },
+        {
+          "token_address": "0x88ad8ddf1e3898412146a534538d418c6f8a9062",
+          "symbol": "STANDARD",
+          "name": "STANDARD",
+          "logo": "https://coin-images.coingecko.com/coins/images/102178385/small/standard.png?1789445039",
+          "chain": "robinhood",
+          "usd_value": "39299.75852774222"
+        },
+        {
+          "token_address": "0x0379e228f6887c6f18bf394042ecaf81b308cb2e",
+          "symbol": "MUSEGOD",
+          "name": "MUSEGOD",
+          "logo": "https://cdn.dexscreener.com/cms/images/xYk3Sql1PoEYi03Q",
+          "chain": "robinhood",
+          "usd_value": "7171.002240259895"
+        },
+        {
+          "token_address": "0x00c7a526d693708e74cfde11293a1e09d6ba47b7",
+          "symbol": "CPU",
+          "name": "Cat Processing Unit",
+          "logo": "https://assets.geckoterminal.com/dr9fvwmrrr04tdzjqcq4dx8qf73w",
+          "chain": "robinhood",
+          "usd_value": "3321.7114946985635"
+        }
+      ]
+    },
+    {
+      "address": "EC2f5DnHzuNRit1ExqghSifDbp1wgrzktsRRZCtU92MJ",
+      "address_label": "🤓 👤 👀 Theo [EC2f5DnH]",
+      "realized_pnl_usd": 1278456.4720930725,
+      "unrealized_pnl_usd": 1048997.6056073192,
+      "total_pnl_usd": 2327454.0777003914,
+      "avg_trade_roi": 1.059651205587539,
+      "roi_percent_unrealised": 1.0482887695445415,
+      "win_rate": 0.5135135135135135,
+      "n_trades": 2032,
+      "n_tokens": 33,
+      "open_trades": 20,
+      "held_tokens_count": 20,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "6GmAFSYs4gk3FDao5FzzySQpPZaWsa4rUJHacpMpUNgx",
+          "symbol": "STONK",
+          "name": "StonkFun",
+          "logo": "https://coin-images.coingecko.com/coins/images/102175239/small/tscmgapqpfx5j4hu8gbs3aj85s7a.?1785895603",
+          "chain": "solana",
+          "usd_value": "1234104.581055579"
+        },
+        {
+          "token_address": "DEW9dSN6QpWyNthphCpMmAbZP1Q4cEKR9xQXAri98WDP",
+          "symbol": "SI",
+          "name": "Super Inu",
+          "logo": "https://assets.geckoterminal.com/q628w8jis4oj4kojo982rwo68rje",
+          "chain": "solana",
+          "usd_value": "23420.907787598782"
+        },
+        {
+          "token_address": "8K5X85PAJHAAVSvYaAzgVPPAPsqqHmvx16ZyBiscYF8L",
+          "symbol": "CTO",
+          "name": "Vida Global CTO",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176760/small/vida.jpg?1788668355",
+          "chain": "solana",
+          "usd_value": "21638.523048738552"
+        },
+        {
+          "token_address": "9h5AzEQzYu9CV5K6uLtFRMD1KcbxZSFNxZEgBTNfw5Na",
+          "symbol": "STONKCATS",
+          "name": "Stonk Cats",
+          "logo": "https://coin-images.coingecko.com/coins/images/102178527/small/cat.webp?1789844003",
+          "chain": "solana",
+          "usd_value": "11343.914482117421"
+        },
+        {
+          "token_address": "7LxC96Ag4DnBotK6bMMUj4kdneAo1kdV1xHnzVF5s7W2",
+          "symbol": "ROCK",
+          "name": "Ether Rock",
+          "logo": "https://coin-images.coingecko.com/coins/images/102178268/small/Untitled_design__13_-removebg-preview.png?1789232363",
+          "chain": "solana",
+          "usd_value": "6272.506937754445"
+        }
+      ]
+    },
+    {
+      "address": "0x0428ef4923513f73d53fd6c28875574fc7ed0413",
+      "address_label": "🤓 👤 Wheels McFantini [0x0428ef]",
+      "realized_pnl_usd": 1215011.8764048682,
+      "unrealized_pnl_usd": 24955.835474533513,
+      "total_pnl_usd": 1239967.7118794017,
+      "avg_trade_roi": 1.5964538883679957,
+      "roi_percent_unrealised": 0.13862773530127429,
+      "win_rate": 0.38461538461538464,
+      "n_trades": 532,
+      "n_tokens": 43,
+      "open_trades": 12,
+      "held_tokens_count": 12,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "0x39dbed3a2bd333467115de45665cc57f813c4571",
+          "symbol": "PONS",
+          "name": "Pons",
+          "logo": "https://coin-images.coingecko.com/coins/images/102174571/small/jhitvkisdq8fhxvimdkpcw7y3dx5.?1784093932",
+          "chain": "robinhood",
+          "usd_value": "914713.9373816742"
+        },
+        {
+          "token_address": "0x020bfc650a365f8bb26819deaabf3e21291018b4",
+          "symbol": "CASHCAT",
+          "name": "Cash Cat",
+          "logo": "https://coin-images.coingecko.com/coins/images/102174280/small/cashcat-logo.jpg?1782922765",
+          "chain": "robinhood",
+          "usd_value": "313443.6490926937"
+        },
+        {
+          "token_address": "0x2e8c31162b855a2ffa90f6f8634643ad6f111e18",
+          "symbol": "AI",
+          "name": "Artificial Inu",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176647/small/5ou9sb7h478ezv28urbjpzf1fl3e.?1788401429",
+          "chain": "robinhood",
+          "usd_value": "62318.508128237845"
+        },
+        {
+          "token_address": "0xb528a38ea684ed26ea0eee9de5d222da6228c10d",
+          "symbol": "ROBLOXIANS",
+          "name": "The Robloxians",
+          "logo": "https://assets.geckoterminal.com/r4vj8pku9ziz9500jv8is93dtnve",
+          "chain": "robinhood",
+          "usd_value": "12576.293235738167"
+        },
+        {
+          "token_address": "0x1d5aad3c0d6066078ea60f384a2492a550db30b0",
+          "symbol": "STACK",
+          "name": "STACKERS",
+          "logo": "https://coin-images.coingecko.com/coins/images/102175541/small/stackerz.jpg?1786693603",
+          "chain": "robinhood",
+          "usd_value": "9016.58959983257"
+        }
+      ]
+    },
+    {
+      "address": "0xfe277aa25a4f65a182c0ec135854794eb7131e79",
+      "address_label": "​​🤓 vali: @vali on Farcaster [Verified] [0xfe277a]",
+      "realized_pnl_usd": 914447.3384784725,
+      "unrealized_pnl_usd": 724210.6324468837,
+      "total_pnl_usd": 1638657.9709253563,
+      "avg_trade_roi": 11.759495415685254,
+      "roi_percent_unrealised": 25.407965009427425,
+      "win_rate": 0.5,
+      "n_trades": 187,
+      "n_tokens": 4,
+      "open_trades": 2,
+      "held_tokens_count": 2,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "0x39dbed3a2bd333467115de45665cc57f813c4571",
+          "symbol": "PONS",
+          "name": "Pons",
+          "logo": "https://coin-images.coingecko.com/coins/images/102174571/small/jhitvkisdq8fhxvimdkpcw7y3dx5.?1784093932",
+          "chain": "robinhood",
+          "usd_value": "922040.361936527"
+        },
+        {
+          "token_address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "symbol": "ETH",
+          "name": "Ether",
+          "logo": "https://coin-images.coingecko.com/coins/images/279/small/ethereum.png?1696501628",
+          "chain": "robinhood",
+          "usd_value": "-1.4255822952108723"
+        },
+        {
+          "token_address": "0x385f4f8ae47651ce5f58f5265395a669f8281e18",
+          "symbol": "MEME",
+          "name": "A Meme Coin",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176700/small/amc.jpg?1788511294",
+          "chain": "robinhood",
+          "usd_value": "-447.5422023045717"
+        },
+        {
+          "token_address": "0x5a86828efd322bfb16d93cfed16ee9bc14940d7f",
+          "symbol": "QUOTRON",
+          "name": "QUOTRONS",
+          "logo": "https://cdn.dexscreener.com/cms/images/kj-5ThhJsBxJyt1S",
+          "chain": "robinhood",
+          "usd_value": "-7144.055673454647"
+        }
+      ]
+    },
+    {
+      "address": "F5MYbjEATQFD6rxwdS2zXzEHBGuUhSGvJkUhLFAcr4hv",
+      "address_label": "🤓 👀 \"OmakaseOnly\" on FOMO [F5MYbjEA]",
+      "realized_pnl_usd": 907798.3788071073,
+      "unrealized_pnl_usd": -147527.5469492242,
+      "total_pnl_usd": 760270.8318578831,
+      "avg_trade_roi": 0.6587504532840106,
+      "roi_percent_unrealised": -0.5691768206181437,
+      "win_rate": 0.43243243243243246,
+      "n_trades": 3154,
+      "n_tokens": 73,
+      "open_trades": 16,
+      "held_tokens_count": 16,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "4MMQY9bwkxxTtsK3W227Q5ABT6yFY8Pmn9Ze7wmAXKY8",
+          "symbol": "ALLINU",
+          "name": "ALLINU",
+          "logo": "https://coin-images.coingecko.com/coins/images/102178423/small/all_inu.png?1789535478",
+          "chain": "solana",
+          "usd_value": "407735.3467351545"
+        },
+        {
+          "token_address": "5dvXTZ5qwgafnHtwu3Ls3QrWx1U4LQsFeCuJgkk4QEC6",
+          "symbol": "EMBER",
+          "name": "embercurve",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176976/small/giinqrdkzvkntah01nawlovbnkp3.?1789112047",
+          "chain": "solana",
+          "usd_value": "383957.79647039203"
+        },
+        {
+          "token_address": "98kfF7rmsg1QDUEoCqNE7g7M1FdrTt92TEp2CLzypump",
+          "symbol": "PAID",
+          "name": "Paid",
+          "logo": "https://coin-images.coingecko.com/coins/images/102178845/small/paid.jpg?1790453410",
+          "chain": "solana",
+          "usd_value": "84795.37879542801"
+        },
+        {
+          "token_address": "MukLDtJ8Cx9DxLbeyLRSWPSposTMWuwHANbuaudpump",
+          "symbol": "OTC",
+          "name": "OTC",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176519/small/pn8lxl1irryda52qtilqq983b8ep.?1788018945",
+          "chain": "solana",
+          "usd_value": "23836.30544738688"
+        },
+        {
+          "token_address": "5ZfFmbHzXuhw17e73NGZSHwiyULmybb4azTXCH4U8sDw",
+          "symbol": "SLAWTH",
+          "name": "Vawlt Slawth",
+          "logo": "https://assets.geckoterminal.com/u2xv0y86hfezzx6jok8jms9p25zp",
+          "chain": "solana",
+          "usd_value": "10598.367169591062"
+        }
+      ]
+    },
+    {
+      "address": "EZcv4WSEmX7WopTJc2bfrdaYovpKcxk81s9zXiQ3Zm9i",
+      "address_label": "​​🤓 DeBot: 30D Smart Trader [EZcv4WSE]",
+      "realized_pnl_usd": 887924.8863171829,
+      "unrealized_pnl_usd": 39657.20404054647,
+      "total_pnl_usd": 927582.0903577294,
+      "avg_trade_roi": 0.5314723091603384,
+      "roi_percent_unrealised": 0.34375842197910805,
+      "win_rate": 0.45454545454545453,
+      "n_trades": 1382,
+      "n_tokens": 31,
+      "open_trades": 7,
+      "held_tokens_count": 7,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "HcRLc9VDgjLeK154xDawfb1dmVJ98DoSqcwTHGqiDeJR",
+          "symbol": "ZCAT",
+          "name": "Anonymous Cat",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176753/small/zcat.webp?1788637007",
+          "chain": "solana",
+          "usd_value": "476816.30798338645"
+        },
+        {
+          "token_address": "6GmAFSYs4gk3FDao5FzzySQpPZaWsa4rUJHacpMpUNgx",
+          "symbol": "STONK",
+          "name": "StonkFun",
+          "logo": "https://coin-images.coingecko.com/coins/images/102175239/small/tscmgapqpfx5j4hu8gbs3aj85s7a.?1785895603",
+          "chain": "solana",
+          "usd_value": "334878.96961232985"
+        },
+        {
+          "token_address": "Dz9mQ9NzkBcCsuGPFJ3r1bS4wgqKMHBPiVuniW8Mbonk",
+          "symbol": "USELESS",
+          "name": "USELESS COIN",
+          "logo": "https://coin-images.coingecko.com/coins/images/55684/small/coingeckoupdate.png?1755203747",
+          "chain": "solana",
+          "usd_value": "119830.51242423836"
+        },
+        {
+          "token_address": "CbyTNf7UPzvewHh4Zp6umogM2RWahhmGRJWLJnPwpump",
+          "symbol": "BIKETYSON",
+          "name": "BIKE TYSON",
+          "logo": "https://assets.geckoterminal.com/oqy5w94wb6ztcmf1eahbip1bxni7",
+          "chain": "solana",
+          "usd_value": "30682.450995765368"
+        },
+        {
+          "token_address": "4sWNB8zGWHkh6UnmwiEtzNxL4XrN7uK9tosbESbJFfVs",
+          "symbol": "XSOL",
+          "name": "Hylo 3x Leveraged SOL",
+          "logo": "https://coin-images.coingecko.com/coins/images/70041/small/ni5u6yn4g5z7ne286emolousuqp3.webp?1760507867",
+          "chain": "solana",
+          "usd_value": "639.524979627285"
+        }
+      ]
+    },
+    {
+      "address": "0xffec0df753b6171e8cd6cf3d13d872c012242f00",
+      "address_label": "🤓 👤 Professor Actual Factual [0xffec0d]",
+      "realized_pnl_usd": 769301.6106992626,
+      "unrealized_pnl_usd": 584965.6958708166,
+      "total_pnl_usd": 1354267.3065700792,
+      "avg_trade_roi": 0.5508291264535785,
+      "roi_percent_unrealised": 1.5510660683937307,
+      "win_rate": 0.4888888888888889,
+      "n_trades": 1054,
+      "n_tokens": 35,
+      "open_trades": 16,
+      "held_tokens_count": 16,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "0x39dbed3a2bd333467115de45665cc57f813c4571",
+          "symbol": "PONS",
+          "name": "Pons",
+          "logo": "https://coin-images.coingecko.com/coins/images/102174571/small/jhitvkisdq8fhxvimdkpcw7y3dx5.?1784093932",
+          "chain": "robinhood",
+          "usd_value": "601558.9512053239"
+        },
+        {
+          "token_address": "0x7dbf38976f6d3b9c529e7d9484a71898b409ee6a",
+          "symbol": "ZZZ",
+          "name": "ZZZ",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176737/small/zzzz.jpg?1788621956",
+          "chain": "robinhood",
+          "usd_value": "145042.43112084654"
+        },
+        {
+          "token_address": "0x56910d4409f3a0c78c64dd8d0545ff0705389870",
+          "symbol": "INDEX",
+          "name": "The Index",
+          "logo": "https://coin-images.coingecko.com/coins/images/102174740/small/qffiSdBd_400x400_%281%29.jpg?1784708104",
+          "chain": "robinhood",
+          "usd_value": "26538.76990250566"
+        },
+        {
+          "token_address": "0x232ce3bd40fcd6f80f3d55a522d03f25df784ee2",
+          "symbol": "LIT",
+          "name": "Lighter",
+          "logo": "https://coin-images.coingecko.com/coins/images/71121/small/lighter.png?1765888098",
+          "chain": "ethereum",
+          "usd_value": "21437.483900437714"
+        },
+        {
+          "token_address": "0xbe98b75361935b18d688409424a869a4c3dc7401",
+          "symbol": "NUDES",
+          "name": "Send Nudes",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176916/small/Screenshot_2569-09-10_at_01.53.02.png?1789030287",
+          "chain": "robinhood",
+          "usd_value": "14203.757062161616"
+        }
+      ]
+    },
+    {
+      "address": "HPZJPCpMKEY1mBfvLE7RrwcpiQDncLY575dBgc6S9sJ1",
+      "address_label": "🤓 👀 \"spartee\" on FOMO [HPZJPCpM]",
+      "realized_pnl_usd": 763638.9103702116,
+      "unrealized_pnl_usd": -17977.27588693202,
+      "total_pnl_usd": 745661.6344832795,
+      "avg_trade_roi": 1.9744071813113135,
+      "roi_percent_unrealised": -0.12732176479067536,
+      "win_rate": 0.30612244897959184,
+      "n_trades": 1317,
+      "n_tokens": 48,
+      "open_trades": 19,
+      "held_tokens_count": 19,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "HcRLc9VDgjLeK154xDawfb1dmVJ98DoSqcwTHGqiDeJR",
+          "symbol": "ZCAT",
+          "name": "Anonymous Cat",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176753/small/zcat.webp?1788637007",
+          "chain": "solana",
+          "usd_value": "742705.7777136517"
+        },
+        {
+          "token_address": "98kfF7rmsg1QDUEoCqNE7g7M1FdrTt92TEp2CLzypump",
+          "symbol": "PAID",
+          "name": "Paid",
+          "logo": "https://coin-images.coingecko.com/coins/images/102178845/small/paid.jpg?1790453410",
+          "chain": "solana",
+          "usd_value": "65573.45715369997"
+        },
+        {
+          "token_address": "CbcyNo7m1amFWqEQm2m4PLv1UNvpcL3C1Ujm6AkzpKoU",
+          "symbol": "🌱 E/ACC",
+          "name": "🌱 Effective Accelerationism",
+          "logo": "https://coin-images.coingecko.com/coins/images/102178846/small/4dcf0uaiw9w1cc08ezo9rg0xvq0o.?1790453851",
+          "chain": "solana",
+          "usd_value": "10055.699946719735"
+        },
+        {
+          "token_address": "Ax5dAamJPeuaLpFUzs9FdcpoUhHDcxyjPzxCJQidjups",
+          "symbol": "MINI",
+          "name": "Minirouter.sh",
+          "logo": "https://assets.geckoterminal.com/q6bmcrz4le5bayq42e6emo134bcj",
+          "chain": "solana",
+          "usd_value": "1438.8527042793703"
+        },
+        {
+          "token_address": "6GmAFSYs4gk3FDao5FzzySQpPZaWsa4rUJHacpMpUNgx",
+          "symbol": "STONK",
+          "name": "StonkFun",
+          "logo": "https://coin-images.coingecko.com/coins/images/102175239/small/tscmgapqpfx5j4hu8gbs3aj85s7a.?1785895603",
+          "chain": "solana",
+          "usd_value": "551.3118727768451"
+        }
+      ]
+    },
+    {
+      "address": "Dw3LY8NnG3BB1EEXCNJwAKtVoEE7faEYiygYNHfFPNb1",
+      "address_label": "🤓 👤 👀 tremendoustoad [Dw3LY8Nn]",
+      "realized_pnl_usd": 628322.2314875827,
+      "unrealized_pnl_usd": 258083.39886849077,
+      "total_pnl_usd": 886405.6303560734,
+      "avg_trade_roi": 1.5332784751048771,
+      "roi_percent_unrealised": 1.3251321631976112,
+      "win_rate": 0.5625,
+      "n_trades": 2492,
+      "n_tokens": 29,
+      "open_trades": 22,
+      "held_tokens_count": 22,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "HcRLc9VDgjLeK154xDawfb1dmVJ98DoSqcwTHGqiDeJR",
+          "symbol": "ZCAT",
+          "name": "Anonymous Cat",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176753/small/zcat.webp?1788637007",
+          "chain": "solana",
+          "usd_value": "303833.7234372866"
+        },
+        {
+          "token_address": "8RVBk8vxLiUHueLUW1f4izFVqN3nWippLhkohKg6EGkS",
+          "symbol": "KNOTS",
+          "name": "KNOTS",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176833/small/Untitled_Artwork_213.PNG?1788862086",
+          "chain": "solana",
+          "usd_value": "159445.68319484015"
+        },
+        {
+          "token_address": "6GmAFSYs4gk3FDao5FzzySQpPZaWsa4rUJHacpMpUNgx",
+          "symbol": "STONK",
+          "name": "StonkFun",
+          "logo": "https://coin-images.coingecko.com/coins/images/102175239/small/tscmgapqpfx5j4hu8gbs3aj85s7a.?1785895603",
+          "chain": "solana",
+          "usd_value": "75045.66400327202"
+        },
+        {
+          "token_address": "E4Ap4icMLwKot8rkkTbq5JkS5kZxt5XCE3yfxbzYBjHx",
+          "symbol": "BTC",
+          "name": "Buy The Cat",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176771/small/24u5bzlbm1s8kcd5wfgkj2ulivzh.?1788680089",
+          "chain": "solana",
+          "usd_value": "51450.44300285519"
+        },
+        {
+          "token_address": "8RNUw4N655VSrZKuhGdywhbSMDTrheguFPfxbpE2NZHQ",
+          "symbol": "PURR",
+          "name": "Hypurr",
+          "logo": "https://assets.geckoterminal.com/n5aex38uuckgf9bw5hxnz9f2ousu",
+          "chain": "solana",
+          "usd_value": "46980.218849186"
+        }
+      ]
+    },
+    {
+      "address": "0xaf0fdd39e5d92499b0ed9f68693da99c0ec1e92e",
+      "address_label": "🤓 \"Tay\" HL Vault Leader [0xaf0fdd]",
+      "realized_pnl_usd": 559173.6512982036,
+      "unrealized_pnl_usd": 90056.86467477215,
+      "total_pnl_usd": 649230.5159729758,
+      "avg_trade_roi": 0.13685924848751108,
+      "roi_percent_unrealised": 0.1585089529868555,
+      "win_rate": 0.5,
+      "n_trades": 114,
+      "n_tokens": 7,
+      "open_trades": 10,
+      "held_tokens_count": 10,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "0x940181a94a35a4569e4529a3cdfb74e38fd98631",
+          "symbol": "AERO",
+          "name": "Aerodrome",
+          "logo": "https://coin-images.coingecko.com/coins/images/31745/small/token.png?1696530564",
+          "chain": "base",
+          "usd_value": "562715.9402299789"
+        },
+        {
+          "token_address": "0x4200000000000000000000000000000000000006",
+          "symbol": "WETH",
+          "name": "Wrapped Ether",
+          "logo": "https://coin-images.coingecko.com/coins/images/39810/small/weth.png?1724139790",
+          "chain": "base",
+          "usd_value": "267.0066273171537"
+        },
+        {
+          "token_address": "0x0b3e328455c4059eeb9e3f84b5543f74e24e7e1b",
+          "symbol": "VIRTUAL",
+          "name": "Virtual Protocol",
+          "logo": "https://coin-images.coingecko.com/coins/images/34057/small/LOGOMARK.png?1708356054",
+          "chain": "base",
+          "usd_value": "2.5000864146174497"
+        },
+        {
+          "token_address": "0xb095274743941e953c746f9c228da9c18bb6ec29",
+          "symbol": "LAPTOP",
+          "name": "LAPTOP",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176837/small/Laptop_Logo.png?1788875459",
+          "chain": "base",
+          "usd_value": "-270.2064534358384"
+        },
+        {
+          "token_address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "symbol": "ETH",
+          "name": "Ethereum",
+          "logo": "https://coin-images.coingecko.com/coins/images/279/small/ethereum.png?1696501628",
+          "chain": "base",
+          "usd_value": "-293.349578717011"
+        }
+      ]
+    },
+    {
+      "address": "4UrFSCrGxgoCtCUBAEZq7ZmPK3Pczkxx7PwYnkBMi1KR",
+      "address_label": "🤓 👤 J777Crypto [4UrFSCrG]",
+      "realized_pnl_usd": 555207.0011204297,
+      "unrealized_pnl_usd": 2432714.248910944,
+      "total_pnl_usd": 2987921.2500313735,
+      "avg_trade_roi": 1.4406436688373838,
+      "roi_percent_unrealised": 16.935073354524125,
+      "win_rate": 0.34782608695652173,
+      "n_trades": 2754,
+      "n_tokens": 43,
+      "open_trades": 17,
+      "held_tokens_count": 17,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "6GmAFSYs4gk3FDao5FzzySQpPZaWsa4rUJHacpMpUNgx",
+          "symbol": "STONK",
+          "name": "StonkFun",
+          "logo": "https://coin-images.coingecko.com/coins/images/102175239/small/tscmgapqpfx5j4hu8gbs3aj85s7a.?1785895603",
+          "chain": "solana",
+          "usd_value": "590868.9912372311"
+        },
+        {
+          "token_address": "CARDSccUMFKoPRZxt5vt3ksUbxEFEcnZ3H2pd3dKxYjp",
+          "symbol": "CARDS",
+          "name": "Collector Crypt",
+          "logo": "https://coin-images.coingecko.com/coins/images/68728/small/cards-logo.jpeg?1756534539",
+          "chain": "solana",
+          "usd_value": "27663.703104589742"
+        },
+        {
+          "token_address": "ASoQZA3Dee2HU34Vwx3b5SAtTaczJtZcyx1T413nDALL",
+          "symbol": "ALL",
+          "name": "all",
+          "logo": "https://assets.geckoterminal.com/49d0j77pb7sfqsxmpz1gtja06kl7",
+          "chain": "solana",
+          "usd_value": "10600.923723966658"
+        },
+        {
+          "token_address": "4oWhtcmBBsMG1bLZCLKusmq4t9fxdVVfbyJLevsYg5Ct",
+          "symbol": "CRIMECAT",
+          "name": "Crime Cat",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176901/small/crimecat.png?1789015577",
+          "chain": "solana",
+          "usd_value": "8094.671627826124"
+        },
+        {
+          "token_address": "3nqHijNUExsnjNBb15WJsJ2xisyMVGN6FK4aUgZk1Rwj",
+          "symbol": "TACZ",
+          "name": "TACZ",
+          "logo": "https://coin-images.coingecko.com/coins/images/102178381/small/tacz_400x400.jpg?1789398547",
+          "chain": "solana",
+          "usd_value": "6966.6604300367635"
+        }
+      ]
+    },
+    {
+      "address": "H6PEtpaDddtPEQjvGwEq5y7nF7WpNsTNy73m5h97oTye",
+      "address_label": "🤓 👀 \"Carver_\" on FOMO [H6PEtpaD]",
+      "realized_pnl_usd": 542982.3554688853,
+      "unrealized_pnl_usd": -3455.3927632258856,
+      "total_pnl_usd": 539526.9627056594,
+      "avg_trade_roi": 0.8828213027501738,
+      "roi_percent_unrealised": -0.13260144938765195,
+      "win_rate": 0.45,
+      "n_trades": 3572,
+      "n_tokens": 140,
+      "open_trades": 35,
+      "held_tokens_count": 35,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "6GmAFSYs4gk3FDao5FzzySQpPZaWsa4rUJHacpMpUNgx",
+          "symbol": "STONK",
+          "name": "StonkFun",
+          "logo": "https://coin-images.coingecko.com/coins/images/102175239/small/tscmgapqpfx5j4hu8gbs3aj85s7a.?1785895603",
+          "chain": "solana",
+          "usd_value": "320326.4552333648"
+        },
+        {
+          "token_address": "8RNUw4N655VSrZKuhGdywhbSMDTrheguFPfxbpE2NZHQ",
+          "symbol": "PURR",
+          "name": "Hypurr",
+          "logo": "https://assets.geckoterminal.com/n5aex38uuckgf9bw5hxnz9f2ousu",
+          "chain": "solana",
+          "usd_value": "101697.37091502706"
+        },
+        {
+          "token_address": "E4Ap4icMLwKot8rkkTbq5JkS5kZxt5XCE3yfxbzYBjHx",
+          "symbol": "BTC",
+          "name": "Buy The Cat",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176771/small/24u5bzlbm1s8kcd5wfgkj2ulivzh.?1788680089",
+          "chain": "solana",
+          "usd_value": "59543.36456709666"
+        },
+        {
+          "token_address": "GTBxUiw6wJdmmkCGZgRHLyYxqu1vG4KtRpeox6yDpump",
+          "symbol": "JEANPHIL",
+          "name": "Jean Phil",
+          "logo": "https://assets.geckoterminal.com/pkwz4cwv7pwdsdmvepbecsh2ybit",
+          "chain": "solana",
+          "usd_value": "27675.25337854656"
+        },
+        {
+          "token_address": "4MMQY9bwkxxTtsK3W227Q5ABT6yFY8Pmn9Ze7wmAXKY8",
+          "symbol": "ALLINU",
+          "name": "ALLINU",
+          "logo": "https://coin-images.coingecko.com/coins/images/102178423/small/all_inu.png?1789535478",
+          "chain": "solana",
+          "usd_value": "18698.74716053732"
+        }
+      ]
+    },
+    {
+      "address": "0x83a7a0f0d724e22cfe8463b41c1d959baca13c88",
+      "address_label": "🤓 👤 lesabre [0x83a7a0]",
+      "realized_pnl_usd": 511036.88883223006,
+      "unrealized_pnl_usd": 68617.69135264528,
+      "total_pnl_usd": 579654.5801848753,
+      "avg_trade_roi": 0.8789388967601861,
+      "roi_percent_unrealised": 0.5693522273020764,
+      "win_rate": 0.41935483870967744,
+      "n_trades": 446,
+      "n_tokens": 21,
+      "open_trades": 11,
+      "held_tokens_count": 11,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "0x2e8c31162b855a2ffa90f6f8634643ad6f111e18",
+          "symbol": "AI",
+          "name": "Artificial Inu",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176647/small/5ou9sb7h478ezv28urbjpzf1fl3e.?1788401429",
+          "chain": "robinhood",
+          "usd_value": "275971.78977256827"
+        },
+        {
+          "token_address": "0x385f4f8ae47651ce5f58f5265395a669f8281e18",
+          "symbol": "MEME",
+          "name": "A Meme Coin",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176700/small/amc.jpg?1788511294",
+          "chain": "robinhood",
+          "usd_value": "261588.93428187913"
+        },
+        {
+          "token_address": "0x91a2dae9699f0b82540b5886b0d8759c22820ba3",
+          "symbol": "MUSEBOOK",
+          "name": "musebook",
+          "logo": "https://coin-images.coingecko.com/coins/images/102178465/small/musebook.png?1789657052",
+          "chain": "robinhood",
+          "usd_value": "29626.599196473806"
+        },
+        {
+          "token_address": "0x12d5ee7917ca430073c3a638ee1e6f0648a98a01",
+          "symbol": "FATCOIN",
+          "name": "FATCOIN",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176676/small/fatcoin.jpg?1788493964",
+          "chain": "robinhood",
+          "usd_value": "13314.731373311373"
+        },
+        {
+          "token_address": "0x98096d17e191b3da1d5f99a6d7b3584351b11e18",
+          "symbol": "BONER",
+          "name": "Boner Coin",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176671/small/boner.jpg?1788451067",
+          "chain": "robinhood",
+          "usd_value": "12399.781502260026"
+        }
+      ]
+    },
+    {
+      "address": "7UBjMaYsE3tKcanfgGrtso6aHAMhVNSVHkkX5j3t7f5y",
+      "address_label": "🤓 👤 👀 Tekkerrss [7UBjMaYs]",
+      "realized_pnl_usd": 464225.2913464513,
+      "unrealized_pnl_usd": 2631.733688008171,
+      "total_pnl_usd": 466857.0250344595,
+      "avg_trade_roi": 2.0540067799134616,
+      "roi_percent_unrealised": 0.01096813164334294,
+      "win_rate": 0.4563106796116505,
+      "n_trades": 5583,
+      "n_tokens": 79,
+      "open_trades": 62,
+      "held_tokens_count": 62,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "6GmAFSYs4gk3FDao5FzzySQpPZaWsa4rUJHacpMpUNgx",
+          "symbol": "STONK",
+          "name": "StonkFun",
+          "logo": "https://coin-images.coingecko.com/coins/images/102175239/small/tscmgapqpfx5j4hu8gbs3aj85s7a.?1785895603",
+          "chain": "solana",
+          "usd_value": "269041.16380186303"
+        },
+        {
+          "token_address": "CFNRDaxFcvRwRSNnA5cHrCCr6AHhk9dNkHWpRUjNupFL",
+          "symbol": "RAYCAT",
+          "name": "Raydium Cat",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176773/small/5odvlfddqijvfrzedylna2xd0fes.?1788680477",
+          "chain": "solana",
+          "usd_value": "134303.39300905884"
+        },
+        {
+          "token_address": "3iUTyNYW6xKv5kZUjtbrEDTsuJTrSVwvB3bQtxkLpump",
+          "symbol": "BUKANGI",
+          "name": "부캉이 busan shark",
+          "logo": "https://assets.geckoterminal.com/ttpzp35mqkvgc507mbhah38nm39e",
+          "chain": "solana",
+          "usd_value": "23743.92818954493"
+        },
+        {
+          "token_address": "B5ANwoWkptDv1QszdPHXjCF2gTWdo27FGLffdfXzzoe6",
+          "symbol": "POKEMON",
+          "name": "POKÉMON CARDS",
+          "logo": "https://assets.geckoterminal.com/cwxpj301qhaypx949ax7t83ph6v2",
+          "chain": "solana",
+          "usd_value": "12136.741062009196"
+        },
+        {
+          "token_address": "CB1YQfUzgsnaCd93cZLdiX1uASW7utWBaYMUsvcwNUBV",
+          "symbol": "LOOM",
+          "name": "loom",
+          "logo": "https://coin-images.coingecko.com/coins/images/102176814/small/py06q25yq8stxt5wkkfwl77jsp8o.?1788774792",
+          "chain": "solana",
+          "usd_value": "9128.954599575223"
+        }
+      ]
+    },
+    {
+      "address": "8JKZAwiTJvkWL1ggjx787t5tcCgvahk4RYruoz4xnhXt",
+      "address_label": "🤓 180D Smart Trader [8JKZAwiT]",
+      "realized_pnl_usd": 456314.4455849575,
+      "unrealized_pnl_usd": 181020.29669474266,
+      "total_pnl_usd": 637334.7422797001,
+      "avg_trade_roi": 0.31841860520860504,
+      "roi_percent_unrealised": 0.24942000432063602,
+      "win_rate": 1,
+      "n_trades": 114,
+      "n_tokens": 4,
+      "open_trades": 4,
+      "held_tokens_count": 4,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "A7bdiYdS5GjqGFtxf17ppRHtDKPkkRqbKtR27dxvQXaS",
+          "symbol": "ZEC",
+          "name": "Zcash",
+          "logo": "https://coin-images.coingecko.com/coins/images/486/small/Brandmark-Yellow_%281%29.png?1785810558",
+          "chain": "solana",
+          "usd_value": "270143.9595054748"
+        },
+        {
+          "token_address": "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn",
+          "symbol": "PUMP",
+          "name": "Pump",
+          "logo": "https://coin-images.coingecko.com/coins/images/67164/small/pump.jpg?1751949376",
+          "chain": "solana",
+          "usd_value": "105998.1221140603"
+        },
+        {
+          "token_address": "Dz9mQ9NzkBcCsuGPFJ3r1bS4wgqKMHBPiVuniW8Mbonk",
+          "symbol": "USELESS",
+          "name": "USELESS COIN",
+          "logo": "https://coin-images.coingecko.com/coins/images/55684/small/coingeckoupdate.png?1755203747",
+          "chain": "solana",
+          "usd_value": "64941.36880375227"
+        },
+        {
+          "token_address": "6GmAFSYs4gk3FDao5FzzySQpPZaWsa4rUJHacpMpUNgx",
+          "symbol": "STONK",
+          "name": "StonkFun",
+          "logo": "https://coin-images.coingecko.com/coins/images/102175239/small/tscmgapqpfx5j4hu8gbs3aj85s7a.?1785895603",
+          "chain": "solana",
+          "usd_value": "15230.995161670118"
+        }
+      ]
+    },
+    {
+      "address": "9T546uDgKfBjDENngY4fehrkfrfAQ17Ua7UdyzGHuU3z",
+      "address_label": "🤓 30D Smart Trader [9T546uDg]",
+      "realized_pnl_usd": 424508.2477392039,
+      "unrealized_pnl_usd": 506542.56235303706,
+      "total_pnl_usd": 931050.810092241,
+      "avg_trade_roi": 0.6196650815151138,
+      "roi_percent_unrealised": 0.7589061345435896,
+      "win_rate": 0.5,
+      "n_trades": 835,
+      "n_tokens": 11,
+      "open_trades": 5,
+      "held_tokens_count": 5,
+      "top_traded_tokens_info": [
+        {
+          "token_address": "A7bdiYdS5GjqGFtxf17ppRHtDKPkkRqbKtR27dxvQXaS",
+          "symbol": "ZEC",
+          "name": "Zcash",
+          "logo": "https://coin-images.coingecko.com/coins/images/486/small/Brandmark-Yellow_%281%29.png?1785810558",
+          "chain": "solana",
+          "usd_value": "492107.76220787957"
+        },
+        {
+          "token_address": "6AUURRdHb9TrfPHv9AMofa8NEVoZDXcsbWKcUBpFSRXs",
+          "symbol": "CYPHERCAT",
+          "name": "CypherCat",
+          "logo": "https://coin-images.coingecko.com/coins/images/102178519/small/cypher.jpg?1789823480",
+          "chain": "solana",
+          "usd_value": "11200.549403472283"
+        },
+        {
+          "token_address": "BPxxfRCXkUVhig4HS1Lh7kZqV6SPJhzfEk4x6fVBjPCy",
+          "symbol": "BP",
+          "name": "Backpack",
+          "logo": "https://coin-images.coingecko.com/coins/images/102171961/small/image_%285%29.png?1774269858",
+          "chain": "solana",
+          "usd_value": "1049.163322004108"
+        },
+        {
+          "token_address": "Pren1FvFX6J3E4kXhJuCiAD5aDmGEb7qJRncwA8Lkhw",
+          "symbol": "ANTHRP",
+          "name": "Anthropic PreStocks",
+          "logo": "https://coin-images.coingecko.com/coins/images/69479/small/anthropic.png?1758715980",
+          "chain": "solana",
+          "usd_value": "226.63464283278876"
+        },
+        {
+          "token_address": "6n7Janary9fqzxKaJVrhL9TG2F61VbAtwUMu1YZscaQS",
+          "symbol": "HOBBES",
+          "name": "Ansem's Cat",
+          "logo": "https://coin-images.coingecko.com/coins/images/36708/small/Hobbes_PFP.png?1712126732",
+          "chain": "solana",
+          "usd_value": "96.93162431431077"
+        }
+      ]
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "per_page": 100,
+    "is_last_page": false
+  }
+}
