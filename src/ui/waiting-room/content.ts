@@ -41,10 +41,10 @@ export const TEAM: Member[] = [
 ];
 
 export const xUrl = (handle: string) => `https://x.com/${handle}`;
-export const REPO_URL = 'https://github.com/White-Lotus-Labs/iroh-tea-shop';
+export const REPO_URL = 'https://github.com/White-Lotus-Labs/iroh-case-shop';
 
 export const PROJECT = {
-  name: "Iroh's Tea Shop",
+  name: "Iroh's Case Shop",
   studio: 'White Lotus Labs',
   tagline: 'Choose a crypto thesis. See whether smart money supports it.',
   summary:
