@@ -31,6 +31,7 @@ import { MusicToggle } from './MusicToggle';
 import { roomTextures, SHELF_POSTERS, THESIS_IDS } from './roomTextures';
 import { lightExperience } from '../scene/lightExperience';
 import { paintSurfaces } from '../scene/paintSurfaces';
+import { PROJECT } from '@/ui/waiting-room/content';
 
 // Scene, deck, chat and Shelf stay out of the first paint; idle preloads warm them.
 const loadTeaRoom = () => import('../scene/TeaRoom');
@@ -511,13 +512,14 @@ export default function TeaRoomShell({
       >
         <WaitingVersions reduced={reduced} />
       </WaitingRoom>
+
       <header className="topbar" inert={isEntrance || undefined}>
         <a href="#main-panel" className="brand">
           <span className="brand-mark" aria-hidden="true">
             ◒
           </span>
           <span className="brand-text">
-            Iroh&apos;s Tea Shop
+            {PROJECT.name}
             <small>NANSEN-POWERED CRYPTO RESEARCH</small>
           </span>
         </a>

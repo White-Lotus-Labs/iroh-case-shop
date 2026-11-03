@@ -1,5 +1,5 @@
 'use client';
-import { useLayoutEffect, useRef, type ReactNode } from 'react';
+import { type ReactNode, useLayoutEffect, useRef } from 'react';
 import type { Station } from '../shared/contracts';
 import { createDockSpring } from './dockSpring';
 import './StationDock.css';

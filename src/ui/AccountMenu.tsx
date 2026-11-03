@@ -34,7 +34,7 @@ export function AccountMenu({ user }: { user: PublicUser | null }) {
       <a
         className="account-entry"
         data-testid="account-entry"
-        href="/account"
+        href=""
         aria-label="Log in"
       >
         <svg
@@ -58,7 +58,7 @@ export function AccountMenu({ user }: { user: PublicUser | null }) {
             strokeLinecap="round"
           />
         </svg>
-        <span>Log in</span>
+        <span>Connect Wallet</span>
       </a>
     );
   }
