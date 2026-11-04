@@ -1,0 +1,6 @@
+{
+  "network": "testnet",
+  "rpcUrl": "https://rpc.testnet.near.org",
+  "tokenContractId": null,
+  "caseContractId": null
+}

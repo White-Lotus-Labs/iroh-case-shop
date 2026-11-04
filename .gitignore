@@ -15,3 +15,5 @@ prisma/*.sqlite-*
 
 next-env.d.ts
 .idea
+# Local Rust build artifacts; contract sources and Cargo.lock stay tracked.
+contracts/target/
