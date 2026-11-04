@@ -135,7 +135,7 @@ No wallet list is hardcoded into the application.
 
 - [x] Typecheck, format check and diff whitespace check pass.
 - [x] Initial production build passes after allowing font network access.
-- [ ] Repeat production build after final source changes.
+- [x] Repeat production build after the integration changes; repeat again after final focus polish.
 - [ ] Review final diff, commit milestones and record final Git status/report.
 - Files: this checklist, `docs/development.md`, final report.
 - Acceptance: verified feature committed on its existing branch; limitations recorded accurately.
@@ -190,3 +190,10 @@ Current-manifest browser check passed: all six advertised Testnet wallets were
 shown and Mainnet-only wallets excluded. The first diagnostic incorrectly
 waited for the SDK's boxless outer wrapper to be visible; targeting its visible
 `.modal-content` corrected the diagnostic without an application change.
+
+
+Final read-only review found no Critical or Important issues. It identified a
+minor keyboard focus loss after successful disconnect. A new Playwright focus
+assertion reproduced the failure, and the menu now returns focus to its trigger
+when the account popover closes following sign-out. The wallet browser suite passed all five tests again. Typecheck, formatting and the
+production build also passed after this correction.

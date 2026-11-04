@@ -169,6 +169,8 @@ test('connects, restores after refresh, then disconnects for good', async ({
     'Connect Wallet',
   );
 
+  await expect(page.getByTestId('wallet-entry')).toBeFocused();
+
   // The disconnect persists: a refresh shows the guest state again.
   await page.reload();
   await waitForRoomReady(page);

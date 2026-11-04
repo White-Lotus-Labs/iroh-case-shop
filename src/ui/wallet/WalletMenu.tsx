@@ -25,8 +25,11 @@ export function WalletMenu() {
 
   // The slip describes this wallet; closing it on disconnect keeps focus sane.
   useEffect(() => {
-    if (status !== 'connected') setOpen(false);
-  }, [status]);
+    if (status !== 'connected' && open) {
+      setOpen(false);
+      trigger.current?.focus();
+    }
+  }, [status, open]);
 
   // Close like the other popovers: a press outside the slip closes it.
   useEffect(() => {
