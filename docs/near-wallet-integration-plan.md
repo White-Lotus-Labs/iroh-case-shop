@@ -125,11 +125,11 @@ No wallet list is hardcoded into the application.
 - [x] All 15 required scenarios covered by unit/controller and browser tests.
 - [x] Unit suite: 45 files, 300 tests pass, including 36 wallet tests.
 - [x] Wallet browser suite: 5 tests pass against real SDK and an injected test wallet.
-- [ ] Finish wider browser regression audit and current-manifest picker inspection.
+- [x] Audit wider browser regressions and inspect the picker with the current official manifest.
 - [ ] Authorize a real NEAR Testnet wallet, refresh and disconnect manually.
 - Files: `tests/wallet-*.test.ts`, `tests/browser/wallet.spec.ts`.
 - Acceptance: automated checks pass; real-wallet limitations are explicitly documented.
-- Status: automated wallet checks completed; wider audit in progress; real wallet not verified.
+- Status: automated checks completed with unrelated browser failures recorded below; real wallet not verified.
 
 ### Phase 10: Perform final regression testing and review
 
@@ -168,3 +168,25 @@ All now pass. Browser testing also caught the duplicate "Connect Wallet" label.
 No real wallet credentials, extension or account authorization were available.
 The injected wallet proves application/SDK wiring only. Actual third-party
 wallet authorization, persistence and availability remain NOT VERIFIED.
+
+
+The correctly configured broader browser run completed 15 tests: 13 passed,
+2 failed. Both failures are stale assertions against unchanged code at `3fee2c2`:
+
+- `deck.spec.ts:281` expects Shift+Tab from the close button to focus Omni,
+  although `TRADING_PLATFORMS` already ends with Hyperliquid. The failure also
+  reproduces when the test runs alone. No trading dialog code changed.
+- `waiting-sketchbook.spec.ts:88` expects "Iroh's Tea Shop", although
+  `PROJECT.name` already says "Iroh's Case Shop". No sketchbook content changed.
+
+The full suite attempt before correcting `DATABASE_URL` was stopped after
+10 failures and one interrupted test; 37 did not run. Its registration failures
+were test setup errors. The three account specs require the absent `/account`
+page. The full suite is therefore not claimed green. Existing tests and
+assertions were preserved, and unrelated account/trading/sketchbook work was
+not added to this feature.
+
+Current-manifest browser check passed: all six advertised Testnet wallets were
+shown and Mainnet-only wallets excluded. The first diagnostic incorrectly
+waited for the SDK's boxless outer wrapper to be visible; targeting its visible
+`.modal-content` corrected the diagnostic without an application change.

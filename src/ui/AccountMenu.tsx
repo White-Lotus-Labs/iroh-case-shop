@@ -58,7 +58,7 @@ export function AccountMenu({ user }: { user: PublicUser | null }) {
             strokeLinecap="round"
           />
         </svg>
-        <span>Connect Wallet</span>
+        <span>Log in</span>
       </a>
     );
   }

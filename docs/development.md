@@ -101,6 +101,27 @@ One unit test reads `README.md`. It fails unless the README still contains the t
 
 `.github/workflows/ci.yml` runs on every pull request and on pushes to `main`. It runs `npm run format:check`, `npm run typecheck`, `npm test`, and `npm run build`, with `NANSEN_API_KEY` empty. It does not run the browser tests, because they need a GPU.
 
+## NEAR wallet
+
+The top bar connects a NEAR **Testnet** wallet with [`@hot-labs/near-connect`](https://github.com/hot-dao/near-selector). The code is in `src/ui/wallet/`:
+
+| File                 | What it does                                                                       |
+| -------------------- | ---------------------------------------------------------------------------------- |
+| `walletController.ts` | The state machine: restore, connect, disconnect, busy flags, errors, dedup guards.  |
+| `nearConnector.ts`   | The only file that imports the SDK. Pins `network: 'testnet'`.                     |
+| `WalletProvider.tsx` | Creates the controller after mount and exposes `useWallet()` throughout the app.         |
+| `WalletMenu.tsx`     | The top-bar button and the account slip with **Disconnect**.                       |
+
+Rules that matter when changing this code:
+
+- The SDK reads `window`, `document`, `localStorage` and IndexedDB at construction, so it is imported lazily and only from a client component. Never import it in a server component.
+- `network: 'testnet'` hides wallets without `features.testnet`. There is no Mainnet fallback, and a session or account ending in `.near` is refused and signed out again.
+- Session restoration uses the SDK's own check (`getConnectedWallet()`). A stored account id alone never counts as connected.
+- Cancelling the wallet picker is a notice, not an error. Unexpected SDK failures are logged by action only, without SDK messages or wallet data.
+- No seed phrases, private keys or access keys are requested or stored. This feature connects an account; it does not prove ownership.
+
+The unit tests in `tests/wallet-controller.test.ts` drive the state machine with a fake connector. `tests/wallet-adapter.test.ts` runs the real SDK against an injected Testnet wallet in Node, which catches renamed SDK methods and events. `tests/browser/wallet.spec.ts` is the end-to-end check and needs a dev server.
+
 ## Scripts
 
 | Script                         | What it does                                                                                                                                                                                                   |

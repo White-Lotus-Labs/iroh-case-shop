@@ -3859,3 +3859,106 @@ body:has(.auth-shell) {
     clip-path: inset(-12px -12px -40px -12px);
   }
 }
+
+/* NEAR wallet control. Same chrome as the status and account controls, so the
+   top bar keeps one row of round buttons and one slip language. */
+.wallet-menu {
+  display: inline-flex;
+  align-items: center;
+}
+.wallet-entry {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(212, 175, 120, 0.3);
+  background: rgba(212, 175, 120, 0.06);
+  color: #f3ead9;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.15s ease;
+}
+.wallet-entry:hover:not(:disabled) {
+  border-color: rgba(212, 175, 120, 0.6);
+  background: rgba(212, 175, 120, 0.14);
+  transform: translateY(-1px);
+}
+.wallet-entry:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+.wallet-entry[aria-busy='true'] {
+  cursor: progress;
+}
+.wallet-entry svg {
+  color: rgba(243, 234, 217, 0.65);
+}
+.wallet-entry.is-connected {
+  padding: 0 16px 0 8px;
+  border-color: rgba(212, 175, 120, 0.25);
+  background: rgba(255, 255, 255, 0.03);
+}
+.wallet-popover {
+  width: auto;
+  min-width: 236px;
+  max-width: min(320px, calc(100vw - 32px));
+}
+.wallet-popover-label {
+  margin-bottom: 4px;
+  color: #8a2f22;
+  font: 600 10px / 1.3 var(--font-body);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.wallet-popover .account-popover-name {
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+/* Cancellations and errors hang under the button instead of covering the room. */
+.wallet-message {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 50;
+  width: max-content;
+  max-width: min(300px, calc(100vw - 32px));
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 2px;
+  border-left: 3px solid var(--jade);
+  color: var(--scroll-ink);
+  background: var(--scroll-paper);
+  box-shadow:
+    inset 0 0 0 1px rgba(184, 145, 63, 0.7),
+    0 12px 26px rgba(8, 4, 2, 0.45);
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+.wallet-message.is-error {
+  border-left-color: var(--seal);
+}
+.wallet-entry:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 3px;
+}
+@media (max-width: 760px) {
+  /* Round icon beside the other round controls; the slip keeps the label. */
+  .wallet-entry:not(.is-connected) {
+    width: 44px;
+    padding: 0;
+    justify-content: center;
+  }
+  .wallet-entry:not(.is-connected) span {
+    display: none;
+  }
+  .wallet-menu .account-name {
+    display: none;
+  }
+}

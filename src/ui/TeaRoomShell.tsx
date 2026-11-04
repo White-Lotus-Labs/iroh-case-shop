@@ -14,6 +14,7 @@ import type { SceneMood } from '../scene/motion/dynamics';
 import type { IrohActivity } from '../scene/TeaHost3D';
 import { OBSERVATORIUM_URL, RECENTER_EVENT, STATIONS } from '../scene/stations';
 import { AccountMenu } from './AccountMenu';
+import { WalletMenu } from './wallet/WalletMenu';
 import type { PublicUser } from '../auth/service';
 import {
   isNansenAvailability,
@@ -582,6 +583,7 @@ export default function TeaRoomShell({
           </div>
 
           <AccountMenu user={user} />
+          <WalletMenu />
         </div>
       </header>
 
