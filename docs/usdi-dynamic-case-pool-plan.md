@@ -85,55 +85,55 @@ risks are documented. No caller-supplied entropy influences the draw.
 ### Phase 2: Contract architecture and financial specification
 - [x] Define token/game boundaries, receipt lifecycle, quotes and reservations above.
 - [x] Check official NEAR standards, maintained SDK APIs and randomness limitations.
-- [ ] Write executable integer mathematics with boundary proofs and shared vectors.
+- [x] Write executable integer mathematics with boundary proofs and shared vectors.
 - Files: `contracts/Cargo.toml`, `contracts/economics/src/lib.rs`, financial notes.
 - Tests: probability normalization/rounding, reference examples, u128 boundaries.
 - Acceptance: exact formulas, immutable accepted odds, sound refund and callback design.
-- Status: in progress.
+- Status: complete, verified by native contract tests and wasm builds.
 
 ### Phase 3: USDI NEP-141 token
-- [ ] Implement standard core/resolver/storage/metadata using maintained standards.
+- [x] Implement standard core/resolver/storage/metadata using maintained standards.
 - Files: `contracts/usdi/*`, workspace lockfile.
 - Tests: metadata, transfers, storage, overflow, authorization, standard resolver.
 - Acceptance: 6 decimals, safe finite bootstrap allocation, no public arbitrary mint.
-- Status: pending.
+- Status: complete, verified by native contract tests and wasm builds.
 
 ### Phase 4: One-time 1000 USDI faucet
-- [ ] Atomic permanent claimed map, exact mint, storage funding/refund and events.
+- [x] Atomic permanent claimed map, exact mint, storage funding/refund and events.
 - Files: token contract and tests.
 - Tests: first/duplicate/different-account claims, unregister persistence, failed claim.
 - Acceptance: on-chain one claim/account, registration works, storage costs explicit.
-- Status: pending.
+- Status: complete, verified by native contract tests and wasm builds.
 
 ### Phase 5: Case pool and payment accounting
-- [ ] Authenticate token, exact amount, case, nonce, quote, funded storage and fees.
-- [ ] Authorized real-token bootstrap funding, initially zero pool.
+- [x] Authenticate token, exact amount, case, nonce, quote, funded storage and fees.
+- [x] Authorized real-token bootstrap funding, initially zero pool.
 - Files: `contracts/case-pool/src/*`.
 - Tests: invalid token/amount/msg, full refunds, exact allocation and fee isolation.
 - Acceptance: no payment-free or replayed opening, no fake initial reserve.
-- Status: pending.
+- Status: complete, verified by native contract tests and wasm builds.
 
 ### Phase 6: Dynamic probabilities and equilibrium
-- [ ] Integrate shared integer formula, denominator1,000,000 and bounded rounding.
+- [x] Integrate shared integer formula, denominator1,000,000 and bounded rounding.
 - Files: economics crate, game quote views, shared vectors.
 - Tests: all slope/clamp transitions and equilibrium drift; deterministic integer sweep.
 - Acceptance: exact normalization; EV deviations quantified; unchanged economics.
-- Status: pending.
+- Status: complete, verified by native contract tests and wasm builds.
 
 ### Phase 7: Safety and reservation
-- [ ] Implement health levels, max reward reservations, concurrency and pause gates.
+- [x] Implement health levels, max reward reservations, concurrency and pause gates.
 - Files: game state and tests.
 - Tests: thresholds, concurrent reservations, funded failed claims, minimum liquidity.
 - Acceptance: P>=L in every state, fees isolated, reject unsafe purchases with refunds.
-- Status: pending.
+- Status: complete, verified by native contract tests and wasm builds.
 
 ### Phase 8: Random outcomes and settlement
-- [ ] Deferred protocol randomness; private, idempotent attempt-bound callbacks.
-- [ ] Recover confirmed failures without redrawing or duplicate payment.
+- [x] Deferred protocol randomness; private, idempotent attempt-bound callbacks.
+- [x] Recover confirmed failures without redrawing or duplicate payment.
 - Files: game randomness, settlement and tests.
 - Tests: successful/failed transfers, replay, private callbacks, retry and stale attempts.
 - Acceptance: outcomes and accepted odds immutable; reservations held until resolution.
-- Status: pending.
+- Status: complete, verified by native contract tests and wasm builds.
 
 ### Phase 9: Next.js integration and UI
 - [ ] Public deployment configuration, validated finalized RPC, safe SDK signing.
@@ -182,3 +182,26 @@ After each milestone run focused tests, applicable types/format checks, inspect
 failures, update this checklist and commit only verified work. Token+faucet and
 payment+economics+safety+settlement are tightly coupled deliverables; verify each
 phase's acceptance inside those ordered milestones without temporary unsafe stubs.
+
+
+## Verification journal
+
+- Core Rust checks: 19 case tests +16 USDI tests +9 economics tests +12 simulation
+  tests passed. No ignored tests. `scripts/contracts.sh build` produced both wasm
+  modules with the MVP CPU target; source release overflow checks stay enabled.
+- Token metadata, standard transfers/storage/resolver, permanent claims, exact
+  quote/probability/reservation arithmetic, callback authorization/replay,
+  concurrency and treasury isolation were tested. Claim cost at current storage
+  pricing is 0.00381 NEAR unregistered or 0.00256 NEAR already registered.
+- A local NEAR Sandbox2.14 runner actually loaded both wasm modules, funded the
+  token pool, claimed, opened four cases, paid real local tokens and reconciled
+  balances. Its expanded concurrent run is still in progress.
+- Core SDK5.29.1 and current workspaces0.24 require incompatible native crypto
+  library versions. The integration runner therefore has an independent nested
+  Cargo workspace/lockfile, with no downgrade of either maintained library.
+- The SDK's unbounded promise-result API is deprecated. The game uses bounded
+  result decoding; an unknown/oversized result keeps the transfer unresolved
+  instead of enabling an unsafe duplicate retry.
+- Compilation caught and corrected a callback edit typo and the SDK's
+  non-exhaustive error enum before tests passed. No error suppression was used.
+- Original wallet controller/adapter regression check remains green:36 tests.
