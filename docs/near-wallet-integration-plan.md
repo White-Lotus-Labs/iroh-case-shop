@@ -78,7 +78,7 @@ No wallet list is hardcoded into the application.
 - [x] Keep SDK construction behind a dynamic import after mount.
 - [x] Share one connector; clean up controller subscriptions on unmount.
 - [x] Place `WalletProvider` in the root layout so page components can use `useWallet`.
-- Files: `src/ui/wallet/{nearConnector,walletController,WalletProvider}.tsx/ts`, `src/app/layout.tsx`.
+- Files: `nearConnector.ts`, `walletController.ts`, `WalletProvider.tsx`, `src/app/layout.tsx`.
 - Verification: controller/adapter tests, typecheck, formatting and browser mount.
 - Acceptance: no SSR browser access, no duplicated listeners, disposed results ignored.
 - Status: completed.
@@ -135,11 +135,11 @@ No wallet list is hardcoded into the application.
 
 - [x] Typecheck, format check and diff whitespace check pass.
 - [x] Initial production build passes after allowing font network access.
-- [x] Repeat production build after the integration changes; repeat again after final focus polish.
-- [ ] Review final diff, commit milestones and record final Git status/report.
+- [x] Repeat production build after the final keyboard-focus correction.
+- [x] Review final diff, commit verified milestones and record final Git status/report.
 - Files: this checklist, `docs/development.md`, final report.
 - Acceptance: verified feature committed on its existing branch; limitations recorded accurately.
-- Status: in progress.
+- Status: completed for the implementation and available checks; real-wallet verification remains open in Phase 9.
 
 ## Verification and debugging notes
 
@@ -197,3 +197,11 @@ minor keyboard focus loss after successful disconnect. A new Playwright focus
 assertion reproduced the failure, and the menu now returns focus to its trigger
 when the account popover closes following sign-out. The wallet browser suite passed all five tests again. Typecheck, formatting and the
 production build also passed after this correction.
+
+
+Final milestones: `6ee9582` planning, `c313fbb` dependency, `a35dc07` feature and
+coverage, `b72af5e` reviewed keyboard-focus fix. Final documentation is committed
+separately. No application source changed after the last passing wallet browser,
+typecheck, formatting and production build runs. See
+[the final report](near-wallet-integration-report.md) for results, remaining
+limitations and exact manual instructions. No push or merge was performed.
