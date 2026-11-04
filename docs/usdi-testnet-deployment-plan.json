@@ -1,0 +1,107 @@
+{
+  "network": "testnet",
+  "status": "UNSIGNED_NOT_SUBMITTED",
+  "accounts": {
+    "network": "testnet",
+    "rpcUrl": "https://rpc.testnet.near.org",
+    "status": "proposed_not_deployed",
+    "ownerId": "pandacoderexe-admin.testnet",
+    "parentId": "pandacoderexe.testnet",
+    "tokenId": "usdi.pandacoderexe.testnet",
+    "caseId": "cases.pandacoderexe.testnet",
+    "treasuryId": "pandacoderexe-admin.testnet"
+  },
+  "artifacts": [
+    {
+      "account_id": "usdi.pandacoderexe.testnet",
+      "path": "contracts/target/wasm32-unknown-unknown/release/iroh_usdi.wasm",
+      "bytes": 361904,
+      "sha256": "1d7dadcfacdb79ec66c0990c74cc0089b5ee2acce0409937637d6eaefed2b343",
+      "initialization": {
+        "method": "new",
+        "args": {
+          "owner_id": "pandacoderexe-admin.testnet"
+        },
+        "gas": "100000000000000",
+        "deposit": "0"
+      },
+      "unsigned_cli": [
+        "near",
+        "contract",
+        "deploy",
+        "usdi.pandacoderexe.testnet",
+        "use-file",
+        "contracts/target/wasm32-unknown-unknown/release/iroh_usdi.wasm",
+        "with-init-call",
+        "new",
+        "json-args",
+        "{\"owner_id\":\"pandacoderexe-admin.testnet\"}",
+        "prepaid-gas",
+        "100 Tgas",
+        "attached-deposit",
+        "0 NEAR",
+        "network-config",
+        "testnet",
+        "sign-later"
+      ]
+    },
+    {
+      "account_id": "cases.pandacoderexe.testnet",
+      "path": "contracts/target/wasm32-unknown-unknown/release/iroh_case_pool.wasm",
+      "bytes": 423261,
+      "sha256": "200405d2ae6dac3dfa5e14ecf4e222fade47da656cf858f9d5f306d4e7eb72b4",
+      "initialization": {
+        "method": "new",
+        "args": {
+          "owner_id": "pandacoderexe-admin.testnet",
+          "token_id": "usdi.pandacoderexe.testnet",
+          "treasury_id": "pandacoderexe-admin.testnet"
+        },
+        "gas": "100000000000000",
+        "deposit": "0"
+      },
+      "unsigned_cli": [
+        "near",
+        "contract",
+        "deploy",
+        "cases.pandacoderexe.testnet",
+        "use-file",
+        "contracts/target/wasm32-unknown-unknown/release/iroh_case_pool.wasm",
+        "with-init-call",
+        "new",
+        "json-args",
+        "{\"owner_id\":\"pandacoderexe-admin.testnet\",\"token_id\":\"usdi.pandacoderexe.testnet\",\"treasury_id\":\"pandacoderexe-admin.testnet\"}",
+        "prepaid-gas",
+        "100 Tgas",
+        "attached-deposit",
+        "0 NEAR",
+        "network-config",
+        "testnet",
+        "sign-later"
+      ]
+    }
+  ],
+  "registration": {
+    "signer": "pandacoderexe-admin.testnet",
+    "receiver": "usdi.pandacoderexe.testnet",
+    "method": "storage_deposit",
+    "args": {
+      "account_id": "cases.pandacoderexe.testnet",
+      "registration_only": true
+    },
+    "deposit": "Query storage_balance_bounds.min before signing"
+  },
+  "funding": {
+    "signer": "pandacoderexe-admin.testnet",
+    "receiver": "usdi.pandacoderexe.testnet",
+    "method": "ft_transfer_call",
+    "gas": "250000000000000",
+    "deposit": "1",
+    "args": {
+      "receiver_id": "cases.pandacoderexe.testnet",
+      "amount": "1000000000",
+      "msg": "{\"action\":\"fund\"}"
+    }
+  },
+  "warning": "All named accounts require verified creation and explicit wallet authorization. Deploy and initialize atomically. No credential files are used by this planner."
+}

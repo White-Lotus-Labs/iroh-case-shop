@@ -1,0 +1,10 @@
+{
+  "network": "testnet",
+  "rpcUrl": "https://rpc.testnet.near.org",
+  "status": "proposed_not_deployed",
+  "ownerId": "pandacoderexe-admin.testnet",
+  "parentId": "pandacoderexe.testnet",
+  "tokenId": "usdi.pandacoderexe.testnet",
+  "caseId": "cases.pandacoderexe.testnet",
+  "treasuryId": "pandacoderexe-admin.testnet"
+}
