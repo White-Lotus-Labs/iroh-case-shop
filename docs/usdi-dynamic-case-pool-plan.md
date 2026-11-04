@@ -242,3 +242,17 @@ phase's acceptance inside those ordered milestones without temporary unsafe stub
   rpath warning during the first simulator release build; the simulation still
   ran successfully, and setting the isolated toolchain library path made the
   tool's own version check succeed. No compiler or test failure was suppressed.
+
+
+- Final recovery UX check added standard USDI registration for a previously
+  claimed wallet that unregisters while a payout is pending. Two failing client
+  checks reproduced the missing state/action. The page now queries NEP-145
+  registration and its current minimum, offers registration without another
+  mint, and gates failed-payout retry until registration is confirmed. Client
+  coverage is28 cases and focused client+wallet coverage is64, all passing.
+
+
+- Final frontend regression is now328 passing unit tests in46 files. The complete
+  11-case browser set passes again, including a restored connected wallet at320px.
+  All new source checks pass; the final production build is rerun after the last
+  recovery action. No further feature changes are planned before handoff.

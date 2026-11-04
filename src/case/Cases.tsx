@@ -13,6 +13,7 @@ import {
   configuredDeployment,
   claimCall,
   storageCall,
+  tokenRegistrationCall,
   openCall,
   recoverCall,
   formatUnits,
@@ -442,6 +443,33 @@ export function Cases() {
                 ? `Attach ${formatUnits(account.claimCost, 24)} Testnet NEAR for token registration and claim storage, plus gas.`
                 : 'Native Testnet NEAR storage cost is read from the token contract before signing.'}
             </p>
+            {account?.claimed && !account.tokenRegistered && (
+              <div>
+                <p>
+                  Your USDI token account is unregistered. Register it to
+                  receive a pending reward; your starter claim stays permanent.
+                </p>
+                <button
+                  disabled={disabled}
+                  onClick={() => {
+                    if (client)
+                      void submit(
+                        'token-storage',
+                        tokenRegistrationCall(
+                          client.config,
+                          account.tokenStorageCost,
+                        ),
+                      );
+                  }}
+                >
+                  Register USDI account
+                </button>
+                <p className="cases-fine">
+                  Attach {formatUnits(account.tokenStorageCost, 24)} Testnet
+                  NEAR for standard token storage, plus gas.
+                </p>
+              </div>
+            )}
           </section>
           <section className="cases-panel">
             <div className="cases-panel-heading">
@@ -608,7 +636,11 @@ export function Cases() {
               active.status === 'Claimable') && (
               <>
                 <button
-                  disabled={disabled}
+                  disabled={
+                    disabled ||
+                    (active.status === 'Claimable' &&
+                      account?.tokenRegistered !== true)
+                  }
                   onClick={() => {
                     if (client)
                       void submit(
@@ -623,6 +655,12 @@ export function Cases() {
                     ? 'Retry the confirmed failed payout'
                     : 'Advance the pending draw'}
                 </button>
+                {active.status === 'Claimable' && !account?.tokenRegistered && (
+                  <p>
+                    Register your USDI account above before retrying. The reward
+                    stays reserved.
+                  </p>
+                )}
                 <p className="cases-fine">
                   Attaches 1 yoctoNEAR plus gas. A retry preserves the selected
                   reward and accepted odds.

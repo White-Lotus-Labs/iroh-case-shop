@@ -49,6 +49,7 @@ test('undeployed cases show no invented chain data and cannot request signatures
 test('cases reuse the root Testnet wallet session through reload and disconnect', async ({
   page,
 }) => {
+  await page.setViewportSize({ width: 320, height: 844 });
   await page.addInitScript(() => {
     const id = 'cases-browser-wallet';
     if (sessionStorage.getItem('cases-test-initialized') !== 'yes') {
@@ -108,6 +109,16 @@ test('cases reuse the root Testnet wallet session through reload and disconnect'
     document.addEventListener('near-selector-ready', announce);
   });
   await page.goto('/cases');
+  await expect(page.getByTestId('wallet-entry')).toContainText(
+    'tea-guest.testnet',
+  );
+  const connectedBounds = await page.getByTestId('wallet-entry').boundingBox();
+  if (!connectedBounds)
+    throw new Error('Connected wallet has no visible bounds');
+  expect(connectedBounds.x + connectedBounds.width).toBeLessThanOrEqual(320);
+  expect(
+    await page.evaluate(() => document.documentElement.scrollWidth),
+  ).toBeLessThanOrEqual(320);
   await expect(page.getByTestId('wallet-entry')).toContainText(
     'tea-guest.testnet',
   );

@@ -195,6 +195,8 @@ export type AccountData = {
   claimed: boolean;
   claimCost: string;
   storage: string;
+  tokenRegistered: boolean;
+  tokenStorageCost: string;
   quote: Quote;
   active: Opening | null;
   history: Opening[];
@@ -358,36 +360,52 @@ export class CaseClient {
   }
   async account(accountId: string, signal?: AbortSignal): Promise<AccountData> {
     const args = { account_id: accountId };
-    const [balance, claimed, claimCost, storage, quote, active, history] =
-      await Promise.all([
-        this.view(this.config.tokenContractId, 'ft_balance_of', args, signal),
-        this.view(this.config.tokenContractId, 'has_claimed', args, signal),
-        this.view(
-          this.config.tokenContractId,
-          'claim_storage_cost',
-          args,
-          signal,
-        ),
-        this.view(
-          this.config.caseContractId,
-          'storage_balance_of',
-          args,
-          signal,
-        ),
-        this.view(this.config.caseContractId, 'get_quote', args, signal),
-        this.view(
-          this.config.caseContractId,
-          'get_account_opening',
-          args,
-          signal,
-        ),
-        this.view(
-          this.config.caseContractId,
-          'get_history',
-          { ...args, limit: 10 },
-          signal,
-        ),
-      ]);
+    const [
+      balance,
+      claimed,
+      claimCost,
+      storage,
+      quote,
+      active,
+      history,
+      tokenStorage,
+      tokenBounds,
+    ] = await Promise.all([
+      this.view(this.config.tokenContractId, 'ft_balance_of', args, signal),
+      this.view(this.config.tokenContractId, 'has_claimed', args, signal),
+      this.view(
+        this.config.tokenContractId,
+        'claim_storage_cost',
+        args,
+        signal,
+      ),
+      this.view(this.config.caseContractId, 'storage_balance_of', args, signal),
+      this.view(this.config.caseContractId, 'get_quote', args, signal),
+      this.view(
+        this.config.caseContractId,
+        'get_account_opening',
+        args,
+        signal,
+      ),
+      this.view(
+        this.config.caseContractId,
+        'get_history',
+        { ...args, limit: 10 },
+        signal,
+      ),
+      this.view(
+        this.config.tokenContractId,
+        'storage_balance_of',
+        args,
+        signal,
+      ),
+      this.view(
+        this.config.tokenContractId,
+        'storage_balance_bounds',
+        {},
+        signal,
+      ),
+    ]);
     if (!Array.isArray(history) || history.length > 10)
       throw new Error('Malformed opening history.');
     const parsedHistory = history.map(parseOpening);
@@ -398,7 +416,15 @@ export class CaseClient {
       )
     )
       throw new Error('Opening belongs to another account.');
+    if (tokenStorage !== null) {
+      const registration = object(tokenStorage);
+      integer(registration.total);
+      integer(registration.available);
+    }
+    const tokenStorageCost = integer(object(tokenBounds).min);
     return {
+      tokenRegistered: tokenStorage !== null,
+      tokenStorageCost,
       accountId,
       balance: integer(balance),
       claimed: flag(claimed),
@@ -516,6 +542,19 @@ export function claimCall(
     deposit: integer(cost),
   };
 }
+export function tokenRegistrationCall(
+  config: Deployment,
+  cost: string,
+): WalletFunctionCall {
+  return {
+    receiverId: config.tokenContractId,
+    methodName: 'storage_deposit',
+    args: { registration_only: true },
+    gas: '30000000000000',
+    deposit: integer(cost),
+  };
+}
+
 export function storageCall(
   config: Deployment,
   pool: Pool,

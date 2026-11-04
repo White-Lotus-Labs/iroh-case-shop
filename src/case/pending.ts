@@ -9,7 +9,7 @@ import type { WalletFunctionCall } from '../ui/wallet/nearConnector';
 
 export type PendingAction = {
   accountId: string;
-  action: 'claim' | 'storage' | 'open' | 'advance' | 'retry';
+  action: 'claim' | 'storage' | 'token-storage' | 'open' | 'advance' | 'retry';
   hash: string | null;
   nonce: string | null;
   openingId: string | null;
@@ -48,6 +48,7 @@ export function readPending(
     !('action' in value) ||
     (value.action !== 'claim' &&
       value.action !== 'storage' &&
+      value.action !== 'token-storage' &&
       value.action !== 'open' &&
       value.action !== 'advance' &&
       value.action !== 'retry') ||
@@ -92,12 +93,13 @@ export function pendingTarget(config: Deployment, pending: PendingAction) {
   const methodName = {
     claim: 'claim_starter',
     storage: 'storage_deposit',
+    'token-storage': 'storage_deposit',
     open: 'ft_transfer_call',
     advance: 'advance_opening',
     retry: 'retry_payout',
   }[action];
   const receiverId =
-    action === 'claim' || action === 'open'
+    action === 'claim' || action === 'open' || action === 'token-storage'
       ? config.tokenContractId
       : config.caseContractId;
   if (

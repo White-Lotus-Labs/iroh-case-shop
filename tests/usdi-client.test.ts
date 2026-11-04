@@ -8,6 +8,7 @@ import {
   openCall,
   claimCall,
   storageCall,
+  tokenRegistrationCall,
   parseOpening,
   parsePool,
   parseQuote,
@@ -233,6 +234,18 @@ describe('USDI exact amounts and actions', () => {
     expect(() => deployment({ ...config, network: 'mainnet' })).toThrow(
       'Testnet',
     );
+  });
+});
+
+describe('missing token registration recovery', () => {
+  it('registers through NEP-145 without attempting a second starter mint', () => {
+    expect(tokenRegistrationCall(config, '1250000000000000000000')).toEqual({
+      receiverId: config.tokenContractId,
+      methodName: 'storage_deposit',
+      args: { registration_only: true },
+      gas: '30000000000000',
+      deposit: '1250000000000000000000',
+    });
   });
 });
 
@@ -492,11 +505,16 @@ describe('finalized RPC reads', () => {
       has_claimed: true,
       claim_storage_cost: '2560000000000000000000',
       storage_balance_of: '20480000000000000000000',
+      storage_balance_bounds: {
+        min: '1250000000000000000000',
+        max: '1250000000000000000000',
+      },
       get_quote: quote,
       get_account_opening: opening,
       get_history: [opening],
     };
     let expectedAccount = 'alice.testnet';
+    let tokenStorage: unknown = null;
     const client = new CaseClient(config, async (_url, init) => {
       const body = JSON.parse(String(init?.body));
       if (body.params.method_name === 'get_history')
@@ -504,10 +522,19 @@ describe('finalized RPC reads', () => {
           account_id: expectedAccount,
           limit: 10,
         });
+      if (
+        body.params.method_name === 'storage_balance_of' &&
+        body.params.account_id === config.tokenContractId
+      )
+        return rpcResponse(encoded(tokenStorage));
       return rpcResponse(encoded(values[body.params.method_name]));
     });
     const result = await client.account('alice.testnet');
     expect(result.balance).toBe('1000000000');
+    expect(result.tokenRegistered).toBe(false);
+    expect(result.tokenStorageCost).toBe('1250000000000000000000');
+    tokenStorage = { total: '1250000000000000000000', available: '0' };
+    expect((await client.account('alice.testnet')).tokenRegistered).toBe(true);
     expect(result.active?.opening_id).toBe('0');
     expect(result.history[0]?.reward).toBe('1000000');
     expectedAccount = 'bob.testnet';
@@ -691,6 +718,8 @@ describe('wallet account and recoverable public intents', () => {
       claimed: true,
       claimCost: '0',
       storage: '0',
+      tokenRegistered: true,
+      tokenStorageCost: '1250000000000000000000',
       quote: parseQuote(quote),
       active: parseOpening(opening),
       history: [],
