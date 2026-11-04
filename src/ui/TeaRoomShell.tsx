@@ -1,5 +1,6 @@
 'use client';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 import { flushSync } from 'react-dom';
 import {
   startTransition,
@@ -515,15 +516,27 @@ export default function TeaRoomShell({
       </WaitingRoom>
 
       <header className="topbar" inert={isEntrance || undefined}>
-        <a href="#main-panel" className="brand">
-          <span className="brand-mark" aria-hidden="true">
-            ◒
-          </span>
-          <span className="brand-text">
-            {PROJECT.name}
-            <small>NANSEN-POWERED CRYPTO RESEARCH</small>
-          </span>
-        </a>
+        <div className="topbar-brand-group">
+          <a href="#main-panel" className="brand" aria-label={PROJECT.name}>
+            <span className="brand-mark" aria-hidden="true">
+              ◒
+            </span>
+            <span className="brand-text">
+              {PROJECT.name}
+              <small>NANSEN-POWERED CRYPTO RESEARCH</small>
+            </span>
+          </a>
+          <Link
+            href="/cases"
+            className="cases-navigation"
+            aria-label="Dragon Tea Cases"
+          >
+            <span className="cases-navigation-full">Dragon Tea Cases</span>
+            <span className="cases-navigation-short" aria-hidden="true">
+              Cases ↗
+            </span>
+          </Link>
+        </div>
 
         <div className="topbar-right">
           <MusicToggle floating={isEntrance} />

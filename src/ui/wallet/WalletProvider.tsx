@@ -4,10 +4,15 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useRef,
   useState,
   type ReactNode,
 } from 'react';
-import { loadConnector } from './nearConnector';
+import {
+  loadConnector,
+  WalletPreflightError,
+  type WalletFunctionCall,
+} from './nearConnector';
 import {
   WalletController,
   type WalletAction,
@@ -18,6 +23,10 @@ export type WalletContextValue = WalletSnapshot & {
   connect(): void;
   disconnect(): void;
   dismiss(): void;
+  signFunctionCall(
+    call: WalletFunctionCall,
+    isCurrent?: () => boolean,
+  ): Promise<unknown>;
 };
 
 // Before the connector exists nothing is connected, but the header must not
@@ -83,6 +92,8 @@ export function WalletProvider({ children }: { children: ReactNode }) {
 
   const state = useWalletSnapshot(controller);
   const merged = controller ? state : startup;
+  const currentAccount = useRef(merged.accountId);
+  currentAccount.current = merged.accountId;
 
   const connect = useCallback(() => {
     if (controller) return void controller.connect();
@@ -101,8 +112,33 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     controller?.dismiss();
   }, [controller]);
 
+  const signFunctionCall = useCallback(
+    async (
+      call: WalletFunctionCall,
+      isCurrent: () => boolean = () => true,
+    ): Promise<unknown> => {
+      if (merged.status !== 'connected' || !merged.accountId || merged.busy)
+        throw new WalletPreflightError(
+          'Connect a NEAR Testnet wallet before signing.',
+        );
+      const connector = await loadConnector();
+      if (!isCurrent() || currentAccount.current !== merged.accountId)
+        throw new WalletPreflightError(
+          'The wallet account changed. Refresh before signing.',
+        );
+      return connector.signFunctionCall(
+        merged.accountId,
+        call,
+        () => isCurrent() && currentAccount.current === merged.accountId,
+      );
+    },
+    [merged.status, merged.accountId, merged.busy],
+  );
+
   return (
-    <WalletContext.Provider value={{ ...merged, connect, disconnect, dismiss }}>
+    <WalletContext.Provider
+      value={{ ...merged, connect, disconnect, dismiss, signFunctionCall }}
+    >
       {children}
     </WalletContext.Provider>
   );

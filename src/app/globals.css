@@ -3962,3 +3962,62 @@ body:has(.auth-shell) {
     display: none;
   }
 }
+
+/* Cases navigation shares the brand column on phones, leaving room for every control. */
+.topbar-brand-group {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-width: 0;
+}
+.cases-navigation {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--gold-bright);
+  font-size: 12px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.cases-navigation-short {
+  display: none;
+}
+@media (max-width: 760px) {
+  .topbar {
+    gap: 10px;
+  }
+  .topbar-brand-group {
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+  .topbar-brand-group .brand {
+    min-width: 0;
+    max-width: 100%;
+  }
+  .topbar-brand-group .brand-mark {
+    flex: none;
+  }
+  .topbar-brand-group .brand-text {
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .topbar-right {
+    flex: none;
+    gap: 6px;
+  }
+  .cases-navigation {
+    min-height: 18px;
+    font-size: 10px;
+    line-height: 18px;
+  }
+  .cases-navigation-full {
+    display: none;
+  }
+  .cases-navigation-short {
+    display: inline;
+  }
+}
