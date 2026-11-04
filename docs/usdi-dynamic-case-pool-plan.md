@@ -75,6 +75,7 @@ risks are documented. No caller-supplied entropy influences the draw.
 ## Ordered checklist
 
 ### Phase 1: Repository inspection and branch verification
+
 - [x] Inspect router, root wallet provider, singleton, tests, pnpm and Git.
 - [x] Create branch from wallet HEAD and prove ancestry.
 - Files: this plan; no original source changes.
@@ -83,6 +84,7 @@ risks are documented. No caller-supplied entropy influences the draw.
 - Status: complete.
 
 ### Phase 2: Contract architecture and financial specification
+
 - [x] Define token/game boundaries, receipt lifecycle, quotes and reservations above.
 - [x] Check official NEAR standards, maintained SDK APIs and randomness limitations.
 - [x] Write executable integer mathematics with boundary proofs and shared vectors.
@@ -92,6 +94,7 @@ risks are documented. No caller-supplied entropy influences the draw.
 - Status: complete, verified by native contract tests and wasm builds.
 
 ### Phase 3: USDI NEP-141 token
+
 - [x] Implement standard core/resolver/storage/metadata using maintained standards.
 - Files: `contracts/usdi/*`, workspace lockfile.
 - Tests: metadata, transfers, storage, overflow, authorization, standard resolver.
@@ -99,6 +102,7 @@ risks are documented. No caller-supplied entropy influences the draw.
 - Status: complete, verified by native contract tests and wasm builds.
 
 ### Phase 4: One-time 1000 USDI faucet
+
 - [x] Atomic permanent claimed map, exact mint, storage funding/refund and events.
 - Files: token contract and tests.
 - Tests: first/duplicate/different-account claims, unregister persistence, failed claim.
@@ -106,6 +110,7 @@ risks are documented. No caller-supplied entropy influences the draw.
 - Status: complete, verified by native contract tests and wasm builds.
 
 ### Phase 5: Case pool and payment accounting
+
 - [x] Authenticate token, exact amount, case, nonce, quote, funded storage and fees.
 - [x] Authorized real-token bootstrap funding, initially zero pool.
 - Files: `contracts/case-pool/src/*`.
@@ -114,6 +119,7 @@ risks are documented. No caller-supplied entropy influences the draw.
 - Status: complete, verified by native contract tests and wasm builds.
 
 ### Phase 6: Dynamic probabilities and equilibrium
+
 - [x] Integrate shared integer formula, denominator1,000,000 and bounded rounding.
 - Files: economics crate, game quote views, shared vectors.
 - Tests: all slope/clamp transitions and equilibrium drift; deterministic integer sweep.
@@ -121,6 +127,7 @@ risks are documented. No caller-supplied entropy influences the draw.
 - Status: complete, verified by native contract tests and wasm builds.
 
 ### Phase 7: Safety and reservation
+
 - [x] Implement health levels, max reward reservations, concurrency and pause gates.
 - Files: game state and tests.
 - Tests: thresholds, concurrent reservations, funded failed claims, minimum liquidity.
@@ -128,6 +135,7 @@ risks are documented. No caller-supplied entropy influences the draw.
 - Status: complete, verified by native contract tests and wasm builds.
 
 ### Phase 8: Random outcomes and settlement
+
 - [x] Deferred protocol randomness; private, idempotent attempt-bound callbacks.
 - [x] Recover confirmed failures without redrawing or duplicate payment.
 - Files: game randomness, settlement and tests.
@@ -136,6 +144,7 @@ risks are documented. No caller-supplied entropy influences the draw.
 - Status: complete, verified by native contract tests and wasm builds.
 
 ### Phase 9: Next.js integration and UI
+
 - [x] Public deployment configuration, validated finalized RPC, safe SDK signing.
 - [x] `/cases` balance, claim, Dragon Tea card, odds/pool dashboard and lifecycle UI.
 - [x] Discover pending state from chain on refresh/account change; honest undeployed state.
@@ -145,6 +154,7 @@ risks are documented. No caller-supplied entropy influences the draw.
 - Status: complete for implementation and available local verification; public deployment is gated in Phase 13.
 
 ### Phase 10: Contract unit tests
+
 - [x] Expand adversarial token, probability, accounting and callback scenarios.
 - Files: contract tests; build/test scripts.
 - Tests: `cargo test --workspace`, wasm build and contract receipt integration if available.
@@ -152,6 +162,7 @@ risks are documented. No caller-supplied entropy influences the draw.
 - Status: complete for implementation and available local verification; public deployment is gated in Phase 13.
 
 ### Phase 11: Economic simulations
+
 - [x] Shared Rust formulas and deterministic simulation-only PRNG, multiple seeds.
 - [x] Run all requested volumes, reserve levels, reward streaks, concurrency and failures.
 - Files: Rust simulation binary, reproducible JSON/CSV, `docs/usdi-pool-simulation-report.md`.
@@ -160,12 +171,14 @@ risks are documented. No caller-supplied entropy influences the draw.
 - Status: complete for implementation and available local verification; public deployment is gated in Phase 13.
 
 ### Phase 12: Integration and browser tests
+
 - [x] Unit, types, formatting, build, wallet regression, cases browser scenarios.
 - Files: `tests/usdi-*.test.ts`, `tests/browser/cases.spec.ts`.
 - Acceptance: available tests run; mocked RPC checks distinguished from real contracts.
 - Status: complete for available local tests; public wallet/contract integration remains blocked in Phase 13.
 
 ### Phase 13: Testnet deployment and end-to-end verification
+
 - [x] Reproducible wasm builds, unsigned plan, and wallet-authorized account/deploy/register/fund guide.
 - [ ] Request actual deployment/signing authorization only after artifacts are reviewable.
 - Files: scripts, public config placeholders, deployment documentation.
@@ -173,16 +186,16 @@ risks are documented. No caller-supplied entropy influences the draw.
 - Status: blocked only for public deployment. Proposed IDs were supplied, but all four required accounts are absent and creation/signing approval is still required.
 
 ### Phase 14: Final review and documentation
+
 - [x] Independent security/accounting review, fix findings and rerun affected gates.
-- [ ] Update checklist, final technical report, manual guide and local Git commits.
+- [x] Update checklist, final technical report, manual guide and local Git commits.
 - Acceptance: no secrets accessed, no existing files deleted, no push/merge, accurate status.
-- Status: final documentation/commits in progress; no public deployment claimed.
+- Status: local review/documentation complete; Phase 13 remains open for public signing and deployment.
 
 After each milestone run focused tests, applicable types/format checks, inspect
 failures, update this checklist and commit only verified work. Token+faucet and
 payment+economics+safety+settlement are tightly coupled deliverables; verify each
 phase's acceptance inside those ordered milestones without temporary unsafe stubs.
-
 
 ## Verification journal
 
@@ -205,7 +218,6 @@ phase's acceptance inside those ordered milestones without temporary unsafe stub
 - Compilation caught and corrected a callback edit typo and the SDK's
   non-exhaustive error enum before tests passed. No error suppression was used.
 - Original wallet controller/adapter regression check remains green:36 tests.
-
 
 - Completed local Sandbox verification: six genuine openings across two accounts,
   including concurrent same-revision payments and a real failed FT payout after
@@ -232,7 +244,6 @@ phase's acceptance inside those ordered milestones without temporary unsafe stub
   submitted. Active frontend contract IDs remain null. The public deployment plan
   contains genuine built-artifact hashes and the user-proposed account names.
 
-
 - Final Rust run through the checked-in test script:57 tests passed
   (17 token,19 pool,9 probability,12 simulation), zero ignored. The added
   insufficient-balance case proves no receiver receipt is scheduled without USDI.
@@ -243,7 +254,6 @@ phase's acceptance inside those ordered milestones without temporary unsafe stub
   ran successfully, and setting the isolated toolchain library path made the
   tool's own version check succeed. No compiler or test failure was suppressed.
 
-
 - Final recovery UX check added standard USDI registration for a previously
   claimed wallet that unregisters while a payout is pending. Two failing client
   checks reproduced the missing state/action. The page now queries NEP-145
@@ -251,8 +261,14 @@ phase's acceptance inside those ordered milestones without temporary unsafe stub
   mint, and gates failed-payout retry until registration is confirmed. Client
   coverage is28 cases and focused client+wallet coverage is64, all passing.
 
-
 - Final frontend regression is now328 passing unit tests in46 files. The complete
   11-case browser set passes again, including a restored connected wallet at320px.
   All new source checks pass; the final production build is rerun after the last
   recovery action. No further feature changes are planned before handoff.
+
+Final code/build gates passed after registration recovery. The final local
+technical report is [here](usdi-dynamic-case-pool-report.md). Public Phase13 is
+not marked complete: four accounts must be created and the user must explicitly
+approve wallet-authorized deployment, registration and funding. No such public
+transaction was attempted. The final report documents the remaining verification
+limits and the ordinary-flow scope of token reconciliation bounds.

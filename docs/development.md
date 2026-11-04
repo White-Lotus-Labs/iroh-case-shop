@@ -200,3 +200,26 @@ The site runs on Railway:
 - The Railway project also has a service named `SQLite3`. The app does not use it.
 
 Some files in `public/images`, `public/audio`, and `public/models` have a 6-character content hash in the name, such as `tea-back-wall.bbdb12.webp`. The server tells browsers to cache these files for a year. When you change such a file, change the hash in its name.
+
+
+## USDI and Dragon Tea Case
+
+The `/cases` route uses the existing root HOT Connect provider. USDI and the case
+pool are separate Rust contracts under `contracts/`; integer odds and the local
+simulator share `contracts/economics`. Public deployed addresses belong in
+`config/contracts.testnet.json`. They remain null until deployment is confirmed.
+Proposed accounts are kept separately in `config/deployment.testnet.json`.
+
+Run `pnpm contracts:test`, `pnpm contracts:build`, `pnpm contracts:integration`
+and `pnpm contracts:simulate` for Rust, wasm, actual local Sandbox receipts and
+reproducible economic results. Rust1.99.1 and the wasm target are pinned. The
+Sandbox runner uses an independent dependency lockfile and ephemeral local keys.
+It never requires a saved user wallet. No deployment is performed by these commands.
+
+Read [the financial design](usdi-financial-design.md),
+[simulation report](usdi-pool-simulation-report.md),
+[verification report](usdi-dynamic-case-pool-report.md) and
+[deployment/player guide](usdi-testnet-deployment.md) before changing accounting
+or preparing wallet signatures. The deployment planner only checks public
+accounts and writes unsigned artifacts. Actual creation and deployment require
+explicit user approval. Do not source environment files or read credentials.
