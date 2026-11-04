@@ -13,7 +13,11 @@
     "test": "vitest run",
     "test:e2e": "playwright test",
     "format": "prettier --write src tests *.ts *.json README.md",
-    "format:check": "prettier --check src tests *.ts *.json README.md"
+    "format:check": "prettier --check src tests *.ts *.json README.md",
+    "contracts:build": "bash scripts/contracts.sh build",
+    "contracts:test": "bash scripts/contracts.sh test",
+    "contracts:simulate": "bash scripts/contracts.sh simulate",
+    "contracts:integration": "bash scripts/contracts.sh integration"
   },
   "dependencies": {
     "@hot-labs/near-connect": "0.12.0",

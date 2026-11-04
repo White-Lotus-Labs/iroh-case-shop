@@ -390,3 +390,30 @@ fn unregistered_claim_cost_covers_standard_refundable_minimum_and_refunds_excess
         matches!(receipts[0].actions.as_slice(), [MockAction::Transfer { deposit, .. }] if deposit.as_yoctonear() == 321)
     );
 }
+
+#[test]
+fn insufficient_balance_cannot_schedule_a_paid_opening() {
+    let mut contract = contract();
+    let cost = contract.storage_balance_bounds().min.as_yoctonear();
+    context("empty.testnet", cost);
+    contract.storage_deposit(None, Some(true));
+    context("case.testnet", cost);
+    contract.storage_deposit(None, Some(true));
+    context("empty.testnet", 1);
+    let before_supply = contract.ft_total_supply();
+    assert!(
+        catch_unwind(AssertUnwindSafe(|| {
+            contract.ft_transfer_call(
+                account("case.testnet"),
+                U128(1_000_000),
+                None,
+                "{\"action\":\"open\"}".to_string(),
+            )
+        }))
+        .is_err()
+    );
+    assert_eq!(contract.ft_balance_of(account("empty.testnet")), U128(0));
+    assert_eq!(contract.ft_balance_of(account("case.testnet")), U128(0));
+    assert_eq!(contract.ft_total_supply(), before_supply);
+    assert!(get_created_receipts().is_empty());
+}

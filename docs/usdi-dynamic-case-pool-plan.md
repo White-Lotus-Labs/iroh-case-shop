@@ -136,47 +136,47 @@ risks are documented. No caller-supplied entropy influences the draw.
 - Status: complete, verified by native contract tests and wasm builds.
 
 ### Phase 9: Next.js integration and UI
-- [ ] Public deployment configuration, validated finalized RPC, safe SDK signing.
-- [ ] `/cases` balance, claim, Dragon Tea card, odds/pool dashboard and lifecycle UI.
-- [ ] Discover pending state from chain on refresh/account change; honest undeployed state.
+- [x] Public deployment configuration, validated finalized RPC, safe SDK signing.
+- [x] `/cases` balance, claim, Dragon Tea card, odds/pool dashboard and lifecycle UI.
+- [x] Discover pending state from chain on refresh/account change; honest undeployed state.
 - Files: `src/case/*`, `src/app/cases/*`, wallet adapter/provider, public config, header link.
 - Tests: RPC/action tests, account races, types/formatting and real browser UI.
 - Acceptance: no fake balances/results, wallet preserved, all transaction actions explicit.
-- Status: pending.
+- Status: complete for implementation and available local verification; public deployment is gated in Phase 13.
 
 ### Phase 10: Contract unit tests
-- [ ] Expand adversarial token, probability, accounting and callback scenarios.
+- [x] Expand adversarial token, probability, accounting and callback scenarios.
 - Files: contract tests; build/test scripts.
 - Tests: `cargo test --workspace`, wasm build and contract receipt integration if available.
 - Acceptance: required invariants and negative scenarios pass; unavailable checks explicit.
-- Status: pending.
+- Status: complete for implementation and available local verification; public deployment is gated in Phase 13.
 
 ### Phase 11: Economic simulations
-- [ ] Shared Rust formulas and deterministic simulation-only PRNG, multiple seeds.
-- [ ] Run all requested volumes, reserve levels, reward streaks, concurrency and failures.
+- [x] Shared Rust formulas and deterministic simulation-only PRNG, multiple seeds.
+- [x] Run all requested volumes, reserve levels, reward streaks, concurrency and failures.
 - Files: Rust simulation binary, reproducible JSON/CSV, `docs/usdi-pool-simulation-report.md`.
 - Tests: reward/pool conservation, repeatability, max1m openings where feasible.
 - Acceptance: full metrics and honest drawdowns/pauses, no altered economics.
-- Status: pending.
+- Status: complete for implementation and available local verification; public deployment is gated in Phase 13.
 
 ### Phase 12: Integration and browser tests
-- [ ] Unit, types, formatting, build, wallet regression, cases browser scenarios.
+- [x] Unit, types, formatting, build, wallet regression, cases browser scenarios.
 - Files: `tests/usdi-*.test.ts`, `tests/browser/cases.spec.ts`.
 - Acceptance: available tests run; mocked RPC checks distinguished from real contracts.
-- Status: pending.
+- Status: complete for available local tests; public wallet/contract integration remains blocked in Phase 13.
 
 ### Phase 13: Testnet deployment and end-to-end verification
-- [ ] Reproducible wasm builds, wallet-authorized deploy/initialize/register/fund guide.
+- [x] Reproducible wasm builds, unsigned plan, and wallet-authorized account/deploy/register/fund guide.
 - [ ] Request actual deployment/signing authorization only after artifacts are reviewable.
 - Files: scripts, public config placeholders, deployment documentation.
 - Acceptance: genuine Testnet receipts/addresses, or exact authorization blocker recorded.
-- Status: pending; real deployment awaits separate explicit approval and public account IDs.
+- Status: blocked only for public deployment. Proposed IDs were supplied, but all four required accounts are absent and creation/signing approval is still required.
 
 ### Phase 14: Final review and documentation
-- [ ] Independent security/accounting review, fix findings and rerun affected gates.
+- [x] Independent security/accounting review, fix findings and rerun affected gates.
 - [ ] Update checklist, final technical report, manual guide and local Git commits.
 - Acceptance: no secrets accessed, no existing files deleted, no push/merge, accurate status.
-- Status: pending.
+- Status: final documentation/commits in progress; no public deployment claimed.
 
 After each milestone run focused tests, applicable types/format checks, inspect
 failures, update this checklist and commit only verified work. Token+faucet and
@@ -186,7 +186,7 @@ phase's acceptance inside those ordered milestones without temporary unsafe stub
 
 ## Verification journal
 
-- Core Rust checks: 19 case tests +16 USDI tests +9 economics tests +12 simulation
+- Core Rust checks: 19 case tests +17 USDI tests +9 economics tests +12 simulation
   tests passed. No ignored tests. `scripts/contracts.sh build` produced both wasm
   modules with the MVP CPU target; source release overflow checks stay enabled.
 - Token metadata, standard transfers/storage/resolver, permanent claims, exact
@@ -194,8 +194,8 @@ phase's acceptance inside those ordered milestones without temporary unsafe stub
   concurrency and treasury isolation were tested. Claim cost at current storage
   pricing is 0.00381 NEAR unregistered or 0.00256 NEAR already registered.
 - A local NEAR Sandbox2.14 runner actually loaded both wasm modules, funded the
-  token pool, claimed, opened four cases, paid real local tokens and reconciled
-  balances. Its expanded concurrent run is still in progress.
+  token pool, claimed, opened six cases, paid real local tokens and reconciled
+  balances, including simultaneous payments and failed-transfer recovery.
 - Core SDK5.29.1 and current workspaces0.24 require incompatible native crypto
   library versions. The integration runner therefore has an independent nested
   Cargo workspace/lockfile, with no downgrade of either maintained library.
@@ -205,3 +205,40 @@ phase's acceptance inside those ordered milestones without temporary unsafe stub
 - Compilation caught and corrected a callback edit typo and the SDK's
   non-exhaustive error enum before tests passed. No error suppression was used.
 - Original wallet controller/adapter regression check remains green:36 tests.
+
+
+- Completed local Sandbox verification: six genuine openings across two accounts,
+  including concurrent same-revision payments and a real failed FT payout after
+  atomic unregistration. Re-registration and attempt-2 retry pay the same frozen
+  draw once. The parent independently reran it using the frontend gas budgets.
+- Full simulations:84 scenarios,13,492,200 attempts,53,697,455 invariant checks.
+  The shared crate generated JSON, CSV and labeled SVG graphs. No economic
+  parameter changed. See the simulation report and financial design for rounding
+  limits and the narrow drift-sign quantization band around the target.
+- Final review found one Important frontend issue: an old same-method transaction
+  could clear an uncertain current intent. Five failing tests reproduced missing
+  call/freshness checks. Pending records now include the full call and a finalized
+  block boundary captured before signing; recovered transactions must match both.
+  The focused client/wallet set passes63 tests, including27 client cases.
+- Root header mobile overflow from the new navigation link was reproduced at390px,
+  then corrected at390px and320px without removing any existing control. The new
+  case route uses a legible dark wallet icon on its light background.
+- All327 frontend unit tests, types and configured formatting pass. The complete
+  cases+wallet browser set passes11 tests. One prior run timed out in the existing
+  3D room-readiness helper after refresh; the same unchanged wallet test then
+  passed in isolation and the whole11-test set passed. No assertion was removed.
+- Public account check at2026-11-04T20:07:56Z, final block276242194: admin, parent,
+  USDI and case accounts all return UNKNOWN_ACCOUNT. No public transaction was
+  submitted. Active frontend contract IDs remain null. The public deployment plan
+  contains genuine built-artifact hashes and the user-proposed account names.
+
+
+- Final Rust run through the checked-in test script:57 tests passed
+  (17 token,19 pool,9 probability,12 simulation), zero ignored. The added
+  insufficient-balance case proves no receiver receipt is scheduled without USDI.
+- Final production build passes with `/cases` generated successfully. Final
+  cases-only browser rerun passes6 tests after icon contrast correction; the
+  full cases/wallet run passed11. Native tools emitted an optional objcopy
+  rpath warning during the first simulator release build; the simulation still
+  ran successfully, and setting the isolated toolchain library path made the
+  tool's own version check succeed. No compiler or test failure was suppressed.
