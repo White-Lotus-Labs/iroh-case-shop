@@ -269,7 +269,8 @@ function callMatches(raw: unknown, expected: WalletFunctionCall): boolean {
 export class CaseClient {
   constructor(
     readonly config: Deployment,
-    private readonly request: typeof fetch = fetch,
+    private readonly request: typeof fetch = (input, init) =>
+      fetch(input, init),
   ) {}
   async rpc(
     method: string,

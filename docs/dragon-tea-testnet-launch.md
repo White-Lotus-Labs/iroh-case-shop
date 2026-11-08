@@ -50,8 +50,13 @@ The wallet owner approves each public transaction separately.
 - [ ] Review and approve USDI storage registration for the case account and the
   separate authenticated funding transfer of exactly 1,000 bootstrap USDI.
   Verify the actual FT balance, pool accounting and 1,000 USDI target.
-- [ ] Configure the existing frontend with the verified public IDs. Verify HOT
-  Connect, claim and balance, case odds and health, history and refresh recovery.
+- [x] Configure the frontend with both verified Testnet IDs. A Chromium check
+  using a simulated wallet and live read-only RPC showed the 1,000 USDI balance,
+  starter eligibility and the unfunded pool. Opening remained disabled. The
+  six case browser tests and 328 frontend unit tests passed after fixing the
+  browser `fetch` invocation.
+- [ ] Verify the funded frontend with a real HOT Connect wallet, including odds,
+  health, claim and balance, history and refresh recovery.
 - [ ] Verify a real fresh-wallet Testnet claim and duplicate rejection, then a
   1 USDI opening, final reward, pool contribution and treasury fee. Test safe
   wallet failure paths and use Sandbox for disruptive failure injection.

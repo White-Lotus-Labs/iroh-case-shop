@@ -1,13 +1,20 @@
 import { expect, test } from '@playwright/test';
+import testnet from '../../config/contracts.testnet.json' with { type: 'json' };
 import { waitForRoomReady, waitForDockReady } from './room-helpers';
 
 test.beforeEach(async ({ page }) => {
   await page.route('**/repository/manifest.json', (route) =>
     route.fulfill({ json: { version: '1.0.0', wallets: [] } }),
   );
+  await page.route(testnet.rpcUrl + '/', (route) =>
+    route.fulfill({
+      status: 503,
+      headers: { 'access-control-allow-origin': '*' },
+    }),
+  );
 });
 
-test('undeployed cases show no invented chain data and cannot request signatures', async ({
+test('cases with unavailable RPC show no invented data and cannot request signatures', async ({
   page,
 }) => {
   const walletRequests: string[] = [];
@@ -20,8 +27,8 @@ test('undeployed cases show no invented chain data and cannot request signatures
     page.getByRole('heading', { name: 'Let the tea leaves decide.' }),
   ).toBeVisible();
   await expect(
-    page.getByRole('heading', { name: 'Testnet contracts are not deployed' }),
-  ).toBeVisible();
+    page.getByRole('alert').filter({ hasText: 'Testnet RPC' }),
+  ).toHaveText('Testnet RPC unavailable. Refresh to try the read again.');
   await expect(
     page.getByRole('button', { name: 'Open Dragon Tea · 1 USDI' }),
   ).toBeDisabled();
@@ -33,7 +40,7 @@ test('undeployed cases show no invented chain data and cannot request signatures
   ).toBeDisabled();
   await expect(
     page.getByRole('button', { name: 'Refresh chain state' }),
-  ).toBeDisabled();
+  ).toBeEnabled();
   await expect(page.locator('.cases-balance')).toHaveText('— USDI');
   await expect(page.locator('.cases-tier b')).toHaveText(['—', '—', '—']);
   await expect(
@@ -98,7 +105,7 @@ test('cases reuse the root Testnet wallet session through reload and disconnect'
       },
       async signAndSendTransaction() {
         console.log('CASE_TEST_SIGN');
-        throw new Error('No signing expected while undeployed');
+        throw new Error('No signing expected when the RPC is unavailable');
       },
     };
     const announce = () =>

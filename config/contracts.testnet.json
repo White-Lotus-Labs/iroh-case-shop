@@ -1,6 +1,6 @@
 {
   "network": "testnet",
   "rpcUrl": "https://rpc.testnet.near.org",
-  "tokenContractId": null,
-  "caseContractId": null
+  "tokenContractId": "usdi-needmore-1-near.testnet",
+  "caseContractId": "cases-needmore-1-near.testnet"
 }
