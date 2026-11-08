@@ -38,13 +38,15 @@ The wallet owner approves each public transaction separately.
   0.0071149895375 test NEAR in total burned fees. The exact local Keychain
   service and account attributes were found without retrieving item data.
   [Faucet transaction](https://testnet.nearblocks.io/txns/7Yz9MaSEvs6fW592hyFxPNy46wCQLXEmNdBH8wavuH9T)
-- [ ] Have the wallet owner confirm the signer with
-  `get-public-key from-keychain` in their own Terminal before deployment.
-- [ ] Verify the selected case WASM before signing. Review deployment separately, with
-  signer and receiver `cases-needmore-1-near.testnet` and one initializer call
-  using `owner_id` and `treasury_id` `needmore_1_near.testnet` and `token_id`
-  `usdi-needmore-1-near.testnet`. Verify the code and initialized state after
-  finality.
+- [x] Verify the approved case deployment. The transaction finalized at block
+  `276785095`, signed by the reviewed FullAccess key. The deployed WASM
+  matched the reviewed SHA-256. At finalized block `276785217`, public RPC
+  confirmed `owner_id` and `treasury_id` `needmore_1_near.testnet` and
+  `token_id` `usdi-needmore-1-near.testnet` in stored state. `get_case`
+  confirmed the 1 USDI price, 0.95 pool contribution, 0.05 treasury fee, and
+  the three expected rewards. The pool started empty with a 1,000 USDI target.
+  The fee was 0.0032480799795832 test NEAR and account storage was 424,000 bytes.
+  [Deployment transaction](https://testnet.nearblocks.io/txns/7tEmfRgXSpjHQmB3orkh66cWqck1hz7bLt5VhaEhM5hQ)
 - [ ] Review and approve USDI storage registration for the case account and the
   separate authenticated funding transfer of exactly 1,000 bootstrap USDI.
   Verify the actual FT balance, pool accounting and 1,000 USDI target.
@@ -66,19 +68,12 @@ owner still held the full 1,000 USDI bootstrap. These are planning estimates
 from that block's gas price and protocol costs, including the full prepaid gas
 budget. Recheck balances, fees and account state before each approval.
 
-1. **Deployment.** The case account signs a transaction to itself that deploys
-   the rebuilt 423,533-byte WASM and calls `new` with `owner_id` and
-   `treasury_id` set to `needmore_1_near.testnet` and `token_id` set to
-   `usdi-needmore-1-near.testnet`. Prepay 100 Tgas and attach 0 NEAR. The fee
-   estimate is 0.013181 test NEAR, and code storage alone requires 4.23533 test
-   NEAR. Check the actual balance against code, account and initializer storage
-   before signing.
-2. **USDI registration.** `needmore_1_near.testnet` calls `storage_deposit` on
+1. **USDI registration.** `needmore_1_near.testnet` calls `storage_deposit` on
    `usdi-needmore-1-near.testnet` with
    `{"account_id":"cases-needmore-1-near.testnet","registration_only":true}`.
    Prepay 30 Tgas and attach the live NEP-145 minimum, 0.00125 test NEAR at this
    block. The fee estimate is 0.003121 test NEAR.
-3. **Bootstrap funding.** The same wallet calls `ft_transfer_call` on USDI with
+2. **Bootstrap funding.** The same wallet calls `ft_transfer_call` on USDI with
    `{"receiver_id":"cases-needmore-1-near.testnet","amount":"1000000000","msg":"{\"action\":\"fund\"}"}`.
    Prepay 250 Tgas and attach one yoctoNEAR. The fee estimate is 0.025121 test
    NEAR. After finality, verify the actual USDI balance and `get_pool` both show
