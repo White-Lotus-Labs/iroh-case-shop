@@ -54,3 +54,32 @@ The wallet owner approves each public transaction separately.
 Starter eligibility is enforced permanently by the token contract per NEAR
 account ID. Someone who controls several eligible Testnet accounts can claim
 once from each. The starter tokens have no real monetary value.
+
+## Pending Testnet transaction reviews
+
+At finalized block `276780775`, the case account was still unused and the
+owner still held the full 1,000 USDI bootstrap. These are planning estimates
+from that block's gas price and protocol costs, including the full prepaid gas
+budget. Recheck balances, fees and account state before each approval.
+
+1. **Faucet creation.** The Testnet faucet creates
+   `cases-needmore-1-near.testnet` and installs the dedicated FullAccess key.
+   The faucet covers funding and fees. The amount received must be checked
+   after finality. Await the public key before reviewing the exact request.
+2. **Deployment.** The case account signs a transaction to itself that deploys
+   the rebuilt 423,533-byte WASM and calls `new` with `owner_id` and
+   `treasury_id` set to `needmore_1_near.testnet` and `token_id` set to
+   `usdi-needmore-1-near.testnet`. Prepay 100 Tgas and attach 0 NEAR. The fee
+   estimate is 0.013181 test NEAR, and code storage alone requires 4.23533 test
+   NEAR. Check the actual balance against code, account and initializer storage
+   before signing.
+3. **USDI registration.** `needmore_1_near.testnet` calls `storage_deposit` on
+   `usdi-needmore-1-near.testnet` with
+   `{"account_id":"cases-needmore-1-near.testnet","registration_only":true}`.
+   Prepay 30 Tgas and attach the live NEP-145 minimum, 0.00125 test NEAR at this
+   block. The fee estimate is 0.003121 test NEAR.
+4. **Bootstrap funding.** The same wallet calls `ft_transfer_call` on USDI with
+   `{"receiver_id":"cases-needmore-1-near.testnet","amount":"1000000000","msg":"{\"action\":\"fund\"}"}`.
+   Prepay 250 Tgas and attach one yoctoNEAR. The fee estimate is 0.025121 test
+   NEAR. After finality, verify the actual USDI balance and `get_pool` both show
+   1,000 USDI with zero pending fees or reserved rewards.
