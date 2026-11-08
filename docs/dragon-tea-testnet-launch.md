@@ -47,9 +47,13 @@ The wallet owner approves each public transaction separately.
   the three expected rewards. The pool started empty with a 1,000 USDI target.
   The fee was 0.0032480799795832 test NEAR and account storage was 424,000 bytes.
   [Deployment transaction](https://testnet.nearblocks.io/txns/7tEmfRgXSpjHQmB3orkh66cWqck1hz7bLt5VhaEhM5hQ)
-- [ ] Review and approve USDI storage registration for the case account and the
-  separate authenticated funding transfer of exactly 1,000 bootstrap USDI.
-  Verify the actual FT balance, pool accounting and 1,000 USDI target.
+- [x] Verify the approved USDI storage registration. At finalized block
+  `276786892`, USDI returned NEP-145 storage of 0.00125 test NEAR total and
+  zero available for `cases-needmore-1-near.testnet`. The transaction contained
+  one `storage_deposit` call and burned 0.0002053033895174 test NEAR in fees.
+  [Registration transaction](https://testnet.nearblocks.io/txns/AWGZaZfRRzGuzKGUW4ksZvU51XEpReW94YuBd6MEiQgy)
+- [ ] Review and approve the separate authenticated funding transfer of exactly
+  1,000 bootstrap USDI. Verify the actual FT balance, pool accounting and target.
 - [x] Configure the frontend with both verified Testnet IDs. A Chromium check
   using a simulated wallet and live read-only RPC showed the 1,000 USDI balance,
   starter eligibility and the unfunded pool. Opening remained disabled. The
@@ -68,17 +72,12 @@ once from each. The starter tokens have no real monetary value.
 
 ## Pending Testnet transaction reviews
 
-At finalized block `276780775`, the case account was still unused and the
-owner still held the full 1,000 USDI bootstrap. These are planning estimates
-from that block's gas price and protocol costs, including the full prepaid gas
-budget. Recheck balances, fees and account state before each approval.
+At finalized block `276786964`, the case account was registered with USDI and
+held zero USDI. The owner held the full 1,000 USDI bootstrap. The fee estimate
+uses that block's gas price and protocol costs, including the full prepaid gas
+budget. Recheck balances, fees and account state before approval.
 
-1. **USDI registration.** `needmore_1_near.testnet` calls `storage_deposit` on
-   `usdi-needmore-1-near.testnet` with
-   `{"account_id":"cases-needmore-1-near.testnet","registration_only":true}`.
-   Prepay 30 Tgas and attach the live NEP-145 minimum, 0.00125 test NEAR at this
-   block. The fee estimate is 0.003121 test NEAR.
-2. **Bootstrap funding.** The same wallet calls `ft_transfer_call` on USDI with
+1. **Bootstrap funding.** `needmore_1_near.testnet` calls `ft_transfer_call` on USDI with
    `{"receiver_id":"cases-needmore-1-near.testnet","amount":"1000000000","msg":"{\"action\":\"fund\"}"}`.
    Prepay 250 Tgas and attach one yoctoNEAR. The fee estimate is 0.025121 test
    NEAR. After finality, verify the actual USDI balance and `get_pool` both show
