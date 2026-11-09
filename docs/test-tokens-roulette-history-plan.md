@@ -20,12 +20,14 @@ Verified with 61 Rust tests and the local NEAR Sandbox. Sandbox executed actual 
 Verified legacy and bonus-enabled contract data, exact reel stop, partial settlement display, reduced motion, and mobile layouts with the production app. The release build and TypeScript checks passed.
 
 ## 3. Shelf activity
-- [ ] Open activity by default while keeping the existing trader view accessible. Combine finalized contract openings with locally saved, verified app receipts. Scope by account and deployment, and leave unknown timestamps and hashes absent. Add a Details view and explorer links for verified hashes.
-- [ ] Verify connected and disconnected views, detail navigation, wallet changes, retained receipts and mobile layout. Run Rust, TypeScript, Vitest, browser, and production build checks.
+- [x] Open activity by default while keeping the existing trader view accessible. Combine finalized contract openings with locally saved, verified app receipts. Scope by account and deployment, and leave unknown timestamps and hashes absent. Add a Details view and explorer links for verified hashes.
+- [x] Verify connected and disconnected views, detail navigation, wallet changes, retained receipts and mobile layout. Run Rust, TypeScript, Vitest, browser, and production build checks.
+
+Verified with 332 Vitest tests and 25 production Playwright tests covering Host, wallet, mobile, loading, and history. The Shelf camera and trader views passed development checks, and a separate production browser check read the four public Testnet payouts using an injected wallet that cannot sign. The production browser used fixture receipts for the v2 bonus and approval lifecycle.
 
 ## 4. Testnet handoff
-- [ ] Read the live USDI and v1 case configuration and inventory; check proposed account IDs without creating them. Record prerequisites for deploying and funding the new case and three mock tokens.
-- [ ] Commit verified milestones. Stop at the deployment review, with separate approval required for each on-chain action.
+- [x] Read the live USDI and v1 case configuration and inventory; check proposed account IDs without creating them. Record prerequisites for deploying and funding the new case and three mock tokens.
+- [x] Commit verified milestones. Stop at the deployment review, with separate approval required for each on-chain action.
 
 ## Testnet deployment review
 

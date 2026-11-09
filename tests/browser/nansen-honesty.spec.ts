@@ -7,6 +7,7 @@ async function openShelf(page: Page) {
     .getByRole('navigation', { name: 'Tea room stations' })
     .getByRole('button', { name: /Shelf/ })
     .click();
+  await page.getByRole('button', { name: 'Open the Activity Ledger' }).click();
   await page.getByRole('button', { name: 'See the top traders' }).click();
 }
 

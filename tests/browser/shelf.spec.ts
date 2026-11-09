@@ -98,6 +98,7 @@ async function focusShelf(page: Page) {
     .getByRole('navigation', { name: 'Tea room stations' })
     .getByRole('button', { name: /Shelf/ })
     .click();
+  await page.getByRole('button', { name: 'Open the Activity Ledger' }).click();
   await page.getByRole('button', { name: 'See the top traders' }).click();
 }
 
@@ -134,7 +135,9 @@ test('the Shelf stays in the room until opened, then reveals ranked wallets with
     'browse',
   );
   await expect(page.getByTestId('leaderboard-parchment')).toHaveCount(0);
-  const approach = page.getByRole('button', { name: 'See the top traders' });
+  const approach = page.getByRole('button', {
+    name: 'Open the Activity Ledger',
+  });
   await expect(approach).toBeVisible();
   const approachBox = await approach.boundingBox();
   const dockBox = await page
@@ -168,6 +171,7 @@ test('the Shelf stays in the room until opened, then reveals ranked wallets with
   });
   const beforeOpen = await cameraPose(page);
   await approach.click();
+  await page.getByRole('button', { name: 'See the top traders' }).click();
   await expect(page.locator('.app-shell')).toHaveAttribute(
     'data-shelf-view',
     'open',
@@ -230,7 +234,7 @@ test('clicking the Shelf in the room starts the focus journey', async ({
     .getByRole('button', { name: /Shelf/ })
     .click();
   await expect(
-    page.getByRole('button', { name: 'See the top traders' }),
+    page.getByRole('button', { name: 'Open the Activity Ledger' }),
   ).toBeVisible();
   // Click the middle of the shelf where the camera draws it; a fixed pixel
   // can fall in a gap between the uprights and the tins.
@@ -273,14 +277,20 @@ test('a hanging spirit paper answers hover and opens the Shelf', async ({
     .getByRole('button', { name: /Shelf/ })
     .click();
   await expect(
-    page.getByRole('button', { name: 'See the top traders' }),
+    page.getByRole('button', { name: 'Open the Activity Ledger' }),
   ).toBeVisible();
-  // The rank 1 sheet hangs above the rolled scroll in the middle bay.
-  const portrait = await centerPortrait(page);
-  await page.mouse.move(...portrait);
+  // Wait for the interactive shelf assets before projecting the portrait.
+  await expect(page.locator('.app-shell')).toHaveAttribute(
+    'aria-busy',
+    'false',
+  );
   await expect
-    .poll(() => page.evaluate(() => document.body.style.cursor))
+    .poll(async () => {
+      await page.mouse.move(...(await centerPortrait(page)));
+      return page.evaluate(() => document.body.style.cursor);
+    })
     .toBe('pointer');
+  const portrait = await centerPortrait(page);
   const beforeOpen = await cameraPose(page);
   await page.mouse.click(...portrait);
   await expect(page.locator('.app-shell')).toHaveAttribute(
@@ -290,19 +300,21 @@ test('a hanging spirit paper answers hover and opens the Shelf', async ({
   expect(await cameraPose(page)).toEqual(beforeOpen);
 
   await page.getByRole('button', { name: 'Close Shelf menu' }).click();
-  await expect(page.getByTestId('leaderboard-parchment')).toHaveCount(0);
-  const approach = page.getByRole('button', { name: 'See the top traders' });
+  await expect(page.getByTestId('shelf-activity')).toHaveCount(0);
+  const approach = page.getByRole('button', {
+    name: 'Open the Activity Ledger',
+  });
   await expect(approach).toBeFocused();
   await page.mouse.click(...portrait);
-  await expect(page.getByTestId('leaderboard-parchment')).toBeVisible();
+  await expect(page.getByTestId('shelf-activity')).toBeVisible();
   expect(await cameraPose(page)).toEqual(beforeOpen);
 
   // Keyboard: Escape closes the parchment, Enter on the hint reopens it.
   await page.keyboard.press('Escape');
-  await expect(page.getByTestId('leaderboard-parchment')).toHaveCount(0);
+  await expect(page.getByTestId('shelf-activity')).toHaveCount(0);
   await expect(approach).toBeFocused();
   await page.keyboard.press('Enter');
-  await expect(page.getByTestId('leaderboard-parchment')).toBeVisible();
+  await expect(page.getByTestId('shelf-activity')).toBeVisible();
   await expect(page.locator('.reading-panel')).toBeFocused();
   expect(await cameraPose(page)).toEqual(beforeOpen);
 });

@@ -414,7 +414,7 @@ const DOCK: DockEntry[] = [
   {
     id: 'Shelf',
     label: 'Shelf',
-    caption: 'Top traders',
+    caption: 'Activity Ledger',
     seal: '榜',
     // Hanging scroll on a silk mount with gold, silver, and bronze ranks.
     glyph: (

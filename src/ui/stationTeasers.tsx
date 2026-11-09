@@ -16,8 +16,8 @@ export const STATION_TEASERS: Partial<
   },
   Shelf: {
     glyph: '卷',
-    text: 'See the top ten perps traders, smart wallets, whales and meme traders.',
-    cta: ['See the', 'top traders'],
+    text: 'Browse your tea case activity and verified transaction receipts.',
+    cta: ['Open the', 'Activity Ledger'],
   },
   TeaTable: {
     glyph: '星',

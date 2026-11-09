@@ -42,6 +42,8 @@ const loadIrohChat = () =>
   import('./IrohChat').then((m) => ({ default: m.IrohChat }));
 const loadTeaCatalog = () =>
   import('../case/TeaCaseCatalog').then((m) => ({ default: m.TeaCaseCatalog }));
+const loadShelfActivity = () =>
+  import('../case/ShelfActivity').then((m) => ({ default: m.ShelfActivity }));
 const loadShelf = () =>
   import('./SmartWalletShelf').then((m) => ({ default: m.SmartWalletShelf }));
 
@@ -78,6 +80,7 @@ const ThesisDeck = dynamic(loadThesisDeck);
 const IrohChat = dynamic(loadIrohChat);
 const TeaCaseCatalog = dynamic(loadTeaCatalog);
 const SmartWalletShelf = dynamic(loadShelf);
+const ShelfActivity = dynamic(loadShelfActivity);
 
 function setTeaCollectionLink(view: 'tea' | 'dragon-tea' | null) {
   const url = new URL(window.location.href);
@@ -114,6 +117,7 @@ export default function TeaRoomShell({
   const [station, setStation] = useState<Station>('Entrance');
   const [cameraAt, setCameraAt] = useState<Station | null>(null);
   const [shelfFocused, setShelfFocused] = useState(false);
+  const [shelfTraders, setShelfTraders] = useState(false);
   const [systemReduced, setSystemReduced] = useState<boolean | null>(null);
   const [panelOpen, setPanelOpen] = useState(false);
   const [hostView, setHostView] = useState<'collection' | 'case' | 'research'>(
@@ -163,6 +167,7 @@ export default function TeaRoomShell({
         loadThesisDeck(),
         loadIrohChat(),
         loadShelf(),
+        loadShelfActivity(),
         loadTeaCatalog(),
       ]);
     });
@@ -308,6 +313,7 @@ export default function TeaRoomShell({
     setPanelOpen(true);
   }, [station, cameraAt, sceneFailed]);
   const focusShelf = useCallback(() => {
+    setShelfTraders(false);
     if (shelfFocused) {
       setPanelOpen(true);
       queueMicrotask(() => panel.current?.focus());
@@ -331,6 +337,7 @@ export default function TeaRoomShell({
     // A transition keeps the panel unmounted until its lazy content is ready.
     startTransition(() => {
       if (station === 'Shelf') {
+        setShelfTraders(false);
         if (cameraAt !== 'Shelf' && !sceneFailed) setCameraAt(null);
         setShelfFocused(true);
       }
@@ -869,7 +876,26 @@ export default function TeaRoomShell({
                     onInspect={inspectCase}
                   />
                 ))}
-              {shelfOpen && <SmartWalletShelf nansen={nansen} />}
+              {shelfOpen &&
+                (shelfTraders ? (
+                  <>
+                    <button
+                      type="button"
+                      className="shelf-return-activity"
+                      onClick={() => setShelfTraders(false)}
+                    >
+                      Activity Ledger
+                    </button>
+                    <SmartWalletShelf nansen={nansen} />
+                  </>
+                ) : (
+                  <ShelfActivity
+                    onTraders={() => {
+                      setShelfTraders(true);
+                      panel.current?.focus();
+                    }}
+                  />
+                ))}
             </section>
           )}
         </Suspense>

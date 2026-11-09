@@ -180,6 +180,7 @@ test('mobile layout remains readable and the WebGL fallback preserves the journe
     .getByRole('navigation', { name: 'Tea room stations' })
     .getByRole('button', { name: /Shelf/ })
     .click();
+  await page.getByRole('button', { name: 'Open the Activity Ledger' }).click();
   await page.getByRole('button', { name: 'See the top traders' }).click();
   await expect(
     page.getByRole('heading', {
@@ -194,12 +195,14 @@ test('mobile layout remains readable and the WebGL fallback preserves the journe
   await expect(page.locator('.reading-panel')).toBeFocused();
 
   // Closing the Shelf leaves a keyboard way back in.
-  const approach = page.getByRole('button', { name: 'See the top traders' });
+  const approach = page.getByRole('button', {
+    name: 'Open the Activity Ledger',
+  });
   await page.getByRole('button', { name: 'Close Shelf menu' }).click();
   await expect(page.getByTestId('leaderboard-parchment')).toHaveCount(0);
   await expect(approach).toBeFocused();
   await page.keyboard.press('Enter');
-  await expect(page.getByTestId('leaderboard-parchment')).toBeVisible();
+  await expect(page.getByTestId('shelf-activity')).toBeVisible();
   await page.keyboard.press('Escape');
   await expect(page.getByTestId('leaderboard-parchment')).toHaveCount(0);
   await expect(approach).toBeFocused();
