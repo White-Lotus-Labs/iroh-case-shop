@@ -13,9 +13,11 @@ Baseline wheel input left `scrollY` at zero before authorization. The document's
 
 ## Milestone 2 · Share chain and transaction state
 
-- [ ] Extract the existing case controller. Preserve the quote, intent, signer, finality, pending receipt, and payout checks for both surfaces.
-- [ ] Supply contract-backed case metadata, pool state, and public odds. Keep anonymous quote data separate from wallet authorization and display actual weighted expected payout.
-- [ ] Run unit and browser tests and TypeScript, then commit the refactor.
+- [x] Extract the existing case controller. Preserve the quote, intent, signer, finality, pending receipt, and payout checks for both surfaces.
+- [x] Supply contract-backed case metadata, pool state, and public odds. Keep anonymous quote data separate from wallet authorization and display actual weighted expected payout.
+- [x] Run unit and browser tests and TypeScript, then commit the refactor.
+
+The legacy route and Host share the controller and recovery panel. The public odds request returns only display data. The official RPC confirmed the deployed case code and the USDI token at finalized block 276955541: 1,000 USDI available and held by the case contract, Healthy, with odds of 27.7778%, 67.2222%, and 5%. TypeScript, 329 Vitest tests, and three standalone browser regressions passed.
 
 ## Milestone 3 · Build the Host experience
 

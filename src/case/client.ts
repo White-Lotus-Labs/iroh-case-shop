@@ -137,6 +137,26 @@ export function parsePool(raw: unknown) {
   return pool;
 }
 export type Pool = ReturnType<typeof parsePool>;
+const rewardTiers = [
+  { tier: 'Common', amount: '100000', probability: 'common' },
+  { tier: 'Rare', amount: '1000000', probability: 'rare' },
+  { tier: 'Legendary', amount: '5000000', probability: 'legendary' },
+] as const;
+
+export function rewardTier(amount: string) {
+  return rewardTiers.find((reward) => reward.amount === amount)?.tier;
+}
+
+export type PublicOdds = Pick<
+  Quote,
+  | 'common'
+  | 'rare'
+  | 'legendary'
+  | 'expected_numerator'
+  | 'revision'
+  | 'available'
+>;
+
 export function parseCase(raw: unknown) {
   const v = object(raw);
   if (
@@ -147,8 +167,24 @@ export function parseCase(raw: unknown) {
     v.probability_denominator !== 1_000_000
   )
     throw new Error('Unexpected Dragon Tea economics.');
+  const rewards = v.rewards;
+  if (
+    !Array.isArray(rewards) ||
+    rewards.length !== rewardTiers.length ||
+    rewardTiers.some(({ tier, amount }, index) => {
+      const reward = object(
+        v.rewards instanceof Array ? v.rewards[index] : null,
+      );
+      return reward.tier !== tier || reward.amount !== amount;
+    })
+  )
+    throw new Error('Unexpected Dragon Tea rewards.');
   return {
     name: text(v.name),
+    price: v.price,
+    poolContribution: v.pool_contribution,
+    platformFee: v.platform_fee,
+    rewards: rewardTiers,
     token_id: contractId(v.token_id),
     randomness: text(v.randomness),
     quote_policy: text(v.quote_policy),
@@ -170,7 +206,7 @@ export function parseOpening(raw: unknown) {
   const v = object(raw);
   const status = openingStatus(v.status);
   const reward = v.reward === null ? null : integer(v.reward);
-  if (reward !== null && !['100000', '1000000', '5000000'].includes(reward))
+  if (reward !== null && !rewardTier(reward))
     throw new Error('Unexpected reward.');
   if (status === 'RandomnessPending' ? reward !== null : reward === null)
     throw new Error('Inconsistent opening result.');
@@ -358,6 +394,18 @@ export class CaseClient {
         'The game token does not match the configured USDI contract.',
       );
     return { caseInfo, pool: parsePool(rawPool) };
+  }
+  async publicOdds(signal?: AbortSignal): Promise<PublicOdds> {
+    const { common, rare, legendary, expected_numerator, revision, available } =
+      parseQuote(
+        await this.view(
+          this.config.caseContractId,
+          'get_quote',
+          { account_id: this.config.caseContractId },
+          signal,
+        ),
+      );
+    return { common, rare, legendary, expected_numerator, revision, available };
   }
   async account(accountId: string, signal?: AbortSignal): Promise<AccountData> {
     const args = { account_id: accountId };

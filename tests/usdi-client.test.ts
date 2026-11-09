@@ -736,3 +736,27 @@ describe('wallet account and recoverable public intents', () => {
     ).toThrow('Saved');
   });
 });
+
+it('reads contract-defined odds for guests without exposing a signing quote', async () => {
+  const client = new CaseClient(config, async (_input, init) => {
+    const { method, params } = JSON.parse(String(init?.body));
+    expect(method).toBe('query');
+    expect(params).toMatchObject({
+      account_id: config.caseContractId,
+      method_name: 'get_quote',
+      finality: 'final',
+    });
+    expect(JSON.parse(atob(params.args_base64))).toEqual({
+      account_id: config.caseContractId,
+    });
+    return rpcResponse(encoded({ ...quote, can_open: false }));
+  });
+  await expect(client.publicOdds()).resolves.toEqual({
+    common: 700000,
+    rare: 250000,
+    legendary: 50000,
+    expected_numerator: '570000000000',
+    revision: '9007199254740993',
+    available: '1000000000',
+  });
+});
