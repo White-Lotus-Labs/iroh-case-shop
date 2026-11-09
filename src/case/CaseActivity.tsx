@@ -1,4 +1,5 @@
 import { formatUnits, percent, rewardTier, type Opening } from './client';
+import { ChainReadStatus } from './ChainReadStatus';
 import type { CaseController } from './useCaseController';
 
 const lifecycle = {
@@ -7,15 +8,21 @@ const lifecycle = {
   Claimable: 'Payout failed · reward claimable',
   Completed: 'Payout completed',
 };
-export function CaseActivity({ controller }: { controller: CaseController }) {
+export function CaseActivity({
+  controller,
+  showNotice = true,
+}: {
+  controller: CaseController;
+  showNotice?: boolean;
+}) {
   const {
-    account,
+    accountId,
+    reads,
     active,
+    history,
     accountPending,
     loading,
     signing,
-    message,
-    error,
     hashInput,
     setHashInput,
     available,
@@ -31,28 +38,14 @@ export function CaseActivity({ controller }: { controller: CaseController }) {
     >
       <div className="cases-panel-heading">
         <h2 id="activity-title">Your latest brews</h2>
-        <button
-          disabled={!available || loading || signing}
-          onClick={() => void refresh()}
-        >
-          {loading ? 'Reading Testnet…' : 'Refresh chain state'}
+        <button disabled={!available} onClick={() => void refresh()}>
+          Refresh chain state
         </button>
       </div>
-      <div aria-live="polite">
-        {message && <p className="cases-message">{message}</p>}
-        {error && (
-          <p role="alert" className="cases-error">
-            {error}
-          </p>
-        )}
-      </div>
+      {loading && <p role="status">Updating available Testnet data…</p>}
+      {showNotice && <CaseTransactionNotice controller={controller} />}
       {accountPending && (
         <div className="cases-pending">
-          <p>
-            {accountPending.hash
-              ? 'Transaction submitted, awaiting finalized confirmation.'
-              : 'Wallet confirmation or submission is unconfirmed. Check the wallet before taking another action.'}
-          </p>
           {accountPending.hash ? (
             <p className="cases-hash">Transaction: {accountPending.hash}</p>
           ) : (
@@ -93,7 +86,7 @@ export function CaseActivity({ controller }: { controller: CaseController }) {
                 disabled={
                   disabled ||
                   (active.status === 'Claimable' &&
-                    account?.tokenRegistered !== true)
+                    reads.tokenRegistration?.value?.tokenRegistered !== true)
                 }
                 onClick={() => recover(active)}
               >
@@ -101,12 +94,13 @@ export function CaseActivity({ controller }: { controller: CaseController }) {
                   ? 'Retry the confirmed failed payout'
                   : 'Advance the pending draw'}
               </button>
-              {active.status === 'Claimable' && !account?.tokenRegistered && (
-                <p>
-                  Register your USDI account above before retrying. The reward
-                  stays reserved.
-                </p>
-              )}
+              {active.status === 'Claimable' &&
+                !reads.tokenRegistration?.value?.tokenRegistered && (
+                  <p>
+                    Register your USDI account above before retrying. The reward
+                    stays reserved.
+                  </p>
+                )}
               <p className="cases-fine">
                 Attaches 1 yoctoNEAR plus gas. A retry preserves the selected
                 reward and accepted odds.
@@ -121,19 +115,73 @@ export function CaseActivity({ controller }: { controller: CaseController }) {
           )}
         </div>
       )}
-      {account?.history
-        .filter((opening) => opening.opening_id !== active?.opening_id)
+      {available && accountId && (
+        <>
+          <ChainReadStatus
+            label="active opening"
+            read={reads.active}
+            retry={refresh}
+          />
+          <ChainReadStatus
+            label="opening history"
+            read={reads.history}
+            retry={refresh}
+          />
+        </>
+      )}
+      {history
+        ?.filter((opening) => opening.opening_id !== active?.opening_id)
         .map((opening) => (
           <OpeningResult key={opening.opening_id} opening={opening} />
         ))}
-      {!active && !account?.history.length && (
+      {(!accountId ||
+        (reads.active?.status === 'ready' &&
+          reads.history?.status === 'ready' &&
+          !active &&
+          !history?.length)) && (
         <p className="cases-empty">
-          {account
+          {accountId
             ? 'No finalized openings found for this account.'
             : 'Your finalized openings and accepted odds will appear here.'}
         </p>
       )}
     </section>
+  );
+}
+
+export function CaseTransactionNotice({
+  controller,
+}: {
+  controller: CaseController;
+}) {
+  const { accountPending, message, error, receiptError, refresh } = controller;
+  if (!message && !error && !accountPending) return null;
+  return (
+    <div aria-live="polite">
+      {message && <p className="cases-message">{message}</p>}
+      {error && (
+        <p role="alert" className="cases-error">
+          {error}
+        </p>
+      )}
+      {accountPending && (
+        <p>
+          {accountPending.hash
+            ? 'Transaction submitted, awaiting finalized confirmation.'
+            : 'Wallet confirmation or submission is unconfirmed. Check the wallet before taking another action.'}
+        </p>
+      )}
+      {accountPending && receiptError && (
+        <>
+          <p role="alert">
+            Could not confirm the transaction yet. {receiptError}
+          </p>
+          <button type="button" onClick={refresh}>
+            Retry transaction status
+          </button>
+        </>
+      )}
+    </div>
   );
 }
 

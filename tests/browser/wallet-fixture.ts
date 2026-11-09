@@ -41,8 +41,10 @@ export const FAKE_WALLET = `
         const mode = localStorage.getItem('fake-near-wallet-mode');
         if (mode === 'reject') throw new Error('User rejected');
         if (mode === 'delay') await new Promise(resolve => setTimeout(resolve, 600));
-        localStorage.setItem(KEY, JSON.stringify([{ accountId }]));
-        return [{ accountId }];
+        const selected = localStorage.getItem('fake-near-wallet-account') ?? accountId;
+        const accounts = [{ accountId: selected }];
+        localStorage.setItem(KEY, JSON.stringify(accounts));
+        return accounts;
       },
       async signInAndSignMessage() {
         throw new Error('not supported');

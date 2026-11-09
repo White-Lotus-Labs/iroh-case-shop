@@ -28,8 +28,8 @@ test('cases with unavailable RPC show no invented data and cannot request signat
     page.getByRole('heading', { name: 'Let the tea leaves decide.' }),
   ).toBeVisible();
   await expect(
-    page.getByRole('alert').filter({ hasText: 'Testnet RPC' }),
-  ).toHaveText('Testnet RPC unavailable. Refresh to try the read again.');
+    page.getByRole('alert').filter({ hasText: 'Could not read pool data.' }),
+  ).toHaveText('Could not read pool data. Testnet RPC unavailable (HTTP 503).');
   await expect(
     page.getByRole('button', { name: 'Open Dragon Tea · 1 USDI' }),
   ).toBeDisabled();

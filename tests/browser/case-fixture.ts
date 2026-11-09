@@ -33,6 +33,8 @@ export async function mockCaseTestnet(page: Page) {
     stored: false,
     stage: 'sealed' as 'sealed' | 'drawn' | 'paid',
     openFinal: false,
+    claimFinal: true,
+    redirectClaim: false,
     reject: false,
     refund: false,
     fail: false,
@@ -48,7 +50,13 @@ export async function mockCaseTestnet(page: Page) {
     if (chain.reject) return { reject: true };
     const hash = '1'.repeat(31) + String(calls.length + 1);
     receipts.set(hash, call);
-    return { transaction: { hash }, status: { SuccessReceiptId: hash } };
+    return {
+      transaction: { hash },
+      status: { SuccessReceiptId: hash },
+      redirect:
+        chain.redirectClaim &&
+        call.actions[0].params.methodName === 'claim_starter',
+    };
   });
   await page.addInitScript(
     FAKE_WALLET.replace(
@@ -56,7 +64,7 @@ export async function mockCaseTestnet(page: Page) {
       'signAndSendTransaction: true',
     ).replace(
       "async signAndSendTransaction() {\n        throw new Error('not supported');\n      }",
-      "async signAndSendTransaction(call) {\n        const result = await window.mockCaseSign(call);\n        if (result.reject) throw new Error('User rejected');\n        return result;\n      }",
+      "async signAndSendTransaction(call) {\n        const result = await window.mockCaseSign(call);\n        if (result.reject) throw new Error('User rejected');\n        if (result.redirect) {\n          const url = new URL(window.location.href);\n          url.searchParams.set('transactionHashes', result.transaction.hash);\n          window.location.assign(url);\n          return new Promise(() => {});\n        }\n        return result;\n      }",
     ),
   );
   await page.route('**/repository/manifest.json', (route) =>
@@ -86,7 +94,11 @@ export async function mockCaseTestnet(page: Page) {
       if (!call) throw new Error('Unknown fixture receipt');
       const action = call.actions[0].params;
       const isOpen = action.methodName === 'ft_transfer_call';
-      const final = !isOpen || chain.openFinal;
+      const final = isOpen
+        ? chain.openFinal
+        : action.methodName === 'claim_starter'
+          ? chain.claimFinal
+          : true;
       if (final) advance(call);
       result = {
         transaction: {

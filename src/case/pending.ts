@@ -71,16 +71,20 @@ export function readPending(
     openingId: value.openingId === null ? null : integer(value.openingId, 64),
   };
 }
-export function actionObserved(pending: PendingAction, data: AccountData) {
+export function actionObserved(
+  pending: PendingAction,
+  data: Pick<AccountData, 'accountId'> &
+    Partial<Pick<AccountData, 'claimed' | 'active' | 'history'>>,
+) {
   if (pending.accountId !== data.accountId) return false;
-  if (pending.action === 'claim') return data.claimed;
+  if (pending.action === 'claim') return data.claimed === true;
   // A balance alone cannot identify which storage transaction succeeded.
   if (pending.action === 'open')
-    return [data.active, ...data.history].some(
+    return [data.active, ...(data.history ?? [])].some(
       (opening) => opening?.nonce === pending.nonce,
     );
   if (pending.action === 'advance' || pending.action === 'retry')
-    return [data.active, ...data.history].some(
+    return [data.active, ...(data.history ?? [])].some(
       (opening) =>
         opening?.opening_id === pending.openingId &&
         opening.status === 'Completed',

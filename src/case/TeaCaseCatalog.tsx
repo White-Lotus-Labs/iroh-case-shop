@@ -2,7 +2,8 @@
 
 import { useEffect, useRef } from 'react';
 import { useWallet } from '../ui/wallet/WalletProvider';
-import { CaseActivity } from './CaseActivity';
+import { ChainReadStatus } from './ChainReadStatus';
+import { CaseActivity, CaseTransactionNotice } from './CaseActivity';
 import { formatUnits, percent, rewardTier } from './client';
 import { useCaseController, type CaseController } from './useCaseController';
 
@@ -35,10 +36,10 @@ export function TeaCaseCatalog({
   onInspect: (inspect: boolean) => void;
 }) {
   const controller = useCaseController();
-  const { chain, account, active, error } = controller;
-  const caseInfo = chain?.caseInfo;
-  const pool = chain?.pool;
-  const quote = controller.odds ?? chain?.guestOdds;
+  const { caseInfo, pool, reads, accountId, active, history, error } =
+    controller;
+  const oddsRead = accountId ? reads.quote : reads.publicOdds;
+  const quote = oddsRead?.value;
   const odds =
     quote?.revision === pool?.revision && quote?.available === pool?.available
       ? quote
@@ -46,10 +47,8 @@ export function TeaCaseCatalog({
   const opening =
     active ??
     (controller.accountPending?.action === 'open'
-      ? account?.history.find(
-          ({ nonce }) => nonce === controller.accountPending?.nonce,
-        )
-      : account?.history[0]);
+      ? history?.find(({ nonce }) => nonce === controller.accountPending?.nonce)
+      : history?.[0]);
   const revealed = opening?.reward !== null && opening?.reward !== undefined;
   const paper = useRef<HTMLElement>(null);
   const heading = useRef<HTMLHeadingElement>(null);
@@ -106,10 +105,19 @@ export function TeaCaseCatalog({
               <p className="tea-catalog-price">
                 {caseInfo
                   ? formatUnits(caseInfo.price) + ' USDI'
-                  : error || !controller.available
+                  : reads.caseInfo?.status === 'error' || !controller.available
                     ? 'Price unavailable'
                     : 'Reading Testnet price…'}
               </p>
+              {controller.available &&
+                !caseInfo &&
+                reads.caseInfo?.status === 'error' && (
+                  <ChainReadStatus
+                    label="case details"
+                    read={reads.caseInfo}
+                    retry={controller.refresh}
+                  />
+                )}
               {caseInfo && (
                 <ul className="tea-catalog-tier-list" aria-label="Reward tiers">
                   {caseInfo.rewards.map(({ tier }) => (
@@ -185,8 +193,25 @@ export function TeaCaseCatalog({
                       </div>
                     ))}
                   </dl>
-                ) : (
-                  <p>Waiting for confirmed reward tiers.</p>
+                ) : null}
+                {controller.available && (
+                  <>
+                    <ChainReadStatus
+                      label="case details"
+                      read={reads.caseInfo}
+                      retry={controller.refresh}
+                    />
+                    <ChainReadStatus
+                      label="pool data"
+                      read={reads.pool}
+                      retry={controller.refresh}
+                    />
+                    <ChainReadStatus
+                      label="case odds"
+                      read={oddsRead}
+                      retry={controller.refresh}
+                    />
+                  </>
                 )}
                 <p>
                   Expected reward{' '}
@@ -207,10 +232,7 @@ export function TeaCaseCatalog({
                       : 'Pool balance unavailable'}
                   </span>
                 </div>
-                {error && chain && (
-                  <p>Showing the last confirmed Testnet read.</p>
-                )}
-                {!odds && chain && !error && (
+                {!odds && pool && oddsRead?.status === 'ready' && (
                   <p>
                     Waiting for odds and pool reserves from the same revision.
                   </p>
@@ -240,7 +262,7 @@ export function TeaCaseCatalog({
           </>
         )}
         {(inspecting || error || controller.accountPending) && (
-          <CaseActivity controller={controller} />
+          <CaseActivity controller={controller} showNotice={!inspecting} />
         )}
         <footer className="tea-catalog-foot">
           NEAR TESTNET · USDI is test currency with no real monetary value.
@@ -252,16 +274,31 @@ export function TeaCaseCatalog({
 
 function CaseWalletActions({ controller }: { controller: CaseController }) {
   const wallet = useWallet();
-  const { accountId, account, chain, storageAmount, disabled } = controller;
+  const {
+    accountId,
+    reads,
+    pool,
+    storageAmount,
+    canClaim,
+    canPrepay,
+    canRegister,
+  } = controller;
+  const balance = reads.balance?.value;
+  const claimed = reads.claimed?.value;
+  const cost = reads.claimCost?.value;
+  const registration = reads.tokenRegistration?.value;
+  const storage = reads.storage?.value;
   const needsStorage =
-    account &&
-    chain &&
-    BigInt(account.storage) < BigInt(chain.pool.storage_per_opening);
+    storage !== undefined &&
+    pool &&
+    BigInt(storage) < BigInt(pool.storage_per_opening);
   return (
     <section className="tea-catalog-wallet" aria-label="Your tea money">
       <div className="tea-catalog-wallet-head">
         <h2>Your tea money</h2>
-        <strong>{account ? formatUnits(account.balance) : '—'} USDI</strong>
+        <strong>
+          {balance !== undefined ? formatUnits(balance) : '—'} USDI
+        </strong>
       </div>
       <p>
         {accountId ??
@@ -276,34 +313,63 @@ function CaseWalletActions({ controller }: { controller: CaseController }) {
           {wallet.busy === 'connect' ? 'Connecting…' : 'Connect Wallet'}
         </button>
       )}
+      <CaseTransactionNotice controller={controller} />
       {wallet.error && !accountId && <p role="alert">{wallet.error}</p>}
-      {accountId && !account && (
-        <p>Reading your balance and claim eligibility from Testnet.</p>
-      )}
-      {account?.claimed === false && (
+      {accountId && controller.available && (
         <>
-          <button type="button" disabled={disabled} onClick={controller.claim}>
-            Claim 1,000 USDI
-          </button>
-          <p>
-            One claim per account. Attaches {formatUnits(account.claimCost, 24)}{' '}
-            Testnet NEAR for registration and claim storage, plus gas.
-          </p>
+          <ChainReadStatus
+            label="USDI balance"
+            read={reads.balance}
+            retry={controller.refresh}
+          />
+          <ChainReadStatus
+            label="claim eligibility"
+            read={reads.claimed}
+            retry={controller.refresh}
+          />
+          <ChainReadStatus
+            label="USDI registration"
+            read={reads.tokenRegistration}
+            retry={controller.refresh}
+          />
+          <ChainReadStatus
+            label="case storage"
+            read={reads.storage}
+            retry={controller.refresh}
+          />
         </>
       )}
-      {account?.claimed && <p>Starter USDI already claimed.</p>}
-      {account?.claimed && !account.tokenRegistered && (
+      {claimed === false && (
+        <>
+          <button type="button" disabled={!canClaim} onClick={controller.claim}>
+            Claim 1,000 USDI
+          </button>
+          {cost !== undefined && (
+            <p>
+              One claim per account. Attaches {formatUnits(cost, 24)} Testnet
+              NEAR for registration and claim storage, plus gas.
+            </p>
+          )}
+          <ChainReadStatus
+            label="claim storage cost"
+            read={reads.claimCost}
+            retry={controller.refresh}
+          />
+        </>
+      )}
+      {claimed && <p>Starter USDI already claimed.</p>}
+      {claimed && registration?.tokenRegistered === false && (
         <>
           <button
             type="button"
-            disabled={disabled}
+            disabled={!canRegister}
             onClick={controller.registerToken}
           >
             Register USDI account
           </button>
           <p>
-            Attaches {formatUnits(account.tokenStorageCost, 24)} Testnet NEAR
-            for token storage, plus gas.
+            Attaches {formatUnits(registration.tokenStorageCost, 24)} Testnet
+            NEAR for token storage, plus gas.
           </p>
         </>
       )}
@@ -311,7 +377,7 @@ function CaseWalletActions({ controller }: { controller: CaseController }) {
         <>
           <button
             type="button"
-            disabled={disabled}
+            disabled={!canPrepay}
             onClick={controller.prepayStorage}
           >
             Prepay opening storage
@@ -335,8 +401,8 @@ function CaseOpenAction({
   hasOdds: boolean;
   settled: boolean;
 }) {
-  const { account, chain, odds, canOpen } = controller;
-  const caseInfo = chain?.caseInfo;
+  const { accountId, caseInfo, reads, odds, canOpen } = controller;
+  const balance = reads.balance?.value;
   const price = caseInfo ? formatUnits(caseInfo.price) + ' USDI' : null;
   return (
     <div className="tea-catalog-open">
@@ -356,10 +422,10 @@ function CaseOpenAction({
           plus gas.
         </p>
       )}
-      {account && odds?.reason && <p>{odds.reason}</p>}
-      {account &&
+      {accountId && odds?.reason && <p>{odds.reason}</p>}
+      {balance !== undefined &&
         caseInfo &&
-        BigInt(account.balance) < BigInt(caseInfo.price) && (
+        BigInt(balance) < BigInt(caseInfo.price) && (
           <p>Your USDI balance is below the case price.</p>
         )}
     </div>
