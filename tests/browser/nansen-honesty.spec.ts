@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
-import { beginVisit, openStationPanel } from './room-helpers';
+import { beginVisit, openResearchChat } from './room-helpers';
 
 async function openShelf(page: Page) {
   await beginVisit(page);
@@ -49,7 +49,7 @@ test('unconfigured Nansen stays honest on status, Host, and Shelf', async ({
   await expect(popup).not.toContainText('Nansen Research');
   await expect(popup).not.toContainText('Live Nansen');
 
-  await openStationPanel(page, 'Host');
+  await openResearchChat(page);
   const chat = page.locator('.iroh-chat');
   await expect(chat).toContainText('Nansen research is offline');
   await expect(chat).not.toContainText('Powered by Nansen');
@@ -131,7 +131,7 @@ test('a configured Nansen status keeps the live Host, status, and Shelf framing'
   await expect(popup).not.toContainText('Demo data');
   await expect(popup).not.toContainText('Offline');
 
-  await openStationPanel(page, 'Host');
+  await openResearchChat(page);
   const chat = page.locator('.iroh-chat');
   await expect(chat).toContainText('Live Nansen research · Fast mode');
   await expect(chat).toContainText('I’ll consult Nansen’s Research Agent');

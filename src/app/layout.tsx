@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Cormorant_Garamond, Inter } from 'next/font/google';
 import { WalletProvider } from '../ui/wallet/WalletProvider';
 import './globals.css';
+import '../case/tea-case-catalog.css';
 import '../ui/styles/tokens.css';
 
 const display = Cormorant_Garamond({

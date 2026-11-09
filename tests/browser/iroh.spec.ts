@@ -1,11 +1,14 @@
 import { expect, test } from '@playwright/test';
 import { registerBrowserAccount } from './auth-helper';
-import { beginVisit, openStationPanel } from './room-helpers';
+import { beginVisit, openResearchChat, openStationPanel } from './room-helpers';
 
 test.beforeEach(async ({ page }) => registerBrowserAccount(page));
 
 test.beforeEach(async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.route('**/api/nansen-status', (route) =>
+    route.fulfill({ json: { nansen: 'configured' } }),
+  );
   await page.route('**/api/smart-wallet-leaderboard', (route) =>
     route.fulfill({
       status: 503,
@@ -94,7 +97,7 @@ test('Host restores previous chats after reload and switches between them', asyn
     });
   });
   await page.goto('/');
-  await openStationPanel(page, 'Host');
+  await openResearchChat(page);
   await expect(page.getByText('ETH has inflows.')).toBeVisible();
   const historyToggle = page.getByRole('button', { name: 'Chat history' });
   await expect(historyToggle).toHaveAttribute('aria-expanded', 'false');
@@ -114,7 +117,7 @@ test('Host restores previous chats after reload and switches between them', asyn
   await history.getByRole('button', { name: 'ETH activity' }).click();
   await expect(page.getByText('ETH has inflows.')).toBeVisible();
   await page.reload();
-  await openStationPanel(page, 'Host');
+  await openResearchChat(page);
   await expect(page.getByText('ETH has inflows.')).toBeVisible();
   await page
     .getByRole('textbox', { name: 'Ask an onchain research question' })
@@ -144,7 +147,7 @@ test('Host immediately shows Iroh chat in the Host panel, keeps history across s
     });
   });
   await page.goto('/');
-  await openStationPanel(page, 'Host');
+  await openResearchChat(page);
   await expect(page.getByRole('heading', { name: 'Ask Uncle' })).toBeVisible();
   await expect(page.getByText(/One breath before you go/)).toHaveCount(0);
   await expect(page.locator('.status-line')).toBeHidden();
@@ -168,10 +171,7 @@ test('Host immediately shows Iroh chat in the Host panel, keeps history across s
   await expect(page.getByText('Nansen answer 1')).toBeVisible();
   const nav = page.getByRole('navigation', { name: 'Tea room stations' });
   await nav.getByRole('button', { name: /Shelf/ }).click();
-  await nav.getByRole('button', { name: /Host/ }).click();
-  await page
-    .getByRole('button', { name: 'Ask Uncle', exact: true })
-    .click({ timeout: 20000 });
+  await openResearchChat(page);
   await expect(page.getByText('Nansen answer 1')).toBeVisible();
   await input.fill('What about HYPE?');
   await page.getByRole('button', { name: 'Ask Uncle', exact: true }).click();
@@ -209,7 +209,7 @@ test('Iroh shows a live provider error and Stop ends a pending request', async (
     });
   });
   await page.goto('/');
-  await openStationPanel(page, 'Host');
+  await openResearchChat(page);
   const input = page.getByRole('textbox', {
     name: 'Ask an onchain research question',
   });
@@ -283,7 +283,7 @@ test('Iroh offers BYOK after the daily cup and sends the visitor key', async ({
     });
   });
   await page.goto('/');
-  await openStationPanel(page, 'Host');
+  await openResearchChat(page);
   await page
     .getByRole('textbox', { name: 'Ask an onchain research question' })
     .fill('One more question');
@@ -331,7 +331,7 @@ test('Iroh keeps a completed answer when Nansen returns no conversation ID', asy
     });
   });
   await page.goto('/');
-  await openStationPanel(page, 'Host');
+  await openResearchChat(page);
   await page
     .getByRole('textbox', { name: 'Ask an onchain research question' })
     .fill('What is ETH doing?');
@@ -362,7 +362,7 @@ test('Iroh keeps follow-ups in the same saved chat without a conversation ID', a
     });
   });
   await page.goto('/');
-  await openStationPanel(page, 'Host');
+  await openResearchChat(page);
   const input = page.getByRole('textbox', {
     name: 'Ask an onchain research question',
   });

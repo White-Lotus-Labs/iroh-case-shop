@@ -120,9 +120,11 @@ export function useCaseController() {
             localStorage.removeItem(key);
             setPending(null);
             setMessage(
-              result.success
-                ? 'Transaction finalized. Contract state refreshed; an opening is accepted only when it appears below.'
-                : 'Transaction failed on chain. No automatic resubmission was made. Refresh before trying again.',
+              result.refunded
+                ? 'The opening was refunded in full. No draw was accepted.'
+                : result.success
+                  ? 'Transaction finalized. Contract state refreshed; an opening is accepted only when it appears below.'
+                  : 'Transaction failed on chain. No automatic resubmission was made. Refresh before trying again.',
             );
             // Read after FINAL, not just after wallet approval or an optimistic receipt.
             const [nextPublic, nextAccount] = await Promise.all([

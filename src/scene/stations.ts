@@ -45,7 +45,7 @@ export const STATIONS: {
   {
     id: 'AvatarSeat',
     label: 'Host',
-    purpose: 'Ask Uncle',
+    purpose: 'Tea Cases',
     position: [0.35, 1.48, 0.45],
     target: [1.25, 1.05, -3.55],
     hotspot: [0.74, 0.84, -2.86],

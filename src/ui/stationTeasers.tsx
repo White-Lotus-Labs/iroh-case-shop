@@ -11,8 +11,8 @@ export const STATION_TEASERS: Partial<
   },
   AvatarSeat: {
     glyph: '师',
-    text: 'Bring an onchain question to Nansen’s Research Agent.',
-    cta: ['Ask', 'Uncle'],
+    text: 'Discover rare brews, inspect their treasures, and open a case.',
+    cta: ['Explore the', 'Tea Collection'],
   },
   Shelf: {
     glyph: '卷',

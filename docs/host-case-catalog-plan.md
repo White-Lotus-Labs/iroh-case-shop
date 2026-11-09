@@ -21,11 +21,13 @@ The legacy route and Host share the controller and recovery panel. The public od
 
 ## Milestone 3 · Build the Host experience
 
-- [ ] Use AvatarSeat and the existing opening parchment for collection, inspection, and settlement. Keep the room, Uncle, camera, and rollers. Retain explicit Counter research prompts as a contextual chat path.
-- [ ] Route the header shortcut into the room station. Preserve old direct links. Restore the Host view on reload and keep wheel, touch, keyboard, and wallet interactions inside the parchment.
-- [ ] Present the real tiers, odds, price, pool, balance, starter claim, storage cost, and opening controls. Use the same pending and recovery logic as the standalone route.
-- [ ] Reveal the tea box only after a verified draw. Distinguish outstanding payment, completed payout, and refund. Respect reduced motion and use the existing room canvas.
-- [ ] Verify browser interactions and TypeScript, then commit the integrated experience.
+- [x] Use AvatarSeat and the existing opening parchment for collection, inspection, and settlement. Keep the room, Uncle, camera, and rollers. Retain explicit Counter research prompts as a contextual chat path.
+- [x] Route the header shortcut into the room station. Preserve old direct links. Restore the Host view on reload and keep wheel, touch, keyboard, and wallet interactions inside the parchment.
+- [x] Present the real tiers, odds, price, pool, balance, starter claim, storage cost, and opening controls. Use the same pending and recovery logic as the standalone route.
+- [x] Reveal the tea box only after a verified draw. Distinguish outstanding payment, completed payout, and refund. Respect reduced motion and use the existing room canvas.
+- [x] Verify browser interactions and TypeScript, then commit the integrated experience.
+
+The Host opens the collection by default. The header button uses the same station and parchment, and the current view is restored from the URL. Counter research prompts still open contextual chat. The coffer uses CSS perspective in the existing room and reads the verified draw and payout state. TypeScript, the production build, and all 16 Cases and Host Playwright checks passed against the production build.
 
 ## Milestone 4 · Verify the experience
 

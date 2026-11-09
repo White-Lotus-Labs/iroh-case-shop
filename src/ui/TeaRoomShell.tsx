@@ -1,6 +1,5 @@
 'use client';
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
 import { flushSync } from 'react-dom';
 import {
   startTransition,
@@ -41,6 +40,8 @@ const loadThesisDeck = () =>
   import('./ThesisDeck').then((m) => ({ default: m.ThesisDeck }));
 const loadIrohChat = () =>
   import('./IrohChat').then((m) => ({ default: m.IrohChat }));
+const loadTeaCatalog = () =>
+  import('../case/TeaCaseCatalog').then((m) => ({ default: m.TeaCaseCatalog }));
 const loadShelf = () =>
   import('./SmartWalletShelf').then((m) => ({ default: m.SmartWalletShelf }));
 
@@ -75,7 +76,17 @@ const TeaRoom = dynamic(
 // once with its content and final size instead of growing mid-unroll.
 const ThesisDeck = dynamic(loadThesisDeck);
 const IrohChat = dynamic(loadIrohChat);
+const TeaCaseCatalog = dynamic(loadTeaCatalog);
 const SmartWalletShelf = dynamic(loadShelf);
+
+function setTeaCollectionLink(view: 'tea' | 'dragon-tea' | null) {
+  const url = new URL(window.location.href);
+  if (view) url.searchParams.set('collection', view);
+  else if (url.searchParams.has('collection'))
+    url.searchParams.delete('collection');
+  else return;
+  window.history.replaceState(window.history.state, '', url);
+}
 
 function idlePreload(load: () => Promise<unknown>) {
   if (typeof window.requestIdleCallback === 'function') {
@@ -105,6 +116,9 @@ export default function TeaRoomShell({
   const [shelfFocused, setShelfFocused] = useState(false);
   const [systemReduced, setSystemReduced] = useState<boolean | null>(null);
   const [panelOpen, setPanelOpen] = useState(false);
+  const [hostView, setHostView] = useState<'collection' | 'case' | 'research'>(
+    'collection',
+  );
   const [observatoriumZoomKey, setObservatoriumZoomKey] = useState(0);
   const [openingObservatorium, setOpeningObservatorium] = useState(false);
   const [pour, setPour] = useState<{ key: string | null; mood: SceneMood }>({
@@ -145,7 +159,12 @@ export default function TeaRoomShell({
         img.crossOrigin = 'anonymous';
         img.src = src;
       }
-      return Promise.all([loadThesisDeck(), loadIrohChat(), loadShelf()]);
+      return Promise.all([
+        loadThesisDeck(),
+        loadIrohChat(),
+        loadShelf(),
+        loadTeaCatalog(),
+      ]);
     });
   }, [sceneReady]);
   useEffect(() => {
@@ -171,6 +190,7 @@ export default function TeaRoomShell({
   const rollUpTimer = useRef(0);
   // Deep link opens the Counter panel once after the camera arrives.
   const deepLinkOpenOnce = useRef(false);
+  const openCatalogOnArrival = useRef(false);
   const focusHintOnArrive = useRef(false);
   const returnThesis = useRef<ThesisId | null>(null);
   const reduced = systemReduced ?? true;
@@ -182,7 +202,15 @@ export default function TeaRoomShell({
     return () => media.removeEventListener('change', change);
   }, []);
   useEffect(() => {
-    const raw = new URLSearchParams(window.location.search).get('thesis');
+    const params = new URLSearchParams(window.location.search);
+    const collection = params.get('collection');
+    if (collection === 'tea' || collection === 'dragon-tea') {
+      setStation('AvatarSeat');
+      setHostView(collection === 'dragon-tea' ? 'case' : 'collection');
+      openCatalogOnArrival.current = true;
+      return;
+    }
+    const raw = params.get('thesis');
     if (!raw || !THESIS_IDS.includes(raw as ThesisId)) return;
     setInitialThesis(raw as ThesisId);
     setStation('Counter');
@@ -247,6 +275,11 @@ export default function TeaRoomShell({
         // An open queued by an earlier trip (a card, a deep link) is stale now.
         deepLinkOpenOnce.current = false;
       }
+      openCatalogOnArrival.current = false;
+      if (station === 'AvatarSeat') {
+        setTeaCollectionLink(null);
+        setHostView('collection');
+      }
       setCameraAt(null);
       setShelfFocused(false);
       setStation(next);
@@ -255,6 +288,25 @@ export default function TeaRoomShell({
     },
     [station],
   );
+  const openCatalog = useCallback(() => {
+    if (observatoriumOpening.current) return;
+    if (station !== 'AvatarSeat') navigate('AvatarSeat');
+    setUncleDraft(null);
+    setHostView('collection');
+    setTeaCollectionLink('tea');
+    if (cameraAt === 'AvatarSeat' || sceneFailed) setPanelOpen(true);
+    else openCatalogOnArrival.current = true;
+  }, [station, navigate, cameraAt, sceneFailed]);
+  const inspectCase = useCallback((inspect: boolean) => {
+    setHostView(inspect ? 'case' : 'collection');
+    setTeaCollectionLink(inspect ? 'dragon-tea' : 'tea');
+  }, []);
+  useEffect(() => {
+    if (!openCatalogOnArrival.current || station !== 'AvatarSeat') return;
+    if (cameraAt !== 'AvatarSeat' && !sceneFailed) return;
+    openCatalogOnArrival.current = false;
+    setPanelOpen(true);
+  }, [station, cameraAt, sceneFailed]);
   const focusShelf = useCallback(() => {
     if (shelfFocused) {
       setPanelOpen(true);
@@ -264,11 +316,18 @@ export default function TeaRoomShell({
     const alreadyAtShelf =
       station === 'Shelf' && (cameraAt === 'Shelf' || sceneFailed);
     if (!alreadyAtShelf) setCameraAt(null);
+    if (station === 'AvatarSeat') {
+      openCatalogOnArrival.current = false;
+      setTeaCollectionLink(null);
+      setHostView('collection');
+    }
     setShelfFocused(true);
     setStation('Shelf');
     setPanelOpen(true);
   }, [shelfFocused, station, cameraAt, sceneFailed]);
   const openPanel = useCallback(() => {
+    if (station === 'AvatarSeat' && hostView !== 'research')
+      setTeaCollectionLink(hostView === 'case' ? 'dragon-tea' : 'tea');
     // A transition keeps the panel unmounted until its lazy content is ready.
     startTransition(() => {
       if (station === 'Shelf') {
@@ -278,7 +337,7 @@ export default function TeaRoomShell({
       setPanelOpen(true);
     });
     queueMicrotask(() => panel.current?.focus());
-  }, [station, cameraAt, sceneFailed]);
+  }, [station, cameraAt, sceneFailed, hostView]);
   useEffect(() => {
     if (!deepLinkOpenOnce.current) return;
     if (station !== 'Counter') return;
@@ -298,6 +357,10 @@ export default function TeaRoomShell({
       // The roll-up timer and a second close must not drop a stashed question.
       if (closeApplied.current) return;
       closeApplied.current = true;
+      if (station === 'AvatarSeat' && hostView !== 'research') {
+        setTeaCollectionLink(null);
+        setHostView('collection');
+      }
       // Keep focus where the user moved it (e.g. a dock click mid roll-up).
       const active = document.activeElement;
       const refocus =
@@ -322,7 +385,7 @@ export default function TeaRoomShell({
       finish,
       parseFloat(animationDuration) * 1000,
     );
-  }, [reduced]);
+  }, [reduced, station, hostView]);
   const onCameraArrive = useCallback((at: Station) => {
     setCameraAt(at);
   }, []);
@@ -388,7 +451,12 @@ export default function TeaRoomShell({
   useEffect(() => {
     if (!panelOpen) return;
     const onKey = (event: KeyboardEvent) => {
-      if (event.key !== 'Escape') return;
+      if (
+        event.key !== 'Escape' ||
+        event.defaultPrevented ||
+        document.querySelector('.hot-connector-popup')
+      )
+        return;
       const box =
         panel.current?.querySelector<HTMLTextAreaElement>('#iroh-question');
       // Close even when the question field is focused. Keep whatever was typed.
@@ -430,6 +498,7 @@ export default function TeaRoomShell({
       // Urgent, not a transition: a pending one could land after the guest
       // closes the desk. The panel's Suspense still mounts it once, with the chat.
       setUncleDraft({ text, key: Date.now() });
+      setHostView('research');
       setCameraAt(null);
       setShelfFocused(false);
       setStation('AvatarSeat');
@@ -478,7 +547,14 @@ export default function TeaRoomShell({
     )
       openHint.current?.focus({ preventScroll: true });
   }, [showOpenHint]);
-  const teaser = STATION_TEASERS[station];
+  const teaser =
+    station === 'AvatarSeat' && hostView === 'research'
+      ? {
+          glyph: '师',
+          text: 'Return to your research conversation.',
+          cta: ['Ask', 'Uncle'],
+        }
+      : STATION_TEASERS[station];
   useEffect(() => {
     if (shelfOpen) panel.current?.focus({ preventScroll: true });
   }, [shelfOpen]);
@@ -526,16 +602,17 @@ export default function TeaRoomShell({
               <small>NANSEN-POWERED CRYPTO RESEARCH</small>
             </span>
           </a>
-          <Link
-            href="/cases"
+          <button
+            type="button"
+            onClick={openCatalog}
             className="cases-navigation"
             aria-label="Dragon Tea Cases"
           >
             <span className="cases-navigation-full">Dragon Tea Cases</span>
             <span className="cases-navigation-short" aria-hidden="true">
-              Cases ↗
+              Tea Cases
             </span>
-          </Link>
+          </button>
         </div>
 
         <div className="topbar-right">
@@ -730,6 +807,11 @@ export default function TeaRoomShell({
             <section
               key={station}
               className="reading-panel"
+              data-host-collection={
+                station === 'AvatarSeat' && hostView !== 'research'
+                  ? ''
+                  : undefined
+              }
               id="main-panel"
               ref={panelRef}
               tabIndex={-1}
@@ -773,14 +855,20 @@ export default function TeaRoomShell({
                   onTalkToUncle={onTalkToUncle}
                 />
               )}
-              {station === 'AvatarSeat' && (
-                <IrohChat
-                  session={irohSession}
-                  user={user}
-                  nansen={nansen}
-                  draft={uncleDraft}
-                />
-              )}
+              {station === 'AvatarSeat' &&
+                (hostView === 'research' ? (
+                  <IrohChat
+                    session={irohSession}
+                    user={user}
+                    nansen={nansen}
+                    draft={uncleDraft}
+                  />
+                ) : (
+                  <TeaCaseCatalog
+                    inspecting={hostView === 'case'}
+                    onInspect={inspectCase}
+                  />
+                ))}
               {shelfOpen && <SmartWalletShelf nansen={nansen} />}
             </section>
           )}

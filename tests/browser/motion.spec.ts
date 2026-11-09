@@ -65,9 +65,11 @@ test('OS reduced motion sets data-motion reduce; full motion restores panel anim
     .getByRole('button', { name: /Host/ })
     .click();
   await page
-    .getByRole('button', { name: 'Ask Uncle', exact: true })
+    .getByRole('button', { name: 'Explore the Tea Collection', exact: true })
     .click({ timeout: 20000 });
-  await expect(page.getByRole('heading', { name: 'Ask Uncle' })).toBeVisible();
+  await expect(
+    page.getByRole('heading', { name: 'The Tea Collection' }),
+  ).toBeVisible();
   expect(
     await page
       .locator('.reading-panel')
@@ -88,7 +90,7 @@ test('system full motion keeps paper-arrive on the Host panel', async ({
     .getByRole('button', { name: /Host/ })
     .click();
   await page
-    .getByRole('button', { name: 'Ask Uncle', exact: true })
+    .getByRole('button', { name: 'Explore the Tea Collection', exact: true })
     .click({ timeout: 45000 });
   expect(
     await page

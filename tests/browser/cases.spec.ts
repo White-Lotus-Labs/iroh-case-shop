@@ -182,7 +182,7 @@ for (const width of [390, 320]) {
     await page.goto('/?thesis=ai');
     await waitForRoomReady(page);
     await waitForDockReady(page);
-    const cases = page.getByRole('link', { name: 'Dragon Tea Cases' });
+    const cases = page.getByRole('button', { name: 'Dragon Tea Cases' });
     const wallet = page.getByTestId('wallet-entry');
     await expect(cases).toBeVisible();
     await expect(wallet).toBeEnabled();
@@ -194,8 +194,9 @@ for (const width of [390, 320]) {
     }
     await cases.click();
     await expect(
-      page.getByRole('heading', { name: 'Dragon Tea Case', exact: true }),
-    ).toBeVisible();
+      page.getByRole('heading', { name: 'The Tea Collection', exact: true }),
+    ).toBeVisible({ timeout: 45000 });
+    expect(new URL(page.url()).pathname).toBe('/');
   });
 }
 

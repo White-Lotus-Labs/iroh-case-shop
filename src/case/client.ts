@@ -554,6 +554,12 @@ export class CaseClient {
     if ('Failure' in status) return { hash, success: false };
     if (typeof status.SuccessValue !== 'string')
       throw new Error('Transaction has no final execution outcome.');
+    // The NEP-141 transfer resolver returns the amount used by the receiver.
+    if (
+      expected?.methodName === 'ft_transfer_call' &&
+      status.SuccessValue === btoa(JSON.stringify('0'))
+    )
+      return { hash, success: true, refunded: true };
     return { hash, success: true };
   }
 }

@@ -64,14 +64,28 @@ export async function openStationPanel(
   station: 'Counter' | 'Host',
 ) {
   await beginVisit(page);
+  if (
+    station === 'Counter' &&
+    (await page.getByRole('heading', { name: 'Thesis Desk' }).isVisible())
+  )
+    return;
   const label = station === 'Host' ? /Host/ : /Counter/;
   const nav = page.getByRole('navigation', { name: 'Tea room stations' });
   await nav.getByRole('button', { name: label }).click();
-  // exact: Host dock caption is also "Ask Uncle", so a substring match hits both.
   const open =
     station === 'Host'
-      ? page.getByRole('button', { name: 'Ask Uncle', exact: true })
+      ? page.getByRole('button', {
+          name: 'Explore the Tea Collection',
+          exact: true,
+        })
       : page.getByRole('button', { name: 'Open the Thesis Desk' });
   await expect(open).toBeVisible({ timeout: 45000 });
   await open.click();
+}
+
+export async function openResearchChat(page: Page) {
+  await openStationPanel(page, 'Counter');
+  await page
+    .getByRole('button', { name: 'Ask Uncle about your own thesis' })
+    .click();
 }

@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { openStationPanel } from './room-helpers';
+import { openResearchChat } from './room-helpers';
 
 test('a guest can open Host and chat with Iroh without signing in', async ({
   page,
@@ -7,6 +7,9 @@ test('a guest can open Host and chat with Iroh without signing in', async ({
 }) => {
   test.setTimeout(90_000);
   await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.route('**/api/nansen-status', (route) =>
+    route.fulfill({ json: { nansen: 'configured' } }),
+  );
   await page.route('**/api/nansen-agent', async (route) => {
     await route.fulfill({
       status: 200,
@@ -19,7 +22,7 @@ test('a guest can open Host and chat with Iroh without signing in', async ({
   expect(
     (await context.cookies()).some((cookie) => cookie.name === 'tea_session'),
   ).toBe(false);
-  await openStationPanel(page, 'Host');
+  await openResearchChat(page);
   const transcript = page.getByRole('log', { name: 'Uncle conversation' });
   await expect(transcript).toContainText('Log in to save this chat.');
   await expect(

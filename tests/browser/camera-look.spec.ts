@@ -202,7 +202,9 @@ test('halos fly to another station, open the current one, and a drag is not a cl
   const hostEmber = await onCanvas(page, hotspot('AvatarSeat'));
   expect(hostEmber).not.toBeNull();
   await page.mouse.click(...hostEmber!);
-  await expect(page.getByRole('heading', { name: 'Ask Uncle' })).toBeVisible();
+  await expect(
+    page.getByRole('heading', { name: 'The Tea Collection' }),
+  ).toBeVisible();
 
   // Wheel over the open panel scrolls the panel, never the camera.
   const still = await pose(page);

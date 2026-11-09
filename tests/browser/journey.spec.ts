@@ -5,6 +5,9 @@ import { beginVisit, openStationPanel } from './room-helpers';
 
 test.beforeEach(async ({ page }) => {
   await registerBrowserAccount(page);
+  await page.route('**/api/nansen-status', (route) =>
+    route.fulfill({ json: { nansen: 'configured' } }),
+  );
   await page.route('**/api/smart-wallet-leaderboard', (route) =>
     route.fulfill({
       status: 200,
@@ -98,9 +101,13 @@ test('Host panel stays open after an explicit open', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/');
   await openStationPanel(page, 'Host');
-  await expect(page.getByRole('heading', { name: 'Ask Uncle' })).toBeVisible();
+  await expect(
+    page.getByRole('heading', { name: 'The Tea Collection' }),
+  ).toBeVisible();
   await page.waitForTimeout(1500);
-  await expect(page.getByRole('heading', { name: 'Ask Uncle' })).toBeVisible();
+  await expect(
+    page.getByRole('heading', { name: 'The Tea Collection' }),
+  ).toBeVisible();
 });
 
 test('mobile layout remains readable and the WebGL fallback preserves the journey', async ({
@@ -197,13 +204,12 @@ test('mobile layout remains readable and the WebGL fallback preserves the journe
   await expect(page.getByTestId('leaderboard-parchment')).toHaveCount(0);
   await expect(approach).toBeFocused();
 
-  // Escape with the Uncle field focused closes Host and keeps the draft.
+  // Escape with a contextual research draft keeps that draft.
+  await openStationPanel(page, 'Counter');
   await page
-    .getByRole('navigation', { name: 'Tea room stations' })
-    .getByRole('button', { name: /Host/ })
+    .getByRole('button', { name: 'Ask Uncle about your own thesis' })
     .click();
   const askUncle = page.getByRole('button', { name: 'Ask Uncle', exact: true });
-  await askUncle.click();
   const box = page.getByRole('textbox', {
     name: 'Ask an onchain research question',
   });

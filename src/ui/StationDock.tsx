@@ -310,7 +310,7 @@ const DOCK: DockEntry[] = [
   {
     id: 'AvatarSeat',
     label: 'Host',
-    caption: 'Ask Uncle',
+    caption: 'Tea Cases',
     seal: '谈',
     // Iroh behind a tea table: topknot, white beard, robe, teapot and cups.
     glyph: (
