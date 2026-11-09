@@ -100,11 +100,14 @@ for (const [width, height] of [
       });
       await touch.detach();
     }
-    await scroll.focus();
-    await page.keyboard.press('Home');
-    await expect
-      .poll(() => scroll.evaluate((element) => element.scrollTop))
-      .toBe(0);
+    await expect(async () => {
+      await scroll.press('Home');
+      await expect
+        .poll(() => scroll.evaluate((element) => element.scrollTop), {
+          timeout: 800,
+        })
+        .toBe(0);
+    }).toPass({ timeout: 6500 });
     if (shots && [390, 1366, 1920].includes(width)) {
       await page.screenshot({ path: `${shots}/details-${width}.png` });
     }

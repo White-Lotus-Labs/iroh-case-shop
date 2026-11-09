@@ -147,6 +147,56 @@ export function rewardTier(amount: string) {
   return rewardTiers.find((reward) => reward.amount === amount)?.tier;
 }
 
+const bonusTiers = {
+  SHITZU: { tier: 'Common', reward_id: 'bonus-shitzu', amount: '50000000' },
+  RHEA: { tier: 'Rare', reward_id: 'bonus-rhea', amount: '5000000' },
+  AURORA: { tier: 'Legendary', reward_id: 'bonus-aurora', amount: '1000000' },
+} as const;
+
+export function parseBonusReward(raw: unknown) {
+  const v = object(raw);
+  const symbol = v.token_symbol;
+  if (symbol !== 'SHITZU' && symbol !== 'RHEA' && symbol !== 'AURORA')
+    throw new Error('Unexpected Dragon Tea bonus token.');
+  const expected = bonusTiers[symbol];
+  if (
+    v.reward_id !== expected.reward_id ||
+    v.tier !== expected.tier ||
+    v.amount !== expected.amount ||
+    v.token_decimals !== 6 ||
+    v.chance_in_tier_bps !== 5000
+  )
+    throw new Error('Unexpected Dragon Tea bonus reward.');
+  const funds = integer(v.funds);
+  const available = integer(v.available);
+  const reserved = integer(v.reserved);
+  const inFlight = integer(v.in_flight);
+  if (
+    BigInt(available) + BigInt(reserved) !== BigInt(funds) ||
+    BigInt(inFlight) > BigInt(reserved)
+  )
+    throw new Error('Inconsistent bonus inventory accounting.');
+  return {
+    ...expected,
+    token_symbol: symbol as keyof typeof bonusTiers,
+    token_contract_id: contractId(v.token_contract_id),
+    token_decimals: v.token_decimals,
+    display_name: text(v.display_name),
+    chance_in_tier_bps: v.chance_in_tier_bps,
+    available,
+  };
+}
+
+export type BonusReward = ReturnType<typeof parseBonusReward>;
+
+export function formatReward(reward: {
+  amount: string;
+  token_decimals: number;
+  token_symbol: string;
+}) {
+  return `${formatUnits(reward.amount, reward.token_decimals)} ${reward.token_symbol}`;
+}
+
 export type PublicOdds = Pick<
   Quote,
   | 'common'
@@ -179,13 +229,28 @@ export function parseCase(raw: unknown) {
     })
   )
     throw new Error('Unexpected Dragon Tea rewards.');
+  const bonus = v.bonus_rewards;
+  if (
+    bonus !== undefined &&
+    (!Array.isArray(bonus) || (bonus.length !== 0 && bonus.length !== 3))
+  )
+    throw new Error('Unexpected Dragon Tea bonus catalog.');
+  const bonusRewards = Array.isArray(bonus) ? bonus.map(parseBonusReward) : [];
+  const tokenId = contractId(v.token_id);
+  if (
+    new Set([tokenId, ...bonusRewards.map((r) => r.token_contract_id)]).size !==
+      bonusRewards.length + 1 ||
+    new Set(bonusRewards.map((r) => r.reward_id)).size !== bonusRewards.length
+  )
+    throw new Error('Duplicate token or reward in the bonus catalog.');
   return {
     name: text(v.name),
     price: v.price,
     poolContribution: v.pool_contribution,
     platformFee: v.platform_fee,
     rewards: rewardTiers,
-    token_id: contractId(v.token_id),
+    token_id: tokenId,
+    bonusRewards,
     randomness: text(v.randomness),
     quote_policy: text(v.quote_policy),
   };
@@ -210,6 +275,19 @@ export function parseOpening(raw: unknown) {
     throw new Error('Unexpected reward.');
   if (status === 'RandomnessPending' ? reward !== null : reward === null)
     throw new Error('Inconsistent opening result.');
+  const bonus = v.bonus == null ? null : parseBonusReward(v.bonus);
+  const usdiPaid =
+    v.usdi_paid === undefined ? status === 'Completed' : flag(v.usdi_paid);
+  const bonusPaid = v.bonus_paid === undefined ? false : flag(v.bonus_paid);
+  if (
+    (bonus &&
+      (bonus.tier !== rewardTier(reward ?? '') ||
+        v.bonus_paid === undefined)) ||
+    (bonusPaid && !bonus) ||
+    (status === 'Completed' && (!usdiPaid || (bonus && !bonusPaid))) ||
+    (status === 'RandomnessPending' && (usdiPaid || bonusPaid))
+  )
+    throw new Error('Inconsistent bonus payout.');
   return {
     ...odds(v),
     opening_id: integer(v.opening_id, 64),
@@ -219,6 +297,9 @@ export function parseOpening(raw: unknown) {
     accepted_revision: integer(v.accepted_revision, 64),
     status,
     reward,
+    bonus,
+    usdiPaid,
+    bonusPaid,
     draw: v.draw === null ? null : count(v.draw),
     attempt: integer(v.attempt, 64),
     reserved: integer(v.reserved),
@@ -236,6 +317,14 @@ export type AccountData = {
   quote: Quote;
   active: Opening | null;
   history: Opening[];
+};
+
+type VerifiedTransaction = {
+  hash: string;
+  success: boolean;
+  refunded?: true;
+  inclusion?: { height: string; timestamp: string | null };
+  returnValue?: string;
 };
 
 export type ExpectedTransaction = WalletFunctionCall & {
@@ -512,14 +601,24 @@ export class CaseClient {
     return raw.map((opening: unknown) => this.accountOpening(opening, id));
   }
 
-  async tokenRegistration(
+  tokenRegistration(id: string, signal?: AbortSignal) {
+    return this.rewardRegistration(this.config.tokenContractId, id, signal);
+  }
+
+  async rewardRegistration(
+    tokenId: string,
     id: string,
     signal?: AbortSignal,
   ): Promise<
     | { tokenRegistered: true; tokenStorageCost: null }
     | { tokenRegistered: false; tokenStorageCost: string }
   > {
-    const raw = await this.tokenView('storage_balance_of', id, signal);
+    const raw = await this.view(
+      contractId(tokenId),
+      'storage_balance_of',
+      { account_id: id },
+      signal,
+    );
     if (raw !== null) {
       const registration = object(raw);
       integer(registration.total);
@@ -527,12 +626,7 @@ export class CaseClient {
       return { tokenRegistered: true, tokenStorageCost: null };
     }
     const bounds = object(
-      await this.view(
-        this.config.tokenContractId,
-        'storage_balance_bounds',
-        {},
-        signal,
-      ),
+      await this.view(tokenId, 'storage_balance_bounds', {}, signal),
     );
     return { tokenRegistered: false, tokenStorageCost: integer(bounds.min) };
   }
@@ -597,7 +691,8 @@ export class CaseClient {
     accountId: string,
     signal?: AbortSignal,
     expected?: ExpectedTransaction,
-  ) {
+    includeInclusion = false,
+  ): Promise<VerifiedTransaction> {
     const result = object(
       await this.rpc(
         'tx',
@@ -631,6 +726,7 @@ export class CaseClient {
       throw new Error(
         'Transaction is still awaiting finality. Refresh to check again.',
       );
+    let inclusion: { height: string; timestamp: string | null } | undefined;
     if (expected) {
       const inclusionHash = transactionHash(
         object(result.transaction_outcome).block_hash,
@@ -648,9 +744,20 @@ export class CaseClient {
           'Transaction predates this saved submission. Check the original wallet transaction.',
         );
       }
+      if (includeInclusion) {
+        const timestamp = header.timestamp_nanosec;
+        inclusion = {
+          height: rpcInteger(header.height),
+          timestamp:
+            typeof timestamp === 'string' && /^\d{1,20}$/.test(timestamp)
+              ? timestamp
+              : null,
+        };
+      }
     }
     const status = object(result.status);
-    if ('Failure' in status) return { hash, success: false };
+    if ('Failure' in status)
+      return { hash, success: false, ...(inclusion && { inclusion }) };
     if (typeof status.SuccessValue !== 'string')
       throw new Error('Transaction has no final execution outcome.');
     // The NEP-141 transfer resolver returns the amount used by the receiver.
@@ -658,8 +765,17 @@ export class CaseClient {
       expected?.methodName === 'ft_transfer_call' &&
       status.SuccessValue === btoa(JSON.stringify('0'))
     )
-      return { hash, success: true, refunded: true };
-    return { hash, success: true };
+      return {
+        hash,
+        success: true,
+        refunded: true,
+        ...(inclusion && { inclusion }),
+      };
+    return {
+      hash,
+      success: true,
+      ...(inclusion && { inclusion, returnValue: status.SuccessValue }),
+    };
   }
 }
 export function transactionHash(value: unknown) {

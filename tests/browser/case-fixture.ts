@@ -34,6 +34,7 @@ export async function mockCaseTestnet(page: Page) {
     stage: 'sealed' as 'sealed' | 'drawn' | 'paid',
     openFinal: false,
     claimFinal: true,
+    bonuses: false,
     redirectClaim: false,
     reject: false,
     refund: false,
@@ -86,7 +87,11 @@ export async function mockCaseTestnet(page: Page) {
     if (method === 'block') {
       result = {
         header: params.block_id
-          ? { hash: params.block_id, height: 201 }
+          ? {
+              hash: params.block_id,
+              height: 201,
+              timestamp_nanosec: '1794251526278507638',
+            }
           : { height: 200 },
       };
     } else if (method === 'tx') {
@@ -124,7 +129,9 @@ export async function mockCaseTestnet(page: Page) {
             : {
                 SuccessValue: isOpen
                   ? encoding(chain.refund ? '0' : '1000000')
-                  : '',
+                  : action.methodName === 'claim_starter'
+                    ? encoding('1000000000')
+                    : '',
               },
       };
     } else if (method === 'query') {
@@ -137,6 +144,24 @@ export async function mockCaseTestnet(page: Page) {
       const revision = drew ? '2' : '1';
       const funds = drew ? (paid ? '995950000' : '1000950000') : '1000000000';
       const available = drew ? '995950000' : funds;
+      const bonuses = [
+        ['SHITZU', 'Common', '50000000', 'Test Shitzu'],
+        ['RHEA', 'Rare', '5000000', 'Test Rhea'],
+        ['AURORA', 'Legendary', '1000000', 'Test Aurora'],
+      ].map(([symbol, tier, amount, name]) => ({
+        reward_id: `bonus-${symbol.toLowerCase()}`,
+        token_contract_id: `mock-${symbol.toLowerCase()}.testnet`,
+        token_symbol: symbol,
+        token_decimals: 6,
+        amount,
+        display_name: name,
+        tier,
+        chance_in_tier_bps: 5000,
+        funds: '500000000',
+        available: '500000000',
+        reserved: '0',
+        in_flight: '0',
+      }));
       const opening = {
         ...distribution,
         opening_id: '1',
@@ -146,6 +171,9 @@ export async function mockCaseTestnet(page: Page) {
         accepted_revision: '1',
         status: paid ? 'Completed' : 'Paying',
         reward: '5000000',
+        ...(chain.bonuses
+          ? { bonus: bonuses[2], bonus_paid: paid, usdi_paid: paid }
+          : {}),
         draw: 985000,
         attempt: '1',
         reserved: paid ? '0' : '5000000',
@@ -161,6 +189,7 @@ export async function mockCaseTestnet(page: Page) {
           probability_denominator: 1000000,
           randomness: 'NEAR protocol randomness',
           quote_policy: 'Exact revision',
+          ...(chain.bonuses ? { bonus_rewards: bonuses } : {}),
           rewards: [
             { tier: 'Common', amount: '100000' },
             { tier: 'Rare', amount: '1000000' },

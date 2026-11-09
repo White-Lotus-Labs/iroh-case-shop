@@ -9,7 +9,14 @@ import type { WalletFunctionCall } from '../ui/wallet/nearConnector';
 
 export type PendingAction = {
   accountId: string;
-  action: 'claim' | 'storage' | 'token-storage' | 'open' | 'advance' | 'retry';
+  action:
+    | 'claim'
+    | 'storage'
+    | 'token-storage'
+    | 'bonus-storage'
+    | 'open'
+    | 'advance'
+    | 'retry';
   hash: string | null;
   nonce: string | null;
   openingId: string | null;
@@ -49,6 +56,7 @@ export function readPending(
     (value.action !== 'claim' &&
       value.action !== 'storage' &&
       value.action !== 'token-storage' &&
+      value.action !== 'bonus-storage' &&
       value.action !== 'open' &&
       value.action !== 'advance' &&
       value.action !== 'retry') ||
@@ -98,14 +106,17 @@ export function pendingTarget(config: Deployment, pending: PendingAction) {
     claim: 'claim_starter',
     storage: 'storage_deposit',
     'token-storage': 'storage_deposit',
+    'bonus-storage': 'storage_deposit',
     open: 'ft_transfer_call',
     advance: 'advance_opening',
     retry: 'retry_payout',
   }[action];
   const receiverId =
-    action === 'claim' || action === 'open' || action === 'token-storage'
-      ? config.tokenContractId
-      : config.caseContractId;
+    action === 'bonus-storage' && pending.call.args.registration_only === true
+      ? pending.call.receiverId
+      : action === 'claim' || action === 'open' || action === 'token-storage'
+        ? config.tokenContractId
+        : config.caseContractId;
   if (
     pending.call.receiverId !== receiverId ||
     pending.call.methodName !== methodName

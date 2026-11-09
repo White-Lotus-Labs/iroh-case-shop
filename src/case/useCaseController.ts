@@ -25,6 +25,7 @@ import {
   readPending,
   type PendingAction,
 } from './pending';
+import { saveVerifiedReceipt } from './history';
 import { useCaseReads } from './useCaseReads';
 
 const client = configuredDeployment
@@ -181,9 +182,15 @@ export function useCaseController() {
           signer,
           scope.signal,
           pendingTarget(rpc.config, intent),
+          true,
         );
         if (scope.signal.aborted || liveAccount.current !== signer) return;
         if (localStorage.getItem(key) !== original) return;
+        try {
+          saveVerifiedReceipt(rpc.config, intent, result, localStorage);
+        } catch {
+          // Shelf storage is optional; it cannot hold a finalized receipt open.
+        }
         // Clear the saved intent only after verifying the original transaction.
         localStorage.removeItem(key);
         done = true;
@@ -455,6 +462,30 @@ export function useCaseController() {
           tokenRegistrationCall(client.config, cost),
         );
     },
+    registerBonus(tokenId: string, cost: string) {
+      if (
+        !disabled &&
+        client &&
+        reads.active?.status === 'ready' &&
+        active?.status === 'Claimable' &&
+        active.bonus?.token_contract_id === tokenId &&
+        !active.bonusPaid &&
+        reads.caseInfo?.status === 'ready' &&
+        reads.caseInfo.value.bonusRewards.some(
+          (reward) => reward.token_contract_id === tokenId,
+        )
+      ) {
+        void submit(
+          'bonus-storage',
+          {
+            ...tokenRegistrationCall(client.config, cost),
+            receiverId: tokenId,
+          },
+          null,
+          active.opening_id,
+        );
+      }
+    },
     prepayStorage() {
       if (canPrepay && client && pool)
         void submit('storage', storageCall(client.config, pool));
@@ -473,8 +504,9 @@ export function useCaseController() {
         return;
       if (
         opening.status === 'Claimable' &&
-        reads.tokenRegistration?.status === 'ready' &&
-        reads.tokenRegistration.value.tokenRegistered
+        (opening.usdiPaid ||
+          (reads.tokenRegistration?.status === 'ready' &&
+            reads.tokenRegistration.value.tokenRegistered))
       )
         void submit(
           'retry',

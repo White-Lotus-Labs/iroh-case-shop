@@ -4,7 +4,8 @@ import { useEffect, useRef } from 'react';
 import { useWallet } from '../ui/wallet/WalletProvider';
 import { ChainReadStatus } from './ChainReadStatus';
 import { CaseActivity, CaseTransactionNotice } from './CaseActivity';
-import { formatUnits, percent, rewardTier } from './client';
+import { formatUnits, percent, rewardTier, formatReward } from './client';
+import { RewardReel, TokenSeal } from './RewardReel';
 import { useCaseController, type CaseController } from './useCaseController';
 
 function TeaCoffer({ revealed = false }: { revealed?: boolean }) {
@@ -18,9 +19,11 @@ function TeaCoffer({ revealed = false }: { revealed?: boolean }) {
         <i />
       </span>
       <span className="tea-coffer-box">
-        <span className="tea-coffer-lid">龍</span>
+        <span className="tea-coffer-lid">
+          <b className="tea-coffer-crest">龍</b>
+        </span>
         <span className="tea-coffer-front">
-          <i /> 茶 <i />
+          <i /> <b className="tea-coffer-clasp">茶</b> <i />
         </span>
       </span>
       <span className="tea-coffer-edition">No. 01 · Longjing</span>
@@ -48,8 +51,15 @@ export function TeaCaseCatalog({
     active ??
     (controller.accountPending?.action === 'open'
       ? history?.find(({ nonce }) => nonce === controller.accountPending?.nonce)
-      : history?.[0]);
+      : controller.signing
+        ? undefined
+        : history?.[0]);
   const revealed = opening?.reward !== null && opening?.reward !== undefined;
+  const rewardSymbols = [
+    'USDI' as const,
+    ...(caseInfo?.bonusRewards.map((reward) => reward.token_symbol) ?? []),
+  ];
+  const winner = opening?.bonus?.token_symbol ?? 'USDI';
   const paper = useRef<HTMLElement>(null);
   const heading = useRef<HTMLHeadingElement>(null);
 
@@ -145,6 +155,16 @@ export function TeaCaseCatalog({
                 <div className="tea-catalog-reveal" aria-live="polite">
                   {opening?.reward ? (
                     <>
+                      <RewardReel
+                        key={`${accountId}:${opening.opening_id}:${winner}`}
+                        symbols={
+                          rewardSymbols.includes(winner)
+                            ? rewardSymbols
+                            : [...rewardSymbols, winner]
+                        }
+                        winner={winner}
+                        tier={rewardTier(opening.reward) ?? ''}
+                      />
                       <p className="tea-catalog-kicker">
                         Brew #{opening.opening_id} ·{' '}
                         {opening.status === 'Completed'
@@ -158,6 +178,18 @@ export function TeaCaseCatalog({
                         {rewardTier(opening.reward)} ·{' '}
                         {formatUnits(opening.reward)} USDI
                       </p>
+                      {opening.bonus &&
+                        opening.usdiPaid &&
+                        opening.status !== 'Completed' && (
+                          <p>USDI payout confirmed.</p>
+                        )}
+                      {opening.bonus && (
+                        <p className="tea-catalog-reward tea-bonus-reward">
+                          <TokenSeal symbol={opening.bonus.token_symbol} />
+                          {formatReward(opening.bonus)} bonus ·{' '}
+                          {opening.bonusPaid ? 'Paid' : 'Reserved'}
+                        </p>
+                      )}
                       {opening.status === 'Claimable' && (
                         <p>
                           The transfer failed. Your reward is reserved and can
@@ -194,6 +226,36 @@ export function TeaCaseCatalog({
                     ))}
                   </dl>
                 ) : null}
+                {caseInfo && caseInfo.bonusRewards.length > 0 && (
+                  <section
+                    className="tea-bonus-table"
+                    aria-label="Testnet bonus rewards"
+                  >
+                    <h3>Testnet bonus rewards</h3>
+                    <p>
+                      Each rarity has a 50% chance of its bonus alongside USDI.
+                      These unofficial test tokens have no monetary value.
+                    </p>
+                    <ul>
+                      {caseInfo.bonusRewards.map((reward) => (
+                        <li key={reward.reward_id} data-tier={reward.tier}>
+                          <TokenSeal symbol={reward.token_symbol} />
+                          <span>
+                            <strong>{formatReward(reward)}</strong>
+                            <small>
+                              {reward.tier} ·{' '}
+                              {formatUnits(
+                                reward.available,
+                                reward.token_decimals,
+                              )}{' '}
+                              available
+                            </small>
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+                )}
                 {controller.available && (
                   <>
                     <ChainReadStatus
@@ -214,7 +276,7 @@ export function TeaCaseCatalog({
                   </>
                 )}
                 <p>
-                  Expected reward{' '}
+                  Expected USDI reward{' '}
                   <strong>
                     {odds
                       ? formatUnits(odds.expected_numerator, 12) + ' USDI'

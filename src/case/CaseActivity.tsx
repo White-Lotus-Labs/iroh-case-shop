@@ -1,4 +1,13 @@
-import { formatUnits, percent, rewardTier, type Opening } from './client';
+import { useEffect, useState } from 'react';
+import {
+  CaseClient,
+  configuredDeployment,
+  formatUnits,
+  formatReward,
+  percent,
+  rewardTier,
+  type Opening,
+} from './client';
 import { ChainReadStatus } from './ChainReadStatus';
 import type { CaseController } from './useCaseController';
 
@@ -86,6 +95,7 @@ export function CaseActivity({
                 disabled={
                   disabled ||
                   (active.status === 'Claimable' &&
+                    !active.usdiPaid &&
                     reads.tokenRegistration?.value?.tokenRegistered !== true)
                 }
                 onClick={() => recover(active)}
@@ -95,6 +105,7 @@ export function CaseActivity({
                   : 'Advance the pending draw'}
               </button>
               {active.status === 'Claimable' &&
+                !active.usdiPaid &&
                 !reads.tokenRegistration?.value?.tokenRegistered && (
                   <p>
                     Register your USDI account above before retrying. The reward
@@ -107,6 +118,18 @@ export function CaseActivity({
               </p>
             </>
           )}
+          {accountId &&
+            active.status === 'Claimable' &&
+            active.bonus &&
+            !active.bonusPaid && (
+              <BonusRegistration
+                key={`${accountId}:${active.bonus.token_contract_id}`}
+                account={accountId}
+                token={active.bonus.token_contract_id}
+                symbol={active.bonus.token_symbol}
+                controller={controller}
+              />
+            )}
           {active.status === 'Paying' && (
             <p>
               Waiting for the transfer callback. An in-flight payout cannot be
@@ -205,6 +228,81 @@ function OpeningResult({ opening }: { opening: Opening }) {
           ? `${rewardTier(opening.reward)} · ${formatUnits(opening.reward)} USDI`
           : 'Draw pending'}
       </strong>
+      {opening.bonus && (
+        <p>
+          {formatReward(opening.bonus)} bonus ·{' '}
+          {opening.bonusPaid ? 'Paid' : 'Reserved'}
+        </p>
+      )}
     </article>
+  );
+}
+
+const registrationClient = configuredDeployment
+  ? new CaseClient(configuredDeployment)
+  : null;
+
+function BonusRegistration({
+  account,
+  token,
+  symbol,
+  controller,
+}: {
+  account: string;
+  token: string;
+  symbol: string;
+  controller: CaseController;
+}) {
+  const [read, setRead] = useState<
+    { cost: string | null } | { error: string } | null
+  >(null);
+  const [retry, setRetry] = useState(0);
+  useEffect(() => {
+    const scope = new AbortController();
+    void registrationClient
+      ?.rewardRegistration(token, account, scope.signal)
+      .then(
+        (result) => {
+          if (!scope.signal.aborted) setRead({ cost: result.tokenStorageCost });
+        },
+        () => {
+          if (!scope.signal.aborted)
+            setRead({ error: `Could not read ${symbol} registration.` });
+        },
+      );
+    return () => scope.abort();
+  }, [account, token, symbol, retry]);
+  if (!read) return <p role="status">Reading {symbol} registration…</p>;
+  if ('error' in read)
+    return (
+      <div>
+        <p role="alert">{read.error}</p>
+        <button
+          type="button"
+          onClick={() => {
+            setRead(null);
+            setRetry((value) => value + 1);
+          }}
+        >
+          Retry registration check
+        </button>
+      </div>
+    );
+  const cost = read.cost;
+  if (cost === null) return <p>{symbol} storage registered.</p>;
+  return (
+    <div>
+      <p>
+        Register {symbol} to receive the reserved bonus, then retry the payout.
+        Storage costs {formatUnits(cost, 24)} Testnet NEAR plus gas.
+      </p>
+      <button
+        type="button"
+        disabled={controller.disabled}
+        onClick={() => controller.registerBonus(token, cost)}
+      >
+        Register {symbol} storage
+      </button>
+    </div>
   );
 }

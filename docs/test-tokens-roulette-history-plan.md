@@ -14,8 +14,10 @@ Verified with 61 Rust tests and the local NEAR Sandbox. Sandbox executed actual 
 - Case pool: `e4092cbff3ff59676d8b530e1540b57e1939264863f8d49a0b32c29483fa1111`
 
 ## 2. Host reward presentation
-- [ ] Read both deployed legacy and extended reward schemas, with token symbols, denominations, inventory and payout status from the contract. Retain separate loading states.
-- [ ] Render a tea-themed reel driven by the selected reward from the contract. Show a neutral pending state, animate to the verified result, and support reduced motion. Verify Host browsing, exact reward, and mobile layout.
+- [x] Read both deployed legacy and extended reward schemas, with token symbols, denominations, inventory and payout status from the contract. Retain separate loading states.
+- [x] Render a tea-themed reel driven by the selected reward from the contract. Show a neutral pending state, animate to the verified result, and support reduced motion. Verify Host browsing, exact reward, and mobile layout.
+
+Verified legacy and bonus-enabled contract data, exact reel stop, partial settlement display, reduced motion, and mobile layouts with the production app. The release build and TypeScript checks passed.
 
 ## 3. Shelf activity
 - [ ] Open activity by default while keeping the existing trader view accessible. Combine finalized contract openings with locally saved, verified app receipts. Scope by account and deployment, and leave unknown timestamps and hashes absent. Add a Details view and explorer links for verified hashes.
