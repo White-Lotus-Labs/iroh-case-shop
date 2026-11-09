@@ -302,6 +302,15 @@ function callMatches(raw: unknown, expected: WalletFunctionCall): boolean {
   }
 }
 
+export class TestnetTransportError extends Error {
+  constructor(
+    message: string,
+    readonly retryable = true,
+  ) {
+    super(message);
+  }
+}
+
 export class CaseClient {
   constructor(
     readonly config: Deployment,
@@ -313,24 +322,43 @@ export class CaseClient {
     params: object,
     signal?: AbortSignal,
   ): Promise<unknown> {
-    const timeout = AbortSignal.timeout(15000);
-    const response = await this.request(this.config.rpcUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        jsonrpc: '2.0',
-        id: 'iroh-cases',
-        method,
-        params,
-      }),
-      signal: signal ? AbortSignal.any([signal, timeout]) : timeout,
-      cache: 'no-store',
-    });
-    if (!response.ok)
-      throw new Error(
-        'Testnet RPC unavailable. Refresh to try the read again.',
-      );
-    const body = object(await response.json());
+    const timeout = AbortSignal.timeout(8000);
+    const send = async () => {
+      const response = await this.request(this.config.rpcUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          jsonrpc: '2.0',
+          id: 'iroh-cases',
+          method,
+          params,
+        }),
+        signal: signal ? AbortSignal.any([signal, timeout]) : timeout,
+        cache: 'no-store',
+      });
+      if (!response.ok) {
+        if (response.status === 429)
+          throw new TestnetTransportError(
+            'Testnet RPC rate limit reached (HTTP 429).',
+          );
+        throw new TestnetTransportError(
+          `Testnet RPC unavailable (HTTP ${response.status}).`,
+          response.status >= 500,
+        );
+      }
+      return object(await response.json());
+    };
+    let body: Record<string, unknown>;
+    try {
+      body = await send();
+    } catch (cause) {
+      if (signal?.aborted) throw cause;
+      if (timeout.aborted)
+        throw new TestnetTransportError('Testnet RPC request timed out.');
+      if (cause instanceof TypeError)
+        throw new TestnetTransportError('Could not reach Testnet RPC.');
+      throw cause;
+    }
     if (body.error !== undefined)
       throw new Error(
         'Testnet RPC could not confirm this request. Refresh to check chain state.',
@@ -383,32 +411,133 @@ export class CaseClient {
       ),
     );
   }
-  async publicState(signal?: AbortSignal) {
-    const [rawCase, rawPool] = await Promise.all([
-      this.view(this.config.caseContractId, 'get_case', {}, signal),
-      this.view(this.config.caseContractId, 'get_pool', {}, signal),
-    ]);
-    const caseInfo = parseCase(rawCase);
-    if (caseInfo.token_id !== this.config.tokenContractId)
+  caseInfo = async (signal?: AbortSignal) => {
+    const info = parseCase(
+      await this.view(this.config.caseContractId, 'get_case', {}, signal),
+    );
+    if (info.token_id !== this.config.tokenContractId)
       throw new Error(
         'The game token does not match the configured USDI contract.',
       );
-    return { caseInfo, pool: parsePool(rawPool) };
+    return info;
+  };
+
+  pool = async (signal?: AbortSignal) =>
+    parsePool(
+      await this.view(this.config.caseContractId, 'get_pool', {}, signal),
+    );
+
+  async publicState(signal?: AbortSignal) {
+    const [caseInfo, pool] = await Promise.all([
+      this.caseInfo(signal),
+      this.pool(signal),
+    ]);
+    return { caseInfo, pool };
   }
+
   async publicOdds(signal?: AbortSignal): Promise<PublicOdds> {
     const { common, rare, legendary, expected_numerator, revision, available } =
-      parseQuote(
-        await this.view(
-          this.config.caseContractId,
-          'get_quote',
-          { account_id: this.config.caseContractId },
-          signal,
-        ),
-      );
+      await this.quote(this.config.caseContractId, signal);
     return { common, rare, legendary, expected_numerator, revision, available };
   }
+
+  private tokenView(method: string, accountId: string, signal?: AbortSignal) {
+    return this.view(
+      this.config.tokenContractId,
+      method,
+      { account_id: accountId },
+      signal,
+    );
+  }
+
+  private caseView(method: string, accountId: string, signal?: AbortSignal) {
+    return this.view(
+      this.config.caseContractId,
+      method,
+      { account_id: accountId },
+      signal,
+    );
+  }
+
+  async balance(id: string, signal?: AbortSignal) {
+    return integer(await this.tokenView('ft_balance_of', id, signal));
+  }
+
+  async claimed(id: string, signal?: AbortSignal) {
+    return flag(await this.tokenView('has_claimed', id, signal));
+  }
+
+  async claimCost(id: string, signal?: AbortSignal) {
+    return integer(await this.tokenView('claim_storage_cost', id, signal));
+  }
+
+  async storage(id: string, signal?: AbortSignal) {
+    return integer(await this.caseView('storage_balance_of', id, signal));
+  }
+
+  async quote(id: string, signal?: AbortSignal) {
+    return parseQuote(await this.caseView('get_quote', id, signal));
+  }
+
+  async active(id: string, signal?: AbortSignal) {
+    const raw = await this.caseView('get_account_opening', id, signal);
+    if (raw === null) return null;
+    const current = this.accountOpening(raw, id);
+    const opening = await this.opening(current.opening_id, signal);
+    if (
+      !opening ||
+      opening.account_id !== id ||
+      opening.opening_id !== current.opening_id
+    )
+      throw new Error('Opening does not match this account.');
+    return opening;
+  }
+
+  private accountOpening(raw: unknown, id: string) {
+    const opening = parseOpening(raw);
+    if (opening.account_id !== id)
+      throw new Error('Opening belongs to another account.');
+    return opening;
+  }
+
+  async history(id: string, signal?: AbortSignal) {
+    const raw = await this.view(
+      this.config.caseContractId,
+      'get_history',
+      { account_id: id, limit: 10 },
+      signal,
+    );
+    if (!Array.isArray(raw) || raw.length > 10)
+      throw new Error('Malformed opening history.');
+    return raw.map((opening: unknown) => this.accountOpening(opening, id));
+  }
+
+  async tokenRegistration(
+    id: string,
+    signal?: AbortSignal,
+  ): Promise<
+    | { tokenRegistered: true; tokenStorageCost: null }
+    | { tokenRegistered: false; tokenStorageCost: string }
+  > {
+    const raw = await this.tokenView('storage_balance_of', id, signal);
+    if (raw !== null) {
+      const registration = object(raw);
+      integer(registration.total);
+      integer(registration.available);
+      return { tokenRegistered: true, tokenStorageCost: null };
+    }
+    const bounds = object(
+      await this.view(
+        this.config.tokenContractId,
+        'storage_balance_bounds',
+        {},
+        signal,
+      ),
+    );
+    return { tokenRegistered: false, tokenStorageCost: integer(bounds.min) };
+  }
+
   async account(accountId: string, signal?: AbortSignal): Promise<AccountData> {
-    const args = { account_id: accountId };
     const [
       balance,
       claimed,
@@ -417,37 +546,17 @@ export class CaseClient {
       quote,
       active,
       history,
-      tokenStorage,
-      tokenBounds,
+      registration,
+      bounds,
     ] = await Promise.all([
-      this.view(this.config.tokenContractId, 'ft_balance_of', args, signal),
-      this.view(this.config.tokenContractId, 'has_claimed', args, signal),
-      this.view(
-        this.config.tokenContractId,
-        'claim_storage_cost',
-        args,
-        signal,
-      ),
-      this.view(this.config.caseContractId, 'storage_balance_of', args, signal),
-      this.view(this.config.caseContractId, 'get_quote', args, signal),
-      this.view(
-        this.config.caseContractId,
-        'get_account_opening',
-        args,
-        signal,
-      ),
-      this.view(
-        this.config.caseContractId,
-        'get_history',
-        { ...args, limit: 10 },
-        signal,
-      ),
-      this.view(
-        this.config.tokenContractId,
-        'storage_balance_of',
-        args,
-        signal,
-      ),
+      this.balance(accountId, signal),
+      this.claimed(accountId, signal),
+      this.claimCost(accountId, signal),
+      this.storage(accountId, signal),
+      this.quote(accountId, signal),
+      this.caseView('get_account_opening', accountId, signal),
+      this.history(accountId, signal),
+      this.tokenView('storage_balance_of', accountId, signal),
       this.view(
         this.config.tokenContractId,
         'storage_balance_bounds',
@@ -455,35 +564,25 @@ export class CaseClient {
         signal,
       ),
     ]);
-    if (!Array.isArray(history) || history.length > 10)
-      throw new Error('Malformed opening history.');
-    const parsedHistory = history.map(parseOpening);
-    const parsedActive = active === null ? null : parseOpening(active);
-    if (
-      [...parsedHistory, ...(parsedActive ? [parsedActive] : [])].some(
-        (opening) => opening.account_id !== accountId,
-      )
-    )
-      throw new Error('Opening belongs to another account.');
-    if (tokenStorage !== null) {
-      const registration = object(tokenStorage);
-      integer(registration.total);
-      integer(registration.available);
+    if (registration !== null) {
+      const fields = object(registration);
+      integer(fields.total);
+      integer(fields.available);
     }
-    const tokenStorageCost = integer(object(tokenBounds).min);
     return {
-      tokenRegistered: tokenStorage !== null,
-      tokenStorageCost,
       accountId,
-      balance: integer(balance),
-      claimed: flag(claimed),
-      claimCost: integer(claimCost),
-      storage: integer(storage),
-      quote: parseQuote(quote),
-      active: parsedActive,
-      history: parsedHistory,
+      balance,
+      claimed,
+      claimCost,
+      storage,
+      quote,
+      history,
+      active: active === null ? null : this.accountOpening(active, accountId),
+      tokenRegistered: registration !== null,
+      tokenStorageCost: integer(object(bounds).min),
     };
   }
+
   async opening(id: string, signal?: AbortSignal) {
     const result = await this.view(
       this.config.caseContractId,
