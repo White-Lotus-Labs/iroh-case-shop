@@ -478,6 +478,9 @@
   .tea-catalog-card-copy {
     padding: 0 4px 5px;
   }
+  .tea-catalog-card .tea-coffer {
+    aspect-ratio: 1.65;
+  }
   .tea-catalog-detail .tea-coffer {
     aspect-ratio: 2;
   }

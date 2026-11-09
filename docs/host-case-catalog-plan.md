@@ -31,6 +31,12 @@ The Host opens the collection by default. The header button uses the same statio
 
 ## Milestone 4 · Verify the experience
 
-- [ ] Exercise claim, rejection, opening, verified draw, payout, and recovery after reload through a controlled wallet and RPC fixture. Verify public deployment separately via read-only Testnet RPC.
-- [ ] Test 320px, 390px, tablet, 1366px, and 1920px layouts, keyboard, scroll, reduced motion, and other room stations. Inspect catalog, detail, and reward screenshots.
-- [ ] Run relevant suites and a production build. Commit verified changes. Do not push, merge, alter contracts, access credentials, or submit any on-chain transaction.
+- [x] Exercise claim, rejection, opening, verified draw, payout, and recovery after reload through a controlled wallet and RPC fixture. Verify public deployment separately via read-only Testnet RPC.
+- [x] Test 320px, 390px, tablet, 1366px, and 1920px layouts, keyboard, scroll, reduced motion, and other room stations. Inspect catalog, detail, and reward screenshots.
+- [x] Run relevant suites and a production build. Commit verified changes. Do not push, merge, alter contracts, access credentials, or submit any on-chain transaction.
+
+The controlled wallet exercised HOT Connect selection and cancellation, starter claim, native storage, opening, reload with a pending hash, confirmed draw, completed payout, full refund, and failure. It also verified that the displayed odds changed with the pool revision. The production browser separately read the official Testnet RPC without a wallet. This live check was read-only.
+
+Checked the production layout at 320, 390, 820, 1366, and 1920px, with native mobile touch input and keyboard scrolling. Reviewed catalog, inspection, and fixture payout screenshots. Moved the open button next to the odds and shortened the mobile cover art to keep the collection action in view. Camera coverage caught an existing Host hover shader missing uniform declarations. The repaired outline passed both development-only camera checks.
+
+Final verification: 329 Vitest tests, 38 production Playwright checks, two development camera checks, a separate live browser read, and a clean production build with TypeScript validation. Contract code and financial parameters were outside this change.

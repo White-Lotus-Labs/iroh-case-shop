@@ -154,6 +154,11 @@ test('halos fly to another station, open the current one, and a drag is not a cl
   page,
 }) => {
   test.setTimeout(90_000);
+  const shaderErrors: string[] = [];
+  page.on('console', (message) => {
+    if (message.text().includes('THREE.WebGLProgram: Shader Error'))
+      shaderErrors.push(message.text());
+  });
   const hotspot = (id: string) => STATIONS.find((s) => s.id === id)!.hotspot;
   await page.goto('/');
   await beginVisit(page);
@@ -165,7 +170,7 @@ test('halos fly to another station, open the current one, and a drag is not a cl
   expect(hostMark, 'Host seal in view').not.toBeNull();
   await page.mouse.move(...hostMark!);
   await expect(page.locator('.halo-label')).toContainText(
-    'Bring an onchain question to Nansen',
+    'Discover rare brews, inspect their treasures, and open a case.',
   );
 
   const shelfEmber = await onCanvas(page, hotspot('Shelf'));
@@ -216,4 +221,5 @@ test('halos fly to another station, open the current one, and a drag is not a cl
   for (let i = 0; i < 6; i++) await page.mouse.wheel(0, 200);
   await page.waitForTimeout(200);
   expect(gap((await pose(page)).position, still.position)).toBeLessThan(1e-4);
+  expect(shaderErrors).toEqual([]);
 });

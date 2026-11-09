@@ -664,12 +664,17 @@ export function IrohModel({
     material.onBeforeCompile = (shader) => {
       shader.uniforms.uSize = { value: size };
       shader.uniforms.uThickness = thickness;
-      shader.vertexShader = shader.vertexShader.replace(
-        '#include <project_vertex>',
-        `#include <project_vertex>
+      shader.vertexShader = shader.vertexShader
+        .replace(
+          '#include <common>',
+          '#include <common>\nuniform vec2 uSize;\nuniform float uThickness;',
+        )
+        .replace(
+          '#include <project_vertex>',
+          `#include <project_vertex>
          vec2 rimDir = (projectionMatrix * vec4(normalMatrix * objectNormal, 0.0)).xy;
          gl_Position.xy += normalize(rimDir + vec2(1e-5)) * uThickness / uSize * gl_Position.w * 2.0;`,
-      );
+        );
     };
     const shell = new SkinnedMesh(body.geometry, material);
     shell.name = 'iroh-rim';
