@@ -52,8 +52,13 @@ The wallet owner approves each public transaction separately.
   zero available for `cases-needmore-1-near.testnet`. The transaction contained
   one `storage_deposit` call and burned 0.0002053033895174 test NEAR in fees.
   [Registration transaction](https://testnet.nearblocks.io/txns/AWGZaZfRRzGuzKGUW4ksZvU51XEpReW94YuBd6MEiQgy)
-- [ ] Review and approve the separate authenticated funding transfer of exactly
-  1,000 bootstrap USDI. Verify the actual FT balance, pool accounting and target.
+- [x] Verify the separately approved transfer of 1,000 bootstrap USDI. At
+  finalized block `276929133`, the case account's token balance, pool funds,
+  available liquidity, target, and reconciliation bounds each equaled 1,000
+  USDI. The treasury wallet held zero USDI. All reservations and fee balances
+  were zero. The pool was Healthy and the quote was 27.7778% common, 67.2222%
+  rare, and 5% legendary. The transaction burned 0.0006407605314647 test NEAR.
+  [Pool funding transaction](https://testnet.nearblocks.io/txns/HYfBtJxyygkhMBkpTFgjRWWy9DYZj7VbKG4hPUm8rDSU)
 - [x] Configure the frontend with both verified Testnet IDs. A Chromium check
   using a simulated wallet and live read-only RPC showed the 1,000 USDI balance,
   starter eligibility and the unfunded pool. Opening remained disabled. The
@@ -70,15 +75,10 @@ Starter eligibility is enforced permanently by the token contract per NEAR
 account ID. Someone who controls several eligible Testnet accounts can claim
 once from each. The starter tokens have no real monetary value.
 
-## Pending Testnet transaction reviews
+## Verified bootstrap funding call
 
-At finalized block `276786964`, the case account was registered with USDI and
-held zero USDI. The owner held the full 1,000 USDI bootstrap. The fee estimate
-uses that block's gas price and protocol costs, including the full prepaid gas
-budget. Recheck balances, fees and account state before approval.
-
-1. **Bootstrap funding.** `needmore_1_near.testnet` calls `ft_transfer_call` on USDI with
-   `{"receiver_id":"cases-needmore-1-near.testnet","amount":"1000000000","msg":"{\"action\":\"fund\"}"}`.
-   Prepay 250 Tgas and attach one yoctoNEAR. The fee estimate is 0.025121 test
-   NEAR. After finality, verify the actual USDI balance and `get_pool` both show
-   1,000 USDI with zero pending fees or reserved rewards.
+`needmore_1_near.testnet` called `ft_transfer_call` on USDI with
+`{"receiver_id":"cases-needmore-1-near.testnet","amount":"1000000000","msg":"{\"action\":\"fund\"}"}`,
+250 Tgas prepaid and one yoctoNEAR attached. The finalized resolver returned
+the full 1,000 USDI as accepted. The next player-side transaction requires its
+own review and approval.
