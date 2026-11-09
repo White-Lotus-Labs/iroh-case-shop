@@ -988,6 +988,9 @@ button[type='submit']:disabled {
 html,
 body {
   min-height: 100%;
+}
+html:has(.app-shell),
+body:has(.app-shell) {
   overflow: hidden;
 }
 .app-shell {

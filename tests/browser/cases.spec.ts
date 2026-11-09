@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test';
 import testnet from '../../config/contracts.testnet.json' with { type: 'json' };
 import { waitForRoomReady, waitForDockReady } from './room-helpers';
+import { FAKE_WALLET } from './wallet-fixture';
 
 test.beforeEach(async ({ page }) => {
   await page.route('**/repository/manifest.json', (route) =>
@@ -197,3 +198,75 @@ for (const width of [390, 320]) {
     ).toBeVisible();
   });
 }
+
+test('standalone Cases scrolls and receives input before and after wallet authorization', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 320, height: 700 });
+  await page.addInitScript(FAKE_WALLET);
+  const errors: string[] = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  await page.goto('/cases');
+  const wallet = page.getByTestId('wallet-entry');
+  const popup = page.locator('.hot-connector-popup');
+  const refresh = page.getByRole('button', { name: 'Refresh chain state' });
+
+  async function expectUsablePage() {
+    await expect(popup).toHaveCount(0);
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.mouse.move(150, 450);
+    await page.mouse.wheel(0, 450);
+    await expect
+      .poll(() => page.evaluate(() => window.scrollY))
+      .toBeGreaterThan(0);
+    await refresh.click();
+    await expect(refresh).toBeEnabled();
+    await page.evaluate(() => window.scrollTo(0, 0));
+  }
+
+  await expectUsablePage();
+  await page.evaluate(() =>
+    localStorage.setItem('fake-near-wallet-mode', 'reject'),
+  );
+  await wallet.click();
+  await popup.locator('.connect-item').click();
+  await expect(wallet).toBeEnabled();
+  await expectUsablePage();
+
+  await page.evaluate(() =>
+    localStorage.setItem('fake-near-wallet-mode', 'delay'),
+  );
+  await wallet.click();
+  await popup.locator('.connect-item').click();
+  await expect(wallet).toBeDisabled();
+  await expect(wallet).toContainText('tea-guest.testnet');
+  await expectUsablePage();
+
+  await page.reload();
+  await expect(wallet).toContainText('tea-guest.testnet');
+  await expectUsablePage();
+  await wallet.click();
+  await page.getByRole('button', { name: 'Disconnect', exact: true }).click();
+  await expect(wallet).toBeFocused();
+  await expectUsablePage();
+  expect(errors).toEqual([]);
+});
+
+test('standalone Cases accepts keyboard scroll when no wallet is available', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 700 });
+  await page.goto('/cases');
+  const wallet = page.getByTestId('wallet-entry');
+  await wallet.click();
+  await expect(
+    page.getByText(/Could not reach the NEAR wallet picker/),
+  ).toBeVisible();
+  await expect(page.locator('.hot-connector-popup')).toHaveCount(0);
+  await page.locator('h1').click();
+  await page.keyboard.press('PageDown');
+  await expect
+    .poll(() => page.evaluate(() => window.scrollY))
+    .toBeGreaterThan(0);
+  await page.getByRole('button', { name: 'Refresh chain state' }).click();
+});
