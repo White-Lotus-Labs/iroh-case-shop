@@ -412,3 +412,117 @@ fn mainnet_named_deployment_is_disabled() {
         account("treasury.near"),
     );
 }
+
+#[test]
+fn bonus_inventory_reserves_all_outcomes_and_retries_only_the_failed_leg() {
+    set("case.testnet", 0, 10);
+    let mut pool = CasePool::new_with_rewards(
+        account("owner.testnet"),
+        account("usdi.testnet"),
+        account("treasury.testnet"),
+        ["shitzu.testnet", "rhea.testnet", "aurora.testnet"].map(account),
+    );
+    let fund = "{\"action\":\"fund\"}".to_string();
+    set("usdi.testnet", 0, 10);
+    assert_eq!(
+        refund(pool.ft_on_transfer(account("owner.testnet"), U128(TARGET), fund.clone())),
+        0
+    );
+    register(&mut pool, "alice.testnet");
+    let unfunded = message(&pool, "alice.testnet");
+    set("usdi.testnet", 0, 10);
+    assert_eq!(
+        refund(pool.ft_on_transfer(account("alice.testnet"), U128(PRICE), unfunded)),
+        PRICE
+    );
+    for (i, token) in ["shitzu.testnet", "rhea.testnet", "aurora.testnet"]
+        .into_iter()
+        .enumerate()
+    {
+        set(token, 0, 10);
+        let amount = U128(bonus::amount(i));
+        assert_eq!(
+            refund(pool.ft_on_transfer(account("alice.testnet"), amount, fund.clone())),
+            amount.0
+        );
+        assert_eq!(
+            refund(pool.ft_on_transfer(account("owner.testnet"), amount, fund.clone())),
+            0
+        );
+    }
+    let id = accept(&mut pool, "alice.testnet");
+    assert!(
+        pool.get_reward_inventory()
+            .iter()
+            .all(|item| item["available"] == "0")
+    );
+    let mut context = context("case.testnet", 0, 11);
+    for seed in 0..=255 {
+        context.random_seed = [seed; 32];
+        testing_env!(context.clone());
+        if randomness::bonus_bit(id, 10) {
+            break;
+        }
+    }
+    assert!(pool.resolve_opening(U64(id)));
+    let opening = pool.openings.get(&id).unwrap();
+    let tier = usize::from(opening.bonus.expect("Test seed selects a bonus"));
+    let reward = opening.reward.unwrap();
+    let bonus = bonus::amount(tier);
+    assert_eq!(
+        pool.get_reward_inventory()[tier]["in_flight"],
+        bonus.to_string()
+    );
+    assert_eq!(
+        pool.get_reward_inventory()
+            .iter()
+            .filter(|item| item["reserved"] != "0")
+            .count(),
+        1
+    );
+    testing_env!(
+        context,
+        near_sdk::test_vm_config(),
+        RuntimeFeesConfig::test(),
+        HashMap::default(),
+        vec![PromiseResult::Successful(vec![]), PromiseResult::Failed]
+    );
+    assert!(!pool.on_payout(U64(id), U64(1)));
+    assert_eq!(pool.total_paid, reward);
+    assert_eq!(pool.reserved, 0);
+    assert_eq!(pool.pending_fees, FEE);
+    assert_eq!(
+        pool.get_reward_inventory()[tier]["reserved"],
+        bonus.to_string()
+    );
+    assert_eq!(pool.get_opening(U64(id)).unwrap()["usdi_paid"], true);
+    set("alice.testnet", 1, 12);
+    pool.retry_payout(U64(id));
+    assert_eq!(pool.in_flight, 0);
+    assert_eq!(get_created_receipts().len(), 2);
+    callback(true);
+    assert!(pool.on_payout(U64(id), U64(2)));
+    assert_eq!(pool.total_paid, reward);
+    assert_eq!(pool.get_reward_inventory()[tier]["funds"], "0");
+    assert_eq!(pool.get_opening(U64(id)).unwrap()["bonus_paid"], true);
+    assert_eq!(pool.fees, FEE);
+}
+
+#[test]
+fn bonus_selection_preserves_rarity_boundaries() {
+    let odds = [277_778, 672_222, 50_000];
+    for (draw, expected) in [
+        (0, 0),
+        (277_777, 0),
+        (277_778, 1),
+        (949_999, 1),
+        (950_000, 2),
+        (999_999, 2),
+    ] {
+        let tier = bonus::tier(draw, odds);
+        assert_eq!(tier, expected);
+        assert_eq!(bonus::selected(tier, true, true), Some(expected as u8));
+        assert_eq!(bonus::selected(tier, false, true), None);
+        assert_eq!(bonus::selected(tier, true, false), None);
+    }
+}

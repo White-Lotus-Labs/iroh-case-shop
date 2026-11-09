@@ -584,8 +584,114 @@ async fn main() -> Result<()> {
     println!(
         "PASS actual payout failure after atomic FT unregistration: funded Claimable reward, permanent faucet marker, and same-draw attempt2 retry; 6 completed openings total"
     );
+    worker
+        .root_account()?
+        .transfer_near(namespace.id(), NearToken::from_near(40))
+        .await?
+        .into_result()?;
+    verify_bonus_pool(&namespace, &token, &alice, &alice, &treasury, &target).await?;
     println!(
         "LOCAL SANDBOX ONLY: no public deployment or public-network wallet signatures performed"
     );
     Ok(())
+}
+
+async fn verify_bonus_pool(
+    namespace: &Account,
+    usdi: &Contract,
+    player: &Account,
+    owner: &Account,
+    treasury: &Account,
+    target: &Path,
+) -> Result<()> {
+    let mock_wasm = std::fs::read(target.join("iroh_mock_token.wasm"))?;
+    let game_wasm = std::fs::read(target.join("iroh_case_pool.wasm"))?;
+    let game = namespace
+        .create_subaccount("bonus-case")
+        .initial_balance(NearToken::from_near(8))
+        .transact()
+        .await?
+        .into_result()?
+        .deploy(&game_wasm)
+        .await?
+        .into_result()?;
+    let mut tokens = Vec::new();
+    for (name, symbol) in [("shitzu", "SHITZU"), ("rhea", "RHEA"), ("aurora", "AURORA")] {
+        let token = namespace
+            .create_subaccount(name)
+            .initial_balance(NearToken::from_near(8))
+            .transact()
+            .await?
+            .into_result()?
+            .deploy(&mock_wasm)
+            .await?
+            .into_result()?;
+        token
+            .as_account()
+            .call(token.id(), "new")
+            .args_json(json!({"asset":symbol,"owner_id":owner.id()}))
+            .max_gas()
+            .transact()
+            .await?
+            .into_result()?;
+        ensure!(view(&token, "ft_metadata", json!({})).await?["symbol"] == symbol);
+        for account in [game.as_account(), player] {
+            owner
+                .call(token.id(), "storage_deposit")
+                .args_json(json!({"account_id":account.id(),"registration_only":true}))
+                .deposit(NearToken::from_millinear(5))
+                .transact()
+                .await?
+                .into_result()?;
+        }
+        tokens.push(token);
+    }
+    let ids: Vec<_> = tokens.iter().map(|token| token.id()).collect();
+    game.as_account().call(game.id(), "new_with_rewards")
+        .args_json(json!({"owner_id":owner.id(),"token_id":usdi.id(),"treasury_id":treasury.id(),"reward_tokens":ids}))
+        .max_gas().transact().await?.into_result()?;
+    owner
+        .call(usdi.id(), "storage_deposit")
+        .args_json(json!({"account_id":game.id(),"registration_only":true}))
+        .deposit(NearToken::from_millinear(5))
+        .transact()
+        .await?
+        .into_result()?;
+    let fund = || json!({"action":"fund"}).to_string();
+    ensure!(transfer_call(owner, usdi, &game, 100_000_000, fund()).await? == 100_000_000);
+    prepay(player, &game).await?;
+    let quote = view(&game, "get_quote", json!({"account_id":player.id()})).await?;
+    ensure!(transfer_call(player, usdi, &game, PRICE, message(&quote)).await? == 0);
+    for token in &tokens {
+        ensure!(transfer_call(owner, token, &game, 1_000_000_000, fund()).await? == 1_000_000_000);
+    }
+    let mut before_bonus = Vec::new();
+    for token in &tokens {
+        before_bonus.push(balance(token, player).await?);
+    }
+    for attempt in 0..16 {
+        if attempt == 8 {
+            prepay(player, &game).await?;
+        }
+        let quote = view(&game, "get_quote", json!({"account_id":player.id()})).await?;
+        let before = balance(usdi, player).await?;
+        ensure!(transfer_call(player, usdi, &game, PRICE, message(&quote)).await? == PRICE);
+        let opening = settle(player, &game).await?;
+        ensure!(balance(usdi, player).await? == before - PRICE + number(&opening, "reward")?);
+        if !opening["bonus"].is_null() {
+            let index = tokens
+                .iter()
+                .position(|token| opening["bonus"]["token_contract_id"] == token.id().as_str())
+                .context("Bonus must belong to a configured token")?;
+            let selected = &tokens[index];
+            let amount = number(&opening["bonus"], "amount")?;
+            ensure!(opening["bonus_paid"] == true && opening["usdi_paid"] == true);
+            ensure!(balance(selected, player).await? == before_bonus[index] + amount);
+            ensure!(balance(selected, game.as_account()).await? == 1_000_000_000 - amount);
+            ensure!(number(&opening["bonus"], "funds")? == 1_000_000_000 - amount);
+            println!("PASS local mock inventory funding and parallel USDI plus bonus payout");
+            return Ok(());
+        }
+    }
+    bail!("Sandbox did not select a bonus in 16 openings")
 }
