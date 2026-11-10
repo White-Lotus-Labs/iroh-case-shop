@@ -112,7 +112,7 @@ test('mobile reel skips motion and Shelf prompts a disconnected wallet', async (
   await expect(shelf.getByText('1 AURORA', { exact: true })).toBeVisible();
   const bonus = shelf.locator('li').filter({ hasText: '1 AURORA' });
   await bonus.getByRole('button', { name: /Details/ }).click();
-  await expect(shelf.getByText('mock-aurora.testnet')).toBeVisible();
+  await expect(shelf.getByText('iroh-test-aurora.testnet')).toBeVisible();
   await expect(shelf.getByText('Legendary', { exact: true })).toBeVisible();
   await expect(shelf.getByRole('link', { name: /NearBlocks/ })).toHaveCount(0);
   const bounds = await shelf.boundingBox();

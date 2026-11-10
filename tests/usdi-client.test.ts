@@ -16,6 +16,7 @@ import {
   walletTransactionHash,
   type AccountData,
 } from '../src/case/client';
+import { openingHistory } from '../src/case/history';
 import {
   actionObserved,
   pendingKey,
@@ -247,6 +248,79 @@ describe('missing token registration recovery', () => {
       deposit: '1250000000000000000000',
     });
   });
+});
+
+describe('legacy and extended payout status', () => {
+  const bonus = {
+    reward_id: 'bonus-rhea',
+    tier: 'Rare',
+    amount: '5000000',
+    token_symbol: 'RHEA',
+    token_contract_id: 'mock-rhea.testnet',
+    token_decimals: 6,
+    display_name: 'Test RHEA',
+    chance_in_tier_bps: 5000,
+    funds: '5000000',
+    available: '0',
+    reserved: '5000000',
+    in_flight: '0',
+  };
+  it('does not infer a missing USDI paid flag for a completed bonus opening', () => {
+    expect(() =>
+      parseOpening({
+        ...opening,
+        status: 'Completed',
+        bonus,
+        bonus_paid: true,
+        reserved: '0',
+      }),
+    ).toThrow('Inconsistent bonus payout');
+  });
+  it('still recognizes completed legacy USDI payouts without a fabricated bonus', () => {
+    const legacy = parseOpening({
+      ...opening,
+      status: 'Completed',
+      reserved: '0',
+    });
+    expect(
+      openingHistory(config, legacy).map(({ type, status, amount }) => ({
+        type,
+        status,
+        amount,
+      })),
+    ).toEqual([
+      { type: 'Case purchase', status: 'Accepted', amount: '1 USDI' },
+      { type: 'Token payout', status: 'Paid', amount: '1 USDI' },
+    ]);
+  });
+  it.each([
+    {
+      usdi_paid: true,
+      bonus_paid: false,
+      expected: ['Paid', 'Retry available'],
+    },
+    {
+      usdi_paid: false,
+      bonus_paid: true,
+      expected: ['Retry available', 'Paid'],
+    },
+  ])(
+    'preserves the two independently finalized payment legs',
+    ({ usdi_paid, bonus_paid, expected }) => {
+      const parsed = parseOpening({
+        ...opening,
+        bonus,
+        usdi_paid,
+        bonus_paid,
+        reserved: usdi_paid ? '0' : opening.reserved,
+      });
+      const payouts = openingHistory(config, parsed).slice(1);
+      expect(payouts.map(({ amount, status }) => [amount, status])).toEqual([
+        ['1 USDI', expected[0]],
+        ['5 RHEA', expected[1]],
+      ]);
+    },
+  );
 });
 
 describe('finalized RPC reads', () => {

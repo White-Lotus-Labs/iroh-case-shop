@@ -276,13 +276,16 @@ export function parseOpening(raw: unknown) {
   if (status === 'RandomnessPending' ? reward !== null : reward === null)
     throw new Error('Inconsistent opening result.');
   const bonus = v.bonus == null ? null : parseBonusReward(v.bonus);
-  const usdiPaid =
-    v.usdi_paid === undefined ? status === 'Completed' : flag(v.usdi_paid);
-  const bonusPaid = v.bonus_paid === undefined ? false : flag(v.bonus_paid);
+  const legacy =
+    v.bonus === undefined &&
+    v.usdi_paid === undefined &&
+    v.bonus_paid === undefined;
+  const usdiPaid = legacy ? status === 'Completed' : v.usdi_paid;
+  const bonusPaid = legacy ? false : v.bonus_paid;
   if (
-    (bonus &&
-      (bonus.tier !== rewardTier(reward ?? '') ||
-        v.bonus_paid === undefined)) ||
+    typeof usdiPaid !== 'boolean' ||
+    typeof bonusPaid !== 'boolean' ||
+    (bonus && bonus.tier !== rewardTier(reward ?? '')) ||
     (bonusPaid && !bonus) ||
     (status === 'Completed' && (!usdiPaid || (bonus && !bonusPaid))) ||
     (status === 'RandomnessPending' && (usdiPaid || bonusPaid))

@@ -236,8 +236,8 @@ test('clicking the Shelf in the room starts the focus journey', async ({
   await expect(
     page.getByRole('button', { name: 'Open the Activity Ledger' }),
   ).toBeVisible();
-  // Click the middle of the shelf where the camera draws it; a fixed pixel
-  // can fall in a gap between the uprights and the tins.
+  // Project the top board's solid center. The center of the shelving unit
+  // itself is open between the side uprights.
   type Camera = {
     pose(): { moving: boolean };
     project(point: [number, number, number]): [number, number, number];
@@ -254,9 +254,11 @@ test('clicking the Shelf in the room starts the focus journey', async ({
     .toBe(false);
   const [x, y] = await page.evaluate(() =>
     (window as typeof window & { __teaCamera: Camera }).__teaCamera.project([
-      3.6, 1.7, -4.55,
+      3.65, 2.83, -4.55,
     ]),
   );
+  await page.mouse.move(x, y);
+  await expect(page.locator('body')).toHaveCSS('cursor', 'pointer');
   await page.mouse.click(x, y);
   await expect(page.locator('.app-shell')).toHaveAttribute(
     'data-shelf-view',

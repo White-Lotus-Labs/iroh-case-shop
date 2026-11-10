@@ -150,7 +150,7 @@ export async function mockCaseTestnet(page: Page) {
         ['AURORA', 'Legendary', '1000000', 'Test Aurora'],
       ].map(([symbol, tier, amount, name]) => ({
         reward_id: `bonus-${symbol.toLowerCase()}`,
-        token_contract_id: `mock-${symbol.toLowerCase()}.testnet`,
+        token_contract_id: `iroh-test-${symbol.toLowerCase()}.testnet`,
         token_symbol: symbol,
         token_decimals: 6,
         amount,
