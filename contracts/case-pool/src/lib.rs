@@ -1,4 +1,5 @@
 mod bonus;
+mod migration;
 
 use iroh_economics::{
     CONTRIBUTION, DENOMINATOR, FEE, MAX_REWARD, PRICE, REWARDS, TARGET, distribution, health,
@@ -103,6 +104,7 @@ pub struct CasePool {
     latest: LookupMap<AccountId, u64>,
     credits: LookupMap<AccountId, u128>,
     bonuses: Option<[bonus::Inventory; 3]>,
+    legacy_openings: Option<migration::LegacyOpenings>,
 }
 
 #[near]
@@ -138,11 +140,12 @@ impl CasePool {
             paused: false,
             revision: 0,
             next_id: 0,
-            openings: LookupMap::new(b"o"),
+            openings: LookupMap::new(b"v"),
             active: LookupMap::new(b"a"),
             latest: LookupMap::new(b"l"),
             credits: LookupMap::new(b"c"),
             bonuses: None,
+            legacy_openings: None,
         }
     }
 
@@ -160,16 +163,7 @@ impl CasePool {
             "Case account must initialize"
         );
         let mut case = Self::new(owner_id, token_id, treasury_id);
-        for (i, token) in reward_tokens.iter().enumerate() {
-            require!(
-                token.as_str().ends_with(".testnet")
-                    && token != &case.token
-                    && token != &env::current_account_id()
-                    && !reward_tokens[..i].contains(token),
-                "Use distinct Testnet reward contracts"
-            );
-        }
-        case.bonuses = Some(reward_tokens.map(bonus::Inventory::new));
+        case.configure_rewards(reward_tokens);
         case
     }
 
@@ -226,21 +220,20 @@ impl CasePool {
             "available":self.available().to_string(),"can_open":error.is_none(),"reason":error})
     }
     pub fn get_opening(&self, opening_id: U64) -> Option<Value> {
-        self.openings
-            .get(&opening_id.0)
+        self.read_opening(opening_id.0)
             .map(|o| self.opening_view(&o))
     }
     pub fn get_account_opening(&self, account_id: AccountId) -> Option<Value> {
         self.active
             .get(&account_id)
-            .and_then(|id| self.openings.get(&id))
+            .and_then(|id| self.read_opening(id))
             .map(|o| self.opening_view(&o))
     }
     pub fn get_history(&self, account_id: AccountId, limit: u32) -> Vec<Value> {
         let mut id = self.latest.get(&account_id);
         let mut result = Vec::new();
         for _ in 0..limit.min(20) {
-            let Some(opening) = id.and_then(|id| self.openings.get(&id)) else {
+            let Some(opening) = id.and_then(|id| self.read_opening(id)) else {
                 break;
             };
             id = opening.previous;
@@ -280,7 +273,7 @@ impl CasePool {
             env::prepaid_gas() >= Gas::from_tgas(100),
             "Attach at least 100 Tgas"
         );
-        let opening = self.openings.get(&opening_id.0).expect("Unknown opening");
+        let opening = self.read_opening(opening_id.0).expect("Unknown opening");
         require!(
             opening.status == Status::RandomnessPending,
             "Draw already selected"
@@ -290,11 +283,12 @@ impl CasePool {
     #[payable]
     pub fn retry_payout(&mut self, opening_id: U64) {
         assert_one_yocto();
+        let mut opening = self.read_opening(opening_id.0).expect("Unknown opening");
+        let two_legs = !opening.usdi_paid && opening.bonus.is_some() && !opening.bonus_paid;
         require!(
-            env::prepaid_gas() >= Gas::from_tgas(if self.bonuses.is_some() { 90 } else { 60 }),
+            env::prepaid_gas() >= Gas::from_tgas(if two_legs { 90 } else { 60 }),
             "Attach enough gas for outstanding payout legs"
         );
-        let mut opening = self.openings.get(&opening_id.0).expect("Unknown opening");
         require!(
             opening.status == Status::Claimable,
             "Only a confirmed failure can retry"
@@ -308,7 +302,7 @@ impl CasePool {
     #[private]
     pub fn resolve_opening(&mut self, opening_id: U64) -> bool {
         self.assert_private();
-        let Some(mut opening) = self.openings.get(&opening_id.0) else {
+        let Some(mut opening) = self.read_opening(opening_id.0) else {
             return false;
         };
         if opening.status != Status::RandomnessPending
@@ -321,12 +315,16 @@ impl CasePool {
         };
         let tier = bonus::tier(draw, opening.odds);
         let reward = REWARDS[tier];
-        opening.bonus = bonus::selected(
-            tier,
-            randomness::bonus_bit(opening.id, opening.accepted_height),
-            self.bonuses.is_some(),
-        );
-        if let Some(inventory) = &mut self.bonuses {
+        let reserved_bonus = self
+            .legacy_openings
+            .as_ref()
+            .is_none_or(|old| opening.id >= old.end);
+        if let Some(inventory) = self.bonuses.as_mut().filter(|_| reserved_bonus) {
+            opening.bonus = bonus::selected(
+                tier,
+                randomness::bonus_bit(opening.id, opening.accepted_height),
+                true,
+            );
             for (index, item) in inventory.iter_mut().enumerate() {
                 if opening.bonus != Some(index as u8) {
                     item.reserved = sub(item.reserved, bonus::amount(index));
@@ -348,7 +346,7 @@ impl CasePool {
     #[private]
     pub fn on_payout(&mut self, opening_id: U64, attempt: U64) -> bool {
         self.assert_private();
-        let Some(mut opening) = self.openings.get(&opening_id.0) else {
+        let Some(mut opening) = self.read_opening(opening_id.0) else {
             return false;
         };
         if opening.status != Status::Paying || opening.attempt != attempt.0 {
@@ -411,8 +409,8 @@ impl CasePool {
         assert_one_yocto();
         self.assert_owner();
         require!(
-            env::prepaid_gas() >= Gas::from_tgas(if self.bonuses.is_some() { 90 } else { 60 }),
-            "Attach enough gas for outstanding payout legs"
+            env::prepaid_gas() >= Gas::from_tgas(60),
+            "Attach at least 60 Tgas"
         );
         require!(
             self.treasury_transfer.is_none(),
@@ -613,6 +611,25 @@ impl FungibleTokenReceiver for CasePool {
 }
 
 impl CasePool {
+    fn configure_rewards(&mut self, reward_tokens: [AccountId; 3]) {
+        for (i, token) in reward_tokens.iter().enumerate() {
+            require!(
+                token.as_str().ends_with(".testnet")
+                    && token != &self.token
+                    && token != &env::current_account_id()
+                    && !reward_tokens[..i].contains(token),
+                "Use distinct Testnet reward contracts"
+            );
+        }
+        self.bonuses = Some(reward_tokens.map(bonus::Inventory::new));
+    }
+
+    fn read_opening(&self, id: u64) -> Option<Opening> {
+        self.openings
+            .get(&id)
+            .or_else(|| self.legacy_openings.as_ref()?.get(id))
+    }
+
     fn available(&self) -> u128 {
         sub(self.pool, self.reserved)
     }
@@ -634,7 +651,7 @@ impl CasePool {
     fn next_nonce(&self, account: &AccountId) -> u64 {
         self.latest
             .get(account)
-            .and_then(|id| self.openings.get(&id))
+            .and_then(|id| self.read_opening(id))
             .map_or(0, |o| o.nonce.checked_add(1).expect("Nonce overflow"))
     }
     fn admission_error(&self) -> Option<&'static str> {

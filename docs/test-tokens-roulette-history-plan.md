@@ -2,6 +2,8 @@
 
 Base: `fix/wallet-chain-data-loading` at `8a0d1af`. Feature: `feature/test-tokens-roulette-history`.
 
+This document records the original fresh-account plan. For the later in-place upgrade of the existing case, use the [migration runbook](dragon-tea-in-place-upgrade.md) and its new WASM checksum.
+
 ## 1. Contracts and inventory
 - [x] Add a fixed-supply Testnet NEP-141 contract with three permitted mock identities, initialized once by its own account.
 - [x] Add a fresh Dragon Tea deployment path with an immutable bonus-token catalog. Preserve the USDI-only initializer and deployed v1 API. No in-place upgrade is supported because state layout changes.

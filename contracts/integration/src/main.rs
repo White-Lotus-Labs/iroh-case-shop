@@ -5,6 +5,8 @@ use near_workspaces::{Account, Contract};
 use serde_json::{Value, json};
 use std::path::Path;
 
+mod migration;
+
 const STARTER: u128 = 1_000_000_000;
 const PRICE: u128 = 1_000_000;
 const CONTRIBUTION: u128 = 950_000;
@@ -182,6 +184,9 @@ async fn reconcile(token: &Contract, game: &Contract) -> Result<Value> {
 
 #[tokio::main]
 async fn main() -> Result<()> {
+    if let Some(snapshot) = std::env::args_os().nth(1) {
+        return migration::rehearse(Path::new(&snapshot)).await;
+    }
     // sandbox() is a fresh local chain. No Testnet RPC, local wallet, saved key,
     // user credentials or environment configuration is used by this program.
     let worker = near_workspaces::sandbox()
