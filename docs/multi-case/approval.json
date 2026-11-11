@@ -1,0 +1,21 @@
+{
+  "approvedAt": "2026-11-11T18:54:59.754405+00:00",
+  "network": "testnet",
+  "batchSha256": "4cf07ab44a6dcf3f9aedf970c938808ec2bcb61e6e21fec959bf36d859db5cc9",
+  "authorization": "Approve exact batch once funded",
+  "conditions": [
+    "Owner funding meets the conservative batch ceiling",
+    "Fresh public code, keys, revision, storage and balance preconditions match",
+    "Only the exact approved actions; stop affected chain on material drift"
+  ],
+  "submittedTransactions": [],
+  "status": "approved_pending_funding",
+  "lastCheckedAt": "2026-11-11T18:56:29.915301+00:00",
+  "lastCheckedBlockHeight": 277254833,
+  "funding": {
+    "balanceYocto": "24108852052391552799199995",
+    "requiredYocto": "91705000000000000000000035",
+    "shortfallYocto": "67596147947608447200800040"
+  },
+  "otherPublicPreconditions": "matched"
+}

@@ -22,6 +22,10 @@ def main():
     simulation = load('docs/multi-case-simulation.json')
     by_case = {c['case_id']: c for c in simulation['cases']}
     digest = (ROOT / 'docs/multi-case/deployment-batch.sha256').read_text().strip()
+    approval_path = ROOT / 'docs/multi-case/approval.json'
+    approval = json.loads(approval_path.read_text()) if approval_path.exists() else None
+    if approval and approval['batchSha256'] != digest:
+        raise RuntimeError('Approval does not match the exact deployment batch')
     lines = [
         '# Iroh five-case implementation and Testnet report', '',
         'Prepared November 11, 2026. The local implementation is verified. Public Testnet still runs the original USDI-only Dragon Tea contract. Its bonus upgrade, four new cases and nine new mock deployments remain unsubmitted pending the bounded approval and native funding described below. No new case is claimed live.', '',
@@ -90,7 +94,17 @@ def main():
     for commit in verify.get('commits', []):
         lines.append(f"- `{commit['hash']}`: {commit['subject']}")
     lines += ['', 'Changed task files are listed in [changed-files.txt](changed-files.txt).', '']
-    (ROOT / 'docs/multi-case/report.md').write_text('\n'.join(lines))
+    report = '\n'.join(lines)
+    if approval:
+        report = report.replace('remain unsubmitted pending the bounded approval and native funding described below.',
+            'remain unsubmitted pending native funding. The user has approved the exact bounded batch once funded.')
+        report = report.replace('## Bounded batch requiring approval', '## Approved bounded batch awaiting funding')
+        report = report.replace('The batch is unapproved and not ready for execution until approval and adequate native funds exist.',
+            'The exact batch is approved once funded. No approval needs to be repeated if all approved parameters and fresh preconditions still match. Native funding remains insufficient, and no further transaction has been submitted. See [the approval record](approval.json) and [the fresh public preflight](approved-preflight.json).')
+        report = report.replace('1. Fund the known owner account to the reviewed execution ceiling and approve the exact bounded batch.',
+            '1. Fund the known owner account to the reviewed execution ceiling. Conditional approval for this exact batch is already recorded.')
+        report = report.replace('4. Obtain bounded approval for any real user claim/opening', '4. Obtain separate bounded approval for any real user claim/opening')
+    (ROOT / 'docs/multi-case/report.md').write_text(report)
 
 
 if __name__ == '__main__':

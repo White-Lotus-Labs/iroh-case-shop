@@ -1,4 +1,4 @@
-# PREPARATION ONLY. No approval has been given for this batch. Do not run these commands before approval and successful preflight.
+# Exact batch 4cf07ab44a6dcf3f9aedf970c938808ec2bcb61e6e21fec959bf36d859db5cc9 approved once funded. Do not execute before sufficient funding and fresh matching preflight.
 # Owner operations are unsigned templates; sign exact manifest actions with the existing owner wallet. Dedicated account operations use only their named Keychain key.
 # Stop on any changed prerequisite or ambiguous receipt. Never run this file as a script.
 

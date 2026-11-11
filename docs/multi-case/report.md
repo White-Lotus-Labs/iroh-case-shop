@@ -1,6 +1,6 @@
 # Iroh five-case implementation and Testnet report
 
-Prepared November 11, 2026. The local implementation is verified. Public Testnet still runs the original USDI-only Dragon Tea contract. Its bonus upgrade, four new cases and nine new mock deployments remain unsubmitted pending the bounded approval and native funding described below. No new case is claimed live.
+Prepared November 11, 2026. The local implementation is verified. Public Testnet still runs the original USDI-only Dragon Tea contract. Its bonus upgrade, four new cases and nine new mock deployments remain unsubmitted pending native funding. The user has approved the exact bounded batch once funded. No new case is claimed live.
 
 ## Implemented collection
 
@@ -137,7 +137,7 @@ Wallet references use the read-only NearBlocks v3 proxy with cursor pagination. 
 
 - 79 Rust tests passed; exact final case/mock/original USDI artifact hashes recorded before and after all suites.
 - 362 Vitest tests passed across 50 files.
-- 13 Node deployment-helper tests passed: nine bounded-batch tests and four historical USDI helper tests with its exact approved artifact.
+- 14 Node deployment-helper tests passed: ten bounded-batch tests including approved-digest immutability, and four historical USDI helper tests with its exact approved artifact.
 - 84 of 84 full Playwright tests passed in the supported development environment, 6.9 minutes.
 - 39 of 39 production case, wallet, recovery, roulette and Shelf Playwright tests passed, 1.9 minutes.
 - next typegen and tsc --noEmit passed.
@@ -157,22 +157,22 @@ At finalized block `277243023`, Dragon remains revision 13, unpaused, with 995.8
 
 The only new submitted transaction is the previously approved SHITZU storage registration: [9oNjXJASSDQgdu3vh4eZuZYMgkiW1fLpcnkaftEksvPq](https://testnet.nearblocks.io/txns/9oNjXJASSDQgdu3vh4eZuZYMgkiW1fLpcnkaftEksvPq). It used the dedicated case signer, 30 Tgas and exactly 0.00125 NEAR. Finalized receipt and storage verification passed. No new paid opening, migration, funding or unpause was submitted.
 
-## Bounded batch requiring approval
+## Approved bounded batch awaiting funding
 
 The exact proposal is [deployment-batch.json](deployment-batch.json), SHA-256 `4cf07ab44a6dcf3f9aedf970c938808ec2bcb61e6e21fec959bf36d859db5cc9`. Its 90 transactions cover thirteen account creations, fourteen deployments or upgrades, twenty-eight storage registrations, twenty-nine inventory funding calls, Dragon pausing and five unpauses. Every account, public key, WASM checksum, initializer, migration argument, raw transfer amount, recipient, gas and deposit is specified. [Deployment review](deployment-review.md) and [individual command templates](deployment-commands.txt) describe sequencing and finalized preconditions.
 
 The maximum native expenditure is **91.705000000000000000000035 test NEAR**, including 73.035000000000000000000035 in attached deposits and 18.67 in maximum fees. New case USDI funding is exactly **1,000 USDI**, allocated 50/150/300/500. Bonus funding covers 100 possible payouts per candidate, including the original Dragon allocations.
 
-The owner currently has 24.108852052391552799199995 test NEAR and 1,004 USDI. Meeting the conservative batch ceiling requires at least **67.59614794760844720080004 additional test NEAR**. No unspecified faucet or funding transaction is included. The batch is unapproved and not ready for execution until approval and adequate native funds exist.
+The owner currently has 24.108852052391552799199995 test NEAR and 1,004 USDI. Meeting the conservative batch ceiling requires at least **67.59614794760844720080004 additional test NEAR**. No unspecified faucet or funding transaction is included. The exact batch is approved once funded. No approval needs to be repeated if all approved parameters and fresh preconditions still match. Native funding remains insufficient, and no further transaction has been submitted. See [the approval record](approval.json) and [the fresh public preflight](approved-preflight.json).
 
 Case WASM SHA-256: `48e560f15ef75db48d82ab1d57ca119b752059d96c1157c897ce3dbf87b7c06e`. Mock WASM SHA-256: `faa2b5cd6957806b93b8c96067152e21ecda54bd63bb7cb5da385c5ebea6a630`. Exact binaries are archived under `artifacts/testnet/`. USDI is not upgraded.
 
 ## Remaining work that requires authorization or external state
 
-1. Fund the known owner account to the reviewed execution ceiling and approve the exact bounded batch.
+1. Fund the known owner account to the reviewed execution ceiling. Conditional approval for this exact batch is already recorded.
 2. Execute its dependency chains, stopping affected operations if code, keys, revision, storage costs or finality differ from the reviewed conditions.
 3. Verify actual deployed code, all legacy records, inventories, receipts and unpaused quotes; only then update verified deployment status.
-4. Obtain bounded approval for any real user claim/opening not included in this batch and verify real HOT signing and new public Testnet payouts. No new case is currently represented as live.
+4. Obtain separate bounded approval for any real user claim/opening not included in this batch and verify real HOT signing and new public Testnet payouts. No new case is currently represented as live.
 
 ## Commits and changed files
 
@@ -180,5 +180,6 @@ Branch: `codex/multi-case-testnet-expansion`. No merge, push, reset or history r
 
 - `72504b3b3533a71a1270b06c160ae5e0d187d7eb`: Add isolated configurable tea cases and verified fixed-supply mocks
 - `e864583e64b2e2cc8142de5723eca75ddf29441c`: Integrate five tea cases and verified paginated Shelf history
+- `03825cf5802f7b7fefd95d110fa71118206ef610`: Record bounded Testnet deployment proposal and complete verification evidence
 
 Changed task files are listed in [changed-files.txt](changed-files.txt).

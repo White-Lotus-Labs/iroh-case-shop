@@ -4,11 +4,25 @@ import { readFile } from 'node:fs/promises';
 import {
   buildBatch,
   commandsForBatch,
+  guardApprovedBatch,
 } from '../scripts/multi-case/prepare-batch.mjs';
 
 const catalog = JSON.parse(
   await readFile(new URL('../config/cases.testnet.json', import.meta.url)),
 );
+
+test('an approved batch cannot be replaced by a changed generated proposal', () => {
+  assert.doesNotThrow(() => guardApprovedBatch(null, 'a'.repeat(64)));
+  assert.doesNotThrow(() => guardApprovedBatch('a'.repeat(64), 'a'.repeat(64)));
+  assert.throws(
+    () => guardApprovedBatch('a'.repeat(64), 'b'.repeat(64)),
+    /approved batch.*immutable/i,
+  );
+  assert.throws(
+    () => guardApprovedBatch(undefined, 'a'.repeat(64)),
+    /approved batch.*immutable/i,
+  );
+});
 const tokens = JSON.parse(
   await readFile(new URL('../config/tokens.testnet.json', import.meta.url)),
 );

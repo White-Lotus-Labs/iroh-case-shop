@@ -1,6 +1,6 @@
 # Bounded Testnet deployment review
 
-This is a prepared proposal. Apart from the separately authorized SHITZU storage registration, no new transaction in this proposal has been approved or submitted.
+The user approved the exact batch with SHA-256 `4cf07ab44a6dcf3f9aedf970c938808ec2bcb61e6e21fec959bf36d859db5cc9` once funded. The approval record is `approval.json`. The batch remains unsubmitted because the owner native balance is below the reviewed ceiling. The separately authorized SHITZU registration is already finalized. The manifest bytes remain unchanged.
 
 The exact machine-readable proposal is `deployment-batch.json`. `deployment-batch.sha256` pins its serialized bytes. Rebuild with `node scripts/multi-case/prepare-batch.mjs` only when source, keys, artifacts and the latest public preflight are final. Any change to the reviewed JSON requires reviewing its new checksum. The generator never signs, retrieves secrets or sends transactions. `deployment-commands.txt` contains individual CLI templates, not a runnable deployment script.
 

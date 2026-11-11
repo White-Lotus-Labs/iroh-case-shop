@@ -21,6 +21,12 @@ const funding = {
 function check(ok, message) {
   if (!ok) throw new Error(message);
 }
+export function guardApprovedBatch(approvedSha256, proposedSha256) {
+  check(
+    approvedSha256 === null || approvedSha256 === proposedSha256,
+    'The approved batch is immutable. Prepare a separate proposal and obtain new approval for any changed digest.',
+  );
+}
 function validPublicKey(value) {
   if (typeof value !== 'string' || !keyPattern.test(value)) return false;
   const alphabet = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
@@ -632,15 +638,24 @@ async function main() {
   const batch = buildBatch({ catalog, tokens, keys, snapshot, artifacts });
   await mkdir(ROOT + 'docs/multi-case', { recursive: true });
   const serialized = JSON.stringify(batch, null, 2) + '\n';
-  await writeFile(ROOT + 'docs/multi-case/deployment-batch.json', serialized);
   const sha256 = createHash('sha256').update(serialized).digest('hex');
+  const approval = await load('docs/multi-case/approval.json').catch(
+    (error) => {
+      if (error.code !== 'ENOENT') throw error;
+      return null;
+    },
+  );
+  guardApprovedBatch(approval === null ? null : approval.batchSha256, sha256);
+  await writeFile(ROOT + 'docs/multi-case/deployment-batch.json', serialized);
   await writeFile(
     ROOT + 'docs/multi-case/deployment-batch.sha256',
     sha256 + '\n',
   );
   await writeFile(
     ROOT + 'docs/multi-case/deployment-commands.txt',
-    '# PREPARATION ONLY. No approval has been given for this batch. Do not run these commands before approval and successful preflight.\n' +
+    (approval
+      ? `# Exact batch ${sha256} approved once funded. Do not execute before sufficient funding and fresh matching preflight.\n`
+      : '# PREPARATION ONLY. No approval has been given for this batch. Do not run these commands before approval and successful preflight.\n') +
       '# Owner operations are unsigned templates; sign exact manifest actions with the existing owner wallet. Dedicated account operations use only their named Keychain key.\n' +
       '# Stop on any changed prerequisite or ambiguous receipt. Never run this file as a script.\n\n' +
       commandsForBatch(batch),

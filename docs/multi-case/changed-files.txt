@@ -21,6 +21,8 @@ docs/multi-case-economics.md
 docs/multi-case-indexer.md
 docs/multi-case-randomness.md
 docs/multi-case-simulation.json
+docs/multi-case/approval.json
+docs/multi-case/approved-preflight.json
 docs/multi-case/changed-files.txt
 docs/multi-case/decisions.tsv
 docs/multi-case/deployment-batch.json

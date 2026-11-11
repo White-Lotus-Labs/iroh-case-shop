@@ -2,7 +2,7 @@
   "recordedAt": "2026-11-11T16:59:52.429976+00:00",
   "rust": "79 Rust tests passed; exact final case/mock/original USDI artifact hashes recorded before and after all suites.",
   "vitest": "362 Vitest tests passed across 50 files.",
-  "deployment": "13 Node deployment-helper tests passed: nine bounded-batch tests and four historical USDI helper tests with its exact approved artifact.",
+  "deployment": "14 Node deployment-helper tests passed: ten bounded-batch tests including approved-digest immutability, and four historical USDI helper tests with its exact approved artifact.",
   "browserDevelopment": "84 of 84 full Playwright tests passed in the supported development environment, 6.9 minutes.",
   "browserProduction": "39 of 39 production case, wallet, recovery, roulette and Shelf Playwright tests passed, 1.9 minutes.",
   "priorFailures": "Initial full-suite failures exposed the removed account page, stale brand and Shelf coordinates, native browser modal traversal, and the development error badge. All were resolved and the complete suite reran green. Production-only full-suite probes were stopped because camera diagnostics are intentionally absent and secure session cookies require HTTPS for the request client.",
@@ -18,13 +18,18 @@
     {
       "hash": "e864583e64b2e2cc8142de5723eca75ddf29441c",
       "subject": "Integrate five tea cases and verified paginated Shelf history"
+    },
+    {
+      "hash": "03825cf5802f7b7fefd95d110fa71118206ef610",
+      "subject": "Record bounded Testnet deployment proposal and complete verification evidence"
     }
   ],
   "noMainnetTransactions": true,
   "newPublicStateChanges": [
     "Previously approved SHITZU storage registration only"
   ],
-  "newCasePublicDeployment": "not submitted; requires explicit bounded approval and native funding",
+  "newCasePublicDeployment": "Exact batch conditionally approved once funded; not submitted because the owner native balance remains below the reviewed ceiling.",
   "independentReviewer": "gpt-6-astra",
-  "unresolvedCodeFindings": []
+  "unresolvedCodeFindings": [],
+  "approvalRecord": "docs/multi-case/approval.json"
 }
