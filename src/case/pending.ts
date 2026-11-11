@@ -118,6 +118,11 @@ export function pendingTarget(config: Deployment, pending: PendingAction) {
         ? config.tokenContractId
         : config.caseContractId;
   if (
+    action === 'open' &&
+    pending.call.args.receiver_id !== config.caseContractId
+  )
+    throw new Error('Saved opening belongs to another case.');
+  if (
     pending.call.receiverId !== receiverId ||
     pending.call.methodName !== methodName
   ) {

@@ -1,12 +1,28 @@
 import type { CSSProperties } from 'react';
 
-const glyphs = { USDI: '茶', SHITZU: '犬', RHEA: '芽', AURORA: '光' } as const;
-export type RewardSymbol = keyof typeof glyphs;
+const glyphs: Record<string, string> = {
+  USDI: '茶',
+  SHITZU: '犬',
+  RHEA: '芽',
+  AURORA: '光',
+  BLACKDRAGON: '龍',
+  NEKO: '猫',
+  mpDAO: '議',
+  GEAR: '輪',
+  PURGE: '霊',
+  wNEAR: '近',
+  STNEAR: '葉',
+  stNEAR: '葉',
+  LINEAR: '線',
+  LiNEAR: '線',
+  rNEAR: '雨',
+};
+export type RewardSymbol = string;
 
 export function TokenSeal({ symbol }: { symbol: RewardSymbol }) {
   return (
     <span className="tea-token-seal" data-token={symbol} aria-hidden="true">
-      {glyphs[symbol]}
+      {glyphs[symbol] ?? '茶'}
     </span>
   );
 }

@@ -278,7 +278,24 @@ test('full motion reading switches theses in place and returns focus to the book
     trading.getByRole('link', { name: /Open Hyperliquid/ }),
   ).toHaveAttribute('href', 'https://app.hyperliquid.xyz/join/0XIROH');
   await page.keyboard.press('Shift+Tab');
+  // Native modal traversal can visit browser chrome before wrapping.
+  if (await page.evaluate(() => !document.hasFocus()))
+    await page.keyboard.press('Shift+Tab');
+  await expect(
+    trading.getByRole('link', { name: /Open Hyperliquid/ }),
+  ).toBeFocused();
+  await page.keyboard.press('Shift+Tab');
   await expect(trading.getByRole('link', { name: /Open Omni/ })).toBeFocused();
+  await page.keyboard.press('Tab');
+  await expect(
+    trading.getByRole('link', { name: /Open Hyperliquid/ }),
+  ).toBeFocused();
+  await page.keyboard.press('Tab');
+  if (await page.evaluate(() => !document.hasFocus()))
+    await page.keyboard.press('Tab');
+  await expect(
+    trading.getByRole('button', { name: 'Close trading platforms' }),
+  ).toBeFocused();
   await page.keyboard.press('Escape');
   await expect(trading).not.toBeVisible();
   await expect(scroll).toBeVisible();

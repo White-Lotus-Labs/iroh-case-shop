@@ -25,6 +25,11 @@ for (const [width, height] of [
     await expect(catalog).toBeVisible({ timeout: 45000 });
     await expect(page.locator('canvas')).toHaveCount(1);
     await expect(page.getByText('1 USDI', { exact: true })).toBeVisible();
+    await expect(
+      page
+        .locator('[data-case="dragon-tea"]')
+        .getByText('Bonus upgrade awaiting approval'),
+    ).toHaveCount(1);
     const panel = page.locator('.reading-panel[data-host-collection]');
     const bounds = await panel.boundingBox();
     expect(bounds!.x).toBeGreaterThan(0);
@@ -302,3 +307,98 @@ for (const result of ['refund', 'fail'] as const) {
     expect(calls).toHaveLength(1);
   });
 }
+
+for (const [name, price] of [
+  ['Bamboo Mist Case', '0.5'],
+  ['Moon Spirit Case', '2'],
+  ['Phoenix Flame Case', '5'],
+  ["Uncle's Secret Reserve", '10'],
+]) {
+  test(`collection previews ${name} without authorizing an undeployed opening`, async ({
+    page,
+  }) => {
+    test.setTimeout(60000);
+    const { calls } = await mockCaseTestnet(page);
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/?collection=tea');
+    await expect(page.locator('.tea-catalog-card')).toHaveCount(5);
+    await page.getByRole('button', { name: `Inspect ${name}` }).click();
+    const panel = page.getByRole('region', { name: 'Case inspection' });
+    await expect(
+      panel.getByRole('heading', { name, exact: true }),
+    ).toBeVisible();
+    await expect(
+      panel.getByRole('heading', {
+        name: 'Awaiting verified Testnet deployment',
+      }),
+    ).toBeVisible();
+    await expect(
+      panel.getByRole('button', { name: `Open Case · ${price} USDI` }),
+    ).toBeDisabled();
+    await expect(
+      panel.getByText('Planned USDI rewards', { exact: true }),
+    ).toBeVisible();
+    await expect(panel).toContainText('unofficial Iroh Testnet mocks');
+    expect(calls).toEqual([]);
+    await panel.getByRole('button', { name: 'Back to Collection' }).click();
+    await page.getByRole('button', { name: 'Inspect Dragon Tea Case' }).click();
+    await expect(page.locator('.tea-catalog-odds')).toContainText('27.7778%');
+    expect(calls).toEqual([]);
+  });
+}
+
+test('a case-specific deep link and refresh retain the selected planned case', async ({
+  page,
+}) => {
+  test.setTimeout(60000);
+  const { calls } = await mockCaseTestnet(page);
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/?collection=moon-spirit');
+  const heading = page.getByRole('heading', {
+    name: 'Moon Spirit Case',
+    exact: true,
+  });
+  await expect(heading).toBeVisible();
+  await page.reload();
+  await expect(heading).toBeVisible();
+  expect(calls).toEqual([]);
+});
+
+test('switching cases preserves the original pending receipt and never resubmits it', async ({
+  page,
+}) => {
+  test.setTimeout(60000);
+  const { chain, calls } = await mockCaseTestnet(page);
+  chain.claimed = true;
+  chain.stored = true;
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/?collection=dragon-tea');
+  const detail = page.getByRole('region', { name: 'Case inspection' });
+  await detail
+    .getByRole('button', { name: 'Connect Wallet', exact: true })
+    .click();
+  await page.locator('.hot-connector-popup .connect-item').click();
+  await detail.getByRole('button', { name: 'Open Case · 1 USDI' }).click();
+  await expect(detail).toContainText(
+    'Transaction submitted, awaiting finalized confirmation.',
+  );
+  await detail.getByRole('button', { name: 'Back to Collection' }).click();
+  await page.getByRole('button', { name: 'Inspect Bamboo Mist Case' }).click();
+  await expect(
+    detail.getByRole('button', { name: 'Open Case · 0.5 USDI' }),
+  ).toBeDisabled();
+  await expect(detail.locator('.tea-reel')).toHaveCount(0);
+  chain.stage = 'drawn';
+  chain.openFinal = true;
+  await detail.getByRole('button', { name: 'Back to Collection' }).click();
+  await page.getByRole('button', { name: 'Inspect Dragon Tea Case' }).click();
+  await expect(detail).toContainText(
+    'Transaction finalized successfully on Testnet.',
+  );
+  await expect(detail.locator('.tea-reel')).toHaveAttribute(
+    'aria-label',
+    'Reward reel landed on USDI',
+  );
+  expect(calls).toHaveLength(1);
+});

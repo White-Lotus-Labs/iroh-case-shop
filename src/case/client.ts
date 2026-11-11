@@ -1,5 +1,6 @@
 import publicConfig from '../../config/contracts.testnet.json';
 import type { WalletFunctionCall } from '../ui/wallet/nearConnector';
+import { dragonCase, type CaseDefinition } from './catalog';
 
 export type Deployment = {
   network: 'testnet';
@@ -65,6 +66,8 @@ function flag(value: unknown): boolean {
   return value;
 }
 export function formatUnits(value: string, decimals = 6) {
+  if (!Number.isInteger(decimals) || decimals < 0 || decimals > 24)
+    throw new Error('Unsupported token decimals.');
   const n = BigInt(integer(value));
   const base = 10n ** BigInt(decimals);
   const fraction = (n % base)
@@ -87,11 +90,23 @@ function odds(value: Record<string, unknown>) {
     throw new Error('Invalid probability distribution.');
   return { common, rare, legendary, denominator: 1_000_000 };
 }
-export function parseQuote(raw: unknown) {
+export function parseQuote(
+  raw: unknown,
+  definition: CaseDefinition = dragonCase,
+) {
   const v = object(raw);
-  if (v.case_id !== 'dragon-tea') throw new Error('Unexpected case.');
+  if (v.case_id !== definition.id) throw new Error('Unexpected case.');
+  const distribution = odds(v);
+  const expected = definition.rewards.reduce(
+    (sum, reward) =>
+      sum + BigInt(reward.amount) * BigInt(distribution[reward.probability]),
+    0n,
+  );
+  if (integer(v.expected_numerator) !== expected.toString())
+    throw new Error('Inconsistent expected USDI reward.');
   return {
-    ...odds(v),
+    ...distribution,
+    caseId: definition.id,
     revision: integer(v.revision, 64),
     expires_at: integer(v.expires_at, 64),
     nonce: integer(v.nonce, 64),
@@ -137,36 +152,43 @@ export function parsePool(raw: unknown) {
   return pool;
 }
 export type Pool = ReturnType<typeof parsePool>;
-const rewardTiers = [
-  { tier: 'Common', amount: '100000', probability: 'common' },
-  { tier: 'Rare', amount: '1000000', probability: 'rare' },
-  { tier: 'Legendary', amount: '5000000', probability: 'legendary' },
-] as const;
-
-export function rewardTier(amount: string) {
-  return rewardTiers.find((reward) => reward.amount === amount)?.tier;
+export function rewardTier(
+  amount: string,
+  definition: CaseDefinition = dragonCase,
+) {
+  return definition.rewards.find((reward) => reward.amount === amount)?.tier;
 }
 
-const bonusTiers = {
-  SHITZU: { tier: 'Common', reward_id: 'bonus-shitzu', amount: '50000000' },
-  RHEA: { tier: 'Rare', reward_id: 'bonus-rhea', amount: '5000000' },
-  AURORA: { tier: 'Legendary', reward_id: 'bonus-aurora', amount: '1000000' },
-} as const;
+const legacyBonuses = [
+  {
+    token_symbol: 'SHITZU',
+    tier: 'Common',
+    amount: '50000000',
+    token_decimals: 6,
+  },
+  { token_symbol: 'RHEA', tier: 'Rare', amount: '5000000', token_decimals: 6 },
+  {
+    token_symbol: 'AURORA',
+    tier: 'Legendary',
+    amount: '1000000',
+    token_decimals: 6,
+  },
+];
 
-export function parseBonusReward(raw: unknown) {
+export function parseBonusReward(raw: unknown, definition?: CaseDefinition) {
   const v = object(raw);
-  const symbol = v.token_symbol;
-  if (symbol !== 'SHITZU' && symbol !== 'RHEA' && symbol !== 'AURORA')
-    throw new Error('Unexpected Dragon Tea bonus token.');
-  const expected = bonusTiers[symbol];
-  if (
-    v.reward_id !== expected.reward_id ||
-    v.tier !== expected.tier ||
-    v.amount !== expected.amount ||
-    v.token_decimals !== 6 ||
-    v.chance_in_tier_bps !== 5000
-  )
-    throw new Error('Unexpected Dragon Tea bonus reward.');
+  const tokenId = contractId(v.token_contract_id);
+  const expected = (definition?.bonusRewards ?? legacyBonuses).find(
+    (reward) =>
+      reward.token_symbol === v.token_symbol &&
+      reward.tier === v.tier &&
+      reward.amount === v.amount &&
+      reward.token_decimals === v.token_decimals &&
+      (!('token_contract_id' in reward) ||
+        reward.token_contract_id === tokenId),
+  );
+  if (!expected || v.chance_in_tier_bps !== 5000)
+    throw new Error('Unexpected case bonus reward.');
   const funds = integer(v.funds);
   const available = integer(v.available);
   const reserved = integer(v.reserved);
@@ -176,17 +198,30 @@ export function parseBonusReward(raw: unknown) {
     BigInt(inFlight) > BigInt(reserved)
   )
     throw new Error('Inconsistent bonus inventory accounting.');
+  const candidatesInTier =
+    v.candidates_in_tier === undefined ? 1 : count(v.candidates_in_tier);
+  if (
+    candidatesInTier < 1 ||
+    (definition &&
+      candidatesInTier !==
+        definition.bonusRewards.filter(
+          (reward) => reward.tier === expected.tier,
+        ).length)
+  )
+    throw new Error('Inconsistent bonus candidate count.');
   return {
-    ...expected,
-    token_symbol: symbol as keyof typeof bonusTiers,
-    token_contract_id: contractId(v.token_contract_id),
-    token_decimals: v.token_decimals,
+    reward_id: text(v.reward_id),
+    tier: expected.tier,
+    amount: expected.amount,
+    token_symbol: expected.token_symbol,
+    token_contract_id: tokenId,
+    token_decimals: expected.token_decimals,
     display_name: text(v.display_name),
-    chance_in_tier_bps: v.chance_in_tier_bps,
+    chance_in_tier_bps: 5000,
+    candidatesInTier,
     available,
   };
 }
-
 export type BonusReward = ReturnType<typeof parseBonusReward>;
 
 export function formatReward(reward: {
@@ -207,48 +242,68 @@ export type PublicOdds = Pick<
   | 'available'
 >;
 
-export function parseCase(raw: unknown) {
+export function parseCase(
+  raw: unknown,
+  definition: CaseDefinition = dragonCase,
+) {
   const v = object(raw);
   if (
-    v.case_id !== 'dragon-tea' ||
-    v.price !== '1000000' ||
-    v.pool_contribution !== '950000' ||
-    v.platform_fee !== '50000' ||
+    v.case_id !== definition.id ||
+    v.price !== definition.price ||
+    v.pool_contribution !== definition.poolContribution ||
+    v.platform_fee !== definition.platformFee ||
     v.probability_denominator !== 1_000_000
   )
-    throw new Error('Unexpected Dragon Tea economics.');
-  const rewards = v.rewards;
+    throw new Error('Unexpected case economics.');
   if (
-    !Array.isArray(rewards) ||
-    rewards.length !== rewardTiers.length ||
-    rewardTiers.some(({ tier, amount }, index) => {
-      const reward = object(
-        v.rewards instanceof Array ? v.rewards[index] : null,
+    !Array.isArray(v.rewards) ||
+    v.rewards.length !== 3 ||
+    definition.rewards.some(({ tier, amount }, index) => {
+      const reward = object(Array.isArray(v.rewards) ? v.rewards[index] : null);
+      return (
+        reward.tier !== tier ||
+        reward.amount !== amount ||
+        (reward.token_symbol !== undefined && reward.token_symbol !== 'USDI') ||
+        (reward.token_decimals !== undefined && reward.token_decimals !== 6) ||
+        (reward.token_contract_id !== undefined &&
+          reward.token_contract_id !== v.token_id)
       );
-      return reward.tier !== tier || reward.amount !== amount;
     })
   )
-    throw new Error('Unexpected Dragon Tea rewards.');
+    throw new Error('Unexpected case rewards.');
   const bonus = v.bonus_rewards;
+  if (definition.id !== 'dragon-tea' && !Array.isArray(bonus))
+    throw new Error('Missing configured case bonus catalog.');
   if (
     bonus !== undefined &&
-    (!Array.isArray(bonus) || (bonus.length !== 0 && bonus.length !== 3))
+    (!Array.isArray(bonus) ||
+      ((definition.id !== 'dragon-tea' || bonus.length !== 0) &&
+        bonus.length !== definition.bonusRewards.length))
   )
-    throw new Error('Unexpected Dragon Tea bonus catalog.');
-  const bonusRewards = Array.isArray(bonus) ? bonus.map(parseBonusReward) : [];
+    throw new Error('Unexpected case bonus catalog.');
+  const bonusRewards = Array.isArray(bonus)
+    ? bonus.map((reward) => parseBonusReward(reward, definition))
+    : [];
   const tokenId = contractId(v.token_id);
   if (
-    new Set([tokenId, ...bonusRewards.map((r) => r.token_contract_id)]).size !==
+    new Set([
+      tokenId,
+      ...bonusRewards.map((reward) => reward.token_contract_id),
+    ]).size !==
       bonusRewards.length + 1 ||
-    new Set(bonusRewards.map((r) => r.reward_id)).size !== bonusRewards.length
+    new Set(bonusRewards.map((reward) => reward.reward_id)).size !==
+      bonusRewards.length
   )
     throw new Error('Duplicate token or reward in the bonus catalog.');
   return {
+    caseId: definition.id,
+    historyPagination:
+      v.history_pagination === undefined ? false : flag(v.history_pagination),
     name: text(v.name),
-    price: v.price,
-    poolContribution: v.pool_contribution,
-    platformFee: v.platform_fee,
-    rewards: rewardTiers,
+    price: definition.price,
+    poolContribution: definition.poolContribution,
+    platformFee: definition.platformFee,
+    rewards: definition.rewards,
     token_id: tokenId,
     bonusRewards,
     randomness: text(v.randomness),
@@ -267,15 +322,38 @@ function openingStatus(
     return raw;
   throw new Error('Unknown opening status.');
 }
-export function parseOpening(raw: unknown) {
+export function parseOpening(raw: unknown, definition?: CaseDefinition) {
+  const selected = definition ?? dragonCase;
   const v = object(raw);
   const status = openingStatus(v.status);
   const reward = v.reward === null ? null : integer(v.reward);
-  if (reward !== null && !rewardTier(reward))
-    throw new Error('Unexpected reward.');
+  if (v.case_id !== undefined && v.case_id !== selected.id)
+    throw new Error('Unexpected opening case.');
+  const tier = reward === null ? null : rewardTier(reward, selected);
+  if (reward !== null && !tier) throw new Error('Unexpected reward.');
   if (status === 'RandomnessPending' ? reward !== null : reward === null)
     throw new Error('Inconsistent opening result.');
-  const bonus = v.bonus == null ? null : parseBonusReward(v.bonus);
+  const distribution = odds(v);
+  const draw = v.draw === null ? null : count(v.draw);
+  if (
+    draw !== null &&
+    (draw >= distribution.denominator ||
+      reward !==
+        selected.rewards[
+          draw < distribution.common
+            ? 0
+            : draw < distribution.common + distribution.rare
+              ? 1
+              : 2
+        ]?.amount)
+  )
+    throw new Error('Recorded draw does not match its reward.');
+  if (
+    (reward === null) !== (draw === null) ||
+    (v.tier !== undefined && v.tier !== tier)
+  )
+    throw new Error('Inconsistent draw or tier.');
+  const bonus = v.bonus == null ? null : parseBonusReward(v.bonus, definition);
   const legacy =
     v.bonus === undefined &&
     v.usdi_paid === undefined &&
@@ -285,14 +363,16 @@ export function parseOpening(raw: unknown) {
   if (
     typeof usdiPaid !== 'boolean' ||
     typeof bonusPaid !== 'boolean' ||
-    (bonus && bonus.tier !== rewardTier(reward ?? '')) ||
+    (bonus && bonus.tier !== tier) ||
     (bonusPaid && !bonus) ||
     (status === 'Completed' && (!usdiPaid || (bonus && !bonusPaid))) ||
     (status === 'RandomnessPending' && (usdiPaid || bonusPaid))
   )
     throw new Error('Inconsistent bonus payout.');
   return {
-    ...odds(v),
+    ...distribution,
+    caseId: selected.id,
+    tier: tier ?? null,
     opening_id: integer(v.opening_id, 64),
     account_id: text(v.account_id),
     nonce: integer(v.nonce, 64),
@@ -303,7 +383,7 @@ export function parseOpening(raw: unknown) {
     bonus,
     usdiPaid,
     bonusPaid,
-    draw: v.draw === null ? null : count(v.draw),
+    draw,
     attempt: integer(v.attempt, 64),
     reserved: integer(v.reserved),
   };
@@ -408,6 +488,7 @@ export class CaseClient {
     readonly config: Deployment,
     private readonly request: typeof fetch = (input, init) =>
       fetch(input, init),
+    readonly definition: CaseDefinition = dragonCase,
   ) {}
   async rpc(
     method: string,
@@ -506,6 +587,7 @@ export class CaseClient {
   caseInfo = async (signal?: AbortSignal) => {
     const info = parseCase(
       await this.view(this.config.caseContractId, 'get_case', {}, signal),
+      this.definition,
     );
     if (info.token_id !== this.config.tokenContractId)
       throw new Error(
@@ -514,10 +596,14 @@ export class CaseClient {
     return info;
   };
 
-  pool = async (signal?: AbortSignal) =>
-    parsePool(
+  pool = async (signal?: AbortSignal) => {
+    const pool = parsePool(
       await this.view(this.config.caseContractId, 'get_pool', {}, signal),
     );
+    if (pool.target !== this.definition.target)
+      throw new Error('Unexpected case liquidity target.');
+    return pool;
+  };
 
   async publicState(signal?: AbortSignal) {
     const [caseInfo, pool] = await Promise.all([
@@ -568,7 +654,10 @@ export class CaseClient {
   }
 
   async quote(id: string, signal?: AbortSignal) {
-    return parseQuote(await this.caseView('get_quote', id, signal));
+    return parseQuote(
+      await this.caseView('get_quote', id, signal),
+      this.definition,
+    );
   }
 
   async active(id: string, signal?: AbortSignal) {
@@ -586,22 +675,73 @@ export class CaseClient {
   }
 
   private accountOpening(raw: unknown, id: string) {
-    const opening = parseOpening(raw);
+    const opening = parseOpening(raw, this.definition);
     if (opening.account_id !== id)
       throw new Error('Opening belongs to another account.');
     return opening;
   }
 
-  async history(id: string, signal?: AbortSignal) {
+  async history(id: string, signal?: AbortSignal, limit = 10) {
+    if (!Number.isInteger(limit) || limit < 1 || limit > 20)
+      throw new Error('History limit must be between 1 and 20.');
     const raw = await this.view(
       this.config.caseContractId,
       'get_history',
-      { account_id: id, limit: 10 },
+      { account_id: id, limit },
       signal,
     );
-    if (!Array.isArray(raw) || raw.length > 10)
+    if (!Array.isArray(raw) || raw.length > limit)
       throw new Error('Malformed opening history.');
     return raw.map((opening: unknown) => this.accountOpening(opening, id));
+  }
+
+  async historyPage(id: string, cursor: string | null, signal?: AbortSignal) {
+    const info = await this.caseInfo(signal);
+    if (!info.historyPagination) {
+      if (cursor !== null)
+        throw new Error('This legacy contract has no history cursor.');
+      const openings = await this.history(id, signal, 20);
+      return {
+        openings,
+        nextCursor: null,
+        complete: openings.length < 20,
+        paginated: false,
+      };
+    }
+    const raw = object(
+      await this.view(
+        this.config.caseContractId,
+        'get_history_page',
+        {
+          account_id: id,
+          before_opening_id: cursor === null ? null : integer(cursor, 64),
+          limit: 20,
+        },
+        signal,
+      ),
+    );
+    if (!Array.isArray(raw.openings) || raw.openings.length > 20)
+      throw new Error('Malformed history page.');
+    const openings = raw.openings.map((opening: unknown) =>
+      this.accountOpening(opening, id),
+    );
+    const nextCursor =
+      raw.next_cursor === null ? null : integer(raw.next_cursor, 64);
+    if (
+      (cursor !== null && openings[0]?.opening_id !== cursor) ||
+      (nextCursor !== null &&
+        (!openings.length ||
+          openings.some(
+            (opening) => BigInt(nextCursor) >= BigInt(opening.opening_id),
+          )))
+    )
+      throw new Error('Malformed or repeating history cursor.');
+    return {
+      openings,
+      nextCursor,
+      complete: nextCursor === null,
+      paginated: true,
+    };
   }
 
   tokenRegistration(id: string, signal?: AbortSignal) {
@@ -687,7 +827,7 @@ export class CaseClient {
       { opening_id: integer(id, 64) },
       signal,
     );
-    return result === null ? null : parseOpening(result);
+    return result === null ? null : parseOpening(result, this.definition);
   }
   async transaction(
     hash: string,
@@ -842,7 +982,13 @@ export function storageCall(
     ).toString(),
   };
 }
-export function openCall(config: Deployment, quote: Quote): WalletFunctionCall {
+export function openCall(
+  config: Deployment,
+  quote: Quote,
+  definition: CaseDefinition = dragonCase,
+): WalletFunctionCall {
+  if (quote.caseId !== definition.id)
+    throw new Error('Quote belongs to another case.');
   if (!quote.can_open)
     throw new Error(quote.reason ?? 'This case cannot accept an opening.');
   return {
@@ -850,10 +996,10 @@ export function openCall(config: Deployment, quote: Quote): WalletFunctionCall {
     methodName: 'ft_transfer_call',
     args: {
       receiver_id: config.caseContractId,
-      amount: '1000000',
+      amount: definition.price,
       msg: JSON.stringify({
         action: 'open',
-        case_id: 'dragon-tea',
+        case_id: definition.id,
         nonce: quote.nonce,
         quote: { revision: quote.revision, expires_at: quote.expires_at },
       }),

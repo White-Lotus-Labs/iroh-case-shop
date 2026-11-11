@@ -1,5 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
 import { mockCaseTestnet } from './case-fixture';
+import testnet from '../../config/contracts.testnet.json' with { type: 'json' };
 
 async function openShelf(page: Page) {
   await page
@@ -117,7 +118,7 @@ test('mobile reel skips motion and Shelf prompts a disconnected wallet', async (
   await expect(shelf.getByRole('link', { name: /NearBlocks/ })).toHaveCount(0);
   const bounds = await shelf.boundingBox();
   expect(bounds!.x + bounds!.width).toBeLessThanOrEqual(391);
-  await page.getByRole('button', { name: 'Dragon Tea Cases' }).click();
+  await page.getByRole('button', { name: 'Tea Cases' }).click();
   await page.getByRole('button', { name: /Inspect Dragon Tea Case/ }).click();
   await expect(host.locator('.tea-reel-track')).toHaveCSS(
     'animation-name',
@@ -127,4 +128,91 @@ test('mobile reel skips motion and Shelf prompts a disconnected wallet', async (
     'data-winner',
     'AURORA',
   );
+});
+
+test('Shelf loads older finalized case history and retains the legacy fallback', async ({
+  page,
+}) => {
+  test.setTimeout(60000);
+  const { chain } = await mockCaseTestnet(page);
+  chain.claimed = true;
+  const cursors: unknown[] = [];
+  await page.route(testnet.rpcUrl + '/', async (route) => {
+    if (route.request().method() !== 'POST') return route.fallback();
+    const { params } = route.request().postDataJSON();
+    if (
+      params.method_name !== 'get_case' &&
+      params.method_name !== 'get_history_page'
+    )
+      return route.fallback();
+    let value: unknown;
+    if (params.method_name === 'get_case')
+      value = {
+        case_id: 'dragon-tea',
+        name: 'Dragon Tea Case',
+        token_id: testnet.tokenContractId,
+        price: '1000000',
+        pool_contribution: '950000',
+        platform_fee: '50000',
+        probability_denominator: 1000000,
+        randomness: 'NEAR protocol randomness',
+        quote_policy: 'Exact revision',
+        rewards: [
+          { tier: 'Common', amount: '100000' },
+          { tier: 'Rare', amount: '1000000' },
+          { tier: 'Legendary', amount: '5000000' },
+        ],
+        bonus_rewards: [],
+        history_pagination: true,
+      };
+    else {
+      const args = JSON.parse(
+        Buffer.from(params.args_base64, 'base64').toString(),
+      );
+      cursors.push(args.before_opening_id);
+      const ids =
+        args.before_opening_id === null
+          ? Array.from({ length: 20 }, (_, index) => 20 - index)
+          : [0];
+      value = {
+        openings: ids.map((id) => ({
+          opening_id: String(id),
+          account_id: 'tea-guest.testnet',
+          nonce: String(id),
+          accepted_height: String(201 + id),
+          accepted_revision: '1',
+          common: 700000,
+          rare: 250000,
+          legendary: 50000,
+          denominator: 1000000,
+          status: 'Completed',
+          reward: '1000000',
+          draw: 800000,
+          attempt: '1',
+          reserved: '0',
+        })),
+        next_cursor: args.before_opening_id === null ? '0' : null,
+      };
+    }
+    await route.fulfill({
+      headers: { 'access-control-allow-origin': '*' },
+      json: {
+        result: { result: [...Buffer.from(JSON.stringify(value))], logs: [] },
+      },
+    });
+  });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/?collection=dragon-tea');
+  await page
+    .getByRole('button', { name: 'Connect Wallet', exact: true })
+    .click();
+  await page.locator('.hot-connector-popup .connect-item').click();
+  const shelf = await openShelf(page);
+  await expect(shelf.locator('.shelf-activity-rows > li')).toHaveCount(40);
+  await shelf
+    .getByRole('button', { name: 'Load older Dragon Tea Case openings' })
+    .click();
+  await expect(shelf.locator('.shelf-activity-rows > li')).toHaveCount(42);
+  await expect(shelf).toContainText('All opening records loaded.');
+  expect(cursors).toEqual([null, '0']);
 });

@@ -1,16 +1,35 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useWallet } from '../ui/wallet/WalletProvider';
 import { ChainReadStatus } from './ChainReadStatus';
 import { CaseActivity, CaseTransactionNotice } from './CaseActivity';
 import { formatUnits, percent, rewardTier, formatReward } from './client';
 import { RewardReel, TokenSeal } from './RewardReel';
 import { useCaseController, type CaseController } from './useCaseController';
+import {
+  caseCatalog,
+  caseById,
+  dragonCase,
+  type CaseDefinition,
+} from './catalog';
 
-function TeaCoffer({ revealed = false }: { revealed?: boolean }) {
+function TeaCoffer({
+  revealed = false,
+  definition = dragonCase,
+}: {
+  revealed?: boolean;
+  definition?: CaseDefinition;
+}) {
+  const index = caseCatalog.indexOf(definition);
+  const crest = ['竹', '龍', '月', '凰', '秘'][index] ?? '茶';
   return (
-    <div className="tea-coffer" data-revealed={revealed} aria-hidden="true">
+    <div
+      className="tea-coffer"
+      data-revealed={revealed}
+      data-case={definition.id}
+      aria-hidden="true"
+    >
       <span className="tea-coffer-moon" />
       <span className="tea-coffer-halo" />
       <span className="tea-coffer-steam">
@@ -20,13 +39,16 @@ function TeaCoffer({ revealed = false }: { revealed?: boolean }) {
       </span>
       <span className="tea-coffer-box">
         <span className="tea-coffer-lid">
-          <b className="tea-coffer-crest">龍</b>
+          <b className="tea-coffer-crest">{crest}</b>
         </span>
         <span className="tea-coffer-front">
           <i /> <b className="tea-coffer-clasp">茶</b> <i />
         </span>
       </span>
-      <span className="tea-coffer-edition">No. 01 · Longjing</span>
+      <span className="tea-coffer-edition">
+        No. {String(index + 1).padStart(2, '0')} ·{' '}
+        {definition.name.replace(' Case', '')}
+      </span>
     </div>
   );
 }
@@ -38,7 +60,42 @@ export function TeaCaseCatalog({
   inspecting: boolean;
   onInspect: (inspect: boolean) => void;
 }) {
-  const controller = useCaseController();
+  const [selected, setSelected] = useState(dragonCase);
+  useEffect(() => {
+    const params = new URL(window.location.href).searchParams;
+    const id = params.get('teaCase') ?? params.get('collection');
+    if (id && caseCatalog.some((entry) => entry.id === id))
+      setSelected(caseById(id));
+  }, []);
+  return (
+    <TeaCaseView
+      key={selected.id}
+      definition={selected}
+      inspecting={inspecting}
+      onInspect={onInspect}
+      onSelect={(definition) => {
+        setSelected(definition);
+        const url = new URL(window.location.href);
+        url.searchParams.set('teaCase', definition.id);
+        window.history.replaceState(window.history.state, '', url);
+        onInspect(true);
+      }}
+    />
+  );
+}
+
+function TeaCaseView({
+  definition,
+  inspecting,
+  onInspect,
+  onSelect,
+}: {
+  definition: CaseDefinition;
+  inspecting: boolean;
+  onInspect: (inspect: boolean) => void;
+  onSelect: (definition: CaseDefinition) => void;
+}) {
+  const controller = useCaseController(definition);
   const { caseInfo, pool, reads, accountId, active, history, error } =
     controller;
   const oddsRead = accountId ? reads.quote : reads.publicOdds;
@@ -92,58 +149,69 @@ export function TeaCaseCatalog({
             <p className="tea-catalog-kicker">The Host’s collection · 茶</p>
           )}
           <h1 ref={heading} tabIndex={-1}>
-            {inspecting
-              ? (caseInfo?.name ?? 'Dragon Tea Case')
-              : 'The Tea Collection'}
+            {inspecting ? definition.name : 'The Tea Collection'}
           </h1>
           <p>
             {inspecting
-              ? 'Uncle’s first brew, sealed in a lacquered tea chest.'
+              ? definition.description
               : 'Every brew holds a different fortune.'}
           </p>
         </header>
 
         {!inspecting ? (
-          <article className="tea-catalog-card">
-            <TeaCoffer />
-            <div className="tea-catalog-card-copy">
-              <p className="tea-catalog-kicker">Case No. 01 · Longjing</p>
-              <h2>{caseInfo?.name ?? 'Dragon Tea Case'}</h2>
-              <p>
-                A little luck, a warm cup, and the chance of a rare treasure.
-              </p>
-              <p className="tea-catalog-price">
-                {caseInfo
-                  ? formatUnits(caseInfo.price) + ' USDI'
-                  : reads.caseInfo?.status === 'error' || !controller.available
-                    ? 'Price unavailable'
-                    : 'Reading Testnet price…'}
-              </p>
-              {controller.available &&
-                !caseInfo &&
-                reads.caseInfo?.status === 'error' && (
-                  <ChainReadStatus
-                    label="case details"
-                    read={reads.caseInfo}
-                    retry={controller.refresh}
-                  />
-                )}
-              {caseInfo && (
-                <ul className="tea-catalog-tier-list" aria-label="Reward tiers">
-                  {caseInfo.rewards.map(({ tier }) => (
-                    <li key={tier}>{tier}</li>
-                  ))}
-                </ul>
-              )}
-              <button
-                type="button"
-                className="tea-catalog-primary"
-                onClick={() => onInspect(true)}
+          <div className="tea-catalog-collection">
+            {caseCatalog.map((entry, index) => (
+              <article
+                className="tea-catalog-card"
+                key={entry.id}
+                data-case={entry.id}
               >
-                Inspect Dragon Tea Case <span aria-hidden="true">→</span>
-              </button>
-            </div>
-          </article>
+                <TeaCoffer definition={entry} />
+                <div className="tea-catalog-card-copy">
+                  <p className="tea-catalog-kicker">
+                    Case No. {String(index + 1).padStart(2, '0')} ·{' '}
+                    {entry.deploymentStatus === 'verified-live'
+                      ? 'Testnet'
+                      : 'Awaiting deployment'}
+                  </p>
+                  <h2>{entry.name}</h2>
+                  <p>{entry.description}</p>
+                  <p className="tea-catalog-price">
+                    {formatUnits(entry.price)} USDI
+                  </p>
+                  <ul
+                    className="tea-catalog-tier-list"
+                    aria-label={`${entry.name} reward tiers`}
+                  >
+                    {entry.rewards.map(({ tier }) => (
+                      <li key={tier}>{tier}</li>
+                    ))}
+                  </ul>
+                  <p className="tea-catalog-token-preview">
+                    Bonus preview ·{' '}
+                    {entry.bonusRewards
+                      .map(({ token_symbol }) => token_symbol)
+                      .join(' · ')}
+                  </p>
+                  {entry.deploymentStatus === 'verified-live' &&
+                    entry.bonusDeploymentStatus === 'planned' && (
+                      <p className="tea-catalog-token-preview">
+                        Bonus upgrade awaiting approval
+                      </p>
+                    )}
+                  <button
+                    type="button"
+                    className="tea-catalog-primary"
+                    onClick={() => onSelect(entry)}
+                  >
+                    Inspect {entry.name} <span aria-hidden="true">→</span>
+                  </button>
+                </div>
+              </article>
+            ))}
+          </div>
+        ) : !controller.available ? (
+          <PlannedCasePreview definition={definition} />
         ) : (
           <>
             <div className="tea-catalog-detail">
@@ -151,19 +219,20 @@ export function TeaCaseCatalog({
                 <TeaCoffer
                   key={opening?.opening_id ?? 'sealed'}
                   revealed={revealed}
+                  definition={definition}
                 />
                 <div className="tea-catalog-reveal" aria-live="polite">
                   {opening?.reward ? (
                     <>
                       <RewardReel
-                        key={`${accountId}:${opening.opening_id}:${winner}`}
+                        key={`${definition.id}:${accountId}:${opening.opening_id}:${winner}`}
                         symbols={
                           rewardSymbols.includes(winner)
                             ? rewardSymbols
                             : [...rewardSymbols, winner]
                         }
                         winner={winner}
-                        tier={rewardTier(opening.reward) ?? ''}
+                        tier={rewardTier(opening.reward, definition) ?? ''}
                       />
                       <p className="tea-catalog-kicker">
                         Brew #{opening.opening_id} ·{' '}
@@ -175,7 +244,7 @@ export function TeaCaseCatalog({
                         className="tea-catalog-reward"
                         key={opening.opening_id}
                       >
-                        {rewardTier(opening.reward)} ·{' '}
+                        {rewardTier(opening.reward, definition)} ·{' '}
                         {formatUnits(opening.reward)} USDI
                       </p>
                       {opening.bonus &&
@@ -233,8 +302,10 @@ export function TeaCaseCatalog({
                   >
                     <h3>Testnet bonus rewards</h3>
                     <p>
-                      Each rarity has a 50% chance of its bonus alongside USDI.
-                      These unofficial test tokens have no monetary value.
+                      Each rarity has a 50% bonus chance alongside USDI.
+                      Candidates within that rarity share the bonus chance
+                      equally. These unofficial test tokens have no monetary
+                      value.
                     </p>
                     <ul>
                       {caseInfo.bonusRewards.map((reward) => (
@@ -243,12 +314,28 @@ export function TeaCaseCatalog({
                           <span>
                             <strong>{formatReward(reward)}</strong>
                             <small>
-                              {reward.tier} ·{' '}
+                              {reward.tier} · 50% ÷ {reward.candidatesInTier} in
+                              tier ·{' '}
                               {formatUnits(
                                 reward.available,
                                 reward.token_decimals,
                               )}{' '}
                               available
+                              {odds && (
+                                <span className="tea-token-chance">
+                                  {' '}
+                                  · Exact token chance{' '}
+                                  {
+                                    odds[
+                                      definition.rewards.find(
+                                        ({ tier }) => tier === reward.tier,
+                                      )?.probability ?? 'common'
+                                    ]
+                                  }{' '}
+                                  / {2_000_000 * reward.candidatesInTier} per
+                                  opening
+                                </span>
+                              )}
                             </small>
                           </span>
                         </li>
@@ -490,6 +577,62 @@ function CaseOpenAction({
         BigInt(balance) < BigInt(caseInfo.price) && (
           <p>Your USDI balance is below the case price.</p>
         )}
+    </div>
+  );
+}
+
+function PlannedCasePreview({ definition }: { definition: CaseDefinition }) {
+  return (
+    <div className="tea-catalog-planned" aria-label="Case deployment preview">
+      <TeaCoffer definition={definition} />
+      <div>
+        <h2>Awaiting verified Testnet deployment</h2>
+        <p>
+          This case is prepared locally. Live probabilities, balances and
+          inventory are unavailable until its contract is deployed, funded and
+          verified.
+        </p>
+        <p>
+          Planned opening price:{' '}
+          <strong>{formatUnits(definition.price)} USDI</strong>.{' '}
+          {formatUnits(definition.poolContribution)} USDI goes to this case's
+          reward pool and {formatUnits(definition.platformFee)} USDI is the
+          platform fee.
+        </p>
+        <h3>Planned USDI rewards</h3>
+        <dl>
+          {definition.rewards.map(({ tier, amount }) => (
+            <div key={tier}>
+              <dt>{tier}</dt>
+              <dd>{formatUnits(amount)} USDI</dd>
+            </div>
+          ))}
+        </dl>
+        <h3>Planned bonus collection</h3>
+        <p>
+          A 50% bonus chance in each tier, with equal selection among that
+          tier's candidates. These are unofficial Iroh Testnet mocks with no
+          monetary value.
+        </p>
+        <ul>
+          {definition.bonusRewards.map((reward) => (
+            <li key={`${reward.tier}:${reward.token_contract_id}`}>
+              <TokenSeal symbol={reward.token_symbol} /> {formatReward(reward)}{' '}
+              · {reward.tier}
+            </li>
+          ))}
+        </ul>
+        {definition.bonusRewards.some(({ token_symbol }) =>
+          /NEAR|LINEAR/i.test(token_symbol),
+        ) && (
+          <p>
+            Derivative mocks provide no staking, yield, redemption or backing.
+          </p>
+        )}
+        <button type="button" className="tea-catalog-primary" disabled>
+          Open Case · {formatUnits(definition.price)} USDI
+        </button>
+      </div>
     </div>
   );
 }

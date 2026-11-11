@@ -8,6 +8,7 @@ import {
   type Opening,
 } from './client';
 import { pendingKey, type PendingAction } from './pending';
+import { caseCatalog, dragonCase, type CaseDefinition } from './catalog';
 
 type Receipt = Awaited<ReturnType<CaseClient['transaction']>>;
 type ReceiptStatus = 'Finalized' | 'Refunded' | 'Failed';
@@ -19,7 +20,8 @@ export type HistoryEntry = {
   amount: string | null;
   token: string;
   tokenContract: string;
-  caseId: 'dragon-tea' | null;
+  caseId: string | null;
+  caseContract?: string;
   openingId?: string;
   nonce?: string;
   reward?: string;
@@ -43,12 +45,30 @@ const receiptActions = {
   retry: 'Retry case payout',
 } as const;
 
+function definitionFor(config: Deployment) {
+  return (
+    caseCatalog.find(
+      ({ contractId }) => contractId === config.caseContractId,
+    ) ?? dragonCase
+  );
+}
+
 function historyKey(config: Deployment, account: string) {
   return `${pendingKey(config, account)}:receipts`;
 }
 
 function amountFromReceipt(intent: PendingAction, receipt: Receipt) {
-  if (intent.action === 'open') return '1 USDI';
+  if (intent.action === 'open') {
+    try {
+      return formatReward({
+        amount: integer(intent.call.args.amount),
+        token_decimals: 6,
+        token_symbol: 'USDI',
+      });
+    } catch {
+      return null;
+    }
+  }
   if (
     intent.action !== 'claim' ||
     !receipt.success ||
@@ -100,7 +120,8 @@ export function saveVerifiedReceipt(
         : action === 'bonus-storage'
           ? intent.call.receiverId
           : '',
-    caseId: caseAction ? 'dragon-tea' : null,
+    caseId: caseAction ? definitionFor(config).id : null,
+    caseContract: config.caseContractId,
     openingId: intent.openingId ?? undefined,
     nonce: intent.nonce ?? undefined,
     sender: intent.accountId,
@@ -142,7 +163,9 @@ export function readSavedHistory(
         item.source !== 'Saved verified receipt' ||
         item.id !== item.hash ||
         !['Finalized', 'Failed', 'Refunded'].includes(item.status) ||
-        ![null, 'dragon-tea'].includes(item.caseId) ||
+        ![null, definitionFor(config).id].includes(item.caseId) ||
+        (item.caseContract !== undefined &&
+          item.caseContract !== config.caseContractId) ||
         !(item.amount === null || typeof item.amount === 'string') ||
         !(
           item.timestamp === null ||
@@ -162,27 +185,30 @@ export function readSavedHistory(
         return false;
       }
     })
-    .slice(0, 60);
+    .slice(0, 60)
+    .map((entry) => ({ ...entry, caseContract: config.caseContractId }));
 }
 
 export function openingHistory(
   config: Deployment,
   opening: Opening,
+  definition: CaseDefinition = definitionFor(config),
 ): HistoryEntry[] {
   const base = {
-    caseId: 'dragon-tea',
+    caseId: definition.id,
+    caseContract: config.caseContractId,
     openingId: opening.opening_id,
     hash: null,
     height: opening.accepted_height,
     timestamp: null,
     sender: config.caseContractId,
     receiver: opening.account_id,
-    rarity: opening.reward ? rewardTier(opening.reward) : undefined,
+    rarity: opening.reward ? rewardTier(opening.reward, definition) : undefined,
     source: 'Finalized case contract',
   } as const;
   const purchase = {
     ...base,
-    id: `purchase-${opening.opening_id}`,
+    id: `${config.caseContractId}:${definition.id}:purchase-${opening.opening_id}`,
     type: 'Case purchase',
     status: 'Accepted',
     nonce: opening.nonce,
@@ -190,7 +216,7 @@ export function openingHistory(
     receiver: config.caseContractId,
     token: 'USDI',
     tokenContract: config.tokenContractId,
-    amount: '1 USDI',
+    amount: `${formatReward({ amount: definition.price, token_decimals: 6, token_symbol: 'USDI' })}`,
     method: 'ft_on_transfer',
     reward: opening.reward
       ? [
@@ -226,7 +252,7 @@ export function openingHistory(
     ...rewards.map(
       (reward): HistoryEntry => ({
         ...base,
-        id: `opening-${opening.opening_id}-${reward.token}`,
+        id: `${config.caseContractId}:${definition.id}:opening-${opening.opening_id}-${reward.token}`,
         type: reward.paid ? 'Token payout' : 'Reward selected',
         status: reward.paid
           ? 'Paid'
@@ -250,7 +276,10 @@ export function mergeHistory(chain: HistoryEntry[], saved: HistoryEntry[]) {
   const accepted = new Map(
     chain
       .filter((entry) => entry.type === 'Case purchase')
-      .map((entry) => [entry.nonce, entry]),
+      .map((entry) => [
+        `${entry.caseContract}:${entry.caseId}:${entry.nonce}`,
+        entry,
+      ]),
   );
   const matched = new Set<string>();
   const receipts = saved.map((receipt) => {
@@ -258,7 +287,9 @@ export function mergeHistory(chain: HistoryEntry[], saved: HistoryEntry[]) {
       receipt.status === 'Finalized' &&
       receipt.type === 'Case purchase' &&
       receipt.nonce !== undefined
-        ? accepted.get(receipt.nonce)
+        ? accepted.get(
+            `${receipt.caseContract}:${receipt.caseId}:${receipt.nonce}`,
+          )
         : undefined;
     if (!purchase) return receipt;
     matched.add(purchase.id);

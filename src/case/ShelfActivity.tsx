@@ -2,7 +2,9 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useWallet } from '../ui/wallet/WalletProvider';
-import { CaseClient, configuredDeployment } from './client';
+import { CaseClient } from './client';
+import { WalletHistory } from './WalletHistory';
+import { caseById, liveCaseClients } from './catalog';
 import {
   historyTime,
   mergeHistory,
@@ -11,8 +13,19 @@ import {
   type HistoryEntry,
 } from './history';
 
-const rpc = configuredDeployment ? new CaseClient(configuredDeployment) : null;
+const clients = liveCaseClients().map(
+  ({ definition, config }) => new CaseClient(config, undefined, definition),
+);
 type Results = { account: string; entries: HistoryEntry[]; error?: string };
+type HistorySource = {
+  contractId: string;
+  caseId: string;
+  nextCursor: string | null;
+  complete: boolean;
+  paginated: boolean;
+  loading: boolean;
+  error?: string;
+};
 
 export function ShelfActivity({ onTraders }: { onTraders: () => void }) {
   const wallet = useWallet();
@@ -24,15 +37,25 @@ export function ShelfActivity({ onTraders }: { onTraders: () => void }) {
     null,
   );
   const detailsHeading = useRef<HTMLHeadingElement>(null);
+  const [pages, setPages] = useState<{
+    account: string;
+    sources: HistorySource[];
+  } | null>(null);
+  const pageSession = useRef<AbortController | null>(null);
+  const pageBusy = useRef(new Set<string>());
 
   useEffect(() => {
-    if (!account || !rpc) return;
-    const client = rpc;
+    if (!account || !clients.length) return;
     const scope = new AbortController();
+    pageSession.current = scope;
+    pageBusy.current.clear();
+    setPages({ account, sources: [] });
     try {
       setSaved({
         account,
-        entries: readSavedHistory(client.config, account, localStorage),
+        entries: clients.flatMap((client) =>
+          readSavedHistory(client.config, account, localStorage),
+        ),
       });
     } catch {
       setSaved({
@@ -41,31 +64,129 @@ export function ShelfActivity({ onTraders }: { onTraders: () => void }) {
         error: 'Saved transaction receipts could not be read in this browser.',
       });
     }
-    void client.history(account, scope.signal).then(
-      (openings) => {
-        if (!scope.signal.aborted)
-          setResult({
-            account,
-            entries: openings.flatMap((opening) =>
-              openingHistory(client.config, opening),
+    const signer = account;
+    const entries: HistoryEntry[] = [];
+    const errors: string[] = [];
+    setResult(null);
+    const queue = [...clients];
+    async function worker() {
+      while (queue.length && !scope.signal.aborted) {
+        const client = queue.shift();
+        if (!client) return;
+        try {
+          const page = await client.historyPage(signer, null, scope.signal);
+          const openings = page.openings;
+          if (!scope.signal.aborted)
+            setPages((previous) => ({
+              account: signer,
+              sources: [
+                ...(previous?.account === signer ? previous.sources : []),
+                {
+                  contractId: client.config.caseContractId,
+                  caseId: client.definition.id,
+                  nextCursor: page.nextCursor,
+                  complete: page.complete,
+                  paginated: page.paginated,
+                  loading: false,
+                },
+              ],
+            }));
+          entries.push(
+            ...openings.flatMap((opening) =>
+              openingHistory(client.config, opening, client.definition),
             ),
-          });
-      },
-      () => {
+          );
+        } catch {
+          if (!scope.signal.aborted)
+            errors.push(
+              `${client.definition.name}: finalized history unavailable.`,
+            );
+        }
         if (!scope.signal.aborted)
           setResult({
-            account,
-            entries: [],
-            error: 'Could not read finalized case activity from Testnet.',
+            account: signer,
+            entries: [...entries],
+            ...(errors.length ? { error: errors.join(' ') } : {}),
           });
-      },
-    );
+      }
+    }
+    void Promise.all([worker(), worker()]);
     return () => scope.abort();
   }, [account, request]);
+
+  async function loadOlder(source: HistorySource) {
+    const owner = pageSession.current;
+    const client = clients.find(
+      ({ config }) => config.caseContractId === source.contractId,
+    );
+    const cursor = source.nextCursor;
+    if (
+      !account ||
+      !client ||
+      !owner ||
+      owner.signal.aborted ||
+      !cursor ||
+      pageBusy.current.has(source.contractId)
+    )
+      return;
+    const signer = account;
+    pageBusy.current.add(source.contractId);
+    const update = (change: Partial<HistorySource>) =>
+      setPages((previous) =>
+        previous?.account === signer
+          ? {
+              ...previous,
+              sources: previous.sources.map((item) =>
+                item.contractId === source.contractId
+                  ? { ...item, ...change }
+                  : item,
+              ),
+            }
+          : previous,
+      );
+    update({ loading: true, error: undefined });
+    try {
+      const page = await client.historyPage(signer, cursor, owner.signal);
+      if (owner.signal.aborted) return;
+      const older = page.openings.flatMap((opening) =>
+        openingHistory(client.config, opening, client.definition),
+      );
+      setResult((previous) =>
+        previous?.account === signer
+          ? {
+              ...previous,
+              entries: [
+                ...new Map(
+                  [...previous.entries, ...older].map((entry) => [
+                    entry.id,
+                    entry,
+                  ]),
+                ).values(),
+              ],
+            }
+          : previous,
+      );
+      update({
+        nextCursor: page.nextCursor,
+        complete: page.complete,
+        paginated: page.paginated,
+        loading: false,
+      });
+    } catch {
+      if (!owner.signal.aborted)
+        update({
+          loading: false,
+          error: 'Could not load older finalized openings. Retry this page.',
+        });
+    } finally {
+      if (!owner.signal.aborted) pageBusy.current.delete(source.contractId);
+    }
+  }
 
   const chain = result?.account === account ? result : null;
   const local = saved?.account === account ? saved : null;
   const entries = mergeHistory(chain?.entries ?? [], local?.entries ?? []);
+  const historySources = pages?.account === account ? pages.sources : [];
   const selected =
     detail?.account === account
       ? entries.find((entry) => entry.id === detail.id)
@@ -120,7 +241,15 @@ export function ShelfActivity({ onTraders }: { onTraders: () => void }) {
               <Detail label="Amount" value={selected.amount} />
               <Detail
                 label="Case"
-                value={selected.caseId ? 'Dragon Tea Case (dragon-tea)' : null}
+                value={
+                  selected.caseId
+                    ? `${caseById(selected.caseId).name} (${selected.caseId})`
+                    : null
+                }
+              />
+              <Detail
+                label="Case contract"
+                value={selected.caseContract ?? null}
               />
               <Detail label="Opening ID" value={selected.openingId ?? null} />
               <Detail label="Reward selected" value={selected.reward ?? null} />
@@ -149,15 +278,15 @@ export function ShelfActivity({ onTraders }: { onTraders: () => void }) {
               </p>
             )}
             {account && <p className="shelf-account">{account}</p>}
-            {account && !chain && rpc && (
+            {account && !chain && clients.length > 0 && (
               <p role="status">Reading finalized case activity…</p>
             )}
-            {account && !rpc && (
+            {account && clients.length === 0 && (
               <p role="status">The Testnet case is not configured.</p>
             )}
             {chain?.error && <p role="alert">{chain.error}</p>}
             {local?.error && <p role="alert">{local.error}</p>}
-            {account && rpc && (
+            {account && clients.length > 0 && (
               <button
                 type="button"
                 onClick={() => {
@@ -172,13 +301,46 @@ export function ShelfActivity({ onTraders }: { onTraders: () => void }) {
             {account && chain && !chain.error && !entries.length && (
               <p>No recorded case activity or saved receipts.</p>
             )}
+            <p className="cases-fine">
+              Opening history comes from finalized case records. Saved receipts
+              include up to 60 transactions per case in this browser. Other
+              wallet transfers can be inspected separately through the public
+              indexer below.
+            </p>
+            {historySources.map((source) => (
+              <div key={source.contractId} className="shelf-history-source">
+                {source.error && (
+                  <p role="alert">
+                    {caseById(source.caseId).name}: {source.error}
+                  </p>
+                )}
+                {source.nextCursor ? (
+                  <button
+                    type="button"
+                    disabled={source.loading}
+                    onClick={() => void loadOlder(source)}
+                  >
+                    {source.loading
+                      ? 'Reading older openings…'
+                      : `Load older ${caseById(source.caseId).name} openings`}
+                  </button>
+                ) : (
+                  <p className="cases-fine">
+                    {caseById(source.caseId).name}:{' '}
+                    {source.complete
+                      ? 'All opening records loaded.'
+                      : 'Legacy contract returns the latest 20 openings. Older records require its history pagination upgrade.'}
+                  </p>
+                )}
+              </div>
+            ))}
             <ul className="shelf-activity-rows">
               {entries.map((entry) => (
                 <li key={entry.id}>
                   <div>
                     <strong>{entry.type}</strong>
                     <span>
-                      {entry.caseId ? 'Dragon Tea Case · ' : ''}
+                      {entry.caseId ? `${caseById(entry.caseId).name} · ` : ''}
                       {entry.status}
                     </span>
                     <small>
@@ -201,6 +363,11 @@ export function ShelfActivity({ onTraders }: { onTraders: () => void }) {
                 </li>
               ))}
             </ul>
+            <WalletHistory
+              account={account}
+              refreshKey={request}
+              client={clients[0] ?? null}
+            />
             <button type="button" onClick={onTraders}>
               See the top traders
             </button>

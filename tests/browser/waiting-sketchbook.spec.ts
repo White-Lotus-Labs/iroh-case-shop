@@ -84,7 +84,7 @@ test('on a phone every page is one tap away, not only a swipe', async ({
     'The Tea Shop, page 2 of 12',
   );
   await expect(
-    book.getByRole('heading', { name: "Iroh's Tea Shop" }),
+    book.getByRole('heading', { name: "Iroh's Case Shop" }),
   ).toBeVisible();
   await page.getByRole('button', { name: 'Previous page' }).click();
   await expect(book).toHaveAttribute(

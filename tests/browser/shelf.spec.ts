@@ -236,8 +236,8 @@ test('clicking the Shelf in the room starts the focus journey', async ({
   await expect(
     page.getByRole('button', { name: 'Open the Activity Ledger' }),
   ).toBeVisible();
-  // Project the top board's solid center. The center of the shelving unit
-  // itself is open between the side uprights.
+  // TeaShelf scales its local top-board center [-0.17, 2.83, 0] before
+  // translating it to [3.82, 0, -4.55]. Project that solid board in world space.
   type Camera = {
     pose(): { moving: boolean };
     project(point: [number, number, number]): [number, number, number];
@@ -254,7 +254,9 @@ test('clicking the Shelf in the room starts the focus journey', async ({
     .toBe(false);
   const [x, y] = await page.evaluate(() =>
     (window as typeof window & { __teaCamera: Camera }).__teaCamera.project([
-      3.65, 2.83, -4.55,
+      3.82 - 0.17 * 0.82,
+      2.83 * 0.86,
+      -4.55,
     ]),
   );
   await page.mouse.move(x, y);

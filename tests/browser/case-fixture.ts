@@ -72,6 +72,18 @@ export async function mockCaseTestnet(page: Page) {
     route.fulfill({ json: { version: '1.0.0', wallets: [] } }),
   );
 
+  await page.route('**/api/case-history?**', (route) =>
+    route.fulfill({
+      json: {
+        accountId:
+          new URL(route.request().url()).searchParams.get('account') ?? player,
+        transactions: [],
+        nextCursor: null,
+        source: 'Indexer reference, not receipt-verified',
+      },
+    }),
+  );
+
   await page.route(testnet.rpcUrl + '/', async (route) => {
     const headers = {
       'access-control-allow-origin': '*',

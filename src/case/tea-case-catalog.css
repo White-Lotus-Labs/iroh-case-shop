@@ -777,3 +777,70 @@
   color: #fff0ca;
   font-size: 0.75rem;
 }
+
+.tea-catalog-collection {
+  display: grid;
+  gap: 24px;
+}
+.tea-catalog-token-preview {
+  overflow-wrap: anywhere;
+  font-size: 11px;
+  color: #634829;
+}
+.tea-catalog-planned {
+  display: grid;
+  gap: 18px;
+}
+.tea-catalog-planned dl > div {
+  display: flex;
+  justify-content: space-between;
+}
+.tea-catalog-planned ul {
+  display: grid;
+  gap: 8px;
+  padding-left: 16px;
+}
+.tea-token-chance {
+  display: block;
+}
+.tea-coffer[data-case='bamboo-mist'] {
+  filter: hue-rotate(48deg) saturate(0.7);
+}
+.tea-coffer[data-case='moon-spirit'] {
+  filter: hue-rotate(210deg) saturate(0.7);
+}
+.tea-coffer[data-case='phoenix-flame'] {
+  filter: saturate(1.65);
+}
+.tea-coffer[data-case='uncles-secret-reserve'] {
+  filter: sepia(0.4) brightness(0.8);
+}
+
+.shelf-wallet-history {
+  border-top: 1px solid #9e7744;
+  margin-top: 18px;
+  padding-top: 18px;
+}
+.shelf-indexer-rows {
+  list-style: none;
+  padding: 0;
+}
+.shelf-indexer-rows > li {
+  display: flex;
+  align-items: start;
+  gap: 12px;
+  border-bottom: 1px solid #a178455e;
+  padding: 12px 0;
+}
+.shelf-indexer-rows > li > div {
+  min-width: 0;
+  flex: 1;
+  overflow-wrap: anywhere;
+}
+.shelf-wallet-history li,
+.shelf-wallet-history dd {
+  overflow-wrap: anywhere;
+}
+.shelf-verification-status {
+  font-weight: 700;
+}

@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 import {
-  CaseClient,
-  configuredDeployment,
   formatUnits,
   formatReward,
   percent,
@@ -225,7 +223,7 @@ function OpeningResult({ opening }: { opening: Opening }) {
       </div>
       <strong>
         {opening.reward
-          ? `${rewardTier(opening.reward)} · ${formatUnits(opening.reward)} USDI`
+          ? `${opening.tier} · ${formatUnits(opening.reward)} USDI`
           : 'Draw pending'}
       </strong>
       {opening.bonus && (
@@ -237,10 +235,6 @@ function OpeningResult({ opening }: { opening: Opening }) {
     </article>
   );
 }
-
-const registrationClient = configuredDeployment
-  ? new CaseClient(configuredDeployment)
-  : null;
 
 function BonusRegistration({
   account,
@@ -259,7 +253,7 @@ function BonusRegistration({
   const [retry, setRetry] = useState(0);
   useEffect(() => {
     const scope = new AbortController();
-    void registrationClient
+    void controller.client
       ?.rewardRegistration(token, account, scope.signal)
       .then(
         (result) => {
@@ -271,7 +265,7 @@ function BonusRegistration({
         },
       );
     return () => scope.abort();
-  }, [account, token, symbol, retry]);
+  }, [account, token, symbol, retry, controller.client]);
   if (!read) return <p role="status">Reading {symbol} registration…</p>;
   if ('error' in read)
     return (

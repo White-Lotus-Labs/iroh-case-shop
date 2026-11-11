@@ -182,7 +182,7 @@ for (const width of [390, 320]) {
     await page.goto('/?thesis=ai');
     await waitForRoomReady(page);
     await waitForDockReady(page);
-    const cases = page.getByRole('button', { name: 'Dragon Tea Cases' });
+    const cases = page.getByRole('button', { name: 'Tea Cases' });
     const wallet = page.getByTestId('wallet-entry');
     await expect(cases).toBeVisible();
     await expect(wallet).toBeEnabled();

@@ -208,7 +208,15 @@ test('mobile layout remains readable and the WebGL fallback preserves the journe
   await expect(approach).toBeFocused();
 
   // Escape with a contextual research draft keeps that draft.
-  await openStationPanel(page, 'Counter');
+  // The forced WebGL error leaves Next's development badge over this dock
+  // position. Exercise the same keyboard route used earlier in this journey.
+  await page
+    .getByRole('navigation', { name: 'Tea room stations' })
+    .getByRole('button', { name: /Counter/ })
+    .press('Enter');
+  await page
+    .getByRole('button', { name: 'Open the Thesis Desk' })
+    .press('Enter');
   await page
     .getByRole('button', { name: 'Ask Uncle about your own thesis' })
     .click();

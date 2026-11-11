@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useWallet } from '../ui/wallet/WalletProvider';
 import {
   WalletPreflightError,
@@ -8,7 +8,6 @@ import {
 } from '../ui/wallet/nearConnector';
 import {
   CaseClient,
-  configuredDeployment,
   claimCall,
   storageCall,
   tokenRegistrationCall,
@@ -27,10 +26,8 @@ import {
 } from './pending';
 import { saveVerifiedReceipt } from './history';
 import { useCaseReads } from './useCaseReads';
+import { dragonCase, deploymentForCase, type CaseDefinition } from './catalog';
 
-const client = configuredDeployment
-  ? new CaseClient(configuredDeployment)
-  : null;
 type PendingState =
   | { accountId: string; action: PendingAction | null }
   | { accountId: string; error: string };
@@ -44,7 +41,11 @@ function errorMessage(error: unknown) {
     : 'Could not complete the request. Check your wallet and refresh chain state before trying again.';
 }
 
-export function useCaseController() {
+export function useCaseController(definition: CaseDefinition = dragonCase) {
+  const client = useMemo(() => {
+    const config = deploymentForCase(definition);
+    return config ? new CaseClient(config, undefined, definition) : null;
+  }, [definition]);
   const wallet = useWallet();
   const accountId = wallet.status === 'connected' ? wallet.accountId : null;
   const { reads, loading, refresh, afterMutation } = useCaseReads(
@@ -83,6 +84,7 @@ export function useCaseController() {
         );
         if (action && action.accountId !== accountId)
           throw new Error('Saved transaction belongs to another account.');
+        if (action) pendingTarget(client.config, action);
         setPending({ accountId, action });
       } catch (cause) {
         setPending({ accountId, error: errorMessage(cause) });
@@ -91,7 +93,7 @@ export function useCaseController() {
       setPending(null);
     }
     return () => owner.abort();
-  }, [accountId]);
+  }, [accountId, client]);
 
   const active = reads.active?.value;
   const history = reads.history?.value;
@@ -141,7 +143,7 @@ export function useCaseController() {
     } catch (cause) {
       setError(errorMessage(cause));
     }
-  }, [accountId, accountPending, observed, afterMutation]);
+  }, [accountId, client, accountPending, observed, afterMutation]);
 
   // Receipt verification is independent of the view reads and never broadcasts a transaction.
   useEffect(() => {
@@ -233,7 +235,7 @@ export function useCaseController() {
       window.clearTimeout(timer);
       checkReceipt.current = () => {};
     };
-  }, [accountId, accountPending, afterMutation]);
+  }, [accountId, client, accountPending, afterMutation]);
 
   async function submit(
     action: PendingAction['action'],
@@ -414,12 +416,16 @@ export function useCaseController() {
     !active &&
     reads.tokenRegistration?.status === 'ready' &&
     reads.tokenRegistration.value.tokenRegistered &&
+    reads.pool.value.can_open &&
+    !reads.pool.value.paused &&
     reads.quote.value.can_open &&
     reads.quote.value.revision === reads.pool.value.revision &&
     reads.quote.value.available === reads.pool.value.available &&
     BigInt(reads.balance.value) >= BigInt(reads.caseInfo.value.price);
 
   return {
+    client,
+    definition,
     accountId,
     reads,
     caseInfo,
@@ -492,7 +498,11 @@ export function useCaseController() {
     },
     open() {
       if (canOpen && client && odds)
-        void submit('open', openCall(client.config, odds), odds.nonce);
+        void submit(
+          'open',
+          openCall(client.config, odds, definition),
+          odds.nonce,
+        );
     },
     recover(opening: Opening) {
       if (

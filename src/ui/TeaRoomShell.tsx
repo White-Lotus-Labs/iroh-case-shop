@@ -10,6 +10,7 @@ import {
   useState,
 } from 'react';
 import type { Station } from '../shared/contracts';
+import { caseCatalog } from '../case/catalog';
 import type { SceneMood } from '../scene/motion/dynamics';
 import type { IrohActivity } from '../scene/TeaHost3D';
 import { OBSERVATORIUM_URL, RECENTER_EVENT, STATIONS } from '../scene/stations';
@@ -84,8 +85,18 @@ const ShelfActivity = dynamic(loadShelfActivity);
 
 function setTeaCollectionLink(view: 'tea' | 'dragon-tea' | null) {
   const url = new URL(window.location.href);
-  if (view) url.searchParams.set('collection', view);
-  else if (url.searchParams.has('collection'))
+  if (view) {
+    const selected =
+      url.searchParams.get('teaCase') ?? url.searchParams.get('collection');
+    url.searchParams.set(
+      'collection',
+      view === 'dragon-tea' &&
+        selected &&
+        caseCatalog.some(({ id }) => id === selected)
+        ? selected
+        : view,
+    );
+  } else if (url.searchParams.has('collection'))
     url.searchParams.delete('collection');
   else return;
   window.history.replaceState(window.history.state, '', url);
@@ -209,9 +220,12 @@ export default function TeaRoomShell({
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const collection = params.get('collection');
-    if (collection === 'tea' || collection === 'dragon-tea') {
+    if (
+      collection === 'tea' ||
+      caseCatalog.some(({ id }) => id === collection)
+    ) {
       setStation('AvatarSeat');
-      setHostView(collection === 'dragon-tea' ? 'case' : 'collection');
+      setHostView(collection === 'tea' ? 'collection' : 'case');
       openCatalogOnArrival.current = true;
       return;
     }
@@ -613,9 +627,9 @@ export default function TeaRoomShell({
             type="button"
             onClick={openCatalog}
             className="cases-navigation"
-            aria-label="Dragon Tea Cases"
+            aria-label="Tea Cases"
           >
-            <span className="cases-navigation-full">Dragon Tea Cases</span>
+            <span className="cases-navigation-full">Tea Cases</span>
             <span className="cases-navigation-short" aria-hidden="true">
               Tea Cases
             </span>

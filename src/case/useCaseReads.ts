@@ -60,9 +60,11 @@ export function useCaseReads(
 ) {
   const [snapshot, setSnapshot] = useState<{
     accountId: string | null;
+    client: CaseClient | null;
     reads: Reads;
   }>({
     accountId,
+    client,
     reads: {},
   });
   const [loading, setLoading] = useState(false);
@@ -71,7 +73,12 @@ export function useCaseReads(
   const afterMutation = useCallback(() => run.current('mutation'), []);
 
   useEffect(() => {
-    if (!client) return;
+    if (!client) {
+      setSnapshot({ accountId, client, reads: {} });
+      setLoading(false);
+      run.current = () => {};
+      return;
+    }
     const scope = new AbortController();
     let running = false;
     let queued = false;
@@ -80,9 +87,13 @@ export function useCaseReads(
     let revision = 0;
     let request = new AbortController();
 
-    setSnapshot(({ reads }) => ({
+    setSnapshot((previous) => ({
       accountId,
-      reads: { caseInfo: reads.caseInfo, pool: reads.pool },
+      client,
+      reads:
+        previous.client === client
+          ? { caseInfo: previous.reads.caseInfo, pool: previous.reads.pool }
+          : {},
     }));
 
     function update<K extends ReadKey>(
@@ -92,6 +103,7 @@ export function useCaseReads(
       if (scope.signal.aborted) return;
       setSnapshot((previous) => ({
         accountId,
+        client,
         reads: { ...previous.reads, [key]: state(previous.reads[key]) },
       }));
     }
@@ -209,8 +221,10 @@ export function useCaseReads(
   }, [client, accountId]);
 
   const reads =
-    snapshot.accountId === accountId
-      ? snapshot.reads
-      : { caseInfo: snapshot.reads.caseInfo, pool: snapshot.reads.pool };
+    snapshot.client !== client
+      ? {}
+      : snapshot.accountId === accountId
+        ? snapshot.reads
+        : { caseInfo: snapshot.reads.caseInfo, pool: snapshot.reads.pool };
   return { reads, loading, refresh, afterMutation };
 }
