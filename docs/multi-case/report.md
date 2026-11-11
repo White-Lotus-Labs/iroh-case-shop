@@ -1,6 +1,6 @@
 # Iroh five-case implementation and Testnet report
 
-Prepared November 11, 2026. The local implementation is verified. Public Testnet still runs the original USDI-only Dragon Tea contract. Its bonus upgrade, four new cases and nine new mock deployments remain unsubmitted pending native funding. The user has approved the exact bounded batch once funded. No new case is claimed live.
+Prepared November 11, 2026. The approved Testnet deployment is partially executed: 2 of 90 steps are finalized and verified. Funding is sufficient. Remaining owner-dependent operations are blocked because the existing owner signer is unavailable to the CLI. No new case is claimed deployed or activated.
 
 ## Implemented collection
 
@@ -155,24 +155,41 @@ The final contract verification records before/after artifact hashes around all 
 
 At finalized block `277243023`, Dragon remains revision 13, unpaused, with 995.8 USDI available, 0.2 USDI vested fees, no pending liabilities and the original four completed openings. Historical payouts total 8 USDI. Existing live addresses are USDI `usdi-needmore-1-near.testnet`, case `cases-needmore-1-near.testnet`, and the three existing mock IDs listed above.
 
-The only new submitted transaction is the previously approved SHITZU storage registration: [9oNjXJASSDQgdu3vh4eZuZYMgkiW1fLpcnkaftEksvPq](https://testnet.nearblocks.io/txns/9oNjXJASSDQgdu3vh4eZuZYMgkiW1fLpcnkaftEksvPq). It used the dedicated case signer, 30 Tgas and exactly 0.00125 NEAR. Finalized receipt and storage verification passed. No new paid opening, migration, funding or unpause was submitted.
+The previously approved SHITZU registration remains finalized. The two additional registrations below also finalized in this execution. No account creation, deployment, migration, inventory funding, pause, unpause or paid opening has been submitted.
 
-## Approved bounded batch awaiting funding
+## Approved bounded batch and execution status
 
 The exact proposal is [deployment-batch.json](deployment-batch.json), SHA-256 `4cf07ab44a6dcf3f9aedf970c938808ec2bcb61e6e21fec959bf36d859db5cc9`. Its 90 transactions cover thirteen account creations, fourteen deployments or upgrades, twenty-eight storage registrations, twenty-nine inventory funding calls, Dragon pausing and five unpauses. Every account, public key, WASM checksum, initializer, migration argument, raw transfer amount, recipient, gas and deposit is specified. [Deployment review](deployment-review.md) and [individual command templates](deployment-commands.txt) describe sequencing and finalized preconditions.
 
 The maximum native expenditure is **91.705000000000000000000035 test NEAR**, including 73.035000000000000000000035 in attached deposits and 18.67 in maximum fees. New case USDI funding is exactly **1,000 USDI**, allocated 50/150/300/500. Bonus funding covers 100 possible payouts per candidate, including the original Dragon allocations.
 
-The owner currently has 24.108852052391552799199995 test NEAR and 1,004 USDI. Meeting the conservative batch ceiling requires at least **67.59614794760844720080004 additional test NEAR**. No unspecified faucet or funding transaction is included. The exact batch is approved once funded. No approval needs to be repeated if all approved parameters and fresh preconditions still match. Native funding remains insufficient, and no further transaction has been submitted. See [the approval record](approval.json) and [the fresh public preflight](approved-preflight.json).
+The fresh owner balance is 109.108852052391552799199995 test NEAR and 1004 USDI at block 277261953. It covers the approved ceiling. No top-up or new transaction approval is needed. The remaining blocker is availability of the existing owner signer, public key `ed25519:BntboZwnJtLVnBBh4XffXUDwbaygCsQiMmhWXD3xCi6`. The CLI found neither its dedicated Keychain item nor a legacy credential; the first account creation stopped before signing. Finalized checks still showed its target absent and the owner nonce unchanged.
 
 Case WASM SHA-256: `48e560f15ef75db48d82ab1d57ca119b752059d96c1157c897ce3dbf87b7c06e`. Mock WASM SHA-256: `faa2b5cd6957806b93b8c96067152e21ecda54bd63bb7cb5da385c5ebea6a630`. Exact binaries are archived under `artifacts/testnet/`. USDI is not upgraded.
 
 ## Remaining work that requires authorization or external state
 
-1. Fund the known owner account to the reviewed execution ceiling. Conditional approval for this exact batch is already recorded.
+1. Make the existing owner signer available through the trusted Keychain workflow or enable access to its existing browser wallet. Do not disclose private keys, passwords or seed phrases in chat. Existing account permissions will not be expanded.
 2. Execute its dependency chains, stopping affected operations if code, keys, revision, storage costs or finality differ from the reviewed conditions.
 3. Verify actual deployed code, all legacy records, inventories, receipts and unpaused quotes; only then update verified deployment status.
 4. Obtain separate bounded approval for any real user claim/opening not included in this batch and verify real HOT signing and new public Testnet payouts. No new case is currently represented as live.
+
+## Verified execution progress
+
+The approved Testnet deployment is partially executed: 2 of 90 steps are finalized and verified. Funding is sufficient. Remaining owner-dependent operations are blocked because the existing owner signer is unavailable to the CLI. No new case is claimed deployed or activated.
+
+- `dragon-register-RHEA`: [transaction `GCW9EVoGZ8uuZWvkvrMdoNcbrmAEngtDXFfJggUbXMoQ`](https://testnet.nearblocks.io/txns/GCW9EVoGZ8uuZWvkvrMdoNcbrmAEngtDXFfJggUbXMoQ), FINAL; fee 0.0002009044679782 test NEAR; storage deposit 0.00125 test NEAR.
+- `dragon-register-AURORA`: [transaction `5HsUXkbmwobiuCFqwPuRqLWDgmti2Sa7uQKvARQ1wANn`](https://testnet.nearblocks.io/txns/5HsUXkbmwobiuCFqwPuRqLWDgmti2Sa7uQKvARQ1wANn), FINAL; fee 0.0002004484679782 test NEAR; storage deposit 0.00125 test NEAR.
+
+This execution allocated 0.0025 test NEAR to token registration storage and burned 0.0004013529359564 test NEAR in actual transaction fees, a total native outflow of 0.0029013529359564 test NEAR from the dedicated case account. No new contract storage backing or inventory funding was allocated. The owner's native and USDI balances are unchanged by these case-signed registrations.
+
+16 Python executor unit tests passed after the two registrations; 14 existing Node deployment-helper tests passed. Re-running either already verified registration was checked to skip signing and submission without changing the journal. Full post-activation suites remain pending until the owner signer is available and deployment completes.
+
+At finalized block 277261953, Dragon's 995.8 USDI pool, 0.2 USDI vested fees, zero liabilities and four completed opening records remain intact. All thirteen proposed account names remain absent. SHITZU, RHEA and AURORA now all have the required Dragon storage registration.
+
+The transaction journal is [execution.json](execution.json), with append-only events in [execution-journal.jsonl](execution-journal.jsonl) and raw finalized receipt files alongside it. The approved manifest and its checksum remain unchanged. The executor refuses ambiguous resubmissions and will resume only from verified state.
+
+Google Chrome Computer Use was not approved, so the existing browser wallet could not be used as a fallback. No browser transaction was attempted. Real HOT Connect signing and new public payouts remain unverified.
 
 ## Commits and changed files
 
@@ -181,5 +198,6 @@ Branch: `codex/multi-case-testnet-expansion`. No merge, push, reset or history r
 - `72504b3b3533a71a1270b06c160ae5e0d187d7eb`: Add isolated configurable tea cases and verified fixed-supply mocks
 - `e864583e64b2e2cc8142de5723eca75ddf29441c`: Integrate five tea cases and verified paginated Shelf history
 - `03825cf5802f7b7fefd95d110fa71118206ef610`: Record bounded Testnet deployment proposal and complete verification evidence
+- `1e582f371494a15078f537e8e7a723e1ac53ed8d`: Pin conditional deployment approval and retain the funding gate
 
 Changed task files are listed in [changed-files.txt](changed-files.txt).

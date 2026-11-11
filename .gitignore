@@ -18,3 +18,5 @@ next-env.d.ts
 # Local Rust build artifacts; contract sources and Cargo.lock stay tracked.
 contracts/target/
 contracts/integration/target/
+__pycache__/
+docs/multi-case/execution.lock

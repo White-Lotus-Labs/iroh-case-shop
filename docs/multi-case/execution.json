@@ -1,0 +1,69 @@
+{
+  "manifest_sha256": "4cf07ab44a6dcf3f9aedf970c938808ec2bcb61e6e21fec959bf36d859db5cc9",
+  "native_budget_yocto": "91705000000000000000000035",
+  "initial_owner_balance_yocto": "109108852052391552799199995",
+  "steps": {
+    "token-BLACKDRAGON-create": {
+      "status": "blocked_signer",
+      "tx_hash": null,
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "blackdragon.needmore_1_near.testnet",
+      "actual_fee_yocto": "0",
+      "reason": "Owner existing Keychain signer absent. CLI stopped before signing; finalized target absent and owner key nonce unchanged.",
+      "verified_at": "2026-11-11T20:02:37.652850+00:00",
+      "owner_nonce": 276359394000011,
+      "before": {
+        "nonce": 276359394000011,
+        "target": {
+          "absent": true
+        },
+        "evidence": "Finalized owner nonce and absent target were checked after the unsigned CLI signer failure; see blocked_signer journal event."
+      }
+    },
+    "dragon-register-RHEA": {
+      "status": "verified",
+      "tx_hash": "GCW9EVoGZ8uuZWvkvrMdoNcbrmAEngtDXFfJggUbXMoQ",
+      "signer_id": "cases-needmore-1-near.testnet",
+      "receiver_id": "iroh-test-rhea.testnet",
+      "before": {
+        "block_height": 277261702,
+        "storage": null
+      },
+      "actual_fee_yocto": "200904467978200000000",
+      "verified_at": "2026-11-11T20:02:57.662044+00:00",
+      "after": {
+        "block_height": 277261738,
+        "storage": {
+          "total": "1250000000000000000000",
+          "available": "0"
+        }
+      },
+      "receipt_file": "docs/multi-case/receipt-dragon-register-RHEA.json"
+    },
+    "dragon-register-AURORA": {
+      "status": "verified",
+      "tx_hash": "5HsUXkbmwobiuCFqwPuRqLWDgmti2Sa7uQKvARQ1wANn",
+      "signer_id": "cases-needmore-1-near.testnet",
+      "receiver_id": "iroh-test-aurora.testnet",
+      "before": {
+        "block_height": 277261738,
+        "storage": null
+      },
+      "actual_fee_yocto": "200448467978200000000",
+      "verified_at": "2026-11-11T20:03:09.705664+00:00",
+      "after": {
+        "block_height": 277261760,
+        "storage": {
+          "total": "1250000000000000000000",
+          "available": "0"
+        }
+      },
+      "receipt_file": "docs/multi-case/receipt-dragon-register-AURORA.json"
+    }
+  },
+  "status": "blocked_owner_signer",
+  "verified_steps": 2,
+  "remaining_steps": 88,
+  "actual_fees_yocto": "401352935956400000000",
+  "storage_deposits_yocto": "2500000000000000000000"
+}

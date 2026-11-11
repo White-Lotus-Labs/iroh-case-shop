@@ -20,4 +20,4 @@ Architecture and constraints: see design.md and the user's full roadmap. Local d
 
 Review focus: cross-case nonce collisions; stale reads/signatures after selection; repeat callbacks and in-flight transfers; insufficient token inventory; public state or code drift after preparation.
 
-All authorized local steps are complete. The exact bounded Testnet batch remains unsubmitted and blocked on owner native funding. Conditional approval for the exact batch is recorded in approval.json. Public deployment and real HOT opening verification are not marked complete.
+All authorized local steps are complete. The exact bounded Testnet batch is funded and approved. Two independent Dragon storage registrations are verified; the remaining owner-dependent operations are blocked by the unavailable existing owner Keychain signer. Current status is recorded in execution.json. Public deployment and real HOT opening verification are not marked complete.

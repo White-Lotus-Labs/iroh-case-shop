@@ -7,9 +7,11 @@ ROOT = Path(__file__).resolve().parents[2]
 
 def units(raw, decimals=6):
     value = int(raw)
+    sign = '-' if value < 0 else ''
+    value = abs(value)
     scale = 10 ** decimals
     fraction = str(value % scale).rjust(decimals, '0').rstrip('0')
-    return str(value // scale) + ('.' + fraction if fraction else '')
+    return sign + str(value // scale) + ('.' + fraction if fraction else '')
 
 
 def main():
@@ -26,6 +28,10 @@ def main():
     approval = json.loads(approval_path.read_text()) if approval_path.exists() else None
     if approval and approval['batchSha256'] != digest:
         raise RuntimeError('Approval does not match the exact deployment batch')
+    execution_path = ROOT / 'docs/multi-case/execution.json'
+    execution = json.loads(execution_path.read_text()) if execution_path.exists() else None
+    if execution and execution['manifest_sha256'] != digest:
+        raise RuntimeError('Execution journal does not match the approved batch')
     lines = [
         '# Iroh five-case implementation and Testnet report', '',
         'Prepared November 11, 2026. The local implementation is verified. Public Testnet still runs the original USDI-only Dragon Tea contract. Its bonus upgrade, four new cases and nine new mock deployments remain unsubmitted pending the bounded approval and native funding described below. No new case is claimed live.', '',
@@ -104,6 +110,33 @@ def main():
         report = report.replace('1. Fund the known owner account to the reviewed execution ceiling and approve the exact bounded batch.',
             '1. Fund the known owner account to the reviewed execution ceiling. Conditional approval for this exact batch is already recorded.')
         report = report.replace('4. Obtain bounded approval for any real user claim/opening', '4. Obtain separate bounded approval for any real user claim/opening')
+    if execution:
+        current = load('docs/multi-case/execution-preflight.json')
+        verified = [(step_id, record) for step_id, record in execution['steps'].items() if record['status'] == 'verified']
+        fees = sum(int(record.get('actual_fee_yocto', 0)) for _, record in verified)
+        steps = {step['id']: step for step in batch['steps']}
+        deposits = sum(int(action.get('deposit', 0)) for step_id, _ in verified for action in steps[step_id]['actions'])
+        intro = f"The approved Testnet deployment is partially executed: {len(verified)} of {len(batch['steps'])} steps are finalized and verified. Funding is sufficient. Remaining owner-dependent operations are blocked because the existing owner signer is unavailable to the CLI. No new case is claimed deployed or activated."
+        paragraphs = report.split('\n')
+        for i, paragraph in enumerate(paragraphs):
+            if paragraph.startswith('Prepared November 11, 2026.'):
+                paragraphs[i] = 'Prepared November 11, 2026. ' + intro
+            elif paragraph.startswith('The owner currently has '):
+                paragraphs[i] = f"The fresh owner balance is {units(current['owner']['amount'], 24)} test NEAR and {units(current['owner_usdi'])} USDI at block {current['block_height']}. It covers the approved ceiling. No top-up or new transaction approval is needed. The remaining blocker is availability of the existing owner signer, public key `ed25519:BntboZwnJtLVnBBh4XffXUDwbaygCsQiMmhWXD3xCi6`. The CLI found neither its dedicated Keychain item nor a legacy credential; the first account creation stopped before signing. Finalized checks still showed its target absent and the owner nonce unchanged."
+            elif paragraph.startswith('The only new submitted transaction is '):
+                paragraphs[i] = 'The previously approved SHITZU registration remains finalized. The two additional registrations below also finalized in this execution. No account creation, deployment, migration, inventory funding, pause, unpause or paid opening has been submitted.'
+            elif paragraph.startswith('1. Fund the known owner account '):
+                paragraphs[i] = '1. Make the existing owner signer available through the trusted Keychain workflow or enable access to its existing browser wallet. Do not disclose private keys, passwords or seed phrases in chat. Existing account permissions will not be expanded.'
+        report = '\n'.join(paragraphs).replace('## Approved bounded batch awaiting funding', '## Approved bounded batch and execution status')
+        progress = ['## Verified execution progress', '', intro, '']
+        for step_id, record in verified:
+            progress.append(f"- `{step_id}`: [transaction `{record['tx_hash']}`](https://testnet.nearblocks.io/txns/{record['tx_hash']}), FINAL; fee {units(record['actual_fee_yocto'], 24)} test NEAR; storage deposit 0.00125 test NEAR.")
+        progress += ['', f"This execution allocated {units(deposits, 24)} test NEAR to token registration storage and burned {units(fees, 24)} test NEAR in actual transaction fees, a total native outflow of {units(deposits + fees, 24)} test NEAR from the dedicated case account. No new contract storage backing or inventory funding was allocated. The owner's native and USDI balances are unchanged by these case-signed registrations.", '',
+            verify['executionHelper'], '',
+            f"At finalized block {current['block_height']}, Dragon's 995.8 USDI pool, 0.2 USDI vested fees, zero liabilities and four completed opening records remain intact. All thirteen proposed account names remain absent. SHITZU, RHEA and AURORA now all have the required Dragon storage registration.", '',
+            'The transaction journal is [execution.json](execution.json), with append-only events in [execution-journal.jsonl](execution-journal.jsonl) and raw finalized receipt files alongside it. The approved manifest and its checksum remain unchanged. The executor refuses ambiguous resubmissions and will resume only from verified state.', '',
+            'Google Chrome Computer Use was not approved, so the existing browser wallet could not be used as a fallback. No browser transaction was attempted. Real HOT Connect signing and new public payouts remain unverified.', '']
+        report = report.replace('## Commits and changed files', '\n'.join(progress) + '\n## Commits and changed files')
     (ROOT / 'docs/multi-case/report.md').write_text(report)
 
 

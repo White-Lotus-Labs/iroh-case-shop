@@ -1,6 +1,6 @@
 # Bounded Testnet deployment review
 
-The user approved the exact batch with SHA-256 `4cf07ab44a6dcf3f9aedf970c938808ec2bcb61e6e21fec959bf36d859db5cc9` once funded. The approval record is `approval.json`. The batch remains unsubmitted because the owner native balance is below the reviewed ceiling. The separately authorized SHITZU registration is already finalized. The manifest bytes remain unchanged.
+The user approved the exact batch with SHA-256 `4cf07ab44a6dcf3f9aedf970c938808ec2bcb61e6e21fec959bf36d859db5cc9` once funded. The approval record is `approval.json`. Funding is now sufficient at 109.108852 test NEAR. Two independent Dragon storage registrations are finalized; the remaining owner-dependent steps are blocked because the existing owner signer is unavailable to the CLI. The separately authorized SHITZU registration is already finalized. The manifest bytes remain unchanged.
 
 The exact machine-readable proposal is `deployment-batch.json`. `deployment-batch.sha256` pins its serialized bytes. Rebuild with `node scripts/multi-case/prepare-batch.mjs` only when source, keys, artifacts and the latest public preflight are final. Any change to the reviewed JSON requires reviewing its new checksum. The generator never signs, retrieves secrets or sends transactions. `deployment-commands.txt` contains individual CLI templates, not a runnable deployment script.
 
@@ -26,7 +26,7 @@ Pause Dragon at its reviewed revision, record a fresh raw-state and balance snap
 
 The manifest gives exact deposits, prepaid gas, a gas-price ceiling of 1,000,000,000 yoctoNEAR per gas, and a separate maximum 0.1 NEAR protocol action-fee allowance per transaction. Re-estimate protocol action fees before signing and stop if this allowance would be exceeded. Its aggregate ceiling conservatively adds all deposits and all signer fees; fees on newly funded accounts therefore have extra budget margin. Attached account funding remains on the dedicated contract accounts.
 
-The finalized owner snapshot currently has about 24.1089 test NEAR and 1,004 USDI. The entire proposed batch exceeds that native balance. The exact additional amount under the conservative ceiling appears in `readiness.blockers`. Execution requires sufficient native funds first; do not add an unspecified faucet or funding operation to this authorization. The batch consumes 1,000 existing USDI and the explicitly listed mock quantities.
+The original preparation snapshot had about 24.1089 test NEAR and 1,004 USDI. The fresh execution snapshot has 109.108852 test NEAR, which covers the reviewed ceiling. The immutable manifest retains its historical preparation-time funding flag; current funding and execution status are recorded separately in `execution-preflight.json` and `execution.json`. No unspecified faucet or funding operation is added to this authorization. The batch consumes 1,000 existing USDI and the explicitly listed mock quantities.
 
 After approval, execute only the exact included actions in dependency order, checking finalized results after each. Stop the affected chain on changed code, keys, revision, storage bounds, funding amount, unresolved transfers or ambiguous finality. Never blindly resubmit. Independent preparation remains safe while approval or funding is pending.
 

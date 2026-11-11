@@ -22,14 +22,23 @@
     {
       "hash": "03825cf5802f7b7fefd95d110fa71118206ef610",
       "subject": "Record bounded Testnet deployment proposal and complete verification evidence"
+    },
+    {
+      "hash": "1e582f371494a15078f537e8e7a723e1ac53ed8d",
+      "subject": "Pin conditional deployment approval and retain the funding gate"
     }
   ],
   "noMainnetTransactions": true,
   "newPublicStateChanges": [
-    "Previously approved SHITZU storage registration only"
+    "Previously approved SHITZU storage registration",
+    "Approved Dragon RHEA storage registration GCW9EVoGZ8uuZWvkvrMdoNcbrmAEngtDXFfJggUbXMoQ",
+    "Approved Dragon AURORA storage registration 5HsUXkbmwobiuCFqwPuRqLWDgmti2Sa7uQKvARQ1wANn"
   ],
-  "newCasePublicDeployment": "Exact batch conditionally approved once funded; not submitted because the owner native balance remains below the reviewed ceiling.",
+  "newCasePublicDeployment": "Funding is sufficient. Two of ninety approved steps are verified; remaining owner-dependent steps are blocked by the unavailable existing owner Keychain signer.",
   "independentReviewer": "gpt-6-astra",
   "unresolvedCodeFindings": [],
-  "approvalRecord": "docs/multi-case/approval.json"
+  "approvalRecord": "docs/multi-case/approval.json",
+  "executionJournal": "docs/multi-case/execution.json",
+  "postActivationTests": "Full post-activation suite awaits completion of deployment; prior implementation verification remains recorded above.",
+  "executionHelper": "16 Python executor unit tests passed after the two registrations; 14 existing Node deployment-helper tests passed. Re-running either already verified registration was checked to skip signing and submission without changing the journal. Full post-activation suites remain pending until the owner signer is available and deployment completes."
 }

@@ -1,3 +1,4 @@
+.gitignore
 artifacts/testnet/iroh_case_pool-48e560f15ef75db48d82ab1d57ca119b752059d96c1157c897ce3dbf87b7c06e.wasm
 artifacts/testnet/iroh_mock_token-faa2b5cd6957806b93b8c96067152e21ecda54bd63bb7cb5da385c5ebea6a630.wasm
 artifacts/testnet/iroh_usdi-1d7dadcfacdb79ec66c0990c74cc0089b5ee2acce0409937637d6eaefed2b343.wasm
@@ -38,6 +39,7 @@ docs/multi-case/evidence/contract-artifacts-after.txt
 docs/multi-case/evidence/contract-artifacts-before.txt
 docs/multi-case/evidence/deployment-tests.log
 docs/multi-case/evidence/details-1366.png
+docs/multi-case/evidence/executor-tests.log
 docs/multi-case/evidence/indexer-live.json
 docs/multi-case/evidence/legacy-token-metadata.json
 docs/multi-case/evidence/production-build.log
@@ -48,15 +50,22 @@ docs/multi-case/evidence/sandbox-migration.log
 docs/multi-case/evidence/simulation.log
 docs/multi-case/evidence/typecheck.log
 docs/multi-case/evidence/vitest.log
+docs/multi-case/execution-journal.jsonl
+docs/multi-case/execution-preflight.json
+docs/multi-case/execution.json
+docs/multi-case/executor-review.md
 docs/multi-case/implementation-plan.md
 docs/multi-case/live-preflight.json
 docs/multi-case/post-shitzu-preflight.json
+docs/multi-case/receipt-dragon-register-AURORA.json
+docs/multi-case/receipt-dragon-register-RHEA.json
 docs/multi-case/report.md
 docs/multi-case/review.md
 docs/multi-case/shitzu-registration.json
 docs/multi-case/verification.json
 docs/token-identities.md
 scripts/contracts.sh
+scripts/multi-case/execute-approved.py
 scripts/multi-case/preflight.py
 scripts/multi-case/prepare-batch.mjs
 scripts/multi-case/verify-contracts.sh
@@ -94,4 +103,5 @@ tests/browser/wallet-history.spec.ts
 tests/case-indexer.test.ts
 tests/multi-case-deployment.test.mjs
 tests/multi-case.test.ts
+tests/test_execution.py
 tests/token-registry.test.ts

@@ -8,14 +8,18 @@
     "Fresh public code, keys, revision, storage and balance preconditions match",
     "Only the exact approved actions; stop affected chain on material drift"
   ],
-  "submittedTransactions": [],
-  "status": "approved_pending_funding",
-  "lastCheckedAt": "2026-11-11T18:56:29.915301+00:00",
-  "lastCheckedBlockHeight": 277254833,
+  "submittedTransactions": [
+    "GCW9EVoGZ8uuZWvkvrMdoNcbrmAEngtDXFfJggUbXMoQ",
+    "5HsUXkbmwobiuCFqwPuRqLWDgmti2Sa7uQKvARQ1wANn"
+  ],
+  "status": "approved_funded_blocked_owner_signer",
+  "lastCheckedAt": "2026-11-11T20:15:22.185447+00:00",
+  "lastCheckedBlockHeight": 277261953,
   "funding": {
-    "balanceYocto": "24108852052391552799199995",
+    "balanceYocto": "109108852052391552799199995",
     "requiredYocto": "91705000000000000000000035",
-    "shortfallYocto": "67596147947608447200800040"
+    "shortfallYocto": "0"
   },
-  "otherPublicPreconditions": "matched"
+  "otherPublicPreconditions": "matched",
+  "blocker": "Existing owner Keychain signer unavailable; owner creation stopped before signing; Chrome Computer Use not approved."
 }

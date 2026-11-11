@@ -1,17 +1,17 @@
-✔ an approved batch cannot be replaced by a changed generated proposal (0.584417ms)
-✔ bounded manifest preserves Dragon economics and specifies every new deployment (1.464875ms)
-✔ every budget covers exact deposits and token transfers without mock dollar valuations (0.498541ms)
-✔ rejects a different chain or substituted deployment key (0.202833ms)
-✔ prepared commands keep owner signing unsigned and quote apostrophes safely (0.699875ms)
-✔ unsafe pending Dragon state blocks the upgrade and retains paused verification gates (0.460459ms)
-✔ funds each token inventory with exactly 100 potential bonuses and correct decimals (0.17525ms)
-✔ refuses changed Dragon bonus ordering, extra signer keys and invalid base58 key length (0.512209ms)
-✔ marks allocation above a new token fixed supply as not ready (0.248ms)
-✔ refuses changed deployed USDI or legacy mock code before proposing transfers (0.135834ms)
-✔ duplicate Meteor connections are usable only when every entry matches the approved signer (0.515209ms)
-✔ the approved request creates and funds USDI only with the reviewed key and initializer (3.012875ms)
-✔ fees match the saved live protocol estimate and stop above the approved ceiling (0.580917ms)
-✔ missing wallet outcomes never become a successful transaction hash (0.137625ms)
+✔ an approved batch cannot be replaced by a changed generated proposal (0.481125ms)
+✔ bounded manifest preserves Dragon economics and specifies every new deployment (1.447209ms)
+✔ every budget covers exact deposits and token transfers without mock dollar valuations (0.486875ms)
+✔ rejects a different chain or substituted deployment key (0.200542ms)
+✔ prepared commands keep owner signing unsigned and quote apostrophes safely (0.735209ms)
+✔ unsafe pending Dragon state blocks the upgrade and retains paused verification gates (0.280292ms)
+✔ funds each token inventory with exactly 100 potential bonuses and correct decimals (0.176208ms)
+✔ refuses changed Dragon bonus ordering, extra signer keys and invalid base58 key length (0.511875ms)
+✔ marks allocation above a new token fixed supply as not ready (0.248708ms)
+✔ refuses changed deployed USDI or legacy mock code before proposing transfers (0.136ms)
+✔ duplicate Meteor connections are usable only when every entry matches the approved signer (0.313917ms)
+✔ the approved request creates and funds USDI only with the reviewed key and initializer (2.593542ms)
+✔ fees match the saved live protocol estimate and stop above the approved ceiling (0.772791ms)
+✔ missing wallet outcomes never become a successful transaction hash (0.127291ms)
 ℹ tests 14
 ℹ suites 0
 ℹ pass 14
@@ -19,4 +19,4 @@
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 39.515708
+ℹ duration_ms 40.472416
