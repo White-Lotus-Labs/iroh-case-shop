@@ -1,0 +1,9 @@
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.41s
+     Running `integration/target/debug/iroh-sandbox-integration`
+PASS genuine receipt pipeline: opening "0", reward 1000000 units
+PASS full refunds and forged-token authorization on local receipts
+PASS 4 completed real openings across 2 accounts; supply, reward and fee conservation
+PASS concurrent genuine payments: one accepted, one stale quote fully refunded; 5 completed openings total
+PASS actual payout failure after atomic FT unregistration: funded Claimable reward, permanent faucet marker, and same-draw attempt2 retry; 6 completed openings total
+PASS local mock inventory funding and parallel USDI plus bonus payout
+LOCAL SANDBOX ONLY: no public deployment or public-network wallet signatures performed

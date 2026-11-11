@@ -1,0 +1,38 @@
+{
+  "network": "testnet",
+  "included": 12,
+  "excluded": 4,
+  "readOnly": true,
+  "results": [
+    {
+      "asset": "SHITZU",
+      "accountId": "iroh-test-shitzu.testnet",
+      "blockHeight": 277209650,
+      "symbol": "SHITZU",
+      "decimals": 6,
+      "ok": true,
+      "totalSupplyRaw": "100000000000",
+      "inventoryBalanceRaw": "100000000000"
+    },
+    {
+      "asset": "RHEA",
+      "accountId": "iroh-test-rhea.testnet",
+      "blockHeight": 277209650,
+      "symbol": "RHEA",
+      "decimals": 6,
+      "ok": true,
+      "totalSupplyRaw": "100000000000",
+      "inventoryBalanceRaw": "100000000000"
+    },
+    {
+      "asset": "AURORA",
+      "accountId": "iroh-test-aurora.testnet",
+      "blockHeight": 277209650,
+      "symbol": "AURORA",
+      "decimals": 6,
+      "ok": true,
+      "totalSupplyRaw": "100000000000",
+      "inventoryBalanceRaw": "100000000000"
+    }
+  ]
+}

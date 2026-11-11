@@ -1,0 +1,104 @@
+{
+  "network": "testnet",
+  "included": 12,
+  "excluded": 4,
+  "readOnly": true,
+  "results": [
+    {
+      "asset": "SHITZU",
+      "accountId": "token.0xshitzu.near",
+      "blockHeight": 224059414,
+      "symbol": "SHITZU",
+      "decimals": 18,
+      "ok": true
+    },
+    {
+      "asset": "RHEA",
+      "accountId": "token.rhealab.near",
+      "blockHeight": 224059414,
+      "symbol": "RHEA",
+      "decimals": 18,
+      "ok": true
+    },
+    {
+      "asset": "AURORA",
+      "accountId": "aaaaaa20d9e0e2461697782ef11675f668207961.factory.bridge.near",
+      "blockHeight": 224059414,
+      "symbol": "AURORA",
+      "decimals": 18,
+      "ok": true
+    },
+    {
+      "asset": "BLACKDRAGON",
+      "accountId": "blackdragon.tkn.near",
+      "blockHeight": 224059414,
+      "symbol": "BLACKDRAGON",
+      "decimals": 24,
+      "ok": true
+    },
+    {
+      "asset": "NEKO",
+      "accountId": "ftv2.nekotoken.near",
+      "blockHeight": 224059418,
+      "symbol": "NEKO",
+      "decimals": 24,
+      "ok": true
+    },
+    {
+      "asset": "MPDAO",
+      "accountId": "mpdao-token.near",
+      "blockHeight": 224059418,
+      "symbol": "mpDAO",
+      "decimals": 6,
+      "ok": true
+    },
+    {
+      "asset": "GEAR",
+      "accountId": "gear.enleap.near",
+      "blockHeight": 224059418,
+      "symbol": "GEAR",
+      "decimals": 18,
+      "ok": true
+    },
+    {
+      "asset": "PURGE",
+      "accountId": "purge-558.meme-cooking.near",
+      "blockHeight": 224059418,
+      "symbol": "PURGE",
+      "decimals": 18,
+      "ok": true
+    },
+    {
+      "asset": "WNEAR",
+      "accountId": "wrap.near",
+      "blockHeight": 224059423,
+      "symbol": "wNEAR",
+      "decimals": 24,
+      "ok": true
+    },
+    {
+      "asset": "STNEAR",
+      "accountId": "meta-pool.near",
+      "blockHeight": 224059422,
+      "symbol": "STNEAR",
+      "decimals": 24,
+      "ok": true
+    },
+    {
+      "asset": "LINEAR",
+      "accountId": "linear-protocol.near",
+      "blockHeight": 224059423,
+      "symbol": "LINEAR",
+      "decimals": 24,
+      "ok": true
+    },
+    {
+      "asset": "RNEAR",
+      "accountId": "lst.rhealab.near",
+      "blockHeight": 224059423,
+      "symbol": "rNEAR",
+      "decimals": 24,
+      "ok": true
+    }
+  ]
+}

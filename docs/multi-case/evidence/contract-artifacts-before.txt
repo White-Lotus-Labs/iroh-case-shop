@@ -1,0 +1,3 @@
+48e560f15ef75db48d82ab1d57ca119b752059d96c1157c897ce3dbf87b7c06e  contracts/target/wasm32-unknown-unknown/release/iroh_case_pool.wasm
+faa2b5cd6957806b93b8c96067152e21ecda54bd63bb7cb5da385c5ebea6a630  contracts/target/wasm32-unknown-unknown/release/iroh_mock_token.wasm
+1d7dadcfacdb79ec66c0990c74cc0089b5ee2acce0409937637d6eaefed2b343  contracts/target/wasm32-unknown-unknown/release/iroh_usdi.wasm

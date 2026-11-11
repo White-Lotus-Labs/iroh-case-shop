@@ -1,0 +1,97 @@
+"""Render the consolidated report from recorded verification and registries."""
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+
+
+def units(raw, decimals=6):
+    value = int(raw)
+    scale = 10 ** decimals
+    fraction = str(value % scale).rjust(decimals, '0').rstrip('0')
+    return str(value // scale) + ('.' + fraction if fraction else '')
+
+
+def main():
+    load = lambda path: json.loads((ROOT / path).read_text())
+    catalog = load('config/cases.testnet.json')
+    tokens = load('config/tokens.testnet.json')
+    batch = load('docs/multi-case/deployment-batch.json')
+    live = load('docs/multi-case/live-preflight.json')
+    verify = load('docs/multi-case/verification.json')
+    simulation = load('docs/multi-case-simulation.json')
+    by_case = {c['case_id']: c for c in simulation['cases']}
+    digest = (ROOT / 'docs/multi-case/deployment-batch.sha256').read_text().strip()
+    lines = [
+        '# Iroh five-case implementation and Testnet report', '',
+        'Prepared November 11, 2026. The local implementation is verified. Public Testnet still runs the original USDI-only Dragon Tea contract. Its bonus upgrade, four new cases and nine new mock deployments remain unsubmitted pending the bounded approval and native funding described below. No new case is claimed live.', '',
+        '## Implemented collection', '',
+        'All cases stay inside Host → Tea Cases in the existing 3D tea house and animated parchment. Planned cases have exact configured reward previews and disabled signing. Deployed cases read live prices, quotes, balances, inventory and settlement state. The reel displays a validated recorded result. Case selection, refresh recovery, independent read failures, wallet finality and return navigation are covered by tests.', '',
+    ]
+    for case in catalog['cases']:
+        config = case['config']
+        economy = config['economy']
+        result = by_case[case['id']]
+        lines += [f"### {case['name']}", '',
+            f"Price {units(economy['price'])} USDI. Common/Rare/Legendary USDI payouts are "
+            + ' / '.join(units(r) for r in economy['rewards'])
+            + f". Target available liquidity is {units(economy['target'])} USDI. Maximum USDI exposure per admitted opening is {units(economy['rewards'][2])} USDI.", '',
+            f"Contract `{case['contractId']}`. Status: " + ('existing live USDI case; bonus activation pending' if case['id'] == 'dragon-tea' else 'proposed, not deployed') + '.', '',
+            'Bonus quantities by tier:', '']
+        for tier, name in enumerate(['Common', 'Rare', 'Legendary']):
+            rewards = [r for r in config['bonus_rewards'] if r['tier'] == tier]
+            text = ', '.join(f"{units(r['amount'], r['token_decimals'])} {r['token_symbol']}" for r in rewards)
+            lines.append(f'- {name}: {text}.')
+        lines += ['', 'The tier has a 50% bonus chance. When several candidates share a tier, one is selected uniformly, so each has conditional probability `1/(2k)` for `k` candidates. All bonus quantities are unofficial mocks with no USD valuation.', '',
+            'At target liquidity, Common/Rare/Legendary probability counts are `'
+            + ' / '.join(str(p) for p in result['target_probabilities'])
+            + '` out of `1,000,000`. These are reference values, not a quote for current public liquidity.', '']
+    lines += ['## Token identities and deployment status', '',
+        'USDI remains the payment and base reward token with six decimals. Twelve bonus mocks are supported. The existing SHITZU, RHEA and AURORA deployments retain six decimals, even where canonical Mainnet tokens have different precision. New mocks use the verified precision below. Every mock has a fixed initial supply of 100,000 whole units and no post-initialization mint method.', '']
+    for token in tokens['tokens']:
+        if token['selection'] == 'included':
+            lines.append(f"- {token['symbol']}: {token['decimals']} decimals, `{token['contractId']}`, {token['status']}.")
+    lines += ['', 'wNEAR, STNEAR, LINEAR and rNEAR mocks do not wrap, stake, redeem, produce yield or carry backing. META is excluded as deprecated, SWEAT because of its announced sunset, and LONK/UWON because current primary-source identity could not be adequately established. [Token research](../token-identities.md) records exact canonical IDs, primary sources, metadata snapshots, duplicate-symbol risks and exclusion reasons.', '',
+        'Thirteen distinct dedicated keys were generated directly into macOS Keychain for the nine token and four case accounts. Only public key records are stored in the repository. Existing account permissions were not changed. Account FullAccess keys retain the protocol ability to replace code, even though the token contract exposes no admin mint method.', '',
+        '## Probability definitions and solvency', '',
+        'Let `D=1,000,000`, `A=pool-reserved`, opening price `P`, target liquidity `T`, and USDI rewards `r0<r1<r2`. Each exact payment puts `19P/20` in the pool and `P/20` in pending fees. Configured prices are divisible by 20 base units.', '',
+        'New cases interpolate a floored target EV `E(A)` and Legendary probability count `L(A)` over pool intervals `[0,T]` and `[T,2T]`, then hold them constant. EV endpoints in basis points of price are Bamboo `7000/9500/11500`, Moon `5000/9500/16000`, Phoenix `4000/9500/18000`, Reserve `6500/9500/16500`. Legendary counts at the same endpoints are Bamboo `1000/15000/30000`, Moon `5000/40000/100000`, Phoenix `2000/30000/70000`, Reserve `3000/45000/85000`.', '',
+        'The solver is `R=floor((D*E-D*r0-(r2-r0)*L)/(r1-r0))`, `C=D-R-L`. Actual EV is `(r0*C+r1*R+r2*L)/D`. Configuration validation proves positive normalized counts over both intervals with a rounding margin and bounded u128 arithmetic. At target liquidity, target EV is exactly 95% of price before Rare flooring.', '',
+        "Dragon's function is preserved exactly: `B=min(A,2000000000)`, `E=clamp(450000+floor(B/2000),600000,1400000)`, `L=clamp(saturating_sub(floor(B/10000),50000),10000,150000)`, followed by the same normalization solver with Dragon's rewards. All amounts here are USDI base units.", '',
+        'Admission requires enough available USDI to reserve the maximum payout before counting the incoming contribution. It also reserves every possible bonus candidate. Selection releases unused reserves; successful callbacks subtract matching funds and liabilities, while failed legs retain both. Only unpaid legs can be retried. Fees vest only when all selected legs settle. Each account physically isolates its pool and inventory.', '',
+        'The deterministic simulation ran 25,000,000 attempted openings across empty, minimum, low, target and excess liquidity, plus maximum-payout streaks, concurrent reservations, failed callbacks and bonus depletion. Exact conservation and safe admission stops passed. [The mathematical report](../multi-case-economics.md) supplies the rounding proof, bounds and maximum exposure analysis; [simulation data](../multi-case-simulation.json) records every scenario.', '',
+        '## Randomness and security', '',
+        'The contract uses NEAR protocol randomness in a later receipt, with account/opening/accepted-height hashing and rejection sampling. Separate domains select bonus presence and candidate. A recorded draw is immutable; retry and duplicate callbacks cannot redraw or settle twice. Validator influence, receipt timing, censorship and undrawn-opening scheduling remain assumptions. This is not claimed to be an adversarially fair application VRF. [The randomness analysis](../multi-case-randomness.md) documents the exact rejection and recovery limits.', '',
+        'Independent review by gpt-6-astra found no blocking contract accounting or cross-case settlement defect. It found two deployment-preparation defects, acceptance of reordered Dragon tokens and extra Dragon keys. Both are fixed with regression tests. Base58 byte-length validation and new-token funding bounds were tightened too. The indexer received a separate review with no actionable finding. This review is not a public-chain deployment or a real HOT wallet test.', '',
+        '## Shelf history', '',
+        'The Shelf aggregates finalized records by case contract, case ID and nonce. Details displays case identity, price, tier, reward, settlement state, contract and transaction information where available. Paginated history can load the full per-account opening chain after upgrade; the current V1 API returns the latest 20. Locally saved verified receipts remain bounded to 60 per deployment and browser. Missing hashes remain unavailable.', '',
+        'Wallet references use the read-only NearBlocks v3 proxy with cursor pagination. They remain labeled unverified until Details checks the transaction, complete finalized receipt graph, inclusion block and successful NEP-141 event executors through RPC. Historical reads have a fixed archival fallback. Public evidence loaded 10+7 distinct references and verified the original Dragon opening transaction through 12 receipt outcomes, including the real USDI purchase and payout. Indexer coverage can be delayed or omit incoming interactions. This is not a claim of a complete wallet-to-wallet ledger. [Indexer evidence and limits](../multi-case-indexer.md) explain the boundary. The trader board remains accessible.', '',
+        '## Verification results', '']
+    for key in ['rust', 'vitest', 'deployment', 'browserDevelopment', 'browserProduction', 'typecheck', 'productionBuild', 'sandbox', 'simulation']:
+        lines.append(f"- {verify[key]}")
+    lines += ['', verify['priorFailures']]
+    lines += ['', 'Browser wallet and mutation coverage uses fixture signing and RPC responses. Sandbox uses real local NEP-141 receipts. Neither establishes real HOT Connect signing on public Testnet. Full browser tests run with development camera diagnostics; the production subset covers cases, wallets, roulette and Shelf. The deleted optional account page was restored from its previous implementation after the full suite exposed its broken documented link. Production session cookies remain secure.', '',
+        'The final contract verification records before/after artifact hashes around all Rust, Sandbox and simulation steps. [Evidence files](evidence/) include the logs, public-chain snapshots, live indexer verification and visual inspection screenshots.', '',
+        '## Public Testnet state and authorized action', '',
+        f"At finalized block `{live['block_height']}`, Dragon remains revision 13, unpaused, with 995.8 USDI available, 0.2 USDI vested fees, no pending liabilities and the original four completed openings. Historical payouts total 8 USDI. Existing live addresses are USDI `usdi-needmore-1-near.testnet`, case `cases-needmore-1-near.testnet`, and the three existing mock IDs listed above.", '',
+        'The only new submitted transaction is the previously approved SHITZU storage registration: [9oNjXJASSDQgdu3vh4eZuZYMgkiW1fLpcnkaftEksvPq](https://testnet.nearblocks.io/txns/9oNjXJASSDQgdu3vh4eZuZYMgkiW1fLpcnkaftEksvPq). It used the dedicated case signer, 30 Tgas and exactly 0.00125 NEAR. Finalized receipt and storage verification passed. No new paid opening, migration, funding or unpause was submitted.', '',
+        '## Bounded batch requiring approval', '',
+        f"The exact proposal is [deployment-batch.json](deployment-batch.json), SHA-256 `{digest}`. Its 90 transactions cover thirteen account creations, fourteen deployments or upgrades, twenty-eight storage registrations, twenty-nine inventory funding calls, Dragon pausing and five unpauses. Every account, public key, WASM checksum, initializer, migration argument, raw transfer amount, recipient, gas and deposit is specified. [Deployment review](deployment-review.md) and [individual command templates](deployment-commands.txt) describe sequencing and finalized preconditions.", '',
+        f"The maximum native expenditure is **{units(batch['budget']['maximumNativeExpenditureYocto'], 24)} test NEAR**, including {units(batch['budget']['attachedDepositsYocto'], 24)} in attached deposits and {units(batch['budget']['maximumFeesYocto'], 24)} in maximum fees. New case USDI funding is exactly **1,000 USDI**, allocated 50/150/300/500. Bonus funding covers 100 possible payouts per candidate, including the original Dragon allocations.", '',
+        f"The owner currently has {units(live['owner']['amount'], 24)} test NEAR and 1,004 USDI. Meeting the conservative batch ceiling requires at least **{units(int(batch['budget']['maximumNativeExpenditureYocto']) - int(live['owner']['amount']), 24)} additional test NEAR**. No unspecified faucet or funding transaction is included. The batch is unapproved and not ready for execution until approval and adequate native funds exist.", '',
+        'Case WASM SHA-256: `' + batch['artifacts']['case']['sha256'] + '`. Mock WASM SHA-256: `' + batch['artifacts']['mock']['sha256'] + '`. Exact binaries are archived under `artifacts/testnet/`. USDI is not upgraded.', '',
+        '## Remaining work that requires authorization or external state', '',
+        '1. Fund the known owner account to the reviewed execution ceiling and approve the exact bounded batch.',
+        '2. Execute its dependency chains, stopping affected operations if code, keys, revision, storage costs or finality differ from the reviewed conditions.',
+        '3. Verify actual deployed code, all legacy records, inventories, receipts and unpaused quotes; only then update verified deployment status.',
+        '4. Obtain bounded approval for any real user claim/opening not included in this batch and verify real HOT signing and new public Testnet payouts. No new case is currently represented as live.', '',
+        '## Commits and changed files', '',
+        'Branch: `codex/multi-case-testnet-expansion`. No merge, push, reset or history rewrite was performed. Pre-existing unrelated working changes were preserved.', '']
+    for commit in verify.get('commits', []):
+        lines.append(f"- `{commit['hash']}`: {commit['subject']}")
+    lines += ['', 'Changed task files are listed in [changed-files.txt](changed-files.txt).', '']
+    (ROOT / 'docs/multi-case/report.md').write_text('\n'.join(lines))
+
+
+if __name__ == '__main__':
+    main()

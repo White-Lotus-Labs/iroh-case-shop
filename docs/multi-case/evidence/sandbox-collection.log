@@ -1,0 +1,10 @@
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.47s
+     Running `integration/target/debug/iroh-sandbox-integration --collection`
+PASS twelve fixed-supply mock contracts, exact registered names/symbols, 6/18/24 decimals on local receipts
+PASS bamboo-mist: exact price 500000, actual USDI plus bonus payout, recorded roulette tier, stale-quote refund and independent inventory
+PASS dragon-tea: exact price 1000000, actual USDI plus bonus payout, recorded roulette tier, stale-quote refund and independent inventory
+PASS moon-spirit: exact price 2000000, actual USDI plus bonus payout, recorded roulette tier, stale-quote refund and independent inventory
+PASS phoenix-flame: exact price 5000000, actual USDI plus bonus payout, recorded roulette tier, stale-quote refund and independent inventory
+PASS uncles-secret-reserve: exact price 10000000, actual USDI plus bonus payout, recorded roulette tier, stale-quote refund and independent inventory
+PASS configured multi-candidate case: actual bonus transfer failure, reserved liability, same-draw retry paid only the outstanding token and duplicate retry rejected
+PASS five-case collection Sandbox receipts; shared WASM, independent accounts and actual mock token transfers. LOCAL ONLY, no public Testnet signatures.

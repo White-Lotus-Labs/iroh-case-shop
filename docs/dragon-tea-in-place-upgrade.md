@@ -1,6 +1,8 @@
 # Upgrade Dragon Tea Case in place on NEAR Testnet
 
-This runbook covers the existing `cases-needmore-1-near.testnet` account. Each of the nine Testnet transactions requires its own approval before signing. The first transaction registers SHITZU storage. Prepare fresh public RPC checks before each approval.
+This runbook records the original in-place migration rehearsal for `cases-needmore-1-near.testnet`. The November 11 expansion request supersedes its per-transaction approval policy with one fully specified bounded batch. Use [the current deployment review](multi-case/deployment-review.md) and its exact manifest checksums for new signing approval. The candidate sizes and checksums below are historical rehearsal evidence, not authorization for the current rebuilt artifact. Prepare fresh public RPC checks before signing.
+
+The previously approved SHITZU registration finalized on November 11, 2026 as transaction `9oNjXJASSDQgdu3vh4eZuZYMgkiW1fLpcnkaftEksvPq`. Its exact parameters, finalized receipts and storage balance are recorded in `docs/multi-case/shitzu-registration.json`. RHEA registration, AURORA registration, pausing, migration, funding and unpausing remain unsubmitted and require the bounded approval.
 
 ## Read the baseline
 

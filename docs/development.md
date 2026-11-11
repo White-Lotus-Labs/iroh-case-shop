@@ -223,3 +223,44 @@ Read [the financial design](usdi-financial-design.md),
 or preparing wallet signatures. The deployment planner only checks public
 accounts and writes unsigned artifacts. Actual creation and deployment require
 explicit user approval. Do not source environment files or read credentials.
+
+## Five-case collection
+
+The Host's Tea Cases parchment reads `config/cases.testnet.json`. It includes
+Bamboo Mist, Dragon Tea, Moon Spirit, Phoenix Flame and Uncle's Secret Reserve.
+An entry with `deploymentStatus: planned` has an inspectable reward preview and
+cannot create a signing client. Mark it live only after the approved deployment
+and finalized on-chain verification. Dragon continues using the existing
+`config/contracts.testnet.json` addresses and preserves its legacy records.
+
+All cases share one WASM and immutable per-account configuration. See
+[multi-case economics](multi-case-economics.md),
+[randomness limitations](multi-case-randomness.md),
+[token identity evidence](token-identities.md) and
+[the bounded deployment review](multi-case/deployment-review.md).
+
+`bash scripts/contracts.sh collection-simulate` reproduces the five-case stress
+report. `bash scripts/contracts.sh collection-integration` runs all five cases
+against a local Sandbox chain. Fetch the pinned public V1 snapshot with
+`scripts/fetch-dragon-tea-migration-snapshot.py`, then pass its absolute directory
+to `bash scripts/multi-case/verify-contracts.sh` to bind all three Sandbox suites
+and Rust results to the exact artifact hashes.
+
+The Shelf combines finalized case history, paginated older openings after the
+upgrade, and separately labeled indexed wallet references. Details verifies
+historical transactions against Testnet RPC with an archival fallback. See
+[the indexer coverage and verification limits](multi-case-indexer.md).
+
+The full Playwright suite requires the development server because camera tests
+use development diagnostics. Production case, wallet and Shelf tests also run
+against `npm run start`. Use a separate SQLite database for verification, for
+example `DATABASE_URL=file:/private/tmp/iroh-browser.sqlite`, and apply migrations
+before starting the production server. Production cookies require HTTPS for
+request-client authentication checks; do not disable secure cookies to make an
+HTTP-only test runner behave like a deployed site.
+
+Contract builds never authorize deployment. The historical USDI approval helper
+expects the exact original USDI artifact. That binary is archived separately in
+`artifacts/testnet/`; a fresh source build may produce a different binary and
+must not inherit the old authorization. This expansion does not deploy or upgrade
+USDI.

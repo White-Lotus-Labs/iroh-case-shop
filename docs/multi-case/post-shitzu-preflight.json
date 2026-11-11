@@ -1,0 +1,271 @@
+{
+  "network": "testnet",
+  "rpc": "https://rpc.testnet.fastnear.com",
+  "checked_at": "2026-11-11T11:31:17.210375+00:00",
+  "block_height": 277209540,
+  "block_hash": "5djXo9qmggs3BajNgUyMpNbd5JEJqhdh1K8Li8bFMYov",
+  "gas_price": "100000000",
+  "owner": {
+    "amount": "24108852052391552799199995",
+    "block_hash": "5djXo9qmggs3BajNgUyMpNbd5JEJqhdh1K8Li8bFMYov",
+    "block_height": 277209540,
+    "code_hash": "11111111111111111111111111111111",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 182
+  },
+  "owner_usdi": "1004000000",
+  "cases": {
+    "bamboo-mist": {
+      "account": {
+        "absent": true
+      }
+    },
+    "dragon-tea": {
+      "account": {
+        "amount": "10087461015552438599999996",
+        "block_hash": "5djXo9qmggs3BajNgUyMpNbd5JEJqhdh1K8Li8bFMYov",
+        "block_height": 277209540,
+        "code_hash": "EdQrCQ4CDhFLJfJpPxShQVCj1K9DdfF4Cf3z247yh3ow",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 424792
+      },
+      "case": {
+        "case_id": "dragon-tea",
+        "name": "Dragon Tea Case",
+        "token_id": "usdi-needmore-1-near.testnet",
+        "price": "1000000",
+        "pool_contribution": "950000",
+        "platform_fee": "50000",
+        "target": "1000000000",
+        "probability_denominator": 1000000,
+        "rewards": [
+          {
+            "tier": "Common",
+            "amount": "100000"
+          },
+          {
+            "tier": "Rare",
+            "amount": "1000000"
+          },
+          {
+            "tier": "Legendary",
+            "amount": "5000000"
+          }
+        ],
+        "randomness": "NEAR protocol randomness; Testnet demonstration, not production-grade VRF",
+        "quote_policy": "Exact revision, zero slippage; stale quotes are fully refunded"
+      },
+      "pool": {
+        "pool_funds": "995800000",
+        "reserved_rewards": "0",
+        "available": "995800000",
+        "target": "1000000000",
+        "health": "Healthy",
+        "pending_fees": "0",
+        "treasury_available": "200000",
+        "treasury_in_flight": "0",
+        "in_flight_payouts": "0",
+        "pending_openings": 0,
+        "completed_payouts": "4",
+        "total_paid": "8000000",
+        "revision": "13",
+        "paused": false,
+        "can_open": true,
+        "storage_per_opening": "20480000000000000000000",
+        "storage_account_cost": "2560000000000000000000",
+        "expected_balance_min": "996000000",
+        "expected_balance_max": "996000000"
+      },
+      "history": [
+        {
+          "opening_id": "3",
+          "account_id": "needmore_1_near.testnet",
+          "nonce": "3",
+          "accepted_height": "276969565",
+          "accepted_revision": "10",
+          "common": 278239,
+          "rare": 672176,
+          "legendary": 49585,
+          "denominator": 1000000,
+          "status": "Completed",
+          "reward": "1000000",
+          "draw": 688758,
+          "attempt": "1",
+          "reserved": "0"
+        },
+        {
+          "opening_id": "2",
+          "account_id": "needmore_1_near.testnet",
+          "nonce": "2",
+          "accepted_height": "276969510",
+          "accepted_revision": "7",
+          "common": 277789,
+          "rare": 672221,
+          "legendary": 49990,
+          "denominator": 1000000,
+          "status": "Completed",
+          "reward": "5000000",
+          "draw": 980221,
+          "attempt": "1",
+          "reserved": "0"
+        },
+        {
+          "opening_id": "1",
+          "account_id": "needmore_1_near.testnet",
+          "nonce": "1",
+          "accepted_height": "276969464",
+          "accepted_revision": "4",
+          "common": 277784,
+          "rare": 672221,
+          "legendary": 49995,
+          "denominator": 1000000,
+          "status": "Completed",
+          "reward": "1000000",
+          "draw": 282627,
+          "attempt": "1",
+          "reserved": "0"
+        },
+        {
+          "opening_id": "0",
+          "account_id": "needmore_1_near.testnet",
+          "nonce": "0",
+          "accepted_height": "276969413",
+          "accepted_revision": "1",
+          "common": 277778,
+          "rare": 672222,
+          "legendary": 50000,
+          "denominator": 1000000,
+          "status": "Completed",
+          "reward": "1000000",
+          "draw": 494499,
+          "attempt": "1",
+          "reserved": "0"
+        }
+      ],
+      "usdi_balance": "996000000",
+      "public_keys": {
+        "block_hash": "5djXo9qmggs3BajNgUyMpNbd5JEJqhdh1K8Li8bFMYov",
+        "block_height": 277209540,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 276783958000002,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:7mkuqApHc4Da4mzL4Xn3jBatX2o49nkJfxYAAoP9puMc"
+          }
+        ]
+      },
+      "wasm_sha256": "ca7bcdef4d3640339318c4589808213df8f8de959de09210770f91e062e2c2aa"
+    },
+    "moon-spirit": {
+      "account": {
+        "absent": true
+      }
+    },
+    "phoenix-flame": {
+      "account": {
+        "absent": true
+      }
+    },
+    "uncles-secret-reserve": {
+      "account": {
+        "absent": true
+      }
+    }
+  },
+  "tokens": {
+    "SHITZU": {
+      "account_id": "iroh-test-shitzu.testnet",
+      "account": {
+        "amount": "9998675748467156000000000",
+        "block_hash": "5djXo9qmggs3BajNgUyMpNbd5JEJqhdh1K8Li8bFMYov",
+        "block_height": 277209540,
+        "code_hash": "5heV1Yf3PxjMLWuyXowJoApj38rggW8GsCoScL6Sxidz",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 322440
+      },
+      "metadata": {
+        "spec": "ft-1.0.0",
+        "name": "Test Shitzu",
+        "symbol": "SHITZU",
+        "icon": null,
+        "reference": "data:application/json,%7B%22description%22%3A%22Unofficial%20Iroh%20Case%20Shop%20Testnet%20mock.%20No%20monetary%20value.%22%7D",
+        "reference_hash": "tL6Csy+j5SttbY80L8z/MP22N5WfT67O+d9dwaw4XBI=",
+        "decimals": 6
+      },
+      "supply": "100000000000",
+      "owner_balance": "100000000000",
+      "storage_bounds": {
+        "min": "1250000000000000000000",
+        "max": "1250000000000000000000"
+      },
+      "dragon_storage": {
+        "total": "1250000000000000000000",
+        "available": "0"
+      },
+      "dragon_balance": "0"
+    },
+    "RHEA": {
+      "account_id": "iroh-test-rhea.testnet",
+      "account": {
+        "amount": "9997424882230381600000000",
+        "block_hash": "5djXo9qmggs3BajNgUyMpNbd5JEJqhdh1K8Li8bFMYov",
+        "block_height": 277209540,
+        "code_hash": "5heV1Yf3PxjMLWuyXowJoApj38rggW8GsCoScL6Sxidz",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 322346
+      },
+      "metadata": {
+        "spec": "ft-1.0.0",
+        "name": "Test Rhea",
+        "symbol": "RHEA",
+        "icon": null,
+        "reference": "data:application/json,%7B%22description%22%3A%22Unofficial%20Iroh%20Case%20Shop%20Testnet%20mock.%20No%20monetary%20value.%22%7D",
+        "reference_hash": "tL6Csy+j5SttbY80L8z/MP22N5WfT67O+d9dwaw4XBI=",
+        "decimals": 6
+      },
+      "supply": "100000000000",
+      "owner_balance": "100000000000",
+      "storage_bounds": {
+        "min": "1250000000000000000000",
+        "max": "1250000000000000000000"
+      },
+      "dragon_storage": null,
+      "dragon_balance": "0"
+    },
+    "AURORA": {
+      "account_id": "iroh-test-aurora.testnet",
+      "account": {
+        "amount": "9997424829638281200000000",
+        "block_hash": "5djXo9qmggs3BajNgUyMpNbd5JEJqhdh1K8Li8bFMYov",
+        "block_height": 277209540,
+        "code_hash": "5heV1Yf3PxjMLWuyXowJoApj38rggW8GsCoScL6Sxidz",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 322350
+      },
+      "metadata": {
+        "spec": "ft-1.0.0",
+        "name": "Test Aurora",
+        "symbol": "AURORA",
+        "icon": null,
+        "reference": "data:application/json,%7B%22description%22%3A%22Unofficial%20Iroh%20Case%20Shop%20Testnet%20mock.%20No%20monetary%20value.%22%7D",
+        "reference_hash": "tL6Csy+j5SttbY80L8z/MP22N5WfT67O+d9dwaw4XBI=",
+        "decimals": 6
+      },
+      "supply": "100000000000",
+      "owner_balance": "100000000000",
+      "storage_bounds": {
+        "min": "1250000000000000000000",
+        "max": "1250000000000000000000"
+      },
+      "dragon_storage": null,
+      "dragon_balance": "0"
+    }
+  }
+}

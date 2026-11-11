@@ -1,0 +1,453 @@
+# PREPARATION ONLY. No approval has been given for this batch. Do not run these commands before approval and successful preflight.
+# Owner operations are unsigned templates; sign exact manifest actions with the existing owner wallet. Dedicated account operations use only their named Keychain key.
+# Stop on any changed prerequisite or ambiguous receipt. Never run this file as a script.
+
+# token-BLACKDRAGON-create
+# Preconditions: Finalized public query returns UNKNOWN_ACCOUNT; Parent has the maximum authorized native expenditure
+'near' 'account' 'create-account' 'fund-myself' 'blackdragon.needmore_1_near.testnet' '5000000000000000000000000 yoctoNEAR' 'use-manually-provided-public-key' 'ed25519:BzFYfhBpT7Y5rchB4v4JH16WNqMHpzP37xrWnM5mZMha' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: New account has exactly the dedicated public key and funded balance
+
+# token-BLACKDRAGON-deploy
+# Preconditions: token-BLACKDRAGON-create verified; Rehash local WASM and require exact reviewed checksum; No existing deployed code or initialized state
+'near' 'contract' 'deploy' 'blackdragon.needmore_1_near.testnet' 'use-file' '/Users/mark/Documents/iroh-case-shop/artifacts/testnet/iroh_mock_token-faa2b5cd6957806b93b8c96067152e21ecda54bd63bb7cb5da385c5ebea6a630.wasm' 'with-init-call' 'new' 'json-args' '{"asset":"BLACKDRAGON","owner_id":"needmore_1_near.testnet"}' 'prepaid-gas' '100 Tgas' 'attached-deposit' '0 yoctoNEAR' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:BzFYfhBpT7Y5rchB4v4JH16WNqMHpzP37xrWnM5mZMha' 'send'
+# Verify: Finalized deployed WASM SHA-256 equals the manifest; Metadata and fixed supply match registry; the inventory owner holds the entire initial supply
+
+# token-NEKO-create
+# Preconditions: Finalized public query returns UNKNOWN_ACCOUNT; Parent has the maximum authorized native expenditure
+'near' 'account' 'create-account' 'fund-myself' 'neko.needmore_1_near.testnet' '5000000000000000000000000 yoctoNEAR' 'use-manually-provided-public-key' 'ed25519:HANvB1MeRnUru1U96q1iPyujUSfCRYNrjRwAUqjNJYLr' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: New account has exactly the dedicated public key and funded balance
+
+# token-NEKO-deploy
+# Preconditions: token-NEKO-create verified; Rehash local WASM and require exact reviewed checksum; No existing deployed code or initialized state
+'near' 'contract' 'deploy' 'neko.needmore_1_near.testnet' 'use-file' '/Users/mark/Documents/iroh-case-shop/artifacts/testnet/iroh_mock_token-faa2b5cd6957806b93b8c96067152e21ecda54bd63bb7cb5da385c5ebea6a630.wasm' 'with-init-call' 'new' 'json-args' '{"asset":"NEKO","owner_id":"needmore_1_near.testnet"}' 'prepaid-gas' '100 Tgas' 'attached-deposit' '0 yoctoNEAR' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:HANvB1MeRnUru1U96q1iPyujUSfCRYNrjRwAUqjNJYLr' 'send'
+# Verify: Finalized deployed WASM SHA-256 equals the manifest; Metadata and fixed supply match registry; the inventory owner holds the entire initial supply
+
+# token-MPDAO-create
+# Preconditions: Finalized public query returns UNKNOWN_ACCOUNT; Parent has the maximum authorized native expenditure
+'near' 'account' 'create-account' 'fund-myself' 'mpdao.needmore_1_near.testnet' '5000000000000000000000000 yoctoNEAR' 'use-manually-provided-public-key' 'ed25519:Cu7riCyEPzUyLzz3xMGa1En516bchWYT1Nw1mipqs6eY' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: New account has exactly the dedicated public key and funded balance
+
+# token-MPDAO-deploy
+# Preconditions: token-MPDAO-create verified; Rehash local WASM and require exact reviewed checksum; No existing deployed code or initialized state
+'near' 'contract' 'deploy' 'mpdao.needmore_1_near.testnet' 'use-file' '/Users/mark/Documents/iroh-case-shop/artifacts/testnet/iroh_mock_token-faa2b5cd6957806b93b8c96067152e21ecda54bd63bb7cb5da385c5ebea6a630.wasm' 'with-init-call' 'new' 'json-args' '{"asset":"MPDAO","owner_id":"needmore_1_near.testnet"}' 'prepaid-gas' '100 Tgas' 'attached-deposit' '0 yoctoNEAR' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:Cu7riCyEPzUyLzz3xMGa1En516bchWYT1Nw1mipqs6eY' 'send'
+# Verify: Finalized deployed WASM SHA-256 equals the manifest; Metadata and fixed supply match registry; the inventory owner holds the entire initial supply
+
+# token-GEAR-create
+# Preconditions: Finalized public query returns UNKNOWN_ACCOUNT; Parent has the maximum authorized native expenditure
+'near' 'account' 'create-account' 'fund-myself' 'gear.needmore_1_near.testnet' '5000000000000000000000000 yoctoNEAR' 'use-manually-provided-public-key' 'ed25519:BNRrJC51SnjV69hgzHo7JZrsyq7MvrZvs444RAvJv5ru' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: New account has exactly the dedicated public key and funded balance
+
+# token-GEAR-deploy
+# Preconditions: token-GEAR-create verified; Rehash local WASM and require exact reviewed checksum; No existing deployed code or initialized state
+'near' 'contract' 'deploy' 'gear.needmore_1_near.testnet' 'use-file' '/Users/mark/Documents/iroh-case-shop/artifacts/testnet/iroh_mock_token-faa2b5cd6957806b93b8c96067152e21ecda54bd63bb7cb5da385c5ebea6a630.wasm' 'with-init-call' 'new' 'json-args' '{"asset":"GEAR","owner_id":"needmore_1_near.testnet"}' 'prepaid-gas' '100 Tgas' 'attached-deposit' '0 yoctoNEAR' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:BNRrJC51SnjV69hgzHo7JZrsyq7MvrZvs444RAvJv5ru' 'send'
+# Verify: Finalized deployed WASM SHA-256 equals the manifest; Metadata and fixed supply match registry; the inventory owner holds the entire initial supply
+
+# token-PURGE-create
+# Preconditions: Finalized public query returns UNKNOWN_ACCOUNT; Parent has the maximum authorized native expenditure
+'near' 'account' 'create-account' 'fund-myself' 'purge.needmore_1_near.testnet' '5000000000000000000000000 yoctoNEAR' 'use-manually-provided-public-key' 'ed25519:3JahkkUeThdgzonP4qwVymyDgcvqb13NoTzffz6FmfJY' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: New account has exactly the dedicated public key and funded balance
+
+# token-PURGE-deploy
+# Preconditions: token-PURGE-create verified; Rehash local WASM and require exact reviewed checksum; No existing deployed code or initialized state
+'near' 'contract' 'deploy' 'purge.needmore_1_near.testnet' 'use-file' '/Users/mark/Documents/iroh-case-shop/artifacts/testnet/iroh_mock_token-faa2b5cd6957806b93b8c96067152e21ecda54bd63bb7cb5da385c5ebea6a630.wasm' 'with-init-call' 'new' 'json-args' '{"asset":"PURGE","owner_id":"needmore_1_near.testnet"}' 'prepaid-gas' '100 Tgas' 'attached-deposit' '0 yoctoNEAR' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:3JahkkUeThdgzonP4qwVymyDgcvqb13NoTzffz6FmfJY' 'send'
+# Verify: Finalized deployed WASM SHA-256 equals the manifest; Metadata and fixed supply match registry; the inventory owner holds the entire initial supply
+
+# token-WNEAR-create
+# Preconditions: Finalized public query returns UNKNOWN_ACCOUNT; Parent has the maximum authorized native expenditure
+'near' 'account' 'create-account' 'fund-myself' 'wnear.needmore_1_near.testnet' '5000000000000000000000000 yoctoNEAR' 'use-manually-provided-public-key' 'ed25519:Hufga4xjW7XgqYuRSHGoeQBAt3r6HZgadudokD6dcX7q' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: New account has exactly the dedicated public key and funded balance
+
+# token-WNEAR-deploy
+# Preconditions: token-WNEAR-create verified; Rehash local WASM and require exact reviewed checksum; No existing deployed code or initialized state
+'near' 'contract' 'deploy' 'wnear.needmore_1_near.testnet' 'use-file' '/Users/mark/Documents/iroh-case-shop/artifacts/testnet/iroh_mock_token-faa2b5cd6957806b93b8c96067152e21ecda54bd63bb7cb5da385c5ebea6a630.wasm' 'with-init-call' 'new' 'json-args' '{"asset":"WNEAR","owner_id":"needmore_1_near.testnet"}' 'prepaid-gas' '100 Tgas' 'attached-deposit' '0 yoctoNEAR' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:Hufga4xjW7XgqYuRSHGoeQBAt3r6HZgadudokD6dcX7q' 'send'
+# Verify: Finalized deployed WASM SHA-256 equals the manifest; Metadata and fixed supply match registry; the inventory owner holds the entire initial supply
+
+# token-STNEAR-create
+# Preconditions: Finalized public query returns UNKNOWN_ACCOUNT; Parent has the maximum authorized native expenditure
+'near' 'account' 'create-account' 'fund-myself' 'stnear.needmore_1_near.testnet' '5000000000000000000000000 yoctoNEAR' 'use-manually-provided-public-key' 'ed25519:HYi4hdPauGQWAupViFNubMSv4xPyibsRh9Tw7tmfBpgQ' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: New account has exactly the dedicated public key and funded balance
+
+# token-STNEAR-deploy
+# Preconditions: token-STNEAR-create verified; Rehash local WASM and require exact reviewed checksum; No existing deployed code or initialized state
+'near' 'contract' 'deploy' 'stnear.needmore_1_near.testnet' 'use-file' '/Users/mark/Documents/iroh-case-shop/artifacts/testnet/iroh_mock_token-faa2b5cd6957806b93b8c96067152e21ecda54bd63bb7cb5da385c5ebea6a630.wasm' 'with-init-call' 'new' 'json-args' '{"asset":"STNEAR","owner_id":"needmore_1_near.testnet"}' 'prepaid-gas' '100 Tgas' 'attached-deposit' '0 yoctoNEAR' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:HYi4hdPauGQWAupViFNubMSv4xPyibsRh9Tw7tmfBpgQ' 'send'
+# Verify: Finalized deployed WASM SHA-256 equals the manifest; Metadata and fixed supply match registry; the inventory owner holds the entire initial supply
+
+# token-LINEAR-create
+# Preconditions: Finalized public query returns UNKNOWN_ACCOUNT; Parent has the maximum authorized native expenditure
+'near' 'account' 'create-account' 'fund-myself' 'linear.needmore_1_near.testnet' '5000000000000000000000000 yoctoNEAR' 'use-manually-provided-public-key' 'ed25519:5q5R4tuBBnh87uScmLPjYAV8cW8et9UnuYd9He2CeMP9' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: New account has exactly the dedicated public key and funded balance
+
+# token-LINEAR-deploy
+# Preconditions: token-LINEAR-create verified; Rehash local WASM and require exact reviewed checksum; No existing deployed code or initialized state
+'near' 'contract' 'deploy' 'linear.needmore_1_near.testnet' 'use-file' '/Users/mark/Documents/iroh-case-shop/artifacts/testnet/iroh_mock_token-faa2b5cd6957806b93b8c96067152e21ecda54bd63bb7cb5da385c5ebea6a630.wasm' 'with-init-call' 'new' 'json-args' '{"asset":"LINEAR","owner_id":"needmore_1_near.testnet"}' 'prepaid-gas' '100 Tgas' 'attached-deposit' '0 yoctoNEAR' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:5q5R4tuBBnh87uScmLPjYAV8cW8et9UnuYd9He2CeMP9' 'send'
+# Verify: Finalized deployed WASM SHA-256 equals the manifest; Metadata and fixed supply match registry; the inventory owner holds the entire initial supply
+
+# token-RNEAR-create
+# Preconditions: Finalized public query returns UNKNOWN_ACCOUNT; Parent has the maximum authorized native expenditure
+'near' 'account' 'create-account' 'fund-myself' 'rnear.needmore_1_near.testnet' '5000000000000000000000000 yoctoNEAR' 'use-manually-provided-public-key' 'ed25519:6TsDqjRzzNvRhPoryErg3Pbn4WMPathCfWpmJcPx22aw' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: New account has exactly the dedicated public key and funded balance
+
+# token-RNEAR-deploy
+# Preconditions: token-RNEAR-create verified; Rehash local WASM and require exact reviewed checksum; No existing deployed code or initialized state
+'near' 'contract' 'deploy' 'rnear.needmore_1_near.testnet' 'use-file' '/Users/mark/Documents/iroh-case-shop/artifacts/testnet/iroh_mock_token-faa2b5cd6957806b93b8c96067152e21ecda54bd63bb7cb5da385c5ebea6a630.wasm' 'with-init-call' 'new' 'json-args' '{"asset":"RNEAR","owner_id":"needmore_1_near.testnet"}' 'prepaid-gas' '100 Tgas' 'attached-deposit' '0 yoctoNEAR' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:6TsDqjRzzNvRhPoryErg3Pbn4WMPathCfWpmJcPx22aw' 'send'
+# Verify: Finalized deployed WASM SHA-256 equals the manifest; Metadata and fixed supply match registry; the inventory owner holds the entire initial supply
+
+# case-bamboo-mist-create
+# Preconditions: Finalized public query returns UNKNOWN_ACCOUNT; Parent has the maximum authorized native expenditure
+'near' 'account' 'create-account' 'fund-myself' 'bamboo.needmore_1_near.testnet' '7000000000000000000000000 yoctoNEAR' 'use-manually-provided-public-key' 'ed25519:G5yBgWyMbxrFg9A1cKY2BtfraL9RkfjAJcgev9AXv13G' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: New account has exactly the dedicated public key and funded balance
+
+# case-bamboo-mist-deploy
+# Preconditions: case-bamboo-mist-create verified; Rehash local WASM and require exact reviewed checksum; No existing deployed code or initialized state
+'near' 'contract' 'deploy' 'bamboo.needmore_1_near.testnet' 'use-file' '/Users/mark/Documents/iroh-case-shop/artifacts/testnet/iroh_case_pool-48e560f15ef75db48d82ab1d57ca119b752059d96c1157c897ce3dbf87b7c06e.wasm' 'with-init-call' 'new_configured' 'json-args' '{"owner_id":"needmore_1_near.testnet","token_id":"usdi-needmore-1-near.testnet","treasury_id":"needmore_1_near.testnet","config":{"case_id":"bamboo-mist","name":"Bamboo Mist Case","economy":{"price":"500000","rewards":["200000","500000","4000000"],"target":"250000000","ev_low_bps":7000,"ev_high_bps":11500,"legendary_low_ppm":1000,"legendary_target_ppm":15000,"legendary_high_ppm":30000},"bonus_rewards":[{"token_contract_id":"iroh-test-shitzu.testnet","token_symbol":"SHITZU","display_name":"Test Shitzu","token_decimals":6,"amount":"25000000","tier":0},{"token_contract_id":"blackdragon.needmore_1_near.testnet","token_symbol":"BLACKDRAGON","display_name":"Test Black Dragon","token_decimals":24,"amount":"25000000000000000000000000","tier":0},{"token_contract_id":"neko.needmore_1_near.testnet","token_symbol":"NEKO","display_name":"Test Neko","token_decimals":24,"amount":"10000000000000000000000000","tier":1},{"token_contract_id":"iroh-test-rhea.testnet","token_symbol":"RHEA","display_name":"Test Rhea","token_decimals":6,"amount":"1000000","tier":2}]}}' 'prepaid-gas' '100 Tgas' 'attached-deposit' '0 yoctoNEAR' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:G5yBgWyMbxrFg9A1cKY2BtfraL9RkfjAJcgev9AXv13G' 'send'
+# Verify: Finalized deployed WASM SHA-256 equals the manifest; get_case equals the exact immutable configuration; get_pool is paused with zero funds and liabilities
+
+# case-register-usdi-bamboo-mist
+# Preconditions: storage_balance_of is null and storage_balance_bounds.min equals 1250000000000000000000
+'near' 'contract' 'call-function' 'as-transaction' 'usdi-needmore-1-near.testnet' 'storage_deposit' 'json-args' '{"account_id":"bamboo.needmore_1_near.testnet","registration_only":true}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1250000000000000000000 yoctoNEAR' 'sign-as' 'bamboo.needmore_1_near.testnet' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:G5yBgWyMbxrFg9A1cKY2BtfraL9RkfjAJcgev9AXv13G' 'send'
+# Verify: Finalized registration equals the attached deposit
+
+# case-register-bamboo-mist-SHITZU
+# Preconditions: storage_balance_of is null and storage_balance_bounds.min equals 1250000000000000000000
+'near' 'contract' 'call-function' 'as-transaction' 'iroh-test-shitzu.testnet' 'storage_deposit' 'json-args' '{"account_id":"bamboo.needmore_1_near.testnet","registration_only":true}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1250000000000000000000 yoctoNEAR' 'sign-as' 'bamboo.needmore_1_near.testnet' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:G5yBgWyMbxrFg9A1cKY2BtfraL9RkfjAJcgev9AXv13G' 'send'
+# Verify: Finalized registration equals the attached deposit
+
+# case-register-bamboo-mist-BLACKDRAGON
+# Preconditions: storage_balance_of is null and storage_balance_bounds.min equals 1250000000000000000000
+'near' 'contract' 'call-function' 'as-transaction' 'blackdragon.needmore_1_near.testnet' 'storage_deposit' 'json-args' '{"account_id":"bamboo.needmore_1_near.testnet","registration_only":true}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1250000000000000000000 yoctoNEAR' 'sign-as' 'bamboo.needmore_1_near.testnet' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:G5yBgWyMbxrFg9A1cKY2BtfraL9RkfjAJcgev9AXv13G' 'send'
+# Verify: Finalized registration equals the attached deposit
+
+# case-register-bamboo-mist-NEKO
+# Preconditions: storage_balance_of is null and storage_balance_bounds.min equals 1250000000000000000000
+'near' 'contract' 'call-function' 'as-transaction' 'neko.needmore_1_near.testnet' 'storage_deposit' 'json-args' '{"account_id":"bamboo.needmore_1_near.testnet","registration_only":true}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1250000000000000000000 yoctoNEAR' 'sign-as' 'bamboo.needmore_1_near.testnet' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:G5yBgWyMbxrFg9A1cKY2BtfraL9RkfjAJcgev9AXv13G' 'send'
+# Verify: Finalized registration equals the attached deposit
+
+# case-register-bamboo-mist-RHEA
+# Preconditions: storage_balance_of is null and storage_balance_bounds.min equals 1250000000000000000000
+'near' 'contract' 'call-function' 'as-transaction' 'iroh-test-rhea.testnet' 'storage_deposit' 'json-args' '{"account_id":"bamboo.needmore_1_near.testnet","registration_only":true}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1250000000000000000000 yoctoNEAR' 'sign-as' 'bamboo.needmore_1_near.testnet' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:G5yBgWyMbxrFg9A1cKY2BtfraL9RkfjAJcgev9AXv13G' 'send'
+# Verify: Finalized registration equals the attached deposit
+
+# case-fund-usdi-bamboo-mist
+# Preconditions: Case deployment and USDI registration verified; case remains paused
+'near' 'contract' 'call-function' 'as-transaction' 'usdi-needmore-1-near.testnet' 'ft_transfer_call' 'json-args' '{"receiver_id":"bamboo.needmore_1_near.testnet","amount":"50000000","memo":null,"msg":"{\"action\":\"fund\"}"}' 'prepaid-gas' '250 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Full resolver acceptance; actual USDI balance equals pool books; no fees or reservations
+
+# case-fund-bonus-bamboo-mist-SHITZU
+# Preconditions: Case is paused and matching token registration finalized; Inventory owner balance covers the entire remaining batch allocation
+'near' 'contract' 'call-function' 'as-transaction' 'iroh-test-shitzu.testnet' 'ft_transfer_call' 'json-args' '{"receiver_id":"bamboo.needmore_1_near.testnet","amount":"2500000000","memo":null,"msg":"{\"action\":\"fund\"}"}' 'prepaid-gas' '250 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Every receipt succeeds and resolver accepts the full exact amount; Actual token balance and per-token inventory book reconcile with no unresolved transfer
+
+# case-fund-bonus-bamboo-mist-BLACKDRAGON
+# Preconditions: Case is paused and matching token registration finalized; Inventory owner balance covers the entire remaining batch allocation
+'near' 'contract' 'call-function' 'as-transaction' 'blackdragon.needmore_1_near.testnet' 'ft_transfer_call' 'json-args' '{"receiver_id":"bamboo.needmore_1_near.testnet","amount":"2500000000000000000000000000","memo":null,"msg":"{\"action\":\"fund\"}"}' 'prepaid-gas' '250 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Every receipt succeeds and resolver accepts the full exact amount; Actual token balance and per-token inventory book reconcile with no unresolved transfer
+
+# case-fund-bonus-bamboo-mist-NEKO
+# Preconditions: Case is paused and matching token registration finalized; Inventory owner balance covers the entire remaining batch allocation
+'near' 'contract' 'call-function' 'as-transaction' 'neko.needmore_1_near.testnet' 'ft_transfer_call' 'json-args' '{"receiver_id":"bamboo.needmore_1_near.testnet","amount":"1000000000000000000000000000","memo":null,"msg":"{\"action\":\"fund\"}"}' 'prepaid-gas' '250 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Every receipt succeeds and resolver accepts the full exact amount; Actual token balance and per-token inventory book reconcile with no unresolved transfer
+
+# case-fund-bonus-bamboo-mist-RHEA
+# Preconditions: Case is paused and matching token registration finalized; Inventory owner balance covers the entire remaining batch allocation
+'near' 'contract' 'call-function' 'as-transaction' 'iroh-test-rhea.testnet' 'ft_transfer_call' 'json-args' '{"receiver_id":"bamboo.needmore_1_near.testnet","amount":"100000000","memo":null,"msg":"{\"action\":\"fund\"}"}' 'prepaid-gas' '250 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Every receipt succeeds and resolver accepts the full exact amount; Actual token balance and per-token inventory book reconcile with no unresolved transfer
+
+# case-moon-spirit-create
+# Preconditions: Finalized public query returns UNKNOWN_ACCOUNT; Parent has the maximum authorized native expenditure
+'near' 'account' 'create-account' 'fund-myself' 'moon.needmore_1_near.testnet' '7000000000000000000000000 yoctoNEAR' 'use-manually-provided-public-key' 'ed25519:7wKGNqCeQVwni17kLHvq2djqixSPsKhzufVLX56X8pPG' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: New account has exactly the dedicated public key and funded balance
+
+# case-moon-spirit-deploy
+# Preconditions: case-moon-spirit-create verified; Rehash local WASM and require exact reviewed checksum; No existing deployed code or initialized state
+'near' 'contract' 'deploy' 'moon.needmore_1_near.testnet' 'use-file' '/Users/mark/Documents/iroh-case-shop/artifacts/testnet/iroh_case_pool-48e560f15ef75db48d82ab1d57ca119b752059d96c1157c897ce3dbf87b7c06e.wasm' 'with-init-call' 'new_configured' 'json-args' '{"owner_id":"needmore_1_near.testnet","token_id":"usdi-needmore-1-near.testnet","treasury_id":"needmore_1_near.testnet","config":{"case_id":"moon-spirit","name":"Moon Spirit Case","economy":{"price":"2000000","rewards":["100000","2000000","20000000"],"target":"2000000000","ev_low_bps":5000,"ev_high_bps":16000,"legendary_low_ppm":5000,"legendary_target_ppm":40000,"legendary_high_ppm":100000},"bonus_rewards":[{"token_contract_id":"purge.needmore_1_near.testnet","token_symbol":"PURGE","display_name":"Test Purge","token_decimals":18,"amount":"20000000000000000000","tier":0},{"token_contract_id":"gear.needmore_1_near.testnet","token_symbol":"GEAR","display_name":"Test Gear","token_decimals":18,"amount":"2000000000000000000","tier":0},{"token_contract_id":"neko.needmore_1_near.testnet","token_symbol":"NEKO","display_name":"Test Neko","token_decimals":24,"amount":"50000000000000000000000000","tier":1},{"token_contract_id":"mpdao.needmore_1_near.testnet","token_symbol":"mpDAO","display_name":"Test mpDAO","token_decimals":6,"amount":"2000000","tier":1},{"token_contract_id":"stnear.needmore_1_near.testnet","token_symbol":"STNEAR","display_name":"Test Staked NEAR","token_decimals":24,"amount":"100000000000000000000000","tier":2}]}}' 'prepaid-gas' '100 Tgas' 'attached-deposit' '0 yoctoNEAR' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:7wKGNqCeQVwni17kLHvq2djqixSPsKhzufVLX56X8pPG' 'send'
+# Verify: Finalized deployed WASM SHA-256 equals the manifest; get_case equals the exact immutable configuration; get_pool is paused with zero funds and liabilities
+
+# case-register-usdi-moon-spirit
+# Preconditions: storage_balance_of is null and storage_balance_bounds.min equals 1250000000000000000000
+'near' 'contract' 'call-function' 'as-transaction' 'usdi-needmore-1-near.testnet' 'storage_deposit' 'json-args' '{"account_id":"moon.needmore_1_near.testnet","registration_only":true}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1250000000000000000000 yoctoNEAR' 'sign-as' 'moon.needmore_1_near.testnet' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:7wKGNqCeQVwni17kLHvq2djqixSPsKhzufVLX56X8pPG' 'send'
+# Verify: Finalized registration equals the attached deposit
+
+# case-register-moon-spirit-PURGE
+# Preconditions: storage_balance_of is null and storage_balance_bounds.min equals 1250000000000000000000
+'near' 'contract' 'call-function' 'as-transaction' 'purge.needmore_1_near.testnet' 'storage_deposit' 'json-args' '{"account_id":"moon.needmore_1_near.testnet","registration_only":true}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1250000000000000000000 yoctoNEAR' 'sign-as' 'moon.needmore_1_near.testnet' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:7wKGNqCeQVwni17kLHvq2djqixSPsKhzufVLX56X8pPG' 'send'
+# Verify: Finalized registration equals the attached deposit
+
+# case-register-moon-spirit-GEAR
+# Preconditions: storage_balance_of is null and storage_balance_bounds.min equals 1250000000000000000000
+'near' 'contract' 'call-function' 'as-transaction' 'gear.needmore_1_near.testnet' 'storage_deposit' 'json-args' '{"account_id":"moon.needmore_1_near.testnet","registration_only":true}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1250000000000000000000 yoctoNEAR' 'sign-as' 'moon.needmore_1_near.testnet' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:7wKGNqCeQVwni17kLHvq2djqixSPsKhzufVLX56X8pPG' 'send'
+# Verify: Finalized registration equals the attached deposit
+
+# case-register-moon-spirit-NEKO
+# Preconditions: storage_balance_of is null and storage_balance_bounds.min equals 1250000000000000000000
+'near' 'contract' 'call-function' 'as-transaction' 'neko.needmore_1_near.testnet' 'storage_deposit' 'json-args' '{"account_id":"moon.needmore_1_near.testnet","registration_only":true}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1250000000000000000000 yoctoNEAR' 'sign-as' 'moon.needmore_1_near.testnet' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:7wKGNqCeQVwni17kLHvq2djqixSPsKhzufVLX56X8pPG' 'send'
+# Verify: Finalized registration equals the attached deposit
+
+# case-register-moon-spirit-mpDAO
+# Preconditions: storage_balance_of is null and storage_balance_bounds.min equals 1250000000000000000000
+'near' 'contract' 'call-function' 'as-transaction' 'mpdao.needmore_1_near.testnet' 'storage_deposit' 'json-args' '{"account_id":"moon.needmore_1_near.testnet","registration_only":true}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1250000000000000000000 yoctoNEAR' 'sign-as' 'moon.needmore_1_near.testnet' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:7wKGNqCeQVwni17kLHvq2djqixSPsKhzufVLX56X8pPG' 'send'
+# Verify: Finalized registration equals the attached deposit
+
+# case-register-moon-spirit-STNEAR
+# Preconditions: storage_balance_of is null and storage_balance_bounds.min equals 1250000000000000000000
+'near' 'contract' 'call-function' 'as-transaction' 'stnear.needmore_1_near.testnet' 'storage_deposit' 'json-args' '{"account_id":"moon.needmore_1_near.testnet","registration_only":true}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1250000000000000000000 yoctoNEAR' 'sign-as' 'moon.needmore_1_near.testnet' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:7wKGNqCeQVwni17kLHvq2djqixSPsKhzufVLX56X8pPG' 'send'
+# Verify: Finalized registration equals the attached deposit
+
+# case-fund-usdi-moon-spirit
+# Preconditions: Case deployment and USDI registration verified; case remains paused
+'near' 'contract' 'call-function' 'as-transaction' 'usdi-needmore-1-near.testnet' 'ft_transfer_call' 'json-args' '{"receiver_id":"moon.needmore_1_near.testnet","amount":"150000000","memo":null,"msg":"{\"action\":\"fund\"}"}' 'prepaid-gas' '250 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Full resolver acceptance; actual USDI balance equals pool books; no fees or reservations
+
+# case-fund-bonus-moon-spirit-PURGE
+# Preconditions: Case is paused and matching token registration finalized; Inventory owner balance covers the entire remaining batch allocation
+'near' 'contract' 'call-function' 'as-transaction' 'purge.needmore_1_near.testnet' 'ft_transfer_call' 'json-args' '{"receiver_id":"moon.needmore_1_near.testnet","amount":"2000000000000000000000","memo":null,"msg":"{\"action\":\"fund\"}"}' 'prepaid-gas' '250 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Every receipt succeeds and resolver accepts the full exact amount; Actual token balance and per-token inventory book reconcile with no unresolved transfer
+
+# case-fund-bonus-moon-spirit-GEAR
+# Preconditions: Case is paused and matching token registration finalized; Inventory owner balance covers the entire remaining batch allocation
+'near' 'contract' 'call-function' 'as-transaction' 'gear.needmore_1_near.testnet' 'ft_transfer_call' 'json-args' '{"receiver_id":"moon.needmore_1_near.testnet","amount":"200000000000000000000","memo":null,"msg":"{\"action\":\"fund\"}"}' 'prepaid-gas' '250 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Every receipt succeeds and resolver accepts the full exact amount; Actual token balance and per-token inventory book reconcile with no unresolved transfer
+
+# case-fund-bonus-moon-spirit-NEKO
+# Preconditions: Case is paused and matching token registration finalized; Inventory owner balance covers the entire remaining batch allocation
+'near' 'contract' 'call-function' 'as-transaction' 'neko.needmore_1_near.testnet' 'ft_transfer_call' 'json-args' '{"receiver_id":"moon.needmore_1_near.testnet","amount":"5000000000000000000000000000","memo":null,"msg":"{\"action\":\"fund\"}"}' 'prepaid-gas' '250 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Every receipt succeeds and resolver accepts the full exact amount; Actual token balance and per-token inventory book reconcile with no unresolved transfer
+
+# case-fund-bonus-moon-spirit-mpDAO
+# Preconditions: Case is paused and matching token registration finalized; Inventory owner balance covers the entire remaining batch allocation
+'near' 'contract' 'call-function' 'as-transaction' 'mpdao.needmore_1_near.testnet' 'ft_transfer_call' 'json-args' '{"receiver_id":"moon.needmore_1_near.testnet","amount":"200000000","memo":null,"msg":"{\"action\":\"fund\"}"}' 'prepaid-gas' '250 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Every receipt succeeds and resolver accepts the full exact amount; Actual token balance and per-token inventory book reconcile with no unresolved transfer
+
+# case-fund-bonus-moon-spirit-STNEAR
+# Preconditions: Case is paused and matching token registration finalized; Inventory owner balance covers the entire remaining batch allocation
+'near' 'contract' 'call-function' 'as-transaction' 'stnear.needmore_1_near.testnet' 'ft_transfer_call' 'json-args' '{"receiver_id":"moon.needmore_1_near.testnet","amount":"10000000000000000000000000","memo":null,"msg":"{\"action\":\"fund\"}"}' 'prepaid-gas' '250 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Every receipt succeeds and resolver accepts the full exact amount; Actual token balance and per-token inventory book reconcile with no unresolved transfer
+
+# case-phoenix-flame-create
+# Preconditions: Finalized public query returns UNKNOWN_ACCOUNT; Parent has the maximum authorized native expenditure
+'near' 'account' 'create-account' 'fund-myself' 'phoenix.needmore_1_near.testnet' '7000000000000000000000000 yoctoNEAR' 'use-manually-provided-public-key' 'ed25519:HwUzDmdm2S9ePN7k9ifJ6Eth5jcMdCPNPNjHMX1rH1Yh' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: New account has exactly the dedicated public key and funded balance
+
+# case-phoenix-flame-deploy
+# Preconditions: case-phoenix-flame-create verified; Rehash local WASM and require exact reviewed checksum; No existing deployed code or initialized state
+'near' 'contract' 'deploy' 'phoenix.needmore_1_near.testnet' 'use-file' '/Users/mark/Documents/iroh-case-shop/artifacts/testnet/iroh_case_pool-48e560f15ef75db48d82ab1d57ca119b752059d96c1157c897ce3dbf87b7c06e.wasm' 'with-init-call' 'new_configured' 'json-args' '{"owner_id":"needmore_1_near.testnet","token_id":"usdi-needmore-1-near.testnet","treasury_id":"needmore_1_near.testnet","config":{"case_id":"phoenix-flame","name":"Phoenix Flame Case","economy":{"price":"5000000","rewards":["100000","3500000","100000000"],"target":"5000000000","ev_low_bps":4000,"ev_high_bps":18000,"legendary_low_ppm":2000,"legendary_target_ppm":30000,"legendary_high_ppm":70000},"bonus_rewards":[{"token_contract_id":"iroh-test-rhea.testnet","token_symbol":"RHEA","display_name":"Test Rhea","token_decimals":6,"amount":"2000000","tier":0},{"token_contract_id":"iroh-test-aurora.testnet","token_symbol":"AURORA","display_name":"Test Aurora","token_decimals":6,"amount":"2000000","tier":1},{"token_contract_id":"mpdao.needmore_1_near.testnet","token_symbol":"mpDAO","display_name":"Test mpDAO","token_decimals":6,"amount":"5000000","tier":1},{"token_contract_id":"linear.needmore_1_near.testnet","token_symbol":"LINEAR","display_name":"Test LiNEAR","token_decimals":24,"amount":"200000000000000000000000","tier":2},{"token_contract_id":"stnear.needmore_1_near.testnet","token_symbol":"STNEAR","display_name":"Test Staked NEAR","token_decimals":24,"amount":"200000000000000000000000","tier":2},{"token_contract_id":"wnear.needmore_1_near.testnet","token_symbol":"wNEAR","display_name":"Test Wrapped NEAR","token_decimals":24,"amount":"250000000000000000000000","tier":2}]}}' 'prepaid-gas' '100 Tgas' 'attached-deposit' '0 yoctoNEAR' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:HwUzDmdm2S9ePN7k9ifJ6Eth5jcMdCPNPNjHMX1rH1Yh' 'send'
+# Verify: Finalized deployed WASM SHA-256 equals the manifest; get_case equals the exact immutable configuration; get_pool is paused with zero funds and liabilities
+
+# case-register-usdi-phoenix-flame
+# Preconditions: storage_balance_of is null and storage_balance_bounds.min equals 1250000000000000000000
+'near' 'contract' 'call-function' 'as-transaction' 'usdi-needmore-1-near.testnet' 'storage_deposit' 'json-args' '{"account_id":"phoenix.needmore_1_near.testnet","registration_only":true}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1250000000000000000000 yoctoNEAR' 'sign-as' 'phoenix.needmore_1_near.testnet' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:HwUzDmdm2S9ePN7k9ifJ6Eth5jcMdCPNPNjHMX1rH1Yh' 'send'
+# Verify: Finalized registration equals the attached deposit
+
+# case-register-phoenix-flame-RHEA
+# Preconditions: storage_balance_of is null and storage_balance_bounds.min equals 1250000000000000000000
+'near' 'contract' 'call-function' 'as-transaction' 'iroh-test-rhea.testnet' 'storage_deposit' 'json-args' '{"account_id":"phoenix.needmore_1_near.testnet","registration_only":true}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1250000000000000000000 yoctoNEAR' 'sign-as' 'phoenix.needmore_1_near.testnet' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:HwUzDmdm2S9ePN7k9ifJ6Eth5jcMdCPNPNjHMX1rH1Yh' 'send'
+# Verify: Finalized registration equals the attached deposit
+
+# case-register-phoenix-flame-AURORA
+# Preconditions: storage_balance_of is null and storage_balance_bounds.min equals 1250000000000000000000
+'near' 'contract' 'call-function' 'as-transaction' 'iroh-test-aurora.testnet' 'storage_deposit' 'json-args' '{"account_id":"phoenix.needmore_1_near.testnet","registration_only":true}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1250000000000000000000 yoctoNEAR' 'sign-as' 'phoenix.needmore_1_near.testnet' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:HwUzDmdm2S9ePN7k9ifJ6Eth5jcMdCPNPNjHMX1rH1Yh' 'send'
+# Verify: Finalized registration equals the attached deposit
+
+# case-register-phoenix-flame-mpDAO
+# Preconditions: storage_balance_of is null and storage_balance_bounds.min equals 1250000000000000000000
+'near' 'contract' 'call-function' 'as-transaction' 'mpdao.needmore_1_near.testnet' 'storage_deposit' 'json-args' '{"account_id":"phoenix.needmore_1_near.testnet","registration_only":true}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1250000000000000000000 yoctoNEAR' 'sign-as' 'phoenix.needmore_1_near.testnet' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:HwUzDmdm2S9ePN7k9ifJ6Eth5jcMdCPNPNjHMX1rH1Yh' 'send'
+# Verify: Finalized registration equals the attached deposit
+
+# case-register-phoenix-flame-LINEAR
+# Preconditions: storage_balance_of is null and storage_balance_bounds.min equals 1250000000000000000000
+'near' 'contract' 'call-function' 'as-transaction' 'linear.needmore_1_near.testnet' 'storage_deposit' 'json-args' '{"account_id":"phoenix.needmore_1_near.testnet","registration_only":true}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1250000000000000000000 yoctoNEAR' 'sign-as' 'phoenix.needmore_1_near.testnet' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:HwUzDmdm2S9ePN7k9ifJ6Eth5jcMdCPNPNjHMX1rH1Yh' 'send'
+# Verify: Finalized registration equals the attached deposit
+
+# case-register-phoenix-flame-STNEAR
+# Preconditions: storage_balance_of is null and storage_balance_bounds.min equals 1250000000000000000000
+'near' 'contract' 'call-function' 'as-transaction' 'stnear.needmore_1_near.testnet' 'storage_deposit' 'json-args' '{"account_id":"phoenix.needmore_1_near.testnet","registration_only":true}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1250000000000000000000 yoctoNEAR' 'sign-as' 'phoenix.needmore_1_near.testnet' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:HwUzDmdm2S9ePN7k9ifJ6Eth5jcMdCPNPNjHMX1rH1Yh' 'send'
+# Verify: Finalized registration equals the attached deposit
+
+# case-register-phoenix-flame-wNEAR
+# Preconditions: storage_balance_of is null and storage_balance_bounds.min equals 1250000000000000000000
+'near' 'contract' 'call-function' 'as-transaction' 'wnear.needmore_1_near.testnet' 'storage_deposit' 'json-args' '{"account_id":"phoenix.needmore_1_near.testnet","registration_only":true}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1250000000000000000000 yoctoNEAR' 'sign-as' 'phoenix.needmore_1_near.testnet' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:HwUzDmdm2S9ePN7k9ifJ6Eth5jcMdCPNPNjHMX1rH1Yh' 'send'
+# Verify: Finalized registration equals the attached deposit
+
+# case-fund-usdi-phoenix-flame
+# Preconditions: Case deployment and USDI registration verified; case remains paused
+'near' 'contract' 'call-function' 'as-transaction' 'usdi-needmore-1-near.testnet' 'ft_transfer_call' 'json-args' '{"receiver_id":"phoenix.needmore_1_near.testnet","amount":"300000000","memo":null,"msg":"{\"action\":\"fund\"}"}' 'prepaid-gas' '250 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Full resolver acceptance; actual USDI balance equals pool books; no fees or reservations
+
+# case-fund-bonus-phoenix-flame-RHEA
+# Preconditions: Case is paused and matching token registration finalized; Inventory owner balance covers the entire remaining batch allocation
+'near' 'contract' 'call-function' 'as-transaction' 'iroh-test-rhea.testnet' 'ft_transfer_call' 'json-args' '{"receiver_id":"phoenix.needmore_1_near.testnet","amount":"200000000","memo":null,"msg":"{\"action\":\"fund\"}"}' 'prepaid-gas' '250 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Every receipt succeeds and resolver accepts the full exact amount; Actual token balance and per-token inventory book reconcile with no unresolved transfer
+
+# case-fund-bonus-phoenix-flame-AURORA
+# Preconditions: Case is paused and matching token registration finalized; Inventory owner balance covers the entire remaining batch allocation
+'near' 'contract' 'call-function' 'as-transaction' 'iroh-test-aurora.testnet' 'ft_transfer_call' 'json-args' '{"receiver_id":"phoenix.needmore_1_near.testnet","amount":"200000000","memo":null,"msg":"{\"action\":\"fund\"}"}' 'prepaid-gas' '250 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Every receipt succeeds and resolver accepts the full exact amount; Actual token balance and per-token inventory book reconcile with no unresolved transfer
+
+# case-fund-bonus-phoenix-flame-mpDAO
+# Preconditions: Case is paused and matching token registration finalized; Inventory owner balance covers the entire remaining batch allocation
+'near' 'contract' 'call-function' 'as-transaction' 'mpdao.needmore_1_near.testnet' 'ft_transfer_call' 'json-args' '{"receiver_id":"phoenix.needmore_1_near.testnet","amount":"500000000","memo":null,"msg":"{\"action\":\"fund\"}"}' 'prepaid-gas' '250 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Every receipt succeeds and resolver accepts the full exact amount; Actual token balance and per-token inventory book reconcile with no unresolved transfer
+
+# case-fund-bonus-phoenix-flame-LINEAR
+# Preconditions: Case is paused and matching token registration finalized; Inventory owner balance covers the entire remaining batch allocation
+'near' 'contract' 'call-function' 'as-transaction' 'linear.needmore_1_near.testnet' 'ft_transfer_call' 'json-args' '{"receiver_id":"phoenix.needmore_1_near.testnet","amount":"20000000000000000000000000","memo":null,"msg":"{\"action\":\"fund\"}"}' 'prepaid-gas' '250 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Every receipt succeeds and resolver accepts the full exact amount; Actual token balance and per-token inventory book reconcile with no unresolved transfer
+
+# case-fund-bonus-phoenix-flame-STNEAR
+# Preconditions: Case is paused and matching token registration finalized; Inventory owner balance covers the entire remaining batch allocation
+'near' 'contract' 'call-function' 'as-transaction' 'stnear.needmore_1_near.testnet' 'ft_transfer_call' 'json-args' '{"receiver_id":"phoenix.needmore_1_near.testnet","amount":"20000000000000000000000000","memo":null,"msg":"{\"action\":\"fund\"}"}' 'prepaid-gas' '250 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Every receipt succeeds and resolver accepts the full exact amount; Actual token balance and per-token inventory book reconcile with no unresolved transfer
+
+# case-fund-bonus-phoenix-flame-wNEAR
+# Preconditions: Case is paused and matching token registration finalized; Inventory owner balance covers the entire remaining batch allocation
+'near' 'contract' 'call-function' 'as-transaction' 'wnear.needmore_1_near.testnet' 'ft_transfer_call' 'json-args' '{"receiver_id":"phoenix.needmore_1_near.testnet","amount":"25000000000000000000000000","memo":null,"msg":"{\"action\":\"fund\"}"}' 'prepaid-gas' '250 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Every receipt succeeds and resolver accepts the full exact amount; Actual token balance and per-token inventory book reconcile with no unresolved transfer
+
+# case-uncles-secret-reserve-create
+# Preconditions: Finalized public query returns UNKNOWN_ACCOUNT; Parent has the maximum authorized native expenditure
+'near' 'account' 'create-account' 'fund-myself' 'reserve.needmore_1_near.testnet' '7000000000000000000000000 yoctoNEAR' 'use-manually-provided-public-key' 'ed25519:6aaWCKDbM6KVkD7uUU1qtk93nufqLrzGmbhiiP63cpiu' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: New account has exactly the dedicated public key and funded balance
+
+# case-uncles-secret-reserve-deploy
+# Preconditions: case-uncles-secret-reserve-create verified; Rehash local WASM and require exact reviewed checksum; No existing deployed code or initialized state
+'near' 'contract' 'deploy' 'reserve.needmore_1_near.testnet' 'use-file' '/Users/mark/Documents/iroh-case-shop/artifacts/testnet/iroh_case_pool-48e560f15ef75db48d82ab1d57ca119b752059d96c1157c897ce3dbf87b7c06e.wasm' 'with-init-call' 'new_configured' 'json-args' '{"owner_id":"needmore_1_near.testnet","token_id":"usdi-needmore-1-near.testnet","treasury_id":"needmore_1_near.testnet","config":{"case_id":"uncles-secret-reserve","name":"Uncle'\''s Secret Reserve","economy":{"price":"10000000","rewards":["2000000","15000000","120000000"],"target":"10000000000","ev_low_bps":6500,"ev_high_bps":16500,"legendary_low_ppm":3000,"legendary_target_ppm":45000,"legendary_high_ppm":85000},"bonus_rewards":[{"token_contract_id":"iroh-test-rhea.testnet","token_symbol":"RHEA","display_name":"Test Rhea","token_decimals":6,"amount":"10000000","tier":0},{"token_contract_id":"iroh-test-aurora.testnet","token_symbol":"AURORA","display_name":"Test Aurora","token_decimals":6,"amount":"10000000","tier":0},{"token_contract_id":"mpdao.needmore_1_near.testnet","token_symbol":"mpDAO","display_name":"Test mpDAO","token_decimals":6,"amount":"20000000","tier":1},{"token_contract_id":"rnear.needmore_1_near.testnet","token_symbol":"rNEAR","display_name":"Test Rhea Staked NEAR","token_decimals":24,"amount":"500000000000000000000000","tier":1},{"token_contract_id":"stnear.needmore_1_near.testnet","token_symbol":"STNEAR","display_name":"Test Staked NEAR","token_decimals":24,"amount":"1000000000000000000000000","tier":2},{"token_contract_id":"linear.needmore_1_near.testnet","token_symbol":"LINEAR","display_name":"Test LiNEAR","token_decimals":24,"amount":"1000000000000000000000000","tier":2},{"token_contract_id":"wnear.needmore_1_near.testnet","token_symbol":"wNEAR","display_name":"Test Wrapped NEAR","token_decimals":24,"amount":"1000000000000000000000000","tier":2}]}}' 'prepaid-gas' '100 Tgas' 'attached-deposit' '0 yoctoNEAR' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:6aaWCKDbM6KVkD7uUU1qtk93nufqLrzGmbhiiP63cpiu' 'send'
+# Verify: Finalized deployed WASM SHA-256 equals the manifest; get_case equals the exact immutable configuration; get_pool is paused with zero funds and liabilities
+
+# case-register-usdi-uncles-secret-reserve
+# Preconditions: storage_balance_of is null and storage_balance_bounds.min equals 1250000000000000000000
+'near' 'contract' 'call-function' 'as-transaction' 'usdi-needmore-1-near.testnet' 'storage_deposit' 'json-args' '{"account_id":"reserve.needmore_1_near.testnet","registration_only":true}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1250000000000000000000 yoctoNEAR' 'sign-as' 'reserve.needmore_1_near.testnet' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:6aaWCKDbM6KVkD7uUU1qtk93nufqLrzGmbhiiP63cpiu' 'send'
+# Verify: Finalized registration equals the attached deposit
+
+# case-register-uncles-secret-reserve-RHEA
+# Preconditions: storage_balance_of is null and storage_balance_bounds.min equals 1250000000000000000000
+'near' 'contract' 'call-function' 'as-transaction' 'iroh-test-rhea.testnet' 'storage_deposit' 'json-args' '{"account_id":"reserve.needmore_1_near.testnet","registration_only":true}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1250000000000000000000 yoctoNEAR' 'sign-as' 'reserve.needmore_1_near.testnet' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:6aaWCKDbM6KVkD7uUU1qtk93nufqLrzGmbhiiP63cpiu' 'send'
+# Verify: Finalized registration equals the attached deposit
+
+# case-register-uncles-secret-reserve-AURORA
+# Preconditions: storage_balance_of is null and storage_balance_bounds.min equals 1250000000000000000000
+'near' 'contract' 'call-function' 'as-transaction' 'iroh-test-aurora.testnet' 'storage_deposit' 'json-args' '{"account_id":"reserve.needmore_1_near.testnet","registration_only":true}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1250000000000000000000 yoctoNEAR' 'sign-as' 'reserve.needmore_1_near.testnet' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:6aaWCKDbM6KVkD7uUU1qtk93nufqLrzGmbhiiP63cpiu' 'send'
+# Verify: Finalized registration equals the attached deposit
+
+# case-register-uncles-secret-reserve-mpDAO
+# Preconditions: storage_balance_of is null and storage_balance_bounds.min equals 1250000000000000000000
+'near' 'contract' 'call-function' 'as-transaction' 'mpdao.needmore_1_near.testnet' 'storage_deposit' 'json-args' '{"account_id":"reserve.needmore_1_near.testnet","registration_only":true}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1250000000000000000000 yoctoNEAR' 'sign-as' 'reserve.needmore_1_near.testnet' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:6aaWCKDbM6KVkD7uUU1qtk93nufqLrzGmbhiiP63cpiu' 'send'
+# Verify: Finalized registration equals the attached deposit
+
+# case-register-uncles-secret-reserve-rNEAR
+# Preconditions: storage_balance_of is null and storage_balance_bounds.min equals 1250000000000000000000
+'near' 'contract' 'call-function' 'as-transaction' 'rnear.needmore_1_near.testnet' 'storage_deposit' 'json-args' '{"account_id":"reserve.needmore_1_near.testnet","registration_only":true}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1250000000000000000000 yoctoNEAR' 'sign-as' 'reserve.needmore_1_near.testnet' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:6aaWCKDbM6KVkD7uUU1qtk93nufqLrzGmbhiiP63cpiu' 'send'
+# Verify: Finalized registration equals the attached deposit
+
+# case-register-uncles-secret-reserve-STNEAR
+# Preconditions: storage_balance_of is null and storage_balance_bounds.min equals 1250000000000000000000
+'near' 'contract' 'call-function' 'as-transaction' 'stnear.needmore_1_near.testnet' 'storage_deposit' 'json-args' '{"account_id":"reserve.needmore_1_near.testnet","registration_only":true}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1250000000000000000000 yoctoNEAR' 'sign-as' 'reserve.needmore_1_near.testnet' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:6aaWCKDbM6KVkD7uUU1qtk93nufqLrzGmbhiiP63cpiu' 'send'
+# Verify: Finalized registration equals the attached deposit
+
+# case-register-uncles-secret-reserve-LINEAR
+# Preconditions: storage_balance_of is null and storage_balance_bounds.min equals 1250000000000000000000
+'near' 'contract' 'call-function' 'as-transaction' 'linear.needmore_1_near.testnet' 'storage_deposit' 'json-args' '{"account_id":"reserve.needmore_1_near.testnet","registration_only":true}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1250000000000000000000 yoctoNEAR' 'sign-as' 'reserve.needmore_1_near.testnet' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:6aaWCKDbM6KVkD7uUU1qtk93nufqLrzGmbhiiP63cpiu' 'send'
+# Verify: Finalized registration equals the attached deposit
+
+# case-register-uncles-secret-reserve-wNEAR
+# Preconditions: storage_balance_of is null and storage_balance_bounds.min equals 1250000000000000000000
+'near' 'contract' 'call-function' 'as-transaction' 'wnear.needmore_1_near.testnet' 'storage_deposit' 'json-args' '{"account_id":"reserve.needmore_1_near.testnet","registration_only":true}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1250000000000000000000 yoctoNEAR' 'sign-as' 'reserve.needmore_1_near.testnet' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:6aaWCKDbM6KVkD7uUU1qtk93nufqLrzGmbhiiP63cpiu' 'send'
+# Verify: Finalized registration equals the attached deposit
+
+# case-fund-usdi-uncles-secret-reserve
+# Preconditions: Case deployment and USDI registration verified; case remains paused
+'near' 'contract' 'call-function' 'as-transaction' 'usdi-needmore-1-near.testnet' 'ft_transfer_call' 'json-args' '{"receiver_id":"reserve.needmore_1_near.testnet","amount":"500000000","memo":null,"msg":"{\"action\":\"fund\"}"}' 'prepaid-gas' '250 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Full resolver acceptance; actual USDI balance equals pool books; no fees or reservations
+
+# case-fund-bonus-uncles-secret-reserve-RHEA
+# Preconditions: Case is paused and matching token registration finalized; Inventory owner balance covers the entire remaining batch allocation
+'near' 'contract' 'call-function' 'as-transaction' 'iroh-test-rhea.testnet' 'ft_transfer_call' 'json-args' '{"receiver_id":"reserve.needmore_1_near.testnet","amount":"1000000000","memo":null,"msg":"{\"action\":\"fund\"}"}' 'prepaid-gas' '250 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Every receipt succeeds and resolver accepts the full exact amount; Actual token balance and per-token inventory book reconcile with no unresolved transfer
+
+# case-fund-bonus-uncles-secret-reserve-AURORA
+# Preconditions: Case is paused and matching token registration finalized; Inventory owner balance covers the entire remaining batch allocation
+'near' 'contract' 'call-function' 'as-transaction' 'iroh-test-aurora.testnet' 'ft_transfer_call' 'json-args' '{"receiver_id":"reserve.needmore_1_near.testnet","amount":"1000000000","memo":null,"msg":"{\"action\":\"fund\"}"}' 'prepaid-gas' '250 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Every receipt succeeds and resolver accepts the full exact amount; Actual token balance and per-token inventory book reconcile with no unresolved transfer
+
+# case-fund-bonus-uncles-secret-reserve-mpDAO
+# Preconditions: Case is paused and matching token registration finalized; Inventory owner balance covers the entire remaining batch allocation
+'near' 'contract' 'call-function' 'as-transaction' 'mpdao.needmore_1_near.testnet' 'ft_transfer_call' 'json-args' '{"receiver_id":"reserve.needmore_1_near.testnet","amount":"2000000000","memo":null,"msg":"{\"action\":\"fund\"}"}' 'prepaid-gas' '250 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Every receipt succeeds and resolver accepts the full exact amount; Actual token balance and per-token inventory book reconcile with no unresolved transfer
+
+# case-fund-bonus-uncles-secret-reserve-rNEAR
+# Preconditions: Case is paused and matching token registration finalized; Inventory owner balance covers the entire remaining batch allocation
+'near' 'contract' 'call-function' 'as-transaction' 'rnear.needmore_1_near.testnet' 'ft_transfer_call' 'json-args' '{"receiver_id":"reserve.needmore_1_near.testnet","amount":"50000000000000000000000000","memo":null,"msg":"{\"action\":\"fund\"}"}' 'prepaid-gas' '250 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Every receipt succeeds and resolver accepts the full exact amount; Actual token balance and per-token inventory book reconcile with no unresolved transfer
+
+# case-fund-bonus-uncles-secret-reserve-STNEAR
+# Preconditions: Case is paused and matching token registration finalized; Inventory owner balance covers the entire remaining batch allocation
+'near' 'contract' 'call-function' 'as-transaction' 'stnear.needmore_1_near.testnet' 'ft_transfer_call' 'json-args' '{"receiver_id":"reserve.needmore_1_near.testnet","amount":"100000000000000000000000000","memo":null,"msg":"{\"action\":\"fund\"}"}' 'prepaid-gas' '250 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Every receipt succeeds and resolver accepts the full exact amount; Actual token balance and per-token inventory book reconcile with no unresolved transfer
+
+# case-fund-bonus-uncles-secret-reserve-LINEAR
+# Preconditions: Case is paused and matching token registration finalized; Inventory owner balance covers the entire remaining batch allocation
+'near' 'contract' 'call-function' 'as-transaction' 'linear.needmore_1_near.testnet' 'ft_transfer_call' 'json-args' '{"receiver_id":"reserve.needmore_1_near.testnet","amount":"100000000000000000000000000","memo":null,"msg":"{\"action\":\"fund\"}"}' 'prepaid-gas' '250 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Every receipt succeeds and resolver accepts the full exact amount; Actual token balance and per-token inventory book reconcile with no unresolved transfer
+
+# case-fund-bonus-uncles-secret-reserve-wNEAR
+# Preconditions: Case is paused and matching token registration finalized; Inventory owner balance covers the entire remaining batch allocation
+'near' 'contract' 'call-function' 'as-transaction' 'wnear.needmore_1_near.testnet' 'ft_transfer_call' 'json-args' '{"receiver_id":"reserve.needmore_1_near.testnet","amount":"100000000000000000000000000","memo":null,"msg":"{\"action\":\"fund\"}"}' 'prepaid-gas' '250 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Every receipt succeeds and resolver accepts the full exact amount; Actual token balance and per-token inventory book reconcile with no unresolved transfer
+
+# dragon-register-RHEA
+# Preconditions: storage_balance_of is null and storage_balance_bounds.min equals 1250000000000000000000
+'near' 'contract' 'call-function' 'as-transaction' 'iroh-test-rhea.testnet' 'storage_deposit' 'json-args' '{"account_id":"cases-needmore-1-near.testnet","registration_only":true}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1250000000000000000000 yoctoNEAR' 'sign-as' 'cases-needmore-1-near.testnet' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:7mkuqApHc4Da4mzL4Xn3jBatX2o49nkJfxYAAoP9puMc' 'send'
+# Verify: Finalized registration equals the attached deposit
+
+# dragon-register-AURORA
+# Preconditions: storage_balance_of is null and storage_balance_bounds.min equals 1250000000000000000000
+'near' 'contract' 'call-function' 'as-transaction' 'iroh-test-aurora.testnet' 'storage_deposit' 'json-args' '{"account_id":"cases-needmore-1-near.testnet","registration_only":true}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1250000000000000000000 yoctoNEAR' 'sign-as' 'cases-needmore-1-near.testnet' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:7mkuqApHc4Da4mzL4Xn3jBatX2o49nkJfxYAAoP9puMc' 'send'
+# Verify: Finalized registration equals the attached deposit
+
+# dragon-pause
+# Preconditions: Original V1 SHA-256 is ca7bcdef4d3640339318c4589808213df8f8de959de09210770f91e062e2c2aa; revision 13; No intervening openings or administrative changes
+'near' 'contract' 'call-function' 'as-transaction' 'cases-needmore-1-near.testnet' 'set_paused' 'json-args' '{"paused":true}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Finalized paused revision equals the reviewed expected revision
+
+# dragon-upgrade
+# Preconditions: Paused V1 revision 14; Original V1 code checksum unchanged; Zero in-flight payout and treasury transfers; USDΙ balance, book bounds, all legacy openings and credits captured and reconciled
+'near' 'contract' 'deploy' 'cases-needmore-1-near.testnet' 'use-file' '/Users/mark/Documents/iroh-case-shop/artifacts/testnet/iroh_case_pool-48e560f15ef75db48d82ab1d57ca119b752059d96c1157c897ce3dbf87b7c06e.wasm' 'with-init-call' 'migrate_v1' 'json-args' '{"reward_tokens":["iroh-test-shitzu.testnet","iroh-test-rhea.testnet","iroh-test-aurora.testnet"],"expected_revision":"14"}' 'prepaid-gas' '100 Tgas' 'attached-deposit' '0 yoctoNEAR' 'network-config' 'testnet' 'sign-with-keychain' '--signer-public-key' 'ed25519:7mkuqApHc4Da4mzL4Xn3jBatX2o49nkJfxYAAoP9puMc' 'send'
+# Verify: Atomic deployment and migration succeeded; Code checksum equals manifest; revision advanced once; exact legacy history preserved; bonus inventory zero; case remains paused
+
+# dragon-fund-bonus-dragon-tea-SHITZU
+# Preconditions: Case is paused and matching token registration finalized; Inventory owner balance covers the entire remaining batch allocation
+'near' 'contract' 'call-function' 'as-transaction' 'iroh-test-shitzu.testnet' 'ft_transfer_call' 'json-args' '{"receiver_id":"cases-needmore-1-near.testnet","amount":"5000000000","memo":null,"msg":"{\"action\":\"fund\"}"}' 'prepaid-gas' '250 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Every receipt succeeds and resolver accepts the full exact amount; Actual token balance and per-token inventory book reconcile with no unresolved transfer
+
+# dragon-fund-bonus-dragon-tea-RHEA
+# Preconditions: Case is paused and matching token registration finalized; Inventory owner balance covers the entire remaining batch allocation
+'near' 'contract' 'call-function' 'as-transaction' 'iroh-test-rhea.testnet' 'ft_transfer_call' 'json-args' '{"receiver_id":"cases-needmore-1-near.testnet","amount":"500000000","memo":null,"msg":"{\"action\":\"fund\"}"}' 'prepaid-gas' '250 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Every receipt succeeds and resolver accepts the full exact amount; Actual token balance and per-token inventory book reconcile with no unresolved transfer
+
+# dragon-fund-bonus-dragon-tea-AURORA
+# Preconditions: Case is paused and matching token registration finalized; Inventory owner balance covers the entire remaining batch allocation
+'near' 'contract' 'call-function' 'as-transaction' 'iroh-test-aurora.testnet' 'ft_transfer_call' 'json-args' '{"receiver_id":"cases-needmore-1-near.testnet","amount":"100000000","memo":null,"msg":"{\"action\":\"fund\"}"}' 'prepaid-gas' '250 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Every receipt succeeds and resolver accepts the full exact amount; Actual token balance and per-token inventory book reconcile with no unresolved transfer
+
+# unpause-bamboo-mist
+# Preconditions: All prior deployment, registration and funding receipts finalized successfully; Actual USDI and every token balance reconcile with their respective books; No unresolved transfers; expected inventory exact; code and metadata match the manifest
+'near' 'contract' 'call-function' 'as-transaction' 'bamboo.needmore_1_near.testnet' 'set_paused' 'json-args' '{"paused":false}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Finalized unpaused pool and fresh quote agree at the same revision; Client deployment remains planned until independent read-only verification is recorded
+
+# unpause-dragon-tea
+# Preconditions: All prior deployment, registration and funding receipts finalized successfully; Actual USDI and every token balance reconcile with their respective books; No unresolved transfers; expected inventory exact; code and metadata match the manifest
+'near' 'contract' 'call-function' 'as-transaction' 'cases-needmore-1-near.testnet' 'set_paused' 'json-args' '{"paused":false}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Finalized unpaused pool and fresh quote agree at the same revision; Client deployment remains planned until independent read-only verification is recorded
+
+# unpause-moon-spirit
+# Preconditions: All prior deployment, registration and funding receipts finalized successfully; Actual USDI and every token balance reconcile with their respective books; No unresolved transfers; expected inventory exact; code and metadata match the manifest
+'near' 'contract' 'call-function' 'as-transaction' 'moon.needmore_1_near.testnet' 'set_paused' 'json-args' '{"paused":false}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Finalized unpaused pool and fresh quote agree at the same revision; Client deployment remains planned until independent read-only verification is recorded
+
+# unpause-phoenix-flame
+# Preconditions: All prior deployment, registration and funding receipts finalized successfully; Actual USDI and every token balance reconcile with their respective books; No unresolved transfers; expected inventory exact; code and metadata match the manifest
+'near' 'contract' 'call-function' 'as-transaction' 'phoenix.needmore_1_near.testnet' 'set_paused' 'json-args' '{"paused":false}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Finalized unpaused pool and fresh quote agree at the same revision; Client deployment remains planned until independent read-only verification is recorded
+
+# unpause-uncles-secret-reserve
+# Preconditions: All prior deployment, registration and funding receipts finalized successfully; Actual USDI and every token balance reconcile with their respective books; No unresolved transfers; expected inventory exact; code and metadata match the manifest
+'near' 'contract' 'call-function' 'as-transaction' 'reserve.needmore_1_near.testnet' 'set_paused' 'json-args' '{"paused":false}' 'prepaid-gas' '30 Tgas' 'attached-deposit' '1 yoctoNEAR' 'sign-as' 'needmore_1_near.testnet' 'network-config' 'testnet' 'sign-later' 'display'
+# Verify: Finalized unpaused pool and fresh quote agree at the same revision; Client deployment remains planned until independent read-only verification is recorded

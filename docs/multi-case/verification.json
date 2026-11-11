@@ -1,0 +1,30 @@
+{
+  "recordedAt": "2026-11-11T16:59:52.429976+00:00",
+  "rust": "79 Rust tests passed; exact final case/mock/original USDI artifact hashes recorded before and after all suites.",
+  "vitest": "362 Vitest tests passed across 50 files.",
+  "deployment": "13 Node deployment-helper tests passed: nine bounded-batch tests and four historical USDI helper tests with its exact approved artifact.",
+  "browserDevelopment": "84 of 84 full Playwright tests passed in the supported development environment, 6.9 minutes.",
+  "browserProduction": "39 of 39 production case, wallet, recovery, roulette and Shelf Playwright tests passed, 1.9 minutes.",
+  "priorFailures": "Initial full-suite failures exposed the removed account page, stale brand and Shelf coordinates, native browser modal traversal, and the development error badge. All were resolved and the complete suite reran green. Production-only full-suite probes were stopped because camera diagnostics are intentionally absent and secure session cookies require HTTPS for the request client.",
+  "productionBuild": "Production Next.js build passed with an isolated migrated SQLite database and the existing Google Fonts network access.",
+  "typecheck": "next typegen and tsc --noEmit passed.",
+  "sandbox": "All three genuine local Sandbox suites passed: five-case collection, original Dragon regressions, and pinned deployed V1 state migration. Includes actual USDI/bonus transfers, failures, same-draw retry, duplicate prevention, inventory isolation and stale refunds.",
+  "simulation": "25,000,000 attempted openings passed exact integer conservation and reservation checks across five liquidity scenarios per case, plus forced legendary and bonus-depletion stresses.",
+  "commits": [
+    {
+      "hash": "72504b3b3533a71a1270b06c160ae5e0d187d7eb",
+      "subject": "Add isolated configurable tea cases and verified fixed-supply mocks"
+    },
+    {
+      "hash": "e864583e64b2e2cc8142de5723eca75ddf29441c",
+      "subject": "Integrate five tea cases and verified paginated Shelf history"
+    }
+  ],
+  "noMainnetTransactions": true,
+  "newPublicStateChanges": [
+    "Previously approved SHITZU storage registration only"
+  ],
+  "newCasePublicDeployment": "not submitted; requires explicit bounded approval and native funding",
+  "independentReviewer": "gpt-6-astra",
+  "unresolvedCodeFindings": []
+}

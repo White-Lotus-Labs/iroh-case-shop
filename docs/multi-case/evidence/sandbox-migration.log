@@ -1,0 +1,8 @@
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.52s
+     Running `integration/target/debug/iroh-sandbox-integration /private/tmp/iroh-dragon-tea-snapshot-277099127`
+PASS copied deployed V1 code and state; 4 settled openings and 996000000 USDI base units reconcile
+PASS failed atomic batch leaves V1 code and state readable
+PASS atomic migration preserved history, raw child records, credits, quote odds and USDI book. Gas 42201979092395
+PASS legacy retry used 60 Tgas, paid once, and preserved draw; stale V1 payment was fully refunded
+PASS migrated case accepted real inventory and a new linked opening; bonus failure reserved one leg and retry paid only that token
+PASS redeploying V1 code alone cannot recover migrated state

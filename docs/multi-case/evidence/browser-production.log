@@ -1,0 +1,47 @@
+
+Running 39 tests using 1 worker
+
+(node:87927) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/39] tests/browser/cases.spec.ts:18:1 › cases with unavailable RPC show no invented data and cannot request signatures
+[2/39] tests/browser/cases.spec.ts:57:1 › cases reuse the root Testnet wallet session through reload and disconnect
+[3/39] tests/browser/cases.spec.ts:154:3 › cases keep branding and the wallet within a 390px viewport
+[4/39] tests/browser/cases.spec.ts:154:3 › cases keep branding and the wallet within a 320px viewport
+[5/39] tests/browser/cases.spec.ts:176:3 › tea room keeps Cases navigation and the wallet visible at 390px
+[6/39] tests/browser/cases.spec.ts:176:3 › tea room keeps Cases navigation and the wallet visible at 320px
+[7/39] tests/browser/cases.spec.ts:203:1 › standalone Cases scrolls and receives input before and after wallet authorization
+[8/39] tests/browser/cases.spec.ts:256:1 › standalone Cases accepts keyboard scroll when no wallet is available
+[9/39] tests/browser/chain-loading.spec.ts:5:1 › shows balance, claim eligibility and pool while opening history is slow
+[10/39] tests/browser/chain-loading.spec.ts:67:1 › backs off a failed balance read and retries without hiding claim or pool data
+[11/39] tests/browser/chain-loading.spec.ts:110:1 › a hanging view times out, and rapid refreshes do not restart it
+[12/39] tests/browser/chain-loading.spec.ts:154:1 › disconnect and a new account ignore a slow balance from the previous wallet
+[13/39] tests/browser/chain-loading.spec.ts:226:1 › recovers a redirected claim receipt and never sends a second claim
+[14/39] tests/browser/chain-loading.spec.ts:262:1 › unmount cancels an in-flight wallet read and reopening starts a fresh read
+[15/39] tests/browser/host-catalog.spec.ts:14:3 › Host catalog and inspection fit a 320px viewport
+[16/39] tests/browser/host-catalog.spec.ts:14:3 › Host catalog and inspection fit a 390px viewport
+[17/39] tests/browser/host-catalog.spec.ts:14:3 › Host catalog and inspection fit a 820px viewport
+[18/39] tests/browser/host-catalog.spec.ts:14:3 › Host catalog and inspection fit a 1366px viewport
+[19/39] tests/browser/host-catalog.spec.ts:14:3 › Host catalog and inspection fit a 1920px viewport
+[20/39] tests/browser/host-catalog.spec.ts:138:1 › Host verifies claim, pending opening recovery, draw, and payment through the wallet lifecycle
+[21/39] tests/browser/host-catalog.spec.ts:275:3 › Host reports a finalized refund without revealing a reward
+[22/39] tests/browser/host-catalog.spec.ts:275:3 › Host reports a finalized fail without revealing a reward
+[23/39] tests/browser/host-catalog.spec.ts:317:3 › collection previews Bamboo Mist Case without authorizing an undeployed opening
+[24/39] tests/browser/host-catalog.spec.ts:317:3 › collection previews Moon Spirit Case without authorizing an undeployed opening
+[25/39] tests/browser/host-catalog.spec.ts:317:3 › collection previews Phoenix Flame Case without authorizing an undeployed opening
+[26/39] tests/browser/host-catalog.spec.ts:317:3 › collection previews Uncle's Secret Reserve without authorizing an undeployed opening
+[27/39] tests/browser/host-catalog.spec.ts:351:1 › a case-specific deep link and refresh retain the selected planned case
+[28/39] tests/browser/host-catalog.spec.ts:368:1 › switching cases preserves the original pending receipt and never resubmits it
+[29/39] tests/browser/reward-history.spec.ts:14:1 › Host waits for a verified draw and the Shelf retains the purchase receipt
+[30/39] tests/browser/reward-history.spec.ts:92:1 › mobile reel skips motion and Shelf prompts a disconnected wallet
+[31/39] tests/browser/reward-history.spec.ts:133:1 › Shelf loads older finalized case history and retains the legacy fallback
+[32/39] tests/browser/wallet-history.spec.ts:35:1 › Shelf separates indexed references, loads more and verifies receipts on demand
+[33/39] tests/browser/wallet-history.spec.ts:166:1 › indexer and receipt failures do not hide finalized case activity
+[34/39] tests/browser/wallet-history.spec.ts:226:1 › switching wallets cancels old indexed history and ignores a late response
+[35/39] tests/browser/wallet.spec.ts:31:1 › shows Connect Wallet by default and opens the wallet picker once
+[36/39] tests/browser/wallet.spec.ts:60:1 › connects, restores after refresh, then disconnects for good
+[37/39] tests/browser/wallet.spec.ts:108:1 › keeps the header usable on a narrow screen
+[38/39] tests/browser/wallet.spec.ts:122:1 › disables connection while authorization is pending
+[39/39] tests/browser/wallet.spec.ts:136:1 › returns to the guest state when wallet authorization is rejected
+  39 passed (1.9m)
