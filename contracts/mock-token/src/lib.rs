@@ -20,6 +20,15 @@ pub enum MockAsset {
     SHITZU,
     RHEA,
     AURORA,
+    BLACKDRAGON,
+    NEKO,
+    MPDAO,
+    GEAR,
+    PURGE,
+    WNEAR,
+    STNEAR,
+    LINEAR,
+    RNEAR,
 }
 
 #[near(contract_state)]
@@ -44,20 +53,37 @@ impl MockToken {
             owner_id.as_str().ends_with(".testnet") && owner_id != account,
             "Use a separate Testnet inventory owner"
         );
-        let (name, symbol) = match asset {
-            MockAsset::SHITZU => ("Test Shitzu", "SHITZU"),
-            MockAsset::RHEA => ("Test Rhea", "RHEA"),
-            MockAsset::AURORA => ("Test Aurora", "AURORA"),
+        let (name, symbol, decimals, derivative) = match asset {
+            MockAsset::SHITZU => ("Test Shitzu", "SHITZU", 6, false),
+            MockAsset::RHEA => ("Test Rhea", "RHEA", 6, false),
+            MockAsset::AURORA => ("Test Aurora", "AURORA", 6, false),
+            MockAsset::BLACKDRAGON => ("Test Black Dragon", "BLACKDRAGON", 24, false),
+            MockAsset::NEKO => ("Test Neko", "NEKO", 24, false),
+            MockAsset::MPDAO => ("Test mpDAO", "mpDAO", 6, false),
+            MockAsset::GEAR => ("Test Gear", "GEAR", 18, false),
+            MockAsset::PURGE => ("Test Purge", "PURGE", 18, false),
+            MockAsset::WNEAR => ("Test Wrapped NEAR", "wNEAR", 24, true),
+            MockAsset::STNEAR => ("Test Staked NEAR", "STNEAR", 24, true),
+            MockAsset::LINEAR => ("Test LiNEAR", "LINEAR", 24, true),
+            MockAsset::RNEAR => ("Test Rhea Staked NEAR", "rNEAR", 24, true),
+        };
+        let notice = if derivative {
+            r#"{"description":"Unofficial Iroh Case Shop Testnet mock. No monetary value. No yield, backing, or redemption."}"#
+        } else { NOTICE };
+        let reference = if derivative {
+            "data:application/json,%7B%22description%22%3A%22Unofficial%20Iroh%20Case%20Shop%20Testnet%20mock.%20No%20monetary%20value.%20No%20yield%2C%20backing%2C%20or%20redemption.%22%7D"
+        } else {
+            "data:application/json,%7B%22description%22%3A%22Unofficial%20Iroh%20Case%20Shop%20Testnet%20mock.%20No%20monetary%20value.%22%7D"
         };
         let metadata = FungibleTokenMetadata {
             spec: FT_METADATA_SPEC.into(), name: name.into(), symbol: symbol.into(),
-            decimals: 6, icon: None,
-            reference: Some("data:application/json,%7B%22description%22%3A%22Unofficial%20Iroh%20Case%20Shop%20Testnet%20mock.%20No%20monetary%20value.%22%7D".into()),
-            reference_hash: Some(Base64VecU8(env::sha256(NOTICE.as_bytes()))),
+            decimals, icon: None,
+            reference: Some(reference.into()),
+            reference_hash: Some(Base64VecU8(env::sha256(notice.as_bytes()))),
         };
         metadata.assert_valid();
         let mut token = FungibleToken::new(b"t");
-        let supply = U128(100_000 * 1_000_000);
+        let supply = U128(100_000_u128 * 10_u128.pow(u32::from(decimals)));
         token.internal_register_account(&owner_id);
         token.internal_deposit(&owner_id, supply.0);
         FtMint {
@@ -177,6 +203,60 @@ mod tests {
         assert_eq!(token.ft_metadata().symbol, "AURORA");
         assert_eq!(token.ft_metadata().name, "Test Aurora");
         assert_eq!(token.ft_metadata().decimals, 6);
+    }
+
+    #[test]
+    fn verified_assets_mirror_decimals_and_issue_exact_whole_supply() {
+        let cases = [
+            ("BLACKDRAGON", "Test Black Dragon", "BLACKDRAGON", 24),
+            ("NEKO", "Test Neko", "NEKO", 24),
+            ("MPDAO", "Test mpDAO", "mpDAO", 6),
+            ("GEAR", "Test Gear", "GEAR", 18),
+            ("PURGE", "Test Purge", "PURGE", 18),
+            ("WNEAR", "Test Wrapped NEAR", "wNEAR", 24),
+            ("STNEAR", "Test Staked NEAR", "STNEAR", 24),
+            ("LINEAR", "Test LiNEAR", "LINEAR", 24),
+            ("RNEAR", "Test Rhea Staked NEAR", "rNEAR", 24),
+        ];
+        for (index, (asset, name, symbol, decimals)) in cases.into_iter().enumerate() {
+            let current: AccountId = format!("mock{index}.testnet").parse().unwrap();
+            let owner: AccountId = format!("inventory{index}.testnet").parse().unwrap();
+            testing_env!(VMContextBuilder::new()
+                .current_account_id(current.clone())
+                .predecessor_account_id(current)
+                .build());
+            let variant = near_sdk::serde_json::from_str(&format!("\"{asset}\"")).unwrap();
+            let token = MockToken::new(variant, owner.clone());
+            let metadata = token.ft_metadata();
+            let expected = U128(100_000_u128 * 10_u128.pow(decimals));
+            assert_eq!(token.ft_total_supply(), expected, "{asset}");
+            assert_eq!(token.ft_balance_of(owner), expected, "{asset}");
+            assert_eq!((metadata.name.as_str(), metadata.symbol.as_str(), metadata.decimals),
+                (name, symbol, decimals as u8));
+            let reference = metadata.reference.unwrap();
+            assert!(reference.contains("Unofficial"));
+            assert!(reference.contains("No%20monetary%20value"));
+            if matches!(asset, "WNEAR" | "STNEAR" | "LINEAR" | "RNEAR") {
+                assert!(reference.contains("No%20yield%2C%20backing%2C%20or%20redemption"));
+            }
+        }
+    }
+
+    #[test]
+    fn legacy_assets_keep_their_six_decimal_supply() {
+        for (index, (asset, name)) in [
+            ("SHITZU", "Test Shitzu"), ("RHEA", "Test Rhea"), ("AURORA", "Test Aurora")
+        ].into_iter().enumerate() {
+            let current = format!("legacy{index}.testnet").parse::<AccountId>().unwrap();
+            testing_env!(VMContextBuilder::new().current_account_id(current.clone())
+                .predecessor_account_id(current).build());
+            let variant = near_sdk::serde_json::from_str(&format!("\"{asset}\"")).unwrap();
+            let token = MockToken::new(variant, format!("legacy-owner{index}.testnet").parse().unwrap());
+            assert_eq!(token.ft_total_supply(), U128(100_000_000_000));
+            assert_eq!(token.ft_metadata().decimals, 6);
+            assert_eq!(token.ft_metadata().name, name);
+            assert_eq!(token.ft_metadata().symbol, asset);
+        }
     }
 
     #[test]

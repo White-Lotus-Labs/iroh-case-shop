@@ -1,8 +1,9 @@
 mod bonus;
+mod configured;
 mod migration;
 
 use iroh_economics::{
-    CONTRIBUTION, DENOMINATOR, FEE, MAX_REWARD, PRICE, REWARDS, TARGET, distribution, health,
+    CONTRIBUTION, DENOMINATOR, FEE, PRICE, REWARDS, TARGET, distribution, health,
 };
 use near_contract_standards::fungible_token::receiver::FungibleTokenReceiver;
 use near_sdk::collections::LookupMap;
@@ -12,6 +13,9 @@ use near_sdk::{
     AccountId, Gas, NearToken, PanicOnDefault, Promise, PromiseOrValue, assert_one_yocto, env,
     ext_contract, near, require,
 };
+
+#[cfg(test)]
+use iroh_economics::MAX_REWARD;
 
 const OPENING_BYTES: u128 = 2_048;
 const ACCOUNT_BYTES: u128 = 256;
@@ -168,25 +172,27 @@ impl CasePool {
     }
 
     pub fn get_reward_inventory(&self) -> Vec<Value> {
-        self.bonuses
+        let entries = self.reward_entries();
+        entries
             .iter()
-            .flat_map(|items| items.iter().enumerate().map(|(tier, item)| item.view(tier)))
+            .enumerate()
+            .map(|(index, _)| self.entry_view(index))
             .collect()
     }
 
     pub fn get_case(&self) -> Value {
-        let rewards: Vec<_> = ["Common", "Rare", "Legendary"].iter().zip(REWARDS).map(|(tier, amount)| {
+        let rewards: Vec<_> = ["Common", "Rare", "Legendary"].iter().zip(self.rewards()).map(|(tier, amount)| {
             json!({"reward_id":format!("usdi-{}", tier.to_ascii_lowercase()), "token_contract_id":self.token,
                 "token_symbol":"USDI", "token_decimals":6, "amount":amount.to_string(),
                 "display_name":"USD Iroh", "tier":tier})
         }).collect();
-        json!({"case_id":"dragon-tea", "name":"Dragon Tea Case", "token_id":self.token,
-            "price":PRICE.to_string(), "pool_contribution":CONTRIBUTION.to_string(), "platform_fee":FEE.to_string(),
-            "target":TARGET.to_string(), "probability_denominator":DENOMINATOR,
+        json!({"case_id":self.case_id(), "name":self.case_name(), "token_id":self.token,
+            "price":self.price().to_string(), "pool_contribution":self.contribution().to_string(), "platform_fee":self.fee().to_string(),
+            "target":self.target().to_string(), "probability_denominator":DENOMINATOR,
             "rewards":rewards,
             "randomness":"NEAR protocol randomness; Testnet demonstration, not production-grade VRF",
             "quote_policy":"Exact revision, zero slippage; stale quotes are fully refunded",
-            "bonus_rewards":self.get_reward_inventory()})
+            "bonus_rewards":self.get_reward_inventory(),"history_pagination":true})
     }
     pub fn get_pool(&self) -> Value {
         let book = add(
@@ -195,7 +201,7 @@ impl CasePool {
         );
         let flights = add(self.in_flight, self.treasury_pending());
         json!({"pool_funds":self.pool.to_string(),"reserved_rewards":self.reserved.to_string(),
-            "available":self.available().to_string(),"target":TARGET.to_string(),"health":health(self.available()),
+            "available":self.available().to_string(),"target":self.target().to_string(),"health":self.pool_health(),
             "pending_fees":self.pending_fees.to_string(),"treasury_available":self.fees.to_string(),
             "treasury_in_flight":self.treasury_pending().to_string(),"in_flight_payouts":self.in_flight.to_string(),
             "pending_openings":self.pending,"completed_payouts":self.completed.to_string(),"total_paid":self.total_paid.to_string(),
@@ -204,7 +210,7 @@ impl CasePool {
             "expected_balance_min":sub(book, flights).to_string(),"expected_balance_max":book.to_string()})
     }
     pub fn get_quote(&self, account_id: AccountId) -> Value {
-        let odds = distribution(self.available());
+        let odds = self.odds();
         let error = self.admission_error().or_else(|| {
             if self.active.get(&account_id).is_some() {
                 Some("Finish the pending opening first")
@@ -214,9 +220,9 @@ impl CasePool {
                 None
             }
         });
-        json!({"case_id":"dragon-tea","revision":self.revision.to_string(),"expires_at":env::block_height().checked_add(120).expect("Height overflow").to_string(),
+        json!({"case_id":self.case_id(),"revision":self.revision.to_string(),"expires_at":env::block_height().checked_add(120).expect("Height overflow").to_string(),
             "nonce":self.next_nonce(&account_id).to_string(),"common":odds.common,"rare":odds.rare,"legendary":odds.legendary,
-            "denominator":DENOMINATOR,"target_ev":odds.target_ev.to_string(),"expected_numerator":odds.expected_numerator().to_string(),
+            "denominator":DENOMINATOR,"target_ev":odds.target_ev.to_string(),"expected_numerator":odds.expected_numerator_for(self.rewards()).to_string(),
             "available":self.available().to_string(),"can_open":error.is_none(),"reason":error})
     }
     pub fn get_opening(&self, opening_id: U64) -> Option<Value> {
@@ -240,6 +246,39 @@ impl CasePool {
             result.push(self.opening_view(&opening));
         }
         result
+    }
+    /// The cursor is inclusive: it identifies the next linked row to read.
+    /// Only rows belonging to the requested account can be traversed.
+    pub fn get_history_page(
+        &self,
+        account_id: AccountId,
+        before_opening_id: Option<U64>,
+        limit: u32,
+    ) -> Value {
+        require!(
+            (1..=50).contains(&limit),
+            "History page limit must be between 1 and 50"
+        );
+        let mut id = before_opening_id
+            .map(|cursor| {
+                let row = self.read_opening(cursor.0).expect("Unknown history cursor");
+                require!(
+                    row.account == account_id,
+                    "History cursor belongs to another account"
+                );
+                cursor.0
+            })
+            .or_else(|| self.latest.get(&account_id));
+        let mut rows = Vec::new();
+        for _ in 0..limit {
+            let Some(row) = id.and_then(|next| self.read_opening(next)) else {
+                break;
+            };
+            require!(row.account == account_id, "History chain account mismatch");
+            id = row.previous;
+            rows.push(self.opening_view(&row));
+        }
+        json!({"openings":rows,"next_cursor":id.map(|next|next.to_string())})
     }
     pub fn storage_balance_of(&self, account_id: AccountId) -> U128 {
         U128(self.credits.get(&account_id).unwrap_or(0))
@@ -314,27 +353,28 @@ impl CasePool {
             return false;
         };
         let tier = bonus::tier(draw, opening.odds);
-        let reward = REWARDS[tier];
+        let reward = self.rewards()[tier];
         let reserved_bonus = self
             .legacy_openings
             .as_ref()
             .is_none_or(|old| opening.id >= old.end);
-        if let Some(inventory) = self.bonuses.as_mut().filter(|_| reserved_bonus) {
-            opening.bonus = bonus::selected(
-                tier,
-                randomness::bonus_bit(opening.id, opening.accepted_height),
-                true,
-            );
-            for (index, item) in inventory.iter_mut().enumerate() {
+        if reserved_bonus {
+            opening.bonus = match self.select_bonus(&opening, tier) {
+                Ok(selected) => selected,
+                Err(()) => return false,
+            };
+            let mut entries = self.reward_entries();
+            for (index, item) in entries.iter_mut().enumerate() {
                 if opening.bonus != Some(index as u8) {
-                    item.reserved = sub(item.reserved, bonus::amount(index));
+                    item.reserved = sub(item.reserved, item.reward.amount.0);
                 }
             }
+            self.store_entries(&entries);
         }
         opening.reward = Some(reward);
         opening.draw = Some(draw);
         opening.status = Status::Claimable;
-        self.reserved = sub(self.reserved, sub(MAX_REWARD, reward));
+        self.reserved = sub(self.reserved, sub(self.maximum_reward(), reward));
         self.bump();
         event(
             "reward_selected",
@@ -372,19 +412,21 @@ impl CasePool {
             }
         }
         if let Some(tier) = bonus_tier {
-            let item = &mut self.bonuses.as_mut().expect("Stored bonus catalog")[tier];
-            let amount = bonus::amount(tier);
+            let mut entries = self.reward_entries();
+            let item = &mut entries[tier];
+            let amount = item.reward.amount.0;
             item.in_flight = sub(item.in_flight, amount);
             if transfer_succeeded_at(u64::from(usdi_due)) {
                 item.funds = sub(item.funds, amount);
                 item.reserved = sub(item.reserved, amount);
                 opening.bonus_paid = true;
             }
+            self.store_entries(&entries);
         }
         let success = opening.usdi_paid && (opening.bonus.is_none() || opening.bonus_paid);
         opening.status = if success {
-            self.pending_fees = sub(self.pending_fees, FEE);
-            self.fees = add(self.fees, FEE);
+            self.pending_fees = sub(self.pending_fees, self.fee());
+            self.fees = add(self.fees, self.fee());
             self.completed = self.completed.checked_add(1).expect("Count overflow");
             self.pending = self.pending.checked_sub(1).expect("Pending underflow");
             self.active.remove(&opening.account);
@@ -435,7 +477,7 @@ impl CasePool {
             .ft_transfer(
                 self.treasury.clone(),
                 amount,
-                Some("Vested Dragon Tea fees".into()),
+                Some(format!("Vested {} fees", self.case_id())),
             )
             .then(
                 ext_self::ext(env::current_account_id())
@@ -481,10 +523,10 @@ impl FungibleTokenReceiver for CasePool {
     ) -> PromiseOrValue<U128> {
         let predecessor = env::predecessor_account_id();
         if predecessor != self.token {
-            if let Some(item) = self
-                .bonuses
-                .as_mut()
-                .and_then(|items| items.iter_mut().find(|item| item.token == predecessor))
+            let mut entries = self.reward_entries();
+            if let Some(item) = entries
+                .iter_mut()
+                .find(|item| item.reward.token_contract_id == predecessor)
             {
                 if msg.len() <= 128
                     && matches!(
@@ -496,10 +538,11 @@ impl FungibleTokenReceiver for CasePool {
                     && item.funds.checked_add(amount.0).is_some()
                 {
                     item.funds = add(item.funds, amount.0);
+                    self.store_entries(&entries);
                     self.bump();
                     event(
                         "bonus_funded",
-                        json!({"token_contract_id":predecessor,"sender_id":sender_id,"amount":amount.0.to_string()}),
+                        json!({"case_id":self.case_id(),"token_contract_id":predecessor,"sender_id":sender_id,"amount":amount.0.to_string()}),
                     );
                     return PromiseOrValue::Value(U128(0));
                 }
@@ -534,8 +577,8 @@ impl FungibleTokenReceiver for CasePool {
                 quote,
             } => {
                 let now = env::block_height();
-                if amount.0 != PRICE
-                    || case_id != "dragon-tea"
+                if amount.0 != self.price()
+                    || case_id != self.case_id()
                     || self.admission_error().is_some()
                     || self.active.get(&sender_id).is_some()
                     || nonce.0 != self.next_nonce(&sender_id)
@@ -552,7 +595,7 @@ impl FungibleTokenReceiver for CasePool {
                     return PromiseOrValue::Value(amount);
                 }
                 let storage_before = env::storage_usage();
-                let odds = distribution(self.available());
+                let odds = self.odds();
                 let id = self.next_id;
                 self.next_id = self.next_id.checked_add(1).expect("Opening ID overflow");
                 let opening = Opening {
@@ -571,14 +614,14 @@ impl FungibleTokenReceiver for CasePool {
                     usdi_paid: false,
                     bonus_paid: false,
                 };
-                self.pool = add(self.pool, CONTRIBUTION);
-                self.pending_fees = add(self.pending_fees, FEE);
-                self.reserved = add(self.reserved, MAX_REWARD);
-                if let Some(inventory) = &mut self.bonuses {
-                    for (tier, item) in inventory.iter_mut().enumerate() {
-                        item.reserved = add(item.reserved, bonus::amount(tier));
-                    }
+                self.pool = add(self.pool, self.contribution());
+                self.pending_fees = add(self.pending_fees, self.fee());
+                self.reserved = add(self.reserved, self.maximum_reward());
+                let mut entries = self.reward_entries();
+                for item in &mut entries {
+                    item.reserved = add(item.reserved, item.reward.amount.0);
                 }
+                self.store_entries(&entries);
                 require!(
                     self.pool >= self.reserved,
                     "Insufficient maximum reward reserve"
@@ -658,18 +701,17 @@ impl CasePool {
         if self.paused {
             return Some("Case paused");
         }
-        if self.available() < MAX_REWARD {
-            return Some("Pool needs at least 5 USDI available");
+        if self.available() < self.maximum_reward() {
+            return Some("Pool needs enough USDI for the maximum reward");
         }
-        if self.bonuses.as_ref().is_some_and(|items| {
-            items
-                .iter()
-                .enumerate()
-                .any(|(tier, item)| item.available() < bonus::amount(tier))
-        }) {
+        if self
+            .reward_entries()
+            .iter()
+            .any(|item| item.available() < item.reward.amount.0)
+        {
             return Some("Bonus inventory needs funding");
         }
-        let limit = match health(self.available()) {
+        let limit = match self.pool_health() {
             iroh_economics::Health::Healthy => 64,
             iroh_economics::Health::Caution => 16,
             iroh_economics::Health::Critical => 4,
@@ -680,13 +722,15 @@ impl CasePool {
         None
     }
     fn opening_view(&self, o: &Opening) -> Value {
-        json!({"opening_id":o.id.to_string(),"account_id":o.account,"nonce":o.nonce.to_string(),
+        json!({"case_id":self.case_id(),"case_name":self.case_name(),
+            "tier":o.draw.map(|draw|["Common","Rare","Legendary"][bonus::tier(draw,o.odds)]),
+            "opening_id":o.id.to_string(),"account_id":o.account,"nonce":o.nonce.to_string(),
             "accepted_height":o.accepted_height.to_string(),"accepted_revision":o.revision.to_string(),
             "common":o.odds[0],"rare":o.odds[1],"legendary":o.odds[2],"denominator":DENOMINATOR,
             "status":o.status,"reward":o.reward.map(|v|v.to_string()),"draw":o.draw,"attempt":o.attempt.to_string(),
             "usdi_paid":o.usdi_paid,"bonus_paid":o.bonus_paid,
-            "bonus":o.bonus.map(|tier| self.bonuses.as_ref().expect("Stored bonus catalog")[usize::from(tier)].view(usize::from(tier))),
-            "reserved":if o.usdi_paid { "0".to_string() } else { o.reward.unwrap_or(MAX_REWARD).to_string() }})
+            "bonus":o.bonus.map(|tier| self.entry_view(usize::from(tier))),
+            "reserved":if o.usdi_paid { "0".to_string() } else { o.reward.unwrap_or(self.maximum_reward()).to_string() }})
     }
     fn schedule_draw(&self, id: u64) {
         ext_self::ext(env::current_account_id())
@@ -709,14 +753,17 @@ impl CasePool {
             .filter(|_| !opening.bonus_paid)
             .map(usize::from)
         {
-            let item = &mut self.bonuses.as_mut().expect("Stored bonus catalog")[tier];
-            let amount = bonus::amount(tier);
+            let mut entries = self.reward_entries();
+            let item = &mut entries[tier];
+            let amount = item.reward.amount.0;
             item.in_flight = add(item.in_flight, amount);
-            let extra = Self::transfer_reward(item.token.clone(), opening, amount);
+            let extra =
+                Self::transfer_reward(item.reward.token_contract_id.clone(), opening, amount);
             transfer = Some(match transfer {
                 Some(base) => base.and(extra),
                 None => extra,
             });
+            self.store_entries(&entries);
         }
         self.openings.insert(&opening.id, opening);
         transfer
@@ -735,7 +782,7 @@ impl CasePool {
             .ft_transfer(
                 opening.account.clone(),
                 U128(amount),
-                Some(format!("Dragon Tea opening {}", opening.id)),
+                Some(format!("Iroh case opening {}", opening.id)),
             )
     }
     fn assert_private(&self) {
@@ -787,6 +834,23 @@ mod randomness {
         input.extend_from_slice(&accepted_height.to_le_bytes());
         env::sha256_array(&input)[0] & 1 == 1
     }
+    pub fn bonus_candidate(id: u64, accepted_height: u64, count: u64) -> Option<u64> {
+        let mut input = b"iroh:case:bonus-candidate:v1".to_vec();
+        input.extend_from_slice(&env::random_seed_array());
+        input.extend_from_slice(env::current_account_id().as_bytes());
+        input.extend_from_slice(&id.to_le_bytes());
+        input.extend_from_slice(&accepted_height.to_le_bytes());
+        let bound = u64::MAX - u64::MAX % count;
+        for counter in 0u8..4 {
+            input.push(counter);
+            let hash = env::sha256_array(&input);
+            let value = u64::from_le_bytes(hash[..8].try_into().expect("Eight bytes"));
+            if value < bound {
+                return Some(value % count);
+            }
+        }
+        None
+    }
     pub fn draw(id: u64, accepted_height: u64) -> Option<u32> {
         let mut input = env::random_seed_array().to_vec();
         input.extend_from_slice(env::current_account_id().as_bytes());
@@ -807,3 +871,6 @@ mod randomness {
 
 #[cfg(test)]
 mod tests;
+
+#[cfg(test)]
+mod configured_tests;

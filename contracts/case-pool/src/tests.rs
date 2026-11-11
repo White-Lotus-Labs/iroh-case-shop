@@ -526,3 +526,33 @@ fn bonus_selection_preserves_rarity_boundaries() {
         assert_eq!(bonus::selected(tier, true, false), None);
     }
 }
+
+#[test]
+fn history_pages_follow_inclusive_account_cursor_without_duplicates() {
+    let mut pool = funded();
+    for _ in 0..3 {
+        let id = accept(&mut pool, "alice.testnet");
+        draw(&mut pool, id);
+        callback(true);
+        assert!(pool.on_payout(U64(id), U64(1)));
+    }
+    let first = pool.get_history_page(account("alice.testnet"), None, 2);
+    assert_eq!(first["openings"][0]["opening_id"], "2");
+    assert_eq!(first["openings"][1]["opening_id"], "1");
+    assert_eq!(first["next_cursor"], "0");
+    let second = pool.get_history_page(account("alice.testnet"), Some(U64(0)), 2);
+    assert_eq!(second["openings"].as_array().unwrap().len(), 1);
+    assert_eq!(second["openings"][0]["opening_id"], "0");
+    assert!(second["next_cursor"].is_null());
+    assert_eq!(
+        pool.get_history_page(account("nobody.testnet"), None, 2)["openings"],
+        json!([])
+    );
+}
+#[test]
+#[should_panic(expected = "History cursor belongs to another account")]
+fn history_pages_reject_other_accounts_cursor() {
+    let mut pool = funded();
+    accept(&mut pool, "alice.testnet");
+    pool.get_history_page(account("bob.testnet"), Some(U64(0)), 20);
+}

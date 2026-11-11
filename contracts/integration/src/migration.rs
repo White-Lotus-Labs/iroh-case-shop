@@ -84,7 +84,14 @@ async fn claimable(owner: &Account, game: &Contract) -> Result<Value> {
 
 fn legacy_fields(mut row: Value) -> Value {
     let obj = row.as_object_mut().expect("Opening object");
-    for key in ["bonus", "bonus_paid", "usdi_paid"] {
+    for key in [
+        "bonus",
+        "bonus_paid",
+        "usdi_paid",
+        "case_id",
+        "case_name",
+        "tier",
+    ] {
         obj.remove(key);
     }
     row

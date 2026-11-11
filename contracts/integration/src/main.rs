@@ -5,6 +5,7 @@ use near_workspaces::{Account, Contract};
 use serde_json::{Value, json};
 use std::path::Path;
 
+mod collection;
 mod migration;
 
 const STARTER: u128 = 1_000_000_000;
@@ -88,7 +89,7 @@ async fn prepay(account: &Account, game: &Contract) -> Result<()> {
 }
 
 fn message(quote: &Value) -> String {
-    json!({"action":"open", "case_id":"dragon-tea", "nonce":quote["nonce"],
+    json!({"action":"open", "case_id":quote["case_id"], "nonce":quote["nonce"],
         "quote":{"revision":quote["revision"], "expires_at":quote["expires_at"]}})
     .to_string()
 }
@@ -184,8 +185,11 @@ async fn reconcile(token: &Contract, game: &Contract) -> Result<Value> {
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    if let Some(snapshot) = std::env::args_os().nth(1) {
-        return migration::rehearse(Path::new(&snapshot)).await;
+    if let Some(argument) = std::env::args_os().nth(1) {
+        if argument == "--collection" {
+            return collection::verify().await;
+        }
+        return migration::rehearse(Path::new(&argument)).await;
     }
     // sandbox() is a fresh local chain. No Testnet RPC, local wallet, saved key,
     // user credentials or environment configuration is used by this program.

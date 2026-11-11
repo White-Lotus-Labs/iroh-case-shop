@@ -5,6 +5,8 @@
 
 use serde::Serialize;
 
+pub mod configured;
+
 pub const UNIT: u128 = 1_000_000;
 pub const PRICE: u128 = UNIT;
 pub const CONTRIBUTION: u128 = 950_000;

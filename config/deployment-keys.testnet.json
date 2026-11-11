@@ -1,0 +1,83 @@
+{
+  "keys": [
+    {
+      "accountId": "bamboo.needmore_1_near.testnet",
+      "asset": "bamboo-mist",
+      "publicKey": "ed25519:G5yBgWyMbxrFg9A1cKY2BtfraL9RkfjAJcgev9AXv13G",
+      "service": "near-testnet-bamboo.needmore_1_near.testnet"
+    },
+    {
+      "accountId": "blackdragon.needmore_1_near.testnet",
+      "asset": "BLACKDRAGON",
+      "publicKey": "ed25519:BzFYfhBpT7Y5rchB4v4JH16WNqMHpzP37xrWnM5mZMha",
+      "service": "near-testnet-blackdragon.needmore_1_near.testnet"
+    },
+    {
+      "accountId": "gear.needmore_1_near.testnet",
+      "asset": "GEAR",
+      "publicKey": "ed25519:BNRrJC51SnjV69hgzHo7JZrsyq7MvrZvs444RAvJv5ru",
+      "service": "near-testnet-gear.needmore_1_near.testnet"
+    },
+    {
+      "accountId": "linear.needmore_1_near.testnet",
+      "asset": "LINEAR",
+      "publicKey": "ed25519:5q5R4tuBBnh87uScmLPjYAV8cW8et9UnuYd9He2CeMP9",
+      "service": "near-testnet-linear.needmore_1_near.testnet"
+    },
+    {
+      "accountId": "moon.needmore_1_near.testnet",
+      "asset": "moon-spirit",
+      "publicKey": "ed25519:7wKGNqCeQVwni17kLHvq2djqixSPsKhzufVLX56X8pPG",
+      "service": "near-testnet-moon.needmore_1_near.testnet"
+    },
+    {
+      "accountId": "mpdao.needmore_1_near.testnet",
+      "asset": "MPDAO",
+      "publicKey": "ed25519:Cu7riCyEPzUyLzz3xMGa1En516bchWYT1Nw1mipqs6eY",
+      "service": "near-testnet-mpdao.needmore_1_near.testnet"
+    },
+    {
+      "accountId": "neko.needmore_1_near.testnet",
+      "asset": "NEKO",
+      "publicKey": "ed25519:HANvB1MeRnUru1U96q1iPyujUSfCRYNrjRwAUqjNJYLr",
+      "service": "near-testnet-neko.needmore_1_near.testnet"
+    },
+    {
+      "accountId": "phoenix.needmore_1_near.testnet",
+      "asset": "phoenix-flame",
+      "publicKey": "ed25519:HwUzDmdm2S9ePN7k9ifJ6Eth5jcMdCPNPNjHMX1rH1Yh",
+      "service": "near-testnet-phoenix.needmore_1_near.testnet"
+    },
+    {
+      "accountId": "purge.needmore_1_near.testnet",
+      "asset": "PURGE",
+      "publicKey": "ed25519:3JahkkUeThdgzonP4qwVymyDgcvqb13NoTzffz6FmfJY",
+      "service": "near-testnet-purge.needmore_1_near.testnet"
+    },
+    {
+      "accountId": "reserve.needmore_1_near.testnet",
+      "asset": "uncles-secret-reserve",
+      "publicKey": "ed25519:6aaWCKDbM6KVkD7uUU1qtk93nufqLrzGmbhiiP63cpiu",
+      "service": "near-testnet-reserve.needmore_1_near.testnet"
+    },
+    {
+      "accountId": "rnear.needmore_1_near.testnet",
+      "asset": "RNEAR",
+      "publicKey": "ed25519:6TsDqjRzzNvRhPoryErg3Pbn4WMPathCfWpmJcPx22aw",
+      "service": "near-testnet-rnear.needmore_1_near.testnet"
+    },
+    {
+      "accountId": "stnear.needmore_1_near.testnet",
+      "asset": "STNEAR",
+      "publicKey": "ed25519:HYi4hdPauGQWAupViFNubMSv4xPyibsRh9Tw7tmfBpgQ",
+      "service": "near-testnet-stnear.needmore_1_near.testnet"
+    },
+    {
+      "accountId": "wnear.needmore_1_near.testnet",
+      "asset": "WNEAR",
+      "publicKey": "ed25519:Hufga4xjW7XgqYuRSHGoeQBAt3r6HZgadudokD6dcX7q",
+      "service": "near-testnet-wnear.needmore_1_near.testnet"
+    }
+  ],
+  "network": "testnet"
+}

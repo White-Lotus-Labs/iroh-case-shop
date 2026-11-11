@@ -1,0 +1,760 @@
+{
+  "attempts_per_case": 5000000,
+  "cases": [
+    {
+      "bonus_depletion": {
+        "accepted_before_inventory_stop": 264,
+        "bonus_payout_counts": [
+          15,
+          18,
+          100,
+          1
+        ],
+        "initial_payouts_per_candidate": 100,
+        "oversubscribed": false,
+        "remaining_payouts": [
+          85,
+          82,
+          0,
+          99
+        ],
+        "usdi_valuation": null
+      },
+      "case_id": "bamboo-mist",
+      "concurrent": {
+        "accepted_before_limit": 16,
+        "pool": "257600000",
+        "reserved": "64000000",
+        "solvent": true
+      },
+      "legendary_streak": {
+        "accepted_before_stop": 70,
+        "maximum_reward": "4000000",
+        "negative_balance": false,
+        "remaining_pool": "3250000"
+      },
+      "price": "500000",
+      "rewards": [
+        "200000",
+        "500000",
+        "4000000"
+      ],
+      "runs": [
+        {
+          "result": {
+            "accepted": 0,
+            "attempts": 1000000,
+            "conservation": true,
+            "failed_then_retried": 0,
+            "final_pool": "0",
+            "initial_pool": "0",
+            "minimum_pool": "0",
+            "rejected": 1000000,
+            "tier_counts": [
+              0,
+              0,
+              0
+            ],
+            "total_paid": "0",
+            "vested_fees": "0"
+          },
+          "scenario": "empty"
+        },
+        {
+          "result": {
+            "accepted": 1,
+            "attempts": 1000000,
+            "conservation": true,
+            "failed_then_retried": 1,
+            "final_pool": "3975000",
+            "initial_pool": "4000000",
+            "minimum_pool": "3975000",
+            "rejected": 999999,
+            "tier_counts": [
+              0,
+              1,
+              0
+            ],
+            "total_paid": "500000",
+            "vested_fees": "25000"
+          },
+          "scenario": "minimum"
+        },
+        {
+          "result": {
+            "accepted": 1000000,
+            "attempts": 1000000,
+            "conservation": true,
+            "failed_then_retried": 100,
+            "final_pool": "227900000",
+            "initial_pool": "25000000",
+            "minimum_pool": "24975000",
+            "rejected": 0,
+            "tier_counts": [
+              259208,
+              725775,
+              15017
+            ],
+            "total_paid": "474797100000",
+            "vested_fees": "25000000000"
+          },
+          "scenario": "low"
+        },
+        {
+          "result": {
+            "accepted": 1000000,
+            "attempts": 1000000,
+            "conservation": true,
+            "failed_then_retried": 100,
+            "final_pool": "227900000",
+            "initial_pool": "250000000",
+            "minimum_pool": "180975000",
+            "rejected": 0,
+            "tier_counts": [
+              258703,
+              726259,
+              15038
+            ],
+            "total_paid": "475022100000",
+            "vested_fees": "25000000000"
+          },
+          "scenario": "target"
+        },
+        {
+          "result": {
+            "accepted": 1000000,
+            "attempts": 1000000,
+            "conservation": true,
+            "failed_then_retried": 100,
+            "final_pool": "227900000",
+            "initial_pool": "500000000",
+            "minimum_pool": "180975000",
+            "rejected": 0,
+            "tier_counts": [
+              258313,
+              726611,
+              15076
+            ],
+            "total_paid": "475272100000",
+            "vested_fees": "25000000000"
+          },
+          "scenario": "excess"
+        }
+      ],
+      "target": "250000000",
+      "target_expected_numerator": "474999800000",
+      "target_probabilities": [
+        258334,
+        726666,
+        15000
+      ]
+    },
+    {
+      "bonus_depletion": {
+        "accepted_before_inventory_stop": 276,
+        "bonus_payout_counts": [
+          39,
+          100,
+          2
+        ],
+        "initial_payouts_per_candidate": 100,
+        "oversubscribed": false,
+        "remaining_payouts": [
+          61,
+          0,
+          98
+        ],
+        "usdi_valuation": null
+      },
+      "case_id": "dragon-tea",
+      "concurrent": {
+        "accepted_before_limit": 50,
+        "pool": "1047500000",
+        "reserved": "250000000",
+        "solvent": true
+      },
+      "legendary_streak": {
+        "accepted_before_stop": 246,
+        "maximum_reward": "5000000",
+        "negative_balance": false,
+        "remaining_pool": "3700000"
+      },
+      "price": "1000000",
+      "rewards": [
+        "100000",
+        "1000000",
+        "5000000"
+      ],
+      "runs": [
+        {
+          "result": {
+            "accepted": 0,
+            "attempts": 1000000,
+            "conservation": true,
+            "failed_then_retried": 0,
+            "final_pool": "0",
+            "initial_pool": "0",
+            "minimum_pool": "0",
+            "rejected": 1000000,
+            "tier_counts": [
+              0,
+              0,
+              0
+            ],
+            "total_paid": "0",
+            "vested_fees": "0"
+          },
+          "scenario": "empty"
+        },
+        {
+          "result": {
+            "accepted": 1,
+            "attempts": 1000000,
+            "conservation": true,
+            "failed_then_retried": 1,
+            "final_pool": "4950000",
+            "initial_pool": "5000000",
+            "minimum_pool": "4950000",
+            "rejected": 999999,
+            "tier_counts": [
+              0,
+              1,
+              0
+            ],
+            "total_paid": "1000000",
+            "vested_fees": "50000"
+          },
+          "scenario": "minimum"
+        },
+        {
+          "result": {
+            "accepted": 1000000,
+            "attempts": 1000000,
+            "conservation": true,
+            "failed_then_retried": 100,
+            "final_pool": "979900000",
+            "initial_pool": "100000000",
+            "minimum_pool": "99950000",
+            "rejected": 0,
+            "tier_counts": [
+              277471,
+              672818,
+              49711
+            ],
+            "total_paid": "949120100000",
+            "vested_fees": "50000000000"
+          },
+          "scenario": "low"
+        },
+        {
+          "result": {
+            "accepted": 1000000,
+            "attempts": 1000000,
+            "conservation": true,
+            "failed_then_retried": 100,
+            "final_pool": "982700000",
+            "initial_pool": "1000000000",
+            "minimum_pool": "899750000",
+            "rejected": 0,
+            "tier_counts": [
+              277123,
+              673020,
+              49857
+            ],
+            "total_paid": "950017300000",
+            "vested_fees": "50000000000"
+          },
+          "scenario": "target"
+        },
+        {
+          "result": {
+            "accepted": 1000000,
+            "attempts": 1000000,
+            "conservation": true,
+            "failed_then_retried": 100,
+            "final_pool": "979900000",
+            "initial_pool": "2000000000",
+            "minimum_pool": "901850000",
+            "rejected": 0,
+            "tier_counts": [
+              276911,
+              673029,
+              50060
+            ],
+            "total_paid": "951020100000",
+            "vested_fees": "50000000000"
+          },
+          "scenario": "excess"
+        }
+      ],
+      "target": "1000000000",
+      "target_expected_numerator": "949999800000",
+      "target_probabilities": [
+        277778,
+        672222,
+        50000
+      ]
+    },
+    {
+      "bonus_depletion": {
+        "accepted_before_inventory_stop": 687,
+        "bonus_payout_counts": [
+          58,
+          71,
+          90,
+          100,
+          12
+        ],
+        "initial_payouts_per_candidate": 100,
+        "oversubscribed": false,
+        "remaining_payouts": [
+          42,
+          29,
+          10,
+          0,
+          88
+        ],
+        "usdi_valuation": null
+      },
+      "case_id": "moon-spirit",
+      "concurrent": {
+        "accepted_before_limit": 23,
+        "pool": "2043700000",
+        "reserved": "460000000",
+        "solvent": true
+      },
+      "legendary_streak": {
+        "accepted_before_stop": 110,
+        "maximum_reward": "20000000",
+        "negative_balance": false,
+        "remaining_pool": "9000000"
+      },
+      "price": "2000000",
+      "rewards": [
+        "100000",
+        "2000000",
+        "20000000"
+      ],
+      "runs": [
+        {
+          "result": {
+            "accepted": 0,
+            "attempts": 1000000,
+            "conservation": true,
+            "failed_then_retried": 0,
+            "final_pool": "0",
+            "initial_pool": "0",
+            "minimum_pool": "0",
+            "rejected": 1000000,
+            "tier_counts": [
+              0,
+              0,
+              0
+            ],
+            "total_paid": "0",
+            "vested_fees": "0"
+          },
+          "scenario": "empty"
+        },
+        {
+          "result": {
+            "accepted": 1,
+            "attempts": 1000000,
+            "conservation": true,
+            "failed_then_retried": 1,
+            "final_pool": "19900000",
+            "initial_pool": "20000000",
+            "minimum_pool": "19900000",
+            "rejected": 999999,
+            "tier_counts": [
+              0,
+              1,
+              0
+            ],
+            "total_paid": "2000000",
+            "vested_fees": "100000"
+          },
+          "scenario": "minimum"
+        },
+        {
+          "result": {
+            "accepted": 1000000,
+            "attempts": 1000000,
+            "conservation": true,
+            "failed_then_retried": 100,
+            "final_pool": "1953300000",
+            "initial_pool": "200000000",
+            "minimum_pool": "199900000",
+            "rejected": 0,
+            "tier_counts": [
+              433307,
+              526608,
+              40085
+            ],
+            "total_paid": "1898246700000",
+            "vested_fees": "100000000000"
+          },
+          "scenario": "low"
+        },
+        {
+          "result": {
+            "accepted": 1000000,
+            "attempts": 1000000,
+            "conservation": true,
+            "failed_then_retried": 100,
+            "final_pool": "1955500000",
+            "initial_pool": "2000000000",
+            "minimum_pool": "1499000000",
+            "rejected": 0,
+            "tier_counts": [
+              433005,
+              526842,
+              40153
+            ],
+            "total_paid": "1900044500000",
+            "vested_fees": "100000000000"
+          },
+          "scenario": "target"
+        },
+        {
+          "result": {
+            "accepted": 1000000,
+            "attempts": 1000000,
+            "conservation": true,
+            "failed_then_retried": 100,
+            "final_pool": "1955500000",
+            "initial_pool": "4000000000",
+            "minimum_pool": "1498900000",
+            "rejected": 0,
+            "tier_counts": [
+              432805,
+              526952,
+              40243
+            ],
+            "total_paid": "1902044500000",
+            "vested_fees": "100000000000"
+          },
+          "scenario": "excess"
+        }
+      ],
+      "target": "2000000000",
+      "target_expected_numerator": "1899999900000",
+      "target_probabilities": [
+        431579,
+        528421,
+        40000
+      ]
+    },
+    {
+      "bonus_depletion": {
+        "accepted_before_inventory_stop": 470,
+        "bonus_payout_counts": [
+          100,
+          58,
+          60,
+          3,
+          1,
+          2
+        ],
+        "initial_payouts_per_candidate": 100,
+        "oversubscribed": false,
+        "remaining_payouts": [
+          0,
+          42,
+          40,
+          97,
+          99,
+          98
+        ],
+        "usdi_valuation": null
+      },
+      "case_id": "phoenix-flame",
+      "concurrent": {
+        "accepted_before_limit": 16,
+        "pool": "5076000000",
+        "reserved": "1600000000",
+        "solvent": true
+      },
+      "legendary_streak": {
+        "accepted_before_stop": 52,
+        "maximum_reward": "100000000",
+        "negative_balance": false,
+        "remaining_pool": "47000000"
+      },
+      "price": "5000000",
+      "rewards": [
+        "100000",
+        "3500000",
+        "100000000"
+      ],
+      "runs": [
+        {
+          "result": {
+            "accepted": 0,
+            "attempts": 1000000,
+            "conservation": true,
+            "failed_then_retried": 0,
+            "final_pool": "0",
+            "initial_pool": "0",
+            "minimum_pool": "0",
+            "rejected": 1000000,
+            "tier_counts": [
+              0,
+              0,
+              0
+            ],
+            "total_paid": "0",
+            "vested_fees": "0"
+          },
+          "scenario": "empty"
+        },
+        {
+          "result": {
+            "accepted": 1000000,
+            "attempts": 1000000,
+            "conservation": true,
+            "failed_then_retried": 100,
+            "final_pool": "4543800000",
+            "initial_pool": "100000000",
+            "minimum_pool": "100000000",
+            "rejected": 0,
+            "tier_counts": [
+              481157,
+              488983,
+              29860
+            ],
+            "total_paid": "4745556200000",
+            "vested_fees": "250000000000"
+          },
+          "scenario": "minimum"
+        },
+        {
+          "result": {
+            "accepted": 1000000,
+            "attempts": 1000000,
+            "conservation": true,
+            "failed_then_retried": 100,
+            "final_pool": "4468100000",
+            "initial_pool": "500000000",
+            "minimum_pool": "500000000",
+            "rejected": 0,
+            "tier_counts": [
+              481159,
+              488976,
+              29865
+            ],
+            "total_paid": "4746031900000",
+            "vested_fees": "250000000000"
+          },
+          "scenario": "low"
+        },
+        {
+          "result": {
+            "accepted": 1000000,
+            "attempts": 1000000,
+            "conservation": true,
+            "failed_then_retried": 100,
+            "final_pool": "4469200000",
+            "initial_pool": "5000000000",
+            "minimum_pool": "2772300000",
+            "rejected": 0,
+            "tier_counts": [
+              481113,
+              488977,
+              29910
+            ],
+            "total_paid": "4750530800000",
+            "vested_fees": "250000000000"
+          },
+          "scenario": "target"
+        },
+        {
+          "result": {
+            "accepted": 1000000,
+            "attempts": 1000000,
+            "conservation": true,
+            "failed_then_retried": 100,
+            "final_pool": "4467900000",
+            "initial_pool": "10000000000",
+            "minimum_pool": "2767600000",
+            "rejected": 0,
+            "tier_counts": [
+              480976,
+              489067,
+              29957
+            ],
+            "total_paid": "4755532100000",
+            "vested_fees": "250000000000"
+          },
+          "scenario": "excess"
+        }
+      ],
+      "target": "5000000000",
+      "target_expected_numerator": "4749998400000",
+      "target_probabilities": [
+        483824,
+        486176,
+        30000
+      ]
+    },
+    {
+      "bonus_depletion": {
+        "accepted_before_inventory_stop": 497,
+        "bonus_payout_counts": [
+          89,
+          100,
+          20,
+          20,
+          5,
+          2,
+          3
+        ],
+        "initial_payouts_per_candidate": 100,
+        "oversubscribed": false,
+        "remaining_payouts": [
+          11,
+          0,
+          80,
+          80,
+          95,
+          98,
+          97
+        ],
+        "usdi_valuation": null
+      },
+      "case_id": "uncles-secret-reserve",
+      "concurrent": {
+        "accepted_before_limit": 19,
+        "pool": "10180500000",
+        "reserved": "2280000000",
+        "solvent": true
+      },
+      "legendary_streak": {
+        "accepted_before_stop": 90,
+        "maximum_reward": "120000000",
+        "negative_balance": false,
+        "remaining_pool": "55000000"
+      },
+      "price": "10000000",
+      "rewards": [
+        "2000000",
+        "15000000",
+        "120000000"
+      ],
+      "runs": [
+        {
+          "result": {
+            "accepted": 0,
+            "attempts": 1000000,
+            "conservation": true,
+            "failed_then_retried": 0,
+            "final_pool": "0",
+            "initial_pool": "0",
+            "minimum_pool": "0",
+            "rejected": 1000000,
+            "tier_counts": [
+              0,
+              0,
+              0
+            ],
+            "total_paid": "0",
+            "vested_fees": "0"
+          },
+          "scenario": "empty"
+        },
+        {
+          "result": {
+            "accepted": 1,
+            "attempts": 1000000,
+            "conservation": true,
+            "failed_then_retried": 1,
+            "final_pool": "114500000",
+            "initial_pool": "120000000",
+            "minimum_pool": "114500000",
+            "rejected": 999999,
+            "tier_counts": [
+              0,
+              1,
+              0
+            ],
+            "total_paid": "15000000",
+            "vested_fees": "500000"
+          },
+          "scenario": "minimum"
+        },
+        {
+          "result": {
+            "accepted": 1000000,
+            "attempts": 1000000,
+            "conservation": true,
+            "failed_then_retried": 100,
+            "final_pool": "10194000000",
+            "initial_pool": "1000000000",
+            "minimum_pool": "991000000",
+            "rejected": 0,
+            "tier_counts": [
+              777828,
+              178338,
+              43834
+            ],
+            "total_paid": "9490806000000",
+            "vested_fees": "500000000000"
+          },
+          "scenario": "low"
+        },
+        {
+          "result": {
+            "accepted": 1000000,
+            "attempts": 1000000,
+            "conservation": true,
+            "failed_then_retried": 100,
+            "final_pool": "10190000000",
+            "initial_pool": "10000000000",
+            "minimum_pool": "6814000000",
+            "rejected": 0,
+            "tier_counts": [
+              778040,
+              178014,
+              43946
+            ],
+            "total_paid": "9499810000000",
+            "vested_fees": "500000000000"
+          },
+          "scenario": "target"
+        },
+        {
+          "result": {
+            "accepted": 1000000,
+            "attempts": 1000000,
+            "conservation": true,
+            "failed_then_retried": 100,
+            "final_pool": "10193000000",
+            "initial_pool": "20000000000",
+            "minimum_pool": "6817000000",
+            "rejected": 0,
+            "tier_counts": [
+              777796,
+              178193,
+              44011
+            ],
+            "total_paid": "9509807000000",
+            "vested_fees": "500000000000"
+          },
+          "scenario": "excess"
+        }
+      ],
+      "target": "10000000000",
+      "target_expected_numerator": "9499993000000",
+      "target_probabilities": [
+        786539,
+        168461,
+        45000
+      ]
+    }
+  ],
+  "mock_token_market_values": null,
+  "network": "offline only",
+  "seed": "0x1a0b20261111",
+  "total_attempts": 25000000,
+  "unit": "USDI base units, six decimals"
+}

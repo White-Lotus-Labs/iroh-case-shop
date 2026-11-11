@@ -1,0 +1,434 @@
+{
+  "network": "testnet",
+  "rpcUrl": "https://rpc.testnet.near.org",
+  "ownerId": "needmore_1_near.testnet",
+  "parentId": "needmore_1_near.testnet",
+  "fixedSupplyWhole": "100000",
+  "verifiedAt": "2026-11-11",
+  "canonicalRpcUrl": "https://rpc.mainnet.near.org",
+  "tokens": [
+    {
+      "asset": "SHITZU",
+      "selection": "included",
+      "status": "verified-live",
+      "contractId": "iroh-test-shitzu.testnet",
+      "name": "Test Shitzu",
+      "symbol": "SHITZU",
+      "decimals": 6,
+      "totalSupplyRaw": "100000000000",
+      "mockStatus": "verified-deployed",
+      "unofficial": true,
+      "hasMonetaryValue": false,
+      "derivativeMock": false,
+      "disclaimer": "Unofficial Iroh Case Shop Testnet mock. No monetary value.",
+      "intendedCases": ["dragon-tea", "bamboo-mist"],
+      "canonical": {
+        "network": "mainnet",
+        "contractId": "token.0xshitzu.near",
+        "sources": ["https://rpc.mainnet.near.org"],
+        "name": "SHITZU",
+        "symbol": "SHITZU",
+        "decimals": 18,
+        "blockHeight": 224058985,
+        "blockHash": "5Vw6dwvWUDpM32GLqhKr2YVE8s39EavNgkuXbjH4Y2JP",
+        "identityEvidence": "Existing mock identity preserved; canonical metadata read-only; no fresh primary project activity claim."
+      },
+      "decimalPolicy": "Preserve existing six-decimal deployment; canonical token uses 18 decimals.",
+      "verificationEvidence": "docs/multi-case/live-preflight.json"
+    },
+    {
+      "asset": "RHEA",
+      "selection": "included",
+      "status": "verified-live",
+      "contractId": "iroh-test-rhea.testnet",
+      "name": "Test Rhea",
+      "symbol": "RHEA",
+      "decimals": 6,
+      "totalSupplyRaw": "100000000000",
+      "mockStatus": "verified-deployed",
+      "unofficial": true,
+      "hasMonetaryValue": false,
+      "derivativeMock": false,
+      "disclaimer": "Unofficial Iroh Case Shop Testnet mock. No monetary value.",
+      "intendedCases": [
+        "dragon-tea",
+        "bamboo-mist",
+        "phoenix-flame",
+        "uncles-secret-reserve"
+      ],
+      "canonical": {
+        "network": "mainnet",
+        "contractId": "token.rhealab.near",
+        "sources": ["https://guide.rhea.finance/docs/tokenomics"],
+        "name": "Rhea",
+        "symbol": "RHEA",
+        "decimals": 18,
+        "blockHeight": 224058985,
+        "blockHash": "5Vw6dwvWUDpM32GLqhKr2YVE8s39EavNgkuXbjH4Y2JP"
+      },
+      "decimalPolicy": "Preserve existing six-decimal deployment; canonical token uses 18 decimals.",
+      "verificationEvidence": "docs/multi-case/live-preflight.json"
+    },
+    {
+      "asset": "AURORA",
+      "selection": "included",
+      "status": "verified-live",
+      "contractId": "iroh-test-aurora.testnet",
+      "name": "Test Aurora",
+      "symbol": "AURORA",
+      "decimals": 6,
+      "totalSupplyRaw": "100000000000",
+      "mockStatus": "verified-deployed",
+      "unofficial": true,
+      "hasMonetaryValue": false,
+      "derivativeMock": false,
+      "disclaimer": "Unofficial Iroh Case Shop Testnet mock. No monetary value.",
+      "intendedCases": ["dragon-tea", "phoenix-flame", "uncles-secret-reserve"],
+      "canonical": {
+        "network": "mainnet",
+        "contractId": "aaaaaa20d9e0e2461697782ef11675f668207961.factory.bridge.near",
+        "sources": ["https://doc.aurora.dev/blog/aurora-chains-demo/"],
+        "name": "Aurora",
+        "symbol": "AURORA",
+        "decimals": 18,
+        "blockHeight": 224058985,
+        "blockHash": "5Vw6dwvWUDpM32GLqhKr2YVE8s39EavNgkuXbjH4Y2JP"
+      },
+      "decimalPolicy": "Preserve existing six-decimal deployment; canonical token uses 18 decimals.",
+      "verificationEvidence": "docs/multi-case/live-preflight.json"
+    },
+    {
+      "asset": "BLACKDRAGON",
+      "selection": "included",
+      "status": "proposed",
+      "contractId": "blackdragon.needmore_1_near.testnet",
+      "name": "Test Black Dragon",
+      "symbol": "BLACKDRAGON",
+      "decimals": 24,
+      "totalSupplyRaw": "100000000000000000000000000000",
+      "mockStatus": "not-deployed",
+      "unofficial": true,
+      "hasMonetaryValue": false,
+      "derivativeMock": false,
+      "disclaimer": "Unofficial Iroh Case Shop Testnet mock. No monetary value.",
+      "intendedCases": ["bamboo-mist"],
+      "canonical": {
+        "network": "mainnet",
+        "contractId": "blackdragon.tkn.near",
+        "sources": ["https://blackdragon.meme/whitepaper/"],
+        "name": "Black Dragon",
+        "symbol": "BLACKDRAGON",
+        "decimals": 24,
+        "blockHeight": 224058639,
+        "blockHash": "46SHegHTkruwp2pLs5Jh1SywGpM6eKHahJks1nTvhzKt"
+      },
+      "publicKey": "ed25519:BzFYfhBpT7Y5rchB4v4JH16WNqMHpzP37xrWnM5mZMha"
+    },
+    {
+      "asset": "NEKO",
+      "selection": "included",
+      "status": "proposed",
+      "contractId": "neko.needmore_1_near.testnet",
+      "name": "Test Neko",
+      "symbol": "NEKO",
+      "decimals": 24,
+      "totalSupplyRaw": "100000000000000000000000000000",
+      "mockStatus": "not-deployed",
+      "unofficial": true,
+      "hasMonetaryValue": false,
+      "derivativeMock": false,
+      "disclaimer": "Unofficial Iroh Case Shop Testnet mock. No monetary value.",
+      "intendedCases": ["bamboo-mist", "moon-spirit"],
+      "canonical": {
+        "network": "mainnet",
+        "contractId": "ftv2.nekotoken.near",
+        "sources": [
+          "https://gov.near.org/t/announcement-please-upgrade-your-neko-token-to-neko-v2/25179",
+          "https://nekoonnear.com/"
+        ],
+        "name": "NEKO",
+        "symbol": "NEKO",
+        "decimals": 24,
+        "blockHeight": 224058639,
+        "blockHash": "46SHegHTkruwp2pLs5Jh1SywGpM6eKHahJks1nTvhzKt"
+      },
+      "publicKey": "ed25519:HANvB1MeRnUru1U96q1iPyujUSfCRYNrjRwAUqjNJYLr"
+    },
+    {
+      "asset": "MPDAO",
+      "selection": "included",
+      "status": "proposed",
+      "contractId": "mpdao.needmore_1_near.testnet",
+      "name": "Test mpDAO",
+      "symbol": "mpDAO",
+      "decimals": 6,
+      "totalSupplyRaw": "100000000000",
+      "mockStatus": "not-deployed",
+      "unofficial": true,
+      "hasMonetaryValue": false,
+      "derivativeMock": false,
+      "disclaimer": "Unofficial Iroh Case Shop Testnet mock. No monetary value.",
+      "intendedCases": [
+        "moon-spirit",
+        "phoenix-flame",
+        "uncles-secret-reserve"
+      ],
+      "canonical": {
+        "network": "mainnet",
+        "contractId": "mpdao-token.near",
+        "sources": [
+          "https://docs.metapool.app/for-developers/meta-pool-contracts/near-network/"
+        ],
+        "name": "metapool.app DAO Governance Token",
+        "symbol": "mpDAO",
+        "decimals": 6,
+        "blockHeight": 224058639,
+        "blockHash": "46SHegHTkruwp2pLs5Jh1SywGpM6eKHahJks1nTvhzKt"
+      },
+      "publicKey": "ed25519:Cu7riCyEPzUyLzz3xMGa1En516bchWYT1Nw1mipqs6eY"
+    },
+    {
+      "asset": "GEAR",
+      "selection": "included",
+      "status": "proposed",
+      "contractId": "gear.needmore_1_near.testnet",
+      "name": "Test Gear",
+      "symbol": "GEAR",
+      "decimals": 18,
+      "totalSupplyRaw": "100000000000000000000000",
+      "mockStatus": "not-deployed",
+      "unofficial": true,
+      "hasMonetaryValue": false,
+      "derivativeMock": false,
+      "disclaimer": "Unofficial Iroh Case Shop Testnet mock. No monetary value.",
+      "intendedCases": ["moon-spirit"],
+      "canonical": {
+        "network": "mainnet",
+        "contractId": "gear.enleap.near",
+        "sources": [
+          "https://tinkerunion.com/",
+          "https://tinkerunion.com/assets/TinkerApp-BVafj1kl.js"
+        ],
+        "name": "GEAR",
+        "symbol": "GEAR",
+        "decimals": 18,
+        "blockHeight": 224058645,
+        "blockHash": "xov5jA8xAf8YCvnCgdsgoWSFnQFAGbk6yt58UnfNMsX"
+      },
+      "publicKey": "ed25519:BNRrJC51SnjV69hgzHo7JZrsyq7MvrZvs444RAvJv5ru"
+    },
+    {
+      "asset": "PURGE",
+      "selection": "included",
+      "status": "proposed",
+      "contractId": "purge.needmore_1_near.testnet",
+      "name": "Test Purge",
+      "symbol": "PURGE",
+      "decimals": 18,
+      "totalSupplyRaw": "100000000000000000000000",
+      "mockStatus": "not-deployed",
+      "unofficial": true,
+      "hasMonetaryValue": false,
+      "derivativeMock": false,
+      "disclaimer": "Unofficial Iroh Case Shop Testnet mock. No monetary value.",
+      "intendedCases": ["moon-spirit"],
+      "canonical": {
+        "network": "mainnet",
+        "contractId": "purge-558.meme-cooking.near",
+        "sources": ["https://www.absolveme.ai/"],
+        "name": "Forgive Me Father",
+        "symbol": "PURGE",
+        "decimals": 18,
+        "blockHeight": 224058646,
+        "blockHash": "46TRc5hCGF2izE1R2y9rJKTsmryVGyjuDz6xydnpSXs8"
+      },
+      "publicKey": "ed25519:3JahkkUeThdgzonP4qwVymyDgcvqb13NoTzffz6FmfJY"
+    },
+    {
+      "asset": "WNEAR",
+      "selection": "included",
+      "status": "proposed",
+      "contractId": "wnear.needmore_1_near.testnet",
+      "name": "Test Wrapped NEAR",
+      "symbol": "wNEAR",
+      "decimals": 24,
+      "totalSupplyRaw": "100000000000000000000000000000",
+      "mockStatus": "not-deployed",
+      "unofficial": true,
+      "hasMonetaryValue": false,
+      "derivativeMock": true,
+      "disclaimer": "Unofficial Iroh Case Shop Testnet mock. No monetary value. No yield, backing, or redemption.",
+      "intendedCases": ["phoenix-flame", "uncles-secret-reserve"],
+      "canonical": {
+        "network": "mainnet",
+        "contractId": "wrap.near",
+        "sources": ["https://github.com/near/NEPs/issues/530"],
+        "name": "Wrapped NEAR fungible token",
+        "symbol": "wNEAR",
+        "decimals": 24,
+        "blockHeight": 224058645,
+        "blockHash": "xov5jA8xAf8YCvnCgdsgoWSFnQFAGbk6yt58UnfNMsX"
+      },
+      "publicKey": "ed25519:Hufga4xjW7XgqYuRSHGoeQBAt3r6HZgadudokD6dcX7q"
+    },
+    {
+      "asset": "STNEAR",
+      "selection": "included",
+      "status": "proposed",
+      "contractId": "stnear.needmore_1_near.testnet",
+      "name": "Test Staked NEAR",
+      "symbol": "STNEAR",
+      "decimals": 24,
+      "totalSupplyRaw": "100000000000000000000000000000",
+      "mockStatus": "not-deployed",
+      "unofficial": true,
+      "hasMonetaryValue": false,
+      "derivativeMock": true,
+      "disclaimer": "Unofficial Iroh Case Shop Testnet mock. No monetary value. No yield, backing, or redemption.",
+      "intendedCases": [
+        "moon-spirit",
+        "phoenix-flame",
+        "uncles-secret-reserve"
+      ],
+      "canonical": {
+        "network": "mainnet",
+        "contractId": "meta-pool.near",
+        "sources": [
+          "https://docs.metapool.app/for-developers/meta-pool-contracts/near-network/"
+        ],
+        "name": "Staked NEAR",
+        "symbol": "STNEAR",
+        "decimals": 24,
+        "blockHeight": 224058645,
+        "blockHash": "xov5jA8xAf8YCvnCgdsgoWSFnQFAGbk6yt58UnfNMsX"
+      },
+      "publicKey": "ed25519:HYi4hdPauGQWAupViFNubMSv4xPyibsRh9Tw7tmfBpgQ"
+    },
+    {
+      "asset": "LINEAR",
+      "selection": "included",
+      "status": "proposed",
+      "contractId": "linear.needmore_1_near.testnet",
+      "name": "Test LiNEAR",
+      "symbol": "LINEAR",
+      "decimals": 24,
+      "totalSupplyRaw": "100000000000000000000000000000",
+      "mockStatus": "not-deployed",
+      "unofficial": true,
+      "hasMonetaryValue": false,
+      "derivativeMock": true,
+      "disclaimer": "Unofficial Iroh Case Shop Testnet mock. No monetary value. No yield, backing, or redemption.",
+      "intendedCases": ["phoenix-flame", "uncles-secret-reserve"],
+      "canonical": {
+        "network": "mainnet",
+        "contractId": "linear-protocol.near",
+        "sources": ["https://github.com/linear-protocol/LiNEAR"],
+        "name": "LiNEAR",
+        "symbol": "LINEAR",
+        "decimals": 24,
+        "blockHeight": 224058645,
+        "blockHash": "xov5jA8xAf8YCvnCgdsgoWSFnQFAGbk6yt58UnfNMsX"
+      },
+      "publicKey": "ed25519:5q5R4tuBBnh87uScmLPjYAV8cW8et9UnuYd9He2CeMP9"
+    },
+    {
+      "asset": "RNEAR",
+      "selection": "included",
+      "status": "proposed",
+      "contractId": "rnear.needmore_1_near.testnet",
+      "name": "Test Rhea Staked NEAR",
+      "symbol": "rNEAR",
+      "decimals": 24,
+      "totalSupplyRaw": "100000000000000000000000000000",
+      "mockStatus": "not-deployed",
+      "unofficial": true,
+      "hasMonetaryValue": false,
+      "derivativeMock": true,
+      "disclaimer": "Unofficial Iroh Case Shop Testnet mock. No monetary value. No yield, backing, or redemption.",
+      "intendedCases": ["uncles-secret-reserve"],
+      "canonical": {
+        "network": "mainnet",
+        "contractId": "lst.rhealab.near",
+        "sources": ["https://guide.rhea.finance/developers/contracts"],
+        "name": "Rhea Liquid Near Staking Token",
+        "symbol": "rNEAR",
+        "decimals": 24,
+        "blockHeight": 224058646,
+        "blockHash": "46TRc5hCGF2izE1R2y9rJKTsmryVGyjuDz6xydnpSXs8"
+      },
+      "publicKey": "ed25519:6TsDqjRzzNvRhPoryErg3Pbn4WMPathCfWpmJcPx22aw"
+    },
+    {
+      "asset": "LONK",
+      "selection": "excluded",
+      "status": "excluded",
+      "mockStatus": "not-deployed",
+      "intendedCases": [],
+      "reason": "Official project domain redirected to an unrelated blog during verification; canonical project identity cannot be refreshed from a current primary source.",
+      "canonical": {
+        "network": "mainnet",
+        "contractId": "token.lonkingnearbackto2024.near",
+        "sources": ["https://lonk.meme/"],
+        "name": "LONK fungible token",
+        "symbol": "LONK",
+        "decimals": 8,
+        "blockHeight": 224058639,
+        "blockHash": "46SHegHTkruwp2pLs5Jh1SywGpM6eKHahJks1nTvhzKt"
+      }
+    },
+    {
+      "asset": "META",
+      "selection": "excluded",
+      "status": "excluded",
+      "mockStatus": "not-deployed",
+      "intendedCases": [],
+      "reason": "Official Meta Pool docs mark META deprecated and replaced by mpDAO.",
+      "canonical": {
+        "network": "mainnet",
+        "contractId": "meta-token.near",
+        "sources": [
+          "https://docs.metapool.app/for-developers/meta-pool-contracts/near-network/"
+        ],
+        "name": "Meta Token",
+        "symbol": "$META",
+        "decimals": 24,
+        "blockHeight": 224058639,
+        "blockHash": "46SHegHTkruwp2pLs5Jh1SywGpM6eKHahJks1nTvhzKt"
+      }
+    },
+    {
+      "asset": "SWEAT",
+      "selection": "excluded",
+      "status": "excluded",
+      "mockStatus": "not-deployed",
+      "intendedCases": [],
+      "reason": "Official sunset announcement ends Sweat Wallet and current SWEAT services on 2026-12-30; conservatively excluded from the active case economy. Token still responds on-chain.",
+      "canonical": {
+        "network": "mainnet",
+        "contractId": "token.sweat",
+        "sources": [
+          "https://github.com/Sweat-Foundation/sweat-claim",
+          "https://update.swe.at/"
+        ],
+        "name": "SWEAT",
+        "symbol": "SWEAT",
+        "decimals": 18,
+        "blockHeight": 224058639,
+        "blockHash": "46SHegHTkruwp2pLs5Jh1SywGpM6eKHahJks1nTvhzKt"
+      }
+    },
+    {
+      "asset": "UWON",
+      "selection": "excluded",
+      "status": "excluded",
+      "mockStatus": "not-deployed",
+      "intendedCases": [],
+      "reason": "Official project site could not be retrieved; third-party listings identify a Rainbow Bridge contract, but current primary evidence for a native NEAR identity is unavailable.",
+      "canonical": {
+        "network": "mainnet",
+        "contractId": "438e48ed4ce6beecf503d43b9dbd3c30d516e7fd.factory.bridge.near",
+        "sources": ["https://uwon.lol/"]
+      }
+    }
+  ]
+}

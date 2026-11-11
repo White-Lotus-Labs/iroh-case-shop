@@ -13,8 +13,14 @@ case "${1:-}" in
   simulate)
     "$contract_cargo" run --locked --release -p iroh-economics --bin simulate -- --output ..
     ;;
+  collection-simulate)
+    "$contract_cargo" run --locked --release -p iroh-economics --bin simulate-collection
+    ;;
+  collection-integration)
+    "$contract_cargo" run --locked --manifest-path integration/Cargo.toml -- --collection
+    ;;
   integration)
     "$contract_cargo" run --locked --manifest-path integration/Cargo.toml
     ;;
-  *) printf '%s\n' 'Usage: bash scripts/contracts.sh {build|test|simulate|integration}' >&2; exit 2 ;;
+  *) printf '%s\n' 'Usage: bash scripts/contracts.sh {build|test|simulate|collection-simulate|collection-integration|integration}' >&2; exit 2 ;;
 esac
