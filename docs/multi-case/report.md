@@ -364,7 +364,9 @@ Public read-only evidence is in [execution-preflight.json](execution-preflight.j
 
 ## Commits and changed files
 
-Branch: `codex/multi-case-testnet-expansion`. No merge, push, reset or history rewrite was performed. Pre-existing unrelated working changes were preserved.
+Implementation branch: `codex/multi-case-testnet-expansion`. Pre-existing unrelated working changes were preserved. No push, reset or history rewrite was performed.
+
+Local main was fast-forwarded to activated release `5b35ba7cb191dad1a9516674260d513e2c42f476`. Post-merge unit, Python, Node and TypeScript checks passed. The final application files match the tested candidate. Formal security audit is deferred; no remote push was performed.
 
 - `72504b3b3533a71a1270b06c160ae5e0d187d7eb`: Add isolated configurable tea cases and verified fixed-supply mocks
 - `e864583e64b2e2cc8142de5723eca75ddf29441c`: Integrate five tea cases and verified paginated Shelf history
@@ -377,5 +379,6 @@ Branch: `codex/multi-case-testnet-expansion`. No merge, push, reset or history r
 - `97baf1df7871e698a5982177a49486e27ddb01ee`: Audit all five deployed cases and prepare independent live case fixtures
 - `6619e7124ff757ea1a79dd6702819a71f74f7d13`: Prepare frontend integration handoff at paused Testnet checkpoint
 - `da6b16ad712d9a1d9a1f26893855eee8ca514c32`: Document complete frontend integration with app APIs and Testnet contracts
+- `5b35ba7cb191dad1a9516674260d513e2c42f476`: Complete five-case Testnet activation and verify functional frontend
 
 Changed task files are listed in [changed-files.txt](changed-files.txt).

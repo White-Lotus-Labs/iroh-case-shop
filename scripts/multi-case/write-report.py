@@ -96,7 +96,10 @@ def main():
         '3. Verify actual deployed code, all legacy records, inventories, receipts and unpaused quotes; only then update verified deployment status.',
         '4. Obtain bounded approval for any real user claim/opening not included in this batch and verify real HOT signing and new public Testnet payouts. No new case is currently represented as live.', '',
         '## Commits and changed files', '',
-        'Branch: `codex/multi-case-testnet-expansion`. No merge, push, reset or history rewrite was performed. Pre-existing unrelated working changes were preserved.', '']
+        'Implementation branch: `codex/multi-case-testnet-expansion`. Pre-existing unrelated working changes were preserved. No push, reset or history rewrite was performed.', '']
+    integration = verify.get('mainIntegration')
+    if integration:
+        lines += [f"Local main was fast-forwarded to activated release `{integration['activationCommit']}`. Post-merge unit, Python, Node and TypeScript checks passed. The final application files match the tested candidate. Formal security audit is deferred; no remote push was performed.", '']
     for commit in verify.get('commits', []):
         lines.append(f"- `{commit['hash']}`: {commit['subject']}")
     lines += ['', 'Changed task files are listed in [changed-files.txt](changed-files.txt).', '']

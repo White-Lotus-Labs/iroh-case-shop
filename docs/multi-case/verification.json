@@ -54,6 +54,10 @@
     {
       "hash": "da6b16ad712d9a1d9a1f26893855eee8ca514c32",
       "subject": "Document complete frontend integration with app APIs and Testnet contracts"
+    },
+    {
+      "hash": "5b35ba7cb191dad1a9516674260d513e2c42f476",
+      "subject": "Complete five-case Testnet activation and verify functional frontend"
     }
   ],
   "noMainnetTransactions": true,
@@ -163,5 +167,17 @@
   },
   "independentReviewScope": "Historical contract and deployment-helper reviews are retained as evidence. No new formal security audit was performed for this activation.",
   "format": "Full npm run format:check passed.",
-  "liveUiReadOnlyEvidence": "docs/multi-case/evidence/live-ui-readonly.json"
+  "liveUiReadOnlyEvidence": "docs/multi-case/evidence/live-ui-readonly.json",
+  "mainIntegration": {
+    "activationCommit": "5b35ba7cb191dad1a9516674260d513e2c42f476",
+    "mode": "local_fast_forward",
+    "postMergeChecks": {
+      "vitest": 368,
+      "python": 44,
+      "node": 13,
+      "typecheck": "passed"
+    },
+    "testedRuntimeFilesMatch": 211,
+    "pushed": false
+  }
 }

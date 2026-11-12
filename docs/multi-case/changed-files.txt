@@ -78,12 +78,17 @@ docs/multi-case/evidence/live-readonly-phoenix-flame.png
 docs/multi-case/evidence/live-readonly-uncles-secret-reserve.png
 docs/multi-case/evidence/live-ui-readonly.json
 docs/multi-case/evidence/live-ui-readonly.log
+docs/multi-case/evidence/merged-main-node.log
+docs/multi-case/evidence/merged-main-python.log
+docs/multi-case/evidence/merged-main-typecheck.log
+docs/multi-case/evidence/merged-main-vitest.log
 docs/multi-case/evidence/production-build.log
 docs/multi-case/evidence/rust-tests.log
 docs/multi-case/evidence/sandbox-collection.log
 docs/multi-case/evidence/sandbox-dragon.log
 docs/multi-case/evidence/sandbox-migration.log
 docs/multi-case/evidence/simulation.log
+docs/multi-case/evidence/tested-source-match.json
 docs/multi-case/evidence/typecheck-final-deployment.log
 docs/multi-case/evidence/typecheck-post-dragon.log
 docs/multi-case/evidence/typecheck.log
