@@ -10,6 +10,7 @@ import {
 } from '../src/case/client';
 import { mergeHistory, openingHistory } from '../src/case/history';
 import { pendingTarget, type PendingAction } from '../src/case/pending';
+import { caseFixture, newCaseScenario } from './case-fixture-data';
 
 const deployment: Deployment = {
   network: 'testnet',
@@ -49,7 +50,13 @@ describe('independent tea cases', () => {
       'phoenix-flame',
       'uncles-secret-reserve',
     ]);
-    expect(deploymentForCase(caseById('bamboo-mist'))).toBeNull();
+    const bamboo = caseById('bamboo-mist');
+    expect(
+      deploymentForCase({ ...bamboo, deploymentStatus: 'planned' }),
+    ).toBeNull();
+    expect(
+      deploymentForCase({ ...bamboo, deploymentStatus: 'verified-live' }),
+    ).toMatchObject({ caseContractId: bamboo.contractId });
     expect(caseById('dragon-tea')).toMatchObject({
       deploymentStatus: 'verified-live',
       bonusDeploymentStatus: 'verified-live',
@@ -346,5 +353,63 @@ describe('independent tea cases', () => {
     await expect(client.historyPage('bob.testnet', null)).rejects.toThrow(
       /account/i,
     );
+  });
+  it.each([
+    ['bamboo-mist', '500000', [258334, 726666, 15000]],
+    ['dragon-tea', '1000000', [277778, 672222, 50000]],
+    ['moon-spirit', '2000000', [431579, 528421, 40000]],
+    ['phoenix-flame', '5000000', [483824, 486176, 30000]],
+    ['uncles-secret-reserve', '10000000', [786539, 168461, 45000]],
+  ] as const)(
+    'serves contract-scoped live fixture metadata for %s',
+    (id, price, probabilities) => {
+      const definition = caseById(id);
+      const state = newCaseScenario();
+      state.stored = true;
+      const data = caseFixture(definition, state, 'tea-guest.testnet');
+      expect(parseCase(data.get_case, definition).price).toBe(price);
+      const quote = parseQuote(data.get_quote, definition);
+      expect([quote.common, quote.rare, quote.legendary]).toEqual(
+        probabilities,
+      );
+      expect(quote.can_open).toBe(true);
+      expect(data.get_account_opening).toBeNull();
+      expect(data.get_history).toEqual([]);
+      expect(
+        data.get_case.bonus_rewards.map(
+          ({ token_contract_id }) => token_contract_id,
+        ),
+      ).toEqual(
+        definition.bonusRewards.map(
+          ({ token_contract_id }) => token_contract_id,
+        ),
+      );
+      state.stage = 'paid';
+      const paid = caseFixture(definition, state, 'tea-guest.testnet');
+      expect(parseOpening(paid.get_opening, definition)).toMatchObject({
+        caseId: id,
+        status: 'Completed',
+        reward: definition.rewards[2].amount,
+        usdiPaid: true,
+        bonusPaid: true,
+      });
+      expect(
+        BigInt(paid.get_pool.pool_funds) +
+          BigInt(paid.get_pool.treasury_available),
+      ).toBe(BigInt(paid.get_pool.expected_balance_max));
+    },
+  );
+  it('keeps opening state and returned histories isolated between fixture contracts', () => {
+    const dragon = newCaseScenario(),
+      bamboo = newCaseScenario();
+    dragon.stage = 'drawn';
+    expect(
+      caseFixture(caseById('dragon-tea'), dragon, 'tea-guest.testnet')
+        .get_history,
+    ).toHaveLength(1);
+    expect(
+      caseFixture(caseById('bamboo-mist'), bamboo, 'tea-guest.testnet')
+        .get_history,
+    ).toEqual([]);
   });
 });

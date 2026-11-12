@@ -140,6 +140,7 @@ test('Shelf loads older finalized case history and retains the legacy fallback',
   await page.route(testnet.rpcUrl + '/', async (route) => {
     if (route.request().method() !== 'POST') return route.fallback();
     const { params } = route.request().postDataJSON();
+    if (params.account_id !== testnet.caseContractId) return route.fallback();
     if (
       params.method_name !== 'get_case' &&
       params.method_name !== 'get_history_page'

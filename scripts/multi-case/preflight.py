@@ -47,7 +47,7 @@ class Rpc:
         return json.loads(bytes(result["result"]))
 
 
-def snapshot(rpc, catalog):
+def snapshot(rpc, catalog, registry=None):
     if rpc.call("status", [])['chain_id'] != "testnet":
         raise RuntimeError("Refusing non-Testnet endpoint")
     block = rpc.call("block", {"finality": "final"})['header']
@@ -55,19 +55,26 @@ def snapshot(rpc, catalog):
     protocol = rpc.call('EXPERIMENTAL_protocol_config', {'block_id': pin})
     owner = catalog['ownerId']
     token = catalog['tokenContractId']
+    if registry is None:
+        registry = json.loads((ROOT / 'config/tokens.testnet.json').read_text())
     result = dict(network="testnet", rpc=rpc.endpoint,
                   checked_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),
                   block_height=block['height'], block_hash=pin,
                   gas_price=rpc.call("gas_price", [pin])['gas_price'],
                   storage_amount_per_byte=protocol['runtime_config']['storage_amount_per_byte'],
                   owner=rpc.query(owner, pin),
+                  owner_public_keys=rpc.query(owner, pin, 'view_access_key_list'),
                   usdi_account=rpc.query(token, pin),
                   owner_usdi=rpc.view(token, pin, "ft_balance_of", {"account_id": owner}),
+                  usdi_metadata=rpc.view(token, pin, "ft_metadata", {}),
+                  usdi_supply=rpc.view(token, pin, "ft_total_supply", {}),
+                  usdi_storage_bounds=rpc.view(token, pin, "storage_balance_bounds", {}),
+                  usdi_case_storage={case["id"]: rpc.view(token, pin, "storage_balance_of", {"account_id": case["contractId"]}) for case in catalog["cases"]},
                   cases={}, tokens={})
     for case in catalog['cases']:
         account = case['contractId']
         entry = dict(account=rpc.query(account, pin))
-        if not entry['account'].get('absent'):
+        if not entry['account'].get('absent') and entry['account']['code_hash'] != '1' * 32:
             entry.update(case=rpc.view(account, pin, 'get_case', {}),
                          pool=rpc.view(account, pin, 'get_pool', {}),
                          history=rpc.view(account, pin, 'get_history', {'account_id': owner, 'limit': 20}),
@@ -83,21 +90,26 @@ def snapshot(rpc, catalog):
             if not int(pool['expected_balance_min']) <= balance <= int(pool['expected_balance_max']):
                 raise RuntimeError(f"{account}: USDI book mismatch")
         result['cases'][case['id']] = entry
-    for symbol in ('shitzu', 'rhea', 'aurora'):
-        account = f'iroh-test-{symbol}.testnet'
-        result['tokens'][symbol.upper()] = dict(account_id=account,
-            account=rpc.query(account, pin),
-            metadata=rpc.view(account, pin, 'ft_metadata', {}),
-            supply=rpc.view(account, pin, 'ft_total_supply', {}),
-            owner_balance=rpc.view(account, pin, 'ft_balance_of', {'account_id': owner}),
-            storage_bounds=rpc.view(account, pin, 'storage_balance_bounds', {}),
-            dragon_storage=rpc.view(account, pin, 'storage_balance_of', {'account_id': catalog['cases'][1]['contractId']}),
-            dragon_balance=rpc.view(account, pin, 'ft_balance_of', {'account_id': catalog['cases'][1]['contractId']}))
-    registry_path = ROOT / 'config/tokens.testnet.json'
-    if registry_path.exists():
-        registry = json.loads(registry_path.read_text())
-        result['proposed_tokens'] = {t['asset']: dict(account_id=t['contractId'], account=rpc.query(t['contractId'], pin))
-            for t in registry['tokens'] if t['selection'] == 'included' and t['status'] == 'proposed'}
+    for definition in registry['tokens']:
+        if definition['selection'] != 'included':
+            continue
+        account = definition['contractId']
+        entry = dict(account_id=account, account=rpc.query(account, pin))
+        if not entry['account'].get('absent') and entry['account']['code_hash'] != '1' * 32:
+            entry.update(public_keys=rpc.query(account, pin, 'view_access_key_list'),
+                         metadata=rpc.view(account, pin, 'ft_metadata', {}),
+                         supply=rpc.view(account, pin, 'ft_total_supply', {}),
+                         owner_balance=rpc.view(account, pin, 'ft_balance_of', {'account_id': owner}),
+                         storage_bounds=rpc.view(account, pin, 'storage_balance_bounds', {}),
+                         case_storage={case['id']: rpc.view(account, pin, 'storage_balance_of', {'account_id': case['contractId']}) for case in catalog['cases']},
+                         case_balances={case['id']: rpc.view(account, pin, 'ft_balance_of', {'account_id': case['contractId']}) for case in catalog['cases']})
+            code = rpc.query(account, pin, 'view_code')
+            entry['wasm_sha256'] = hashlib.sha256(base64.b64decode(code['code_base64'])).hexdigest()
+            entry['dragon_storage'] = entry['case_storage']['dragon-tea']
+            entry['dragon_balance'] = entry['case_balances']['dragon-tea']
+        result['tokens'][definition['asset']] = entry
+    result['proposed_tokens'] = {definition['asset']: dict(account_id=definition['contractId'], account=result['tokens'][definition['asset']]['account'])
+        for definition in registry['tokens'] if definition['selection'] == 'included' and definition['status'] == 'proposed'}
     return result
 
 

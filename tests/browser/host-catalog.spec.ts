@@ -311,55 +311,177 @@ for (const result of ['refund', 'fail'] as const) {
   });
 }
 
-for (const [name, price] of [
-  ['Bamboo Mist Case', '0.5'],
-  ['Moon Spirit Case', '2'],
-  ['Phoenix Flame Case', '5'],
-  ["Uncle's Secret Reserve", '10'],
+for (const sample of [
+  {
+    id: 'bamboo-mist',
+    name: 'Bamboo Mist Case',
+    price: '0.5',
+    rawPrice: '500000',
+    contract: 'bamboo.needmore_1_near.testnet',
+    odds: ['25.8334%', '72.6666%', '1.5%'],
+    rewards: ['0.2 USDI', '0.5 USDI', '4 USDI'],
+    bonuses: ['25 SHITZU', '25 BLACKDRAGON', '10 NEKO', '1 RHEA'],
+    winner: 'RHEA',
+    bonus: '1 RHEA',
+    balance: '1003.5 USDI',
+  },
+  {
+    id: 'dragon-tea',
+    name: 'Dragon Tea Case',
+    price: '1',
+    rawPrice: '1000000',
+    contract: 'cases-needmore-1-near.testnet',
+    odds: ['27.7778%', '67.2222%', '5%'],
+    rewards: ['0.1 USDI', '1 USDI', '5 USDI'],
+    bonuses: ['50 SHITZU', '5 RHEA', '1 AURORA'],
+    winner: 'AURORA',
+    bonus: '1 AURORA',
+    balance: '1004 USDI',
+  },
+  {
+    id: 'moon-spirit',
+    name: 'Moon Spirit Case',
+    price: '2',
+    rawPrice: '2000000',
+    contract: 'moon.needmore_1_near.testnet',
+    odds: ['43.1579%', '52.8421%', '4%'],
+    rewards: ['0.1 USDI', '2 USDI', '20 USDI'],
+    bonuses: ['20 PURGE', '2 GEAR', '50 NEKO', '2 mpDAO', '0.1 STNEAR'],
+    winner: 'STNEAR',
+    bonus: '0.1 STNEAR',
+    balance: '1018 USDI',
+  },
+  {
+    id: 'phoenix-flame',
+    name: 'Phoenix Flame Case',
+    price: '5',
+    rawPrice: '5000000',
+    contract: 'phoenix.needmore_1_near.testnet',
+    odds: ['48.3824%', '48.6176%', '3%'],
+    rewards: ['0.1 USDI', '3.5 USDI', '100 USDI'],
+    bonuses: [
+      '2 RHEA',
+      '2 AURORA',
+      '5 mpDAO',
+      '0.2 LINEAR',
+      '0.2 STNEAR',
+      '0.25 wNEAR',
+    ],
+    winner: 'LINEAR',
+    bonus: '0.2 LINEAR',
+    balance: '1095 USDI',
+  },
+  {
+    id: 'uncles-secret-reserve',
+    name: "Uncle's Secret Reserve",
+    price: '10',
+    rawPrice: '10000000',
+    contract: 'reserve.needmore_1_near.testnet',
+    odds: ['78.6539%', '16.8461%', '4.5%'],
+    rewards: ['2 USDI', '15 USDI', '120 USDI'],
+    bonuses: [
+      '10 RHEA',
+      '10 AURORA',
+      '20 mpDAO',
+      '0.5 rNEAR',
+      '1 STNEAR',
+      '1 LINEAR',
+      '1 wNEAR',
+    ],
+    winner: 'STNEAR',
+    bonus: '1 STNEAR',
+    balance: '1110 USDI',
+  },
 ]) {
-  test(`collection previews ${name} without authorizing an undeployed opening`, async ({
+  test(`live collection opens ${sample.name} with its exact price, probabilities and token quantities`, async ({
     page,
   }) => {
     test.setTimeout(60000);
-    const { calls } = await mockCaseTestnet(page);
+    const { chain, calls, forCase } = await mockCaseTestnet(page);
+    chain.claimed = true;
+    const scenario = forCase(sample.id);
+    scenario.stored = true;
+    scenario.bonuses = true;
     await page.setViewportSize({ width: 390, height: 844 });
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto('/?collection=tea');
     await expect(page.locator('.tea-catalog-card')).toHaveCount(5);
-    await page.getByRole('button', { name: `Inspect ${name}` }).click();
+    await page.getByRole('button', { name: `Inspect ${sample.name}` }).click();
     const panel = page.getByRole('region', { name: 'Case inspection' });
     await expect(
-      panel.getByRole('heading', { name, exact: true }),
+      panel.getByRole('heading', { name: sample.name, exact: true }),
     ).toBeVisible();
     await expect(
       panel.getByRole('heading', {
         name: 'Awaiting verified Testnet deployment',
       }),
-    ).toBeVisible();
-    await expect(
-      panel.getByRole('button', { name: `Open Case · ${price} USDI` }),
-    ).toBeDisabled();
-    await expect(
-      panel.getByText('Planned USDI rewards', { exact: true }),
-    ).toBeVisible();
-    await expect(panel).toContainText('unofficial Iroh Testnet mocks');
-    expect(calls).toEqual([]);
-    await panel.getByRole('button', { name: 'Back to Collection' }).click();
-    await page.getByRole('button', { name: 'Inspect Dragon Tea Case' }).click();
-    await expect(page.locator('.tea-catalog-odds')).toContainText('27.7778%');
-    expect(calls).toEqual([]);
+    ).toHaveCount(0);
+    const odds = panel.locator('.tea-catalog-odds');
+    for (const text of [...sample.odds, ...sample.rewards])
+      await expect(odds.getByText(text, { exact: true })).toBeVisible();
+    const bonus = panel.getByRole('region', { name: 'Testnet bonus rewards' });
+    for (const quantity of sample.bonuses)
+      await expect(bonus.getByText(quantity, { exact: true })).toBeVisible();
+    await expect(bonus).toContainText(
+      'unofficial test tokens have no monetary value',
+    );
+    const open = panel.getByRole('button', {
+      name: `Open Case · ${sample.price} USDI`,
+    });
+    await expect(open).toBeDisabled();
+    await panel
+      .getByRole('button', { name: 'Connect Wallet', exact: true })
+      .click();
+    await page.locator('.hot-connector-popup .connect-item').click();
+    await expect(open).toBeEnabled();
+    await open.click();
+    await expect(panel).toContainText(
+      'Transaction submitted, awaiting finalized confirmation.',
+    );
+    expect(calls).toHaveLength(1);
+    expect(calls[0].actions[0].params).toMatchObject({
+      methodName: 'ft_transfer_call',
+      deposit: '1',
+      args: { receiver_id: sample.contract, amount: sample.rawPrice },
+    });
+    const args = calls[0].actions[0].params.args;
+    expect(
+      'msg' in args && typeof args.msg === 'string'
+        ? JSON.parse(args.msg)
+        : null,
+    ).toMatchObject({ case_id: sample.id, nonce: '0' });
+    await expect(panel.locator('.tea-reel')).toHaveCount(0);
+    scenario.openFinal = true;
+    scenario.stage = 'drawn';
+    await panel.getByRole('button', { name: 'Refresh chain state' }).click();
+    await expect(panel.locator('.tea-reel')).toHaveAttribute(
+      'aria-label',
+      `Reward reel landed on ${sample.winner}`,
+    );
+    await expect(panel.locator('.tea-bonus-reward')).toContainText(
+      `${sample.bonus} bonus · Reserved`,
+    );
+    scenario.stage = 'paid';
+    await panel.getByRole('button', { name: 'Refresh chain state' }).click();
+    await expect(panel.locator('.tea-bonus-reward')).toContainText(
+      `${sample.bonus} bonus · Paid`,
+    );
+    await expect(panel.locator('.tea-catalog-wallet-head strong')).toHaveText(
+      sample.balance,
+    );
+    expect(calls).toHaveLength(1);
   });
 }
 
-test('a case-specific deep link and refresh retain the selected planned case', async ({
+test('a case-specific deep link and refresh retain the selected live case', async ({
   page,
 }) => {
   test.setTimeout(60000);
   const { calls } = await mockCaseTestnet(page);
   await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.goto('/?collection=moon-spirit');
+  await page.goto('/?collection=bamboo-mist');
   const heading = page.getByRole('heading', {
-    name: 'Moon Spirit Case',
+    name: 'Bamboo Mist Case',
     exact: true,
   });
   await expect(heading).toBeVisible();
@@ -372,9 +494,10 @@ test('switching cases preserves the original pending receipt and never resubmits
   page,
 }) => {
   test.setTimeout(60000);
-  const { chain, calls } = await mockCaseTestnet(page);
+  const { chain, calls, forCase } = await mockCaseTestnet(page);
   chain.claimed = true;
   chain.stored = true;
+  forCase('bamboo-mist').stored = true;
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/?collection=dragon-tea');
   const detail = page.getByRole('region', { name: 'Case inspection' });
@@ -390,7 +513,18 @@ test('switching cases preserves the original pending receipt and never resubmits
   await page.getByRole('button', { name: 'Inspect Bamboo Mist Case' }).click();
   await expect(
     detail.getByRole('button', { name: 'Open Case · 0.5 USDI' }),
-  ).toBeDisabled();
+  ).toBeEnabled();
+  const saved = await page.evaluate(() =>
+    Object.entries(localStorage)
+      .filter(
+        ([key]) =>
+          key.startsWith('iroh-cases:testnet:') && !key.endsWith(':receipts'),
+      )
+      .map(([, value]) => JSON.parse(value)),
+  );
+  expect(saved).toHaveLength(1);
+  expect(saved[0].call.args.receiver_id).toBe('cases-needmore-1-near.testnet');
+  expect(calls).toHaveLength(1);
   await expect(detail.locator('.tea-reel')).toHaveCount(0);
   chain.stage = 'drawn';
   chain.openFinal = true;
