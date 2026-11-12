@@ -1,6 +1,6 @@
 # Existing owner signer setup
 
-Setup is not complete. Metadata-only checks under normal Keychain access confirmed that the known case signer exists and the owner entry does not. Finalized Testnet block 277371336 lists one owner FullAccess key:
+The existing owner signer is now verified. The user privately added the exact login Keychain item, and a fresh NEP-413 signature verified under the required public key with no transaction or nonce change during verification. The public proof is in owner-signer-status.json. The following format and private setup instructions are retained as a runbook. Original metadata-only inspection confirmed the case signer existed while the owner entry was absent. Finalized Testnet block 277371336 lists one owner FullAccess key:
 
 `ed25519:BntboZwnJtLVnBBh4XffXUDwbaygCsQiMmhWXD3xCi6`
 
@@ -59,7 +59,7 @@ Proof of the configured signer should use the installed CLI's **NEP-413 message 
 
 Confirm the returned account/public key match exactly, the signature verifies, and the owner transaction nonce remains unchanged. Mark setup verified only after that succeeds. Do not submit deployment transactions during setup verification. Deployment continuation also requires fresh manifest, code, budget, key and state checks.
 
-The installed transaction signer's online nonce/block resolution must be accounted for before resuming deployment; flags accepted by help are not by themselves proof that the online path uses them. No transaction is authorized merely to test that behavior.
+The executor now uses checked offline signing, exact signed-wire validation, independent public-signature verification and one fixed Testnet RPC submission. See offline-signing-review.md. The completed first approved creation supplied a real finalized wire fixture for the guard tests; no extra test transaction was introduced.
 
 ## Primary references inspected
 

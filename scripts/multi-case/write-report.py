@@ -46,7 +46,7 @@ def main():
             f"Price {units(economy['price'])} USDI. Common/Rare/Legendary USDI payouts are "
             + ' / '.join(units(r) for r in economy['rewards'])
             + f". Target available liquidity is {units(economy['target'])} USDI. Maximum USDI exposure per admitted opening is {units(economy['rewards'][2])} USDI.", '',
-            f"Contract `{case['contractId']}`. Status: " + ('existing live USDI case; bonus activation pending' if case['id'] == 'dragon-tea' else 'proposed, not deployed') + '.', '',
+            f"Contract `{case['contractId']}`. Status: " + ('verified live with funded bonuses' if case['deploymentStatus'] == 'verified-live' and case['bonusDeploymentStatus'] == 'verified-live' else 'awaiting verified deployment/activation') + '.', '',
             'Bonus quantities by tier:', '']
         for tier, name in enumerate(['Common', 'Rare', 'Legendary']):
             rewards = [r for r in config['bonus_rewards'] if r['tier'] == tier]
@@ -113,43 +113,72 @@ def main():
     if execution:
         current = load('docs/multi-case/execution-preflight.json')
         verified = [(step_id, record) for step_id, record in execution['steps'].items() if record['status'] == 'verified']
+        complete = len(verified) == len(batch['steps'])
+        signer_path = ROOT / 'docs/multi-case/owner-signer-status.json'
+        signer = json.loads(signer_path.read_text()) if signer_path.exists() else {}
         fees = int(execution['actual_fees_yocto'])
         steps = {step['id']: step for step in batch['steps']}
         deposits = sum(int(action.get('deposit', 0)) for step_id, _ in verified for action in steps[step_id]['actions'])
-        registrations = sum(int(action.get('deposit', 0)) for step_id, _ in verified for action in steps[step_id]['actions'] if action.get('methodName') == 'storage_deposit')
-        dragon = current['cases']['dragon-tea']
-        pool = dragon['pool']
-        upgraded = execution['steps'].get('dragon-upgrade', {}).get('status') == 'verified'
-        activated = execution['steps'].get('unpause-dragon-tea', {}).get('status') == 'verified'
-        state = 'active with funded bonuses' if activated else 'migrated and paused for inventory funding' if upgraded else 'awaiting migration'
-        blocker = 'Meteor blocks the approved new-account FullAccess AddKey actions. The owner CLI signer is still unavailable in Keychain. The four new cases and nine new token accounts remain undeployed.'
-        intro = f"The approved Testnet deployment is partially executed: {len(verified)} of {len(batch['steps'])} steps are finalized and verified. Dragon is {state}. {blocker} Funding is sufficient."
+        registrations = sum(int(a.get('deposit', 0)) for step_id, _ in verified for a in steps[step_id]['actions'] if a.get('methodName') == 'storage_deposit')
+        account_funding = sum(int(a['deposit']) for step_id, _ in verified for a in steps[step_id]['actions'] if a['type'] == 'Transfer')
+        created = sum(steps[step_id]['actions'][0]['type'] == 'CreateAccount' for step_id, _ in verified)
+        require_budget = fees + deposits <= int(batch['budget']['maximumNativeExpenditureYocto'])
+        if not require_budget: raise RuntimeError('Recorded native expenditure exceeds approval')
+        intro = ('All 90 approved Testnet transactions are FINAL and verified. All five cases and twelve fixed-supply bonus mocks are deployed; every approved pool and inventory allocation is funded, and all five cases are active.' if complete else f"The approved Testnet deployment is in progress: {len(verified)} of 90 steps are FINAL and verified, including {created} of 13 new accounts.")
+        if not complete and not signer.get('signerVerified'):
+            intro += ' Remaining account creation is blocked by Meteor FullAccess-key policy and the missing owner CLI signer.'
+        elif not complete:
+            intro += ' The existing owner Keychain signer passed cryptographic NEP-413 verification; the guarded executor is processing the remaining dependency chains.'
         paragraphs = report.split('\n')
         for i, paragraph in enumerate(paragraphs):
             if paragraph.startswith('Prepared November 11, 2026.'):
                 paragraphs[i] = 'Updated November 12, 2026. ' + intro
             elif paragraph.startswith('The owner currently has '):
-                paragraphs[i] = f"The finalized owner balance is {units(current['owner']['amount'], 24)} test NEAR and {units(current['owner_usdi'])} USDI at block {current['block_height']}. No top-up or replacement batch approval is needed. {blocker}"
+                paragraphs[i] = f"At recorded finalized block {current['block_height']}, the owner holds {units(current['owner']['amount'], 24)} test NEAR and {units(current['owner_usdi'])} USDI. The exact batch approval remains unchanged. Current per-step results are in execution.json."
             elif paragraph.startswith('At finalized block `'):
-                paragraphs[i] = f"At finalized block {current['block_height']}, Dragon is revision {pool['revision']}, paused={str(pool['paused']).lower()}, with {units(pool['available'])} USDI available, {units(pool['treasury_available'])} USDI vested fees, {pool['pending_openings']} pending openings and {pool['completed_payouts']} completed payouts. Historical payouts total {units(pool['total_paid'])} USDI. The pinned migration preserved the legacy opening and credit records."
+                pool = current['cases']['dragon-tea']['pool']
+                paragraphs[i] = f"At finalized block {current['block_height']}, Dragon is revision {pool['revision']}, paused={str(pool['paused']).lower()}, with {units(pool['available'])} USDI available, {units(pool['treasury_available'])} USDI vested fees and {pool['completed_payouts']} completed payouts. Its pinned migration preserved the legacy opening and credit records. Historical payouts total {units(pool['total_paid'])} USDI."
             elif paragraph.startswith('The only new submitted transaction is '):
-                paragraphs[i] = 'The previously approved SHITZU registration remains finalized. Additional completed transactions are listed below. No paid opening, claim, Mainnet transaction or treasury withdrawal was submitted.'
+                paragraphs[i] = 'The separately approved SHITZU registration predates the 90-step batch and remains finalized. Current-batch hashes, actual fees and results are listed below. No paid opening, starter claim, Mainnet transaction or treasury withdrawal was submitted.'
             elif paragraph.startswith('1. Fund the known owner account '):
-                paragraphs[i] = '1. Make the existing approved owner signer available through a trusted local signing workflow that supports the approved new-account actions. Meteor explicitly blocks them; its protection was not bypassed. Do not disclose private keys, passwords or seed phrases in chat.'
-            elif paragraph.startswith('Contract `cases-needmore-1-near.testnet`. Status:'):
-                paragraphs[i] = f"Contract `cases-needmore-1-near.testnet`. Status: {state}."
+                paragraphs[i] = ('1. The approved deployment batch is complete; no batch transaction remains pending.' if complete else '1. Finish the approved dependency chains using the cryptographically verified owner signer and guarded offline signing transport.')
+            elif complete and (paragraph.startswith('2. Execute its dependency chains') or paragraph.startswith('3. Verify actual deployed code')):
+                paragraphs[i] = ''
+            elif paragraph.startswith('4. Obtain separate bounded approval'):
+                paragraphs[i] = '2. Any real paid opening, starter claim, additional storage prepayment or HOT wallet signing test outside this batch needs separate bounded authorization. Public bonus payout behavior remains covered by genuine local Sandbox receipts, not a new public paid opening.'
         report = '\n'.join(paragraphs).replace('## Approved bounded batch awaiting funding', '## Approved bounded batch and execution status')
-        if upgraded:
-            report = report.replace('the current V1 API returns the latest 20', 'the historical V1 API returned the latest 20; Dragon now runs the paginated implementation')
-        progress = ['## Verified execution progress', '', intro, '']
+        if complete: report = report.replace('## Remaining work that requires authorization or external state', '## Follow-up outside the completed batch')
+        if execution['steps'].get('dragon-upgrade', {}).get('status') == 'verified':
+            report = report.replace('the current V1 API returns the latest 20', 'the historical V1 API returned the latest 20; the upgraded implementation supports pagination')
+        progress = ['## Verified execution progress', '', intro, '', f"Native fees burned: {units(fees, 24)} test NEAR. Verified attached deposits: {units(deposits, 24)} test NEAR, including {units(account_funding, 24)} retained as new-account funding and {units(registrations, 24)} token-registration deposits. The gross approved attached-deposit plus fee total is {units(deposits + fees, 24)} test NEAR, below the original ceiling. Account funding and storage backing are not burned fees.", '', verify['executionHelper'], '', '### Finalized case pools, inventories and quotes', '']
+        storage_total = 0
+        for definition in catalog['cases']:
+            item = current['cases'][definition['id']]
+            progress += [f"#### {definition['name']} — `{definition['contractId']}`", '']
+            if item['account'].get('absent'):
+                progress += ['Account absent at the last full snapshot; later execution progress is recorded in the transaction journal.', '']
+                continue
+            pool, quote = item['pool'], item.get('quote', {})
+            backing = int(item['account']['storage_usage']) * int(current['storage_amount_per_byte']); storage_total += backing
+            progress += [f"Pool funds {units(pool['pool_funds'])} USDI; available {units(pool['available'])}; vested fees {units(pool['treasury_available'])}; actual token balance {units(item['usdi_balance'])}. Revision {pool['revision']}; paused={str(pool['paused']).lower()}; completed history rows {len(item['history'])}. Native balance {units(item['account']['amount'], 24)} test NEAR; retained storage backing {units(backing, 24)} test NEAR.", '']
+            if quote:
+                progress += [f"Contract quote Common/Rare/Legendary counts {quote['common']} / {quote['rare']} / {quote['legendary']} out of {quote['denominator']}. Owner-specific can_open={str(quote['can_open']).lower()}; reason `{quote['reason']}`. Normal player storage/funding requirements are not deployment failures; no unlisted player prepayment or opening was submitted.", '']
+            for row in item.get('reward_inventory', []):
+                progress.append(f"- {row['token_symbol']} `{row['token_contract_id']}`: funds {units(row['funds'], row['token_decimals'])}, available {units(row['available'], row['token_decimals'])}, reserved {units(row['reserved'], row['token_decimals'])}, in flight {units(row['in_flight'], row['token_decimals'])}.")
+            progress.append('')
+        progress += ['### Finalized mock supply and balances', '']
+        for asset, token in current['tokens'].items():
+            if token['account'].get('absent'):
+                progress.append(f"- {asset}: account absent at the snapshot."); continue
+            decimals = token['metadata']['decimals']
+            balances = ', '.join(f"{case_id}={units(balance, decimals)}" for case_id, balance in token.get('case_balances', {}).items())
+            progress.append(f"- {asset} `{token['account_id']}`: supply {units(token['supply'], decimals)}, owner {units(token['owner_balance'], decimals)}; case balances {balances or 'see recorded Dragon balance'}. Metadata, decimals, code, supply and storage are checked by the public audit.")
+            storage_total += int(token['account']['storage_usage']) * int(current['storage_amount_per_byte'])
+        progress += ['', f"Retained storage backing across the snapshotted case and mock accounts totals {units(storage_total, 24)} test NEAR. Registration deposits above are accounted separately and are not additional burned transaction fees.", '', '### Every finalized batch transaction', '']
         for step_id, record in verified:
-            step = steps[step_id]
-            attached = sum(int(a.get('deposit', 0)) for a in step['actions'])
+            attached = sum(int(a.get('deposit', 0)) for a in steps[step_id]['actions'])
             progress.append(f"- `{step_id}`: [transaction `{record['tx_hash']}`](https://testnet.nearblocks.io/txns/{record['tx_hash']}), FINAL; fee {units(record['actual_fee_yocto'], 24)} test NEAR; attached {units(attached, 24)} test NEAR.")
-        progress += ['', f"Actual transaction fees total {units(fees, 24)} test NEAR. Verified attached deposits total {units(deposits, 24)} test NEAR, including {units(registrations, 24)} for token registrations. Total native outflow is {units(deposits + fees, 24)} test NEAR. Storage backing retained in Dragon's existing account is {units(int(dragon['account']['storage_usage']) * int(current['storage_amount_per_byte']), 24)} test NEAR for {dragon['account']['storage_usage']} bytes; this is retained balance, not an additional transfer.", '', verify['executionHelper'], '', '### Finalized Dragon inventory', '']
-        for row in dragon.get('reward_inventory', []):
-            progress.append(f"- `{row['token_contract_id']}`: raw funds `{row['funds']}`, reserved `{row['reserved']}`, in flight `{row['in_flight']}`. The journal verifies actual token balances against each book increment.")
-        progress += ['', f"At finalized block {current['block_height']}, Dragon's {units(pool['available'])} USDI pool, {units(pool['treasury_available'])} USDI vested fees and {pool['completed_payouts']} completed opening records remain intact. All thirteen proposed account names remain absent. SHITZU, RHEA and AURORA have the required Dragon storage registration.", '', f"The owner-specific quote currently reports can_open={str(dragon['quote']['can_open']).lower()} with reason `{dragon['quote']['reason']}`. The pool is healthy and admits openings once the normal user storage prepayment is satisfied. That prepayment and a paid opening are outside this batch and were not submitted.", '', 'The canonical journal is [execution.json](execution.json), with append-only events in [execution-journal.jsonl](execution-journal.jsonl) and raw finalized receipt files alongside it. The approved manifest and checksum remain unchanged. Ambiguous requests cannot be resubmitted automatically.', '', 'Chrome access was enabled, and the existing Meteor Testnet owner signed the approved Dragon calls. The blocked BLACKDRAGON request was canceled without broadcast. Meteor signing does not establish real HOT Connect signing or a new public paid opening.', '', 'The deployment receipt code field is the SHA-256 digest in [nearcore ActionView](https://github.com/near/nearcore/blob/master/core/primitives/src/views.rs). The verifier now handles that representation and still independently downloads and hashes the deployed bytecode before accepting deployment.', '']
+        progress += ['', 'The canonical journal is [execution.json](execution.json), with append-only events in [execution-journal.jsonl](execution-journal.jsonl) and raw finalized receipts alongside it. The approved manifest/checksum are unchanged. The existing owner key was verified with a non-transaction NEP-413 signature; no replacement owner key or on-chain permission change was added.', '', 'Meteor signed the approved Dragon owner calls. Its blocked BLACKDRAGON request was canceled without broadcast. Subsequent Keychain signing uses checked offline state, exact signed-wire validation and one fixed Testnet RPC submission, followed by full FINAL receipt verification. [Signing review](offline-signing-review.md) records the CLI behavior and guard tests.', '', 'Public read-only evidence is in [execution-preflight.json](execution-preflight.json) and [the repeatable audit](evidence/final-readonly-audit.json). The audit checks actual pools, inventory, fixed token supplies, storage, quotes and preserved Dragon history. Real HOT Connect signing and a new public paid bonus payout remain unverified because they are outside this approved transaction batch.', '']
         report = report.replace('## Commits and changed files', '\n'.join(progress) + '\n## Commits and changed files')
     (ROOT / 'docs/multi-case/report.md').write_text(report)
 

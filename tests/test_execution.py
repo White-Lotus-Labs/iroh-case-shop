@@ -36,6 +36,122 @@ class ExecutionTests(unittest.TestCase):
         tx_hash = '2' * 32
         return {'final_execution_status': 'FINAL', 'transaction': {'hash': tx_hash, 'signer_id': step['signerId'], 'receiver_id': step['receiverId'], 'public_key': self.e.signing_key(self.batch, step), 'actions': actions}, 'status': {'SuccessValue': ''}, 'transaction_outcome': {'id': tx_hash, 'outcome': {'receipt_ids': ['3' * 32], 'tokens_burnt': '2', 'status': {'SuccessReceiptId': '3' * 32}}}, 'receipts_outcome': [{'id': '3' * 32, 'outcome': {'receipt_ids': [], 'tokens_burnt': '5', 'status': {'SuccessValue': ''}}}]}
 
+    def signed_creation(self):
+        step = self.batch['steps'][0]
+        def text(value):
+            raw = value.encode()
+            return len(raw).to_bytes(4, 'little') + raw
+        owner = self.e.decode58(self.e.OWNER_KEY.split(':')[1])
+        new_key = self.e.decode58(step['actions'][2]['publicKey'].split(':')[1])
+        raw = (text(step['signerId']) + b'\0' + owner + (8).to_bytes(8, 'little')
+            + text(step['receiverId']) + bytes([2]) * 32 + (3).to_bytes(4, 'little')
+            + b'\0' + b'\3' + int(step['actions'][1]['deposit']).to_bytes(16, 'little')
+            + b'\5\0' + new_key + bytes(8) + b'\1')
+        return step, raw + b'\0' + bytes(64)
+
+    def test_signed_wire_decoder_binds_actions_nonce_block_and_key(self):
+        step, raw = self.signed_creation()
+        before = {'nonce': 7, 'block_hash': self.e.encode58(bytes([2]) * 32)}
+        with patch.object(self.e, 'verify_public_signature', return_value=True):
+            result = self.e.verify_signed_transaction(self.batch, step, before, base64.b64encode(raw).decode())
+        self.assertEqual(result['nonce'], 8)
+        self.assertEqual(result['hash'], self.e.encode58(__import__('hashlib').sha256(raw[:-65]).digest()))
+        for changed in [dict(before, nonce=8), dict(before, block_hash='1' * 32)]:
+            with patch.object(self.e, 'verify_public_signature', return_value=True), self.assertRaises(ValueError):
+                self.e.verify_signed_transaction(self.batch, step, changed, base64.b64encode(raw).decode())
+        with patch.object(self.e, 'verify_public_signature', return_value=False), self.assertRaisesRegex(ValueError, 'signature'):
+            self.e.verify_signed_transaction(self.batch, step, before, base64.b64encode(raw).decode())
+        for malformed in (raw[:-1], raw + b'\0', b'\1' + raw):
+            with patch.object(self.e, 'verify_public_signature', return_value=True), self.assertRaises(ValueError):
+                self.e.verify_signed_transaction(self.batch, step, before, base64.b64encode(malformed).decode())
+
+    def wire_for_step(self, step, changes=None):
+        def text(value):
+            raw = value.encode()
+            return len(raw).to_bytes(4, 'little') + raw
+        raw = text(step['signerId']) + b'\0' + self.e.decode58(self.e.signing_key(self.batch, step).split(':')[1]) + (8).to_bytes(8, 'little') + text(step['receiverId']) + bytes([2]) * 32 + len(step['actions']).to_bytes(4, 'little')
+        for action in step['actions']:
+            kind = action['type']
+            if kind == 'DeployContract':
+                code = (ROOT / action['path']).read_bytes()
+                if changes == 'wasm': code = code[:-1] + bytes([code[-1] ^ 1])
+                raw += b'\1' + len(code).to_bytes(4, 'little') + code
+            elif kind == 'FunctionCall':
+                method = action['methodName'] + ('x' if changes == 'method' else '')
+                args = copy.deepcopy(action['args'])
+                if changes == 'args': args['receiver_id'] = 'wrong.testnet'
+                if isinstance(changes, dict): args.update(changes)
+                args = json.dumps(args, sort_keys=True, separators=(',', ':'))
+                if changes == 'duplicates': args = '{"receiver_id":"wrong.testnet",' + args[1:]
+                raw += b'\2' + text(method) + text(args) + (int(action['gas']) + (1 if changes == 'gas' else 0)).to_bytes(8, 'little') + (int(action['deposit']) + (1 if changes == 'deposit' else 0)).to_bytes(16, 'little')
+            else: raise AssertionError('Test fixture supports deploy and function calls only')
+        return base64.b64encode(raw + b'\0' + bytes(64)).decode()
+
+    def test_wire_function_call_rejects_changed_economics_and_duplicate_json_keys(self):
+        step = next(s for s in self.batch['steps'] if s['id'].startswith('dragon-fund'))
+        before = {'nonce': 7, 'block_hash': self.e.encode58(bytes([2]) * 32)}
+        with patch.object(self.e, 'verify_public_signature', return_value=True):
+            self.e.verify_signed_transaction(self.batch, step, before, self.wire_for_step(step))
+            for change in ('method', 'args', 'gas', 'deposit', 'duplicates'):
+                with self.assertRaises(ValueError, msg=change): self.e.verify_signed_transaction(self.batch, step, before, self.wire_for_step(step, change))
+
+    def test_wire_json_does_not_equate_boolean_true_and_integer_one(self):
+        step = next(s for s in self.batch['steps'] if s['actions'][0].get('methodName') == 'storage_deposit')
+        before = {'nonce': 7, 'block_hash': self.e.encode58(bytes([2]) * 32)}
+        with patch.object(self.e, 'verify_public_signature', return_value=True), self.assertRaises(ValueError):
+            self.e.verify_signed_transaction(self.batch, step, before, self.wire_for_step(step, {'registration_only': 1}))
+
+    def test_wire_case_tiers_preserve_integer_types(self):
+        step = next(s for s in self.batch['steps'] if len(s['actions']) == 2 and s['actions'][1].get('methodName') == 'new_configured')
+        before = {'nonce': 7, 'block_hash': self.e.encode58(bytes([2]) * 32)}
+        for value in (True, 1.0):
+            config = copy.deepcopy(step['actions'][1]['args']['config'])
+            row = next(r for r in config['bonus_rewards'] if r['tier'] == 1)
+            row['tier'] = value
+            with patch.object(self.e, 'verify_public_signature', return_value=True), self.assertRaises(ValueError):
+                self.e.verify_signed_transaction(self.batch, step, before, self.wire_for_step(step, {'config': config}))
+
+    def test_wire_deploy_requires_full_exact_wasm_and_private_initializer(self):
+        step = self.batch['steps'][1]
+        before = {'nonce': 7, 'block_hash': self.e.encode58(bytes([2]) * 32)}
+        with patch.object(self.e, 'verify_public_signature', return_value=True):
+            self.e.verify_signed_transaction(self.batch, step, before, self.wire_for_step(step))
+            for change in ('wasm', 'method', 'gas', 'deposit'):
+                with self.assertRaises(ValueError, msg=change): self.e.verify_signed_transaction(self.batch, step, before, self.wire_for_step(step, change))
+            reordered = dict(step, actions=list(reversed(step['actions'])))
+            with self.assertRaises(ValueError): self.e.verify_signed_transaction(self.batch, step, before, self.wire_for_step(reordered))
+
+    def test_actual_finalized_creation_wire_has_the_approved_owner_signature(self):
+        fixture = json.loads((ROOT / 'docs/multi-case/evidence/finalized-creation-wire.json').read_text())
+        step = next(s for s in self.batch['steps'] if s['id'] == fixture['step_id'])
+        result = self.e.verify_signed_transaction(self.batch, step, fixture['before'], fixture['signed_transaction_base64'])
+        self.assertEqual(result['hash'], 'EaRaXfVSA3wiWaRp3Q8uVGkpP8buHsCLD4EsGPg85BTD')
+        changed = bytearray(base64.b64decode(fixture['signed_transaction_base64'])); changed[-1] ^= 1
+        with self.assertRaisesRegex(ValueError, 'signature'):
+            self.e.verify_signed_transaction(self.batch, step, fixture['before'], base64.b64encode(changed).decode())
+
+    def test_signature_verifier_uses_published_public_rfc8032_vector(self):
+        key = 'ed25519:' + self.e.encode58(bytes.fromhex('d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a'))
+        signature = bytes.fromhex('e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb8821590a33bacc61e39701cf9b46bd25bf5f0595bbe24655141438e7a100b')
+        self.assertTrue(self.e.verify_public_signature(key, b'', signature))
+        self.assertFalse(self.e.verify_public_signature(key, b'x', signature))
+
+    def test_broadcast_is_exactly_one_attempt_even_when_transport_fails(self):
+        from types import SimpleNamespace
+        calls = []
+        def runner(command, **kwargs):
+            calls.append((command, kwargs))
+            return SimpleNamespace(returncode=28, stdout='', stderr='timeout')
+        with self.assertRaises(ValueError): self.e.broadcast_once('https://rpc.testnet.fastnear.com', 'cHVibGlj', runner)
+        self.assertEqual(len(calls), 1)
+        self.assertEqual(calls[0][0][1], '--disable')
+        self.assertEqual(calls[0][0][calls[0][0].index('--retry') + 1], '0')
+        sent = json.loads(calls[0][1]['input'])
+        self.assertEqual(sent['method'], 'send_tx')
+        self.assertEqual(sent['params'], {'signed_tx_base64': 'cHVibGlj', 'wait_until': 'FINAL'})
+        with self.assertRaises(ValueError): self.e.broadcast_once('https://rpc.mainnet.near.org', 'cHVibGlj', runner)
+        self.assertEqual(len(calls), 1)
+
     def test_manifest_byte_guard_rejects_even_whitespace_changes(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / 'batch.json'
@@ -44,11 +160,11 @@ class ExecutionTests(unittest.TestCase):
                 self.e.load_manifest(path)
 
     def test_commands_are_arrays_with_atomic_initialization_and_exact_key(self):
-        before = {'nonce': 4, 'block_hash': '2' * 44}
+        before = {'nonce': 4, 'block_hash': '2' * 44, 'block_height': 100}
         create = self.e.command_for(self.batch, self.batch['steps'][0], before)
-        self.assertEqual(create[:4], ['near', 'account', 'create-account', 'fund-myself'])
+        self.assertEqual(create[:5], ['near', '--offline', 'account', 'create-account', 'fund-myself'])
         self.assertIn('5000000000000000000000000 yoctoNEAR', create)
-        self.assertEqual(create[-8:], ['sign-with-keychain', '--signer-public-key', self.e.OWNER_KEY, '--block-hash', '2' * 44, '--nonce', '5', 'send'])
+        self.assertEqual(create[-10:], ['sign-with-keychain', '--signer-public-key', self.e.OWNER_KEY, '--block-hash', '2' * 44, '--block-height', '100', '--nonce', '5', 'display'])
         deploy = self.e.command_for(self.batch, self.batch['steps'][1], before)
         self.assertIn('with-init-call', deploy)
         self.assertEqual(deploy[deploy.index('with-init-call') + 1], 'new')

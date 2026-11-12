@@ -1,16 +1,30 @@
 {
-  "checkedAt": "2026-11-12T13:54:06.232826+00:00",
+  "checkedAt": "2026-11-12T17:14:58.544Z",
   "network": "testnet",
   "accountId": "needmore_1_near.testnet",
   "expectedPublicKey": "ed25519:BntboZwnJtLVnBBh4XffXUDwbaygCsQiMmhWXD3xCi6",
   "onChainPermission": "FullAccess",
-  "onChainBlockHeight": 277371336,
+  "onChainBlockHeight": 277392427,
   "onChainNonce": 276359394000016,
   "keychainService": "near-testnet-needmore_1_near.testnet",
   "keychainAccount": "needmore_1_near.testnet:ed25519:BntboZwnJtLVnBBh4XffXUDwbaygCsQiMmhWXD3xCi6",
-  "keychainEntryPresent": false,
-  "signerVerified": false,
-  "status": "awaiting_user_private_setup",
+  "keychainEntryPresent": true,
+  "signerVerified": true,
+  "status": "verified_nep413_possession",
   "secretsReadByAssistant": false,
-  "transactionsSubmittedDuringSetup": 0
+  "transactionsSubmittedDuringSetup": 0,
+  "proof": {
+    "type": "NEP-413",
+    "message": "Iroh Case Shop local signer possession check only. Not authorization for a transaction, login, delegation or access change. 2026-11-12T17:14:52.908Z",
+    "nonceBase64": "jGeisKtIl6nqDRpCMW04q0mp0Casf4g6oo4CVuDqnmI=",
+    "recipient": "iroh-keychain-verification.invalid",
+    "callbackUrl": null,
+    "publicKey": "ed25519:BntboZwnJtLVnBBh4XffXUDwbaygCsQiMmhWXD3xCi6",
+    "signature": "ed25519:4NT61ETZYyk7meAajwDjg9NtH39P8x4pAm2ksdF38ErQPuJyqLbzCV1QynbVUwkLgtMNV7p5dxH1WwFrgxRvY5EV",
+    "payloadSha256": "042a279097967f3d7fb53606c3b8cea601381be60fc5d4e7315e4d9d7d68e727",
+    "signatureVerified": true,
+    "beforeBlock": 277392418,
+    "afterBlock": 277392427,
+    "nonceUnchanged": true
+  }
 }

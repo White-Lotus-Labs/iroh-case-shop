@@ -1,0 +1,10 @@
+{
+  "description": "Public serialized transaction already FINAL on Testnet; contains no private key. Nonce is consumed.",
+  "step_id": "token-BLACKDRAGON-create",
+  "tx_hash": "EaRaXfVSA3wiWaRp3Q8uVGkpP8buHsCLD4EsGPg85BTD",
+  "before": {
+    "nonce": 276359394000016,
+    "block_hash": "6kvccBLuSgmX1VyFCv3zwh1cFkbhsPfEeQmP7rzhyBCC"
+  },
+  "signed_transaction_base64": "FwAAAG5lZWRtb3JlXzFfbmVhci50ZXN0bmV0AALDshjBjrndW9gP56KpiFh5Gk7Nul4F68aKhAyG4EoTkXyC71j7AAAjAAAAYmxhY2tkcmFnb24ubmVlZG1vcmVfMV9uZWFyLnRlc3RuZXRViwfmVAGLkvgR4HRRa46CMCIjKL4ZsI03yD/veEntEQMAAAAAAwAAACWkAAqLyiIEAAAAAAAFAKM/bC4WlN++ILvr5TF1RQQ1KxXnkW+siz06YV8QHkLBAAAAAAAAAAABAFwi8xjGKLSF9ZounGYolhJS9NOcHWN0frrjAg6rJPhQoPA89NPMu2610basdUKfW71HZB6OZSNG08+nmy5ooAk="
+}

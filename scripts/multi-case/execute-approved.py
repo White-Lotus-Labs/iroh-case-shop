@@ -51,10 +51,11 @@ def signing_key(batch, step):
 def command_for(batch, step, before):
     require(step in batch['steps'] and step['network'] == 'testnet', 'Unapproved step')
     require(isinstance(before.get('nonce'), int) and 0 <= before['nonce'] < 2**64-1
+            and isinstance(before.get('block_height'), int) and before['block_height'] > 0
             and isinstance(before.get('block_hash'), str)
             and re.fullmatch(r'[1-9A-HJ-NP-Za-km-z]{32,44}', before['block_hash']), 'Checked Testnet block and nonce are required')
     actions = step['actions']
-    signer = ['sign-with-keychain', '--signer-public-key', signing_key(batch, step), '--block-hash', before['block_hash'], '--nonce', str(before['nonce'] + 1), 'send']
+    signer = ['sign-with-keychain', '--signer-public-key', signing_key(batch, step), '--block-hash', before['block_hash'], '--block-height', str(before['block_height']), '--nonce', str(before['nonce'] + 1), 'display']
     if actions[0]['type'] == 'CreateAccount':
         require([a['type'] for a in actions] == ['CreateAccount', 'Transfer', 'AddKey'], 'Invalid account creation')
         command = ['near', 'account', 'create-account', 'fund-myself', step['receiverId'], actions[1]['deposit'] + ' yoctoNEAR', 'use-manually-provided-public-key', actions[2]['publicKey'], 'sign-as', step['signerId']]
@@ -66,7 +67,7 @@ def command_for(batch, step, before):
         require(len(actions) == 1 and actions[0]['type'] == 'FunctionCall', 'Unexpected action')
         call = actions[0]
         command = ['near', 'contract', 'call-function', 'as-transaction', step['receiverId'], call['methodName'], 'json-args', compact(call['args']), 'prepaid-gas', str(int(call['gas']) // 10**12) + ' Tgas', 'attached-deposit', call['deposit'] + ' yoctoNEAR', 'sign-as', step['signerId']]
-    return command + ['network-config', 'testnet'] + signer
+    return [command[0], '--offline', *command[1:]] + ['network-config', 'testnet'] + signer
 
 
 def step_ceiling(batch, step):
@@ -124,9 +125,22 @@ def keychain_available(account, runner=None):
     return process.returncode == 0
 
 
-def verify_receipt(batch, step, result, tx_hash):
-    tx = result['transaction']
-    require(result['final_execution_status'] == 'FINAL' and tx['hash'] == tx_hash and tx['signer_id'] == step['signerId'] and tx['receiver_id'] == step['receiverId'] and tx['public_key'] == signing_key(batch, step), 'Final transaction identity/key mismatch')
+def strict_json(value):
+    def pairs(items):
+        result = {}
+        for key, value in items:
+            require(key not in result, 'Duplicate JSON argument key')
+            result[key] = value
+        return result
+    return json.loads(value, object_pairs_hook=pairs)
+
+
+def canonical_json(value):
+    return json.dumps(value, sort_keys=True, separators=(',', ':'), ensure_ascii=False, allow_nan=False)
+
+
+def verify_transaction(batch, step, tx, tx_hash):
+    require(tx['hash'] == tx_hash and tx['signer_id'] == step['signerId'] and tx['receiver_id'] == step['receiverId'] and tx['public_key'] == signing_key(batch, step), 'Transaction identity/key mismatch')
     require(len(tx['actions']) == len(step['actions']), 'Transaction actions changed')
     for expected, observed in zip(step['actions'], tx['actions']):
         kind = expected['type']
@@ -140,7 +154,12 @@ def verify_receipt(batch, step, result, tx_hash):
             # nearcore ActionView returns the code digest; full bytecode comes from view_code.
             digest = code.hex() if len(code) == 32 else hashlib.sha256(code).hexdigest()
             require(digest == expected['sha256'], 'Deployed action checksum changed')
-        elif kind == 'FunctionCall': require(value['method_name'] == expected['methodName'] and int(value['gas']) == int(expected['gas']) and value['deposit'] == expected['deposit'] and json.loads(base64.b64decode(value['args'], validate=True)) == expected['args'], 'Function arguments, gas or deposit changed')
+        elif kind == 'FunctionCall': require(value['method_name'] == expected['methodName'] and int(value['gas']) == int(expected['gas']) and value['deposit'] == expected['deposit'] and canonical_json(strict_json(base64.b64decode(value['args'], validate=True))) == canonical_json(expected['args']), 'Function arguments, gas or deposit changed')
+
+
+def verify_receipt(batch, step, result, tx_hash):
+    require(result['final_execution_status'] == 'FINAL', 'Final transaction required')
+    verify_transaction(batch, step, result['transaction'], tx_hash)
     require('SuccessValue' in result['status'], 'Transaction failed or remains unresolved')
     root = result['transaction_outcome']
     require(root['id'] == tx_hash, 'Root receipt mismatch')
@@ -161,6 +180,92 @@ def verify_receipt(batch, step, result, tx_hash):
         except (ValueError, UnicodeError): accepted = None
         require(accepted == step['actions'][0]['args']['amount'], 'Funding resolver full acceptance missing')
     return sum(int(row['tokens_burnt']) for row in [root['outcome'], *by_id.values()])
+
+
+def encode58(data):
+    alphabet = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
+    number = int.from_bytes(data, 'big'); result = ''
+    while number: number, digit = divmod(number, 58); result = alphabet[digit] + result
+    return '1' * (len(data) - len(data.lstrip(b'\0'))) + result
+
+
+def decode58(value):
+    alphabet = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
+    number = 0
+    for char in value:
+        require(char in alphabet, 'Invalid base58 character')
+        number = number * 58 + alphabet.index(char)
+    return b'\0' * (len(value) - len(value.lstrip('1'))) + number.to_bytes((number.bit_length() + 7) // 8, 'big')
+
+
+def verify_public_signature(key, message, signature):
+    require(key.startswith('ed25519:'), 'Only Ed25519 signatures are approved')
+    raw_key = decode58(key.split(':', 1)[1])
+    require(len(raw_key) == 32 and len(signature) == 64, 'Invalid Ed25519 lengths')
+    program = """import {createPublicKey,verify} from 'node:crypto';let s='';for await(const b of process.stdin)s+=b;const x=JSON.parse(s);const key=createPublicKey({key:Buffer.concat([Buffer.from('302a300506032b6570032100','hex'),Buffer.from(x.key,'base64')]),format:'der',type:'spki'});process.stdout.write(String(verify(null,Buffer.from(x.message,'base64'),key,Buffer.from(x.signature,'base64'))));"""
+    result = subprocess.run(['node', '--input-type=module', '-e', program], input=compact({'key': base64.b64encode(raw_key).decode(), 'message': base64.b64encode(message).decode(), 'signature': base64.b64encode(signature).decode()}), capture_output=True, text=True, timeout=15)
+    require(result.returncode == 0 and result.stdout in ('true', 'false'), 'Public signature verifier failed')
+    return result.stdout == 'true'
+
+
+class WireReader:
+    def __init__(self, data): self.data, self.position = data, 0
+    def take(self, length):
+        require(0 <= length <= len(self.data) - self.position, 'Truncated signed transaction')
+        value = self.data[self.position:self.position + length]; self.position += length
+        return value
+    def integer(self, length): return int.from_bytes(self.take(length), 'little')
+    def vector(self, limit):
+        length = self.integer(4); require(length <= limit, 'Signed transaction field too large')
+        return self.take(length)
+    def string(self, limit=256): return self.vector(limit).decode('utf8')
+    def public_key(self):
+        require(self.integer(1) == 0, 'Only Ed25519 key tags are approved')
+        return 'ed25519:' + encode58(self.take(32))
+
+
+def verify_signed_transaction(batch, step, before, encoded):
+    require(isinstance(encoded, str) and len(encoded) <= 2000000, 'Invalid signed transaction size')
+    raw = base64.b64decode(encoded, validate=True); reader = WireReader(raw)
+    tx = {'signer_id': reader.string(64), 'public_key': reader.public_key(), 'nonce': reader.integer(8), 'receiver_id': reader.string(64), 'block_hash': encode58(reader.take(32)), 'actions': []}
+    require(tx['nonce'] == before['nonce'] + 1 and tx['block_hash'] == before['block_hash'], 'Signed nonce/block changed')
+    require(reader.integer(4) == len(step['actions']), 'Signed action count changed')
+    for expected in step['actions']:
+        tag = reader.integer(1)
+        if tag == 0: action = 'CreateAccount'
+        elif tag == 1:
+            code = reader.vector(1000000)
+            require(expected['type'] == 'DeployContract' and len(code) == expected['bytes'] and hashlib.sha256(code).hexdigest() == expected['sha256'], 'Signed deployed WASM changed')
+            action = {'DeployContract': {'code': base64.b64encode(code).decode()}}
+        elif tag == 2:
+            method, arguments = reader.string(), reader.vector(100000)
+            strict_json(arguments)
+            action = {'FunctionCall': {'method_name': method, 'args': base64.b64encode(arguments).decode(), 'gas': reader.integer(8), 'deposit': str(reader.integer(16))}}
+        elif tag == 3: action = {'Transfer': {'deposit': str(reader.integer(16))}}
+        elif tag == 5:
+            key, nonce = reader.public_key(), reader.integer(8)
+            require(reader.integer(1) == 1, 'Only approved FullAccess AddKey is permitted')
+            action = {'AddKey': {'public_key': key, 'access_key': {'nonce': nonce, 'permission': 'FullAccess'}}}
+        else: raise ValueError('Unapproved signed action/version')
+        tx['actions'].append(action)
+    unsigned = raw[:reader.position]
+    require(reader.integer(1) == 0, 'Only Ed25519 signature tags are approved')
+    signature = reader.take(64)
+    require(reader.position == len(raw), 'Trailing signed transaction bytes')
+    digest = hashlib.sha256(unsigned).digest(); tx['hash'] = encode58(digest)
+    verify_transaction(batch, step, tx, tx['hash'])
+    require(verify_public_signature(tx['public_key'], digest, signature), 'Signed transaction signature invalid')
+    return tx
+
+
+def broadcast_once(endpoint, encoded, runner=None):
+    require(endpoint in ('https://rpc.testnet.fastnear.com', 'https://rpc.testnet.near.org'), 'Pinned Testnet RPC required')
+    payload = compact({'jsonrpc': '2.0', 'id': 'iroh-approved-single-send', 'method': 'send_tx', 'params': {'signed_tx_base64': encoded, 'wait_until': 'FINAL'}})
+    result = (runner or subprocess.run)(['curl', '--disable', '-fsS', '--retry', '0', '--max-time', '60', '--header', 'Content-Type: application/json', '--data-binary', '@-', endpoint], input=payload, capture_output=True, text=True)
+    require(result.returncode == 0, 'Single submission transport uncertain; reconcile saved hash')
+    response = json.loads(result.stdout)
+    require('error' not in response, 'Single submission returned an error; reconcile saved hash')
+    return response['result']
 
 
 def code_hash(digest):
@@ -358,6 +463,7 @@ def main():
                 before = preconditions(batch, step, rpc, journal['steps']); may_submit(saved, (saved or {}).get('before', {}), before)
                 if 'initial_owner_balance_yocto' not in journal: journal['initial_owner_balance_yocto'] = rpc.query(batch['ownerId'], before['block_hash'])['amount']
                 entry = {'status': 'prepared', 'tx_hash': None, 'signer_id': step['signerId'], 'receiver_id': step['receiverId'], 'before': before}
+                if saved and saved.get('previous_attempts'): entry['previous_attempts'] = saved['previous_attempts']
                 persist(execution_path, journal, step['id'], entry)
                 # No shell, environment credential lookup, signing retry, or raw CLI output in the journal.
                 load_manifest(args.manifest)
@@ -366,15 +472,22 @@ def main():
                     persist(execution_path, journal, step['id'], entry)
                     raise ValueError(entry['reason'])
                 process = subprocess.run(command_for(batch, step, before), capture_output=True, text=True)
-                tx_hash = parse_hash(process.stdout + '\n' + process.stderr)
-                if not tx_hash:
-                    local = False
-                    try: local = local_signer_failure(process.returncode, process.stdout + process.stderr, before, preconditions(batch, step, rpc, journal['steps']))
-                    except Exception: pass
-                    entry.update(status='blocked_signer' if local else 'uncertain', reason='CLI produced no transaction hash; no automatic retry')
+                if process.returncode != 0:
+                    entry.update(status='signing_failed', reason='Offline signing failed; no broadcast attempted; raw CLI output withheld')
                     persist(execution_path, journal, step['id'], entry)
                     raise ValueError(entry['reason'])
-                entry.update(status='submitted', tx_hash=tx_hash)
+                matches = re.findall(r'Signed transaction \(serialized as base64\):\s*([A-Za-z0-9+/=]+)', process.stderr)
+                require(len(matches) == 1, 'Offline CLI did not return one signed transaction; no broadcast attempted')
+                encoded = matches[0]
+                signed = verify_signed_transaction(batch, step, before, encoded)
+                tx_hash = signed['hash']
+                entry.update(status='submitted', tx_hash=tx_hash, transport='offline_keychain_pinned_testnet_rpc', signed_nonce=signed['nonce'], signed_block_hash=signed['block_hash'])
+                # Persist the computed hash before the only broadcast. A crash cannot cause a blind retry.
+                persist(execution_path, journal, step['id'], entry)
+                try: broadcast_once(args.rpc, encoded)
+                except Exception:
+                    entry['submission_response'] = 'Unconfirmed; querying the saved transaction hash without resubmission'
+                    persist(execution_path, journal, step['id'], entry)
             persist(execution_path, journal, step['id'], entry)
             try:
                 result = rpc.call('tx', {'tx_hash': tx_hash, 'sender_account_id': step['signerId'], 'wait_until': 'FINAL'})

@@ -1,20 +1,20 @@
-✔ exact account creation keeps the dedicated new key and five NEAR deposit (0.74725ms)
-✔ function calls preserve literal args, gas and deposits (0.123666ms)
-✔ wallet accounts must all match the existing owner and any returned public key (0.153084ms)
-✔ an approved batch cannot be replaced by a changed generated proposal (0.72575ms)
-✔ bounded manifest preserves Dragon economics and specifies every new deployment (2.331791ms)
-✔ every budget covers exact deposits and token transfers without mock dollar valuations (0.644917ms)
-✔ rejects a different chain or substituted deployment key (0.479542ms)
-✔ prepared commands keep owner signing unsigned and quote apostrophes safely (0.754375ms)
-✔ unsafe pending Dragon state blocks the upgrade and retains paused verification gates (0.312083ms)
-✔ funds each token inventory with exactly 100 potential bonuses and correct decimals (0.174834ms)
-✔ refuses changed Dragon bonus ordering, extra signer keys and invalid base58 key length (0.552917ms)
-✔ marks allocation above a new token fixed supply as not ready (0.267791ms)
-✔ refuses changed deployed USDI or legacy mock code before proposing transfers (0.148083ms)
-✔ duplicate Meteor connections are usable only when every entry matches the approved signer (0.389709ms)
-✔ the approved request creates and funds USDI only with the reviewed key and initializer (6.562875ms)
-✔ fees match the saved live protocol estimate and stop above the approved ceiling (2.121ms)
-✔ missing wallet outcomes never become a successful transaction hash (0.236958ms)
+✔ exact account creation keeps the dedicated new key and five NEAR deposit (0.56825ms)
+✔ function calls preserve literal args, gas and deposits (0.122875ms)
+✔ wallet accounts must all match the existing owner and any returned public key (0.078375ms)
+✔ an approved batch cannot be replaced by a changed generated proposal (0.4865ms)
+✔ bounded manifest preserves Dragon economics and specifies every new deployment (1.454833ms)
+✔ every budget covers exact deposits and token transfers without mock dollar valuations (0.462125ms)
+✔ rejects a different chain or substituted deployment key (0.187583ms)
+✔ prepared commands keep owner signing unsigned and quote apostrophes safely (0.697584ms)
+✔ unsafe pending Dragon state blocks the upgrade and retains paused verification gates (0.258375ms)
+✔ funds each token inventory with exactly 100 potential bonuses and correct decimals (0.168167ms)
+✔ refuses changed Dragon bonus ordering, extra signer keys and invalid base58 key length (0.505584ms)
+✔ marks allocation above a new token fixed supply as not ready (0.240625ms)
+✔ refuses changed deployed USDI or legacy mock code before proposing transfers (0.12975ms)
+✔ duplicate Meteor connections are usable only when every entry matches the approved signer (0.321959ms)
+✔ the approved request creates and funds USDI only with the reviewed key and initializer (2.853167ms)
+✔ fees match the saved live protocol estimate and stop above the approved ceiling (0.857125ms)
+✔ missing wallet outcomes never become a successful transaction hash (0.141584ms)
 ℹ tests 17
 ℹ suites 0
 ℹ pass 17
@@ -22,4 +22,4 @@
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 70.312458
+ℹ duration_ms 41.839042

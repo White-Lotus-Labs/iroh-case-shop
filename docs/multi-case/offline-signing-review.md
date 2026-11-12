@@ -1,0 +1,11 @@
+# Pinned offline signing and owner verification
+
+The user privately imported the existing owner credential. Exact generic-password service/account metadata matched. The installed CLI signed a fresh NEP-413 challenge for `iroh-keychain-verification.invalid`; independent Node Ed25519 verification matched the required existing public key. Finalized Testnet RPC confirmed FullAccess and an unchanged owner transaction nonce. No transaction was submitted during signer verification. Public proof is in owner-signer-status.json.
+
+The exact installed CLI 0.31.1 source showed that its online path resolves its own nonce and block even when those flags are accepted, and its send helper retries. The executor now requests offline signing with the checked key, nonce, block hash and block height, using `display` rather than CLI `send`. It decodes only legacy V0 approved actions, rejects extra bytes, unsupported tags, duplicate JSON keys and changed JSON types, checks full deployment bytecode, and independently verifies the signature over the unsigned transaction hash. Private credential access stays inside the installed CLI.
+
+Only after exact validation does it durably record the computed transaction hash and attempt one send_tx request to an allowlisted Testnet RPC. Curl configuration is disabled, retries are explicitly zero, and redirects are not followed. Any submission uncertainty is resolved by read-only hash queries; there is no automatic resubmission.
+
+The independent security reviewer confirmed the wire design and exact offline CLI behavior, exercised all ninety exact action sets with synthetic public wire fixtures, and found the boolean/integer equality issue. The fix uses type-sensitive canonical JSON, with regressions for true versus 1 and integer tiers versus booleans/floats. Thirty-four Python executor/handoff tests and seventeen Node deployment/action tests passed before first resumed broadcast. Public RFC8032 vectors exercise the signature primitive without private test material.
+
+The canceled BLACKDRAGON attempt was reconciled only after confirming target absence and attributing every intervening owner nonce to the five verified approved Dragon calls. Previous cancellation evidence remains in Git and the append-only execution journal. The deployment manifest bytes and SHA-256 remain unchanged.
