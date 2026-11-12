@@ -2,6 +2,8 @@
 
 This is the starting reference for agents replacing the entire Iroh frontend. Written on 12 November 2026. The local frontend branch is `codex/frontend-handoff`. Blockchain deployment is paused by the owner. No additional deployment is required to start frontend development.
 
+Read [the agent brief](AGENT-BRIEF.md) for implementation boundaries and [the application API reference](application-api.md) for auth, chat streaming, market data, server configuration, and hosting. The contract and wallet integration is described below.
+
 The interface can change completely. Keep the contract calls, accounting, transaction validation, and recovery behavior intact. The chain remains the source of truth for prices, odds, draws, payouts, and inventories.
 
 ## Current integration boundary
