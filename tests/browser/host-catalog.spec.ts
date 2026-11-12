@@ -29,6 +29,9 @@ for (const [width, height] of [
       page
         .locator('[data-case="dragon-tea"]')
         .getByText('Bonus upgrade awaiting approval'),
+    ).toHaveCount(0);
+    await expect(
+      page.locator('[data-case="dragon-tea"]').getByText(/Bonus rewards/),
     ).toHaveCount(1);
     const panel = page.locator('.reading-panel[data-host-collection]');
     const bounds = await panel.boundingBox();

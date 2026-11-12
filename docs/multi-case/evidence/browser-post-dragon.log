@@ -1,0 +1,129 @@
+
+> tea-after-pour@0.1.0 test:e2e
+> playwright test --reporter=line --output=/private/tmp/iroh-post-dragon-browser-results
+
+[WebServer] ┌─────────────────────────────────────────────────────────┐
+[WebServer] │  Update available 6.4.1 -> 8.0.0-rc.33                  │
+[WebServer] │                                                         │
+[WebServer] │  This is a major update - please follow the guide at    │
+[WebServer] │  https://pris.ly/d/major-version-upgrade                │
+[WebServer] │                                                         │
+[WebServer] │  Run the following to update                            │
+[WebServer] │    npm i --save-dev prisma@latest                       │
+[WebServer] │    npm i @prisma/client@latest                          │
+[WebServer] └─────────────────────────────────────────────────────────┘
+
+[WebServer] (node:25682) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:25688) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 84 tests using 1 worker
+
+(node:25720) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/84] tests/browser/auth.spec.ts:4:1 › a guest can use the room and find optional account actions
+[2/84] tests/browser/auth.spec.ts:40:1 › register, refresh, logout, and case-insensitive login keep one identity
+[3/84] tests/browser/auth.spec.ts:114:1 › duplicate nickname and short password show recoverable errors
+[4/84] tests/browser/camera-look.spec.ts:83:1 › free look drags, zooms and walks without leaving the room, then recenters
+[5/84] tests/browser/camera-look.spec.ts:153:1 › halos fly to another station, open the current one, and a drag is not a click
+[6/84] tests/browser/cases.spec.ts:18:1 › cases with unavailable RPC show no invented data and cannot request signatures
+[7/84] tests/browser/cases.spec.ts:57:1 › cases reuse the root Testnet wallet session through reload and disconnect
+[8/84] tests/browser/cases.spec.ts:154:3 › cases keep branding and the wallet within a 390px viewport
+[9/84] tests/browser/cases.spec.ts:154:3 › cases keep branding and the wallet within a 320px viewport
+[10/84] tests/browser/cases.spec.ts:176:3 › tea room keeps Cases navigation and the wallet visible at 390px
+[11/84] tests/browser/cases.spec.ts:176:3 › tea room keeps Cases navigation and the wallet visible at 320px
+[12/84] tests/browser/cases.spec.ts:203:1 › standalone Cases scrolls and receives input before and after wallet authorization
+[13/84] tests/browser/cases.spec.ts:256:1 › standalone Cases accepts keyboard scroll when no wallet is available
+[WebServer] [browser] NEAR wallet connect failed.
+[WebServer]     at WalletController.report (src/ui/wallet/WalletProvider.tsx:56:11)
+[WebServer]     at WalletController.connect (src/ui/wallet/walletController.ts:188:35)
+[WebServer]   54 | function report(_error: unknown, action: WalletAction) {
+[WebServer]   55 |   // SDK error messages can contain wallet payloads; log only the action.
+[WebServer] > 56 |   console.error(`NEAR wallet ${action} failed.`);
+[WebServer]      |           ^
+[WebServer]   57 | }
+[WebServer]   58 |
+[WebServer]   59 | export function WalletProvider({ children }: { children: ReactNode }) { (src/ui/wallet/WalletProvider.tsx:56:11)
+
+[14/84] tests/browser/chain-loading.spec.ts:5:1 › shows balance, claim eligibility and pool while opening history is slow
+[15/84] tests/browser/chain-loading.spec.ts:67:1 › backs off a failed balance read and retries without hiding claim or pool data
+[16/84] tests/browser/chain-loading.spec.ts:110:1 › a hanging view times out, and rapid refreshes do not restart it
+[17/84] tests/browser/chain-loading.spec.ts:154:1 › disconnect and a new account ignore a slow balance from the previous wallet
+[18/84] tests/browser/chain-loading.spec.ts:226:1 › recovers a redirected claim receipt and never sends a second claim
+[19/84] tests/browser/chain-loading.spec.ts:262:1 › unmount cancels an in-flight wallet read and reopening starts a fresh read
+[20/84] tests/browser/deck.spec.ts:38:1 › Counter deck opens a thesis in the panel, expands a leaf, and hands off to Uncle
+[WebServer] (node:27028) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[21/84] tests/browser/deck.spec.ts:107:1 › deck shows an honest offline state when Nansen answers 503
+[22/84] tests/browser/deck.spec.ts:131:1 › a counter card opens the Thesis Desk on all scrolls, and each thesis opens in the same panel
+[23/84] tests/browser/deck.spec.ts:209:1 › full motion reading switches theses in place and returns focus to the book
+[24/84] tests/browser/deck.spec.ts:322:1 › blocked site storage does not crash the page
+[25/84] tests/browser/host-catalog.spec.ts:14:3 › Host catalog and inspection fit a 320px viewport
+[26/84] tests/browser/host-catalog.spec.ts:14:3 › Host catalog and inspection fit a 390px viewport
+[27/84] tests/browser/host-catalog.spec.ts:14:3 › Host catalog and inspection fit a 820px viewport
+[28/84] tests/browser/host-catalog.spec.ts:14:3 › Host catalog and inspection fit a 1366px viewport
+[29/84] tests/browser/host-catalog.spec.ts:14:3 › Host catalog and inspection fit a 1920px viewport
+[30/84] tests/browser/host-catalog.spec.ts:141:1 › Host verifies claim, pending opening recovery, draw, and payment through the wallet lifecycle
+[31/84] tests/browser/host-catalog.spec.ts:278:3 › Host reports a finalized refund without revealing a reward
+[32/84] tests/browser/host-catalog.spec.ts:278:3 › Host reports a finalized fail without revealing a reward
+[33/84] tests/browser/host-catalog.spec.ts:320:3 › collection previews Bamboo Mist Case without authorizing an undeployed opening
+[34/84] tests/browser/host-catalog.spec.ts:320:3 › collection previews Moon Spirit Case without authorizing an undeployed opening
+[35/84] tests/browser/host-catalog.spec.ts:320:3 › collection previews Phoenix Flame Case without authorizing an undeployed opening
+[36/84] tests/browser/host-catalog.spec.ts:320:3 › collection previews Uncle's Secret Reserve without authorizing an undeployed opening
+[37/84] tests/browser/host-catalog.spec.ts:354:1 › a case-specific deep link and refresh retain the selected planned case
+[38/84] tests/browser/host-catalog.spec.ts:371:1 › switching cases preserves the original pending receipt and never resubmits it
+[39/84] tests/browser/iroh-guest.spec.ts:4:1 › a guest can open Host and chat with Iroh without signing in
+[40/84] tests/browser/iroh.spec.ts:21:1 › Host restores previous chats after reload and switches between them
+[41/84] tests/browser/iroh.spec.ts:132:1 › Host immediately shows Iroh chat in the Host panel, keeps history across stations, and resets conversation
+[42/84] tests/browser/iroh.spec.ts:196:1 › Iroh shows a live provider error and Stop ends a pending request
+[43/84] tests/browser/iroh.spec.ts:254:1 › Iroh offers BYOK after the daily cup and sends the visitor key
+[44/84] tests/browser/iroh.spec.ts:322:1 › Iroh keeps a completed answer when Nansen returns no conversation ID
+[45/84] tests/browser/iroh.spec.ts:343:1 › Iroh keeps follow-ups in the same saved chat without a conversation ID
+[46/84] tests/browser/iroh.spec.ts:386:1 › the Uncle hand-off prefill is used once, not on every reopen
+[47/84] tests/browser/journey.spec.ts:26:1 › Entrance to Counter shows the thesis desk placeholder
+[48/84] tests/browser/journey.spec.ts:63:1 › dock navigation keeps panels closed until Open is used
+[49/84] tests/browser/journey.spec.ts:99:1 › Host panel stays open after an explicit open
+[50/84] tests/browser/journey.spec.ts:113:1 › mobile layout remains readable and the WebGL fallback preserves the journey
+[WebServer] [browser] THREE.WebGLRenderer: Error creating WebGL context.
+
+[51/84] tests/browser/motion.spec.ts:18:1 › all directed station transitions and rapid interruptions preserve navigation
+[52/84] tests/browser/motion.spec.ts:56:1 › OS reduced motion sets data-motion reduce; full motion restores panel animation
+[53/84] tests/browser/motion.spec.ts:80:1 › system full motion keeps paper-arrive on the Host panel
+[54/84] tests/browser/nansen-honesty.spec.ts:14:1 › unconfigured Nansen stays honest on status, Host, and Shelf
+[55/84] tests/browser/nansen-honesty.spec.ts:85:1 › a configured Nansen status keeps the live Host, status, and Shelf framing
+[56/84] tests/browser/reward-history.spec.ts:14:1 › Host waits for a verified draw and the Shelf retains the purchase receipt
+[57/84] tests/browser/reward-history.spec.ts:92:1 › mobile reel skips motion and Shelf prompts a disconnected wallet
+[58/84] tests/browser/reward-history.spec.ts:133:1 › Shelf loads older finalized case history and retains the legacy fallback
+[59/84] tests/browser/scroll-hint.spec.ts:4:1 › the open hint keeps its name, describes the teaser, and gets focus back after the roll-up
+[60/84] tests/browser/shelf.spec.ts:105:1 › the Shelf stays in the room until opened, then reveals ranked wallets without moving again
+[61/84] tests/browser/shelf.spec.ts:224:1 › clicking the Shelf in the room starts the focus journey
+[62/84] tests/browser/shelf.spec.ts:271:1 › a hanging spirit paper answers hover and opens the Shelf
+[63/84] tests/browser/shelf.spec.ts:326:1 › Shelf presents one leader above a ranked list of nine spirits
+[64/84] tests/browser/shelf.spec.ts:430:1 › Meme Traders has its own sorts, win rate, chains and profiler links
+[65/84] tests/browser/shelf.spec.ts:503:1 › Shelf keeps its parchment for a safe error and exposes a keyboard retry
+[66/84] tests/browser/shelf.spec.ts:532:1 › an invalid server response shows a safe parchment error
+[67/84] tests/browser/shelf.spec.ts:561:1 › rank ten remains visible at 1280 by 720
+[68/84] tests/browser/shelf.spec.ts:592:1 › a stale real snapshot is labelled and small screens keep values readable
+[69/84] tests/browser/station-dock.spec.ts:7:1 › station dock magnifies under the pointer and keeps navigation
+[70/84] tests/browser/thesis-deep-link.spec.ts:5:1 › ?thesis=ai lands on Counter, opens the panel, and scrolls the AI thesis
+[71/84] tests/browser/waiting-room.spec.ts:3:1 › waiting room holds the door until the room is ready, then steps inside
+[72/84] tests/browser/waiting-sketchbook.spec.ts:15:1 › sketchbook turns by button, key, drag and index, and links the team
+[73/84] tests/browser/waiting-sketchbook.spec.ts:69:1 › on a phone every page is one tap away, not only a swipe
+[74/84] tests/browser/waiting-sketchbook.spec.ts:96:1 › the sketchbook starts open, riffles forward once, and lands on the first spread
+[75/84] tests/browser/waiting-sketchbook.spec.ts:141:1 › a light machine riffles snapshot strips and skips the page blur
+[76/84] tests/browser/waiting-sketchbook.spec.ts:210:1 › on a phone held sideways one page keeps a size its text fits
+[77/84] tests/browser/wallet-history.spec.ts:35:1 › Shelf separates indexed references, loads more and verifies receipts on demand
+[78/84] tests/browser/wallet-history.spec.ts:166:1 › indexer and receipt failures do not hide finalized case activity
+[79/84] tests/browser/wallet-history.spec.ts:226:1 › switching wallets cancels old indexed history and ignores a late response
+[80/84] tests/browser/wallet.spec.ts:31:1 › shows Connect Wallet by default and opens the wallet picker once
+[81/84] tests/browser/wallet.spec.ts:60:1 › connects, restores after refresh, then disconnects for good
+[82/84] tests/browser/wallet.spec.ts:108:1 › keeps the header usable on a narrow screen
+[83/84] tests/browser/wallet.spec.ts:122:1 › disables connection while authorization is pending
+[84/84] tests/browser/wallet.spec.ts:136:1 › returns to the guest state when wallet authorization is rejected
+  84 passed (6.8m)

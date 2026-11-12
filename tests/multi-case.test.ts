@@ -52,7 +52,7 @@ describe('independent tea cases', () => {
     expect(deploymentForCase(caseById('bamboo-mist'))).toBeNull();
     expect(caseById('dragon-tea')).toMatchObject({
       deploymentStatus: 'verified-live',
-      bonusDeploymentStatus: 'planned',
+      bonusDeploymentStatus: 'verified-live',
     });
   });
   it('binds exact signing amount and case identity to the chosen definition', () => {

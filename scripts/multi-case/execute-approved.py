@@ -135,7 +135,11 @@ def verify_receipt(batch, step, result, tx_hash):
         value = observed[kind]
         if kind == 'Transfer': require(value == {'deposit': expected['deposit']}, 'Transfer deposit changed')
         elif kind == 'AddKey': require(value['public_key'] == expected['publicKey'] and value['access_key'] == {'nonce': 0, 'permission': 'FullAccess'}, 'Added key changed')
-        elif kind == 'DeployContract': require(hashlib.sha256(base64.b64decode(value['code'], validate=True)).hexdigest() == expected['sha256'], 'Deployed action checksum changed')
+        elif kind == 'DeployContract':
+            code = base64.b64decode(value['code'], validate=True)
+            # nearcore ActionView returns the code digest; full bytecode comes from view_code.
+            digest = code.hex() if len(code) == 32 else hashlib.sha256(code).hexdigest()
+            require(digest == expected['sha256'], 'Deployed action checksum changed')
         elif kind == 'FunctionCall': require(value['method_name'] == expected['methodName'] and int(value['gas']) == int(expected['gas']) and value['deposit'] == expected['deposit'] and json.loads(base64.b64decode(value['args'], validate=True)) == expected['args'], 'Function arguments, gas or deposit changed')
     require('SuccessValue' in result['status'], 'Transaction failed or remains unresolved')
     root = result['transaction_outcome']

@@ -10,16 +10,22 @@
   ],
   "submittedTransactions": [
     "GCW9EVoGZ8uuZWvkvrMdoNcbrmAEngtDXFfJggUbXMoQ",
-    "5HsUXkbmwobiuCFqwPuRqLWDgmti2Sa7uQKvARQ1wANn"
+    "5HsUXkbmwobiuCFqwPuRqLWDgmti2Sa7uQKvARQ1wANn",
+    "6yR2z3c2bQUeHeEyznUSbSz9YQEbwYvGqZomuckshcy8",
+    "EoKEYMLUpD6pBnsPSjUvMhr43paoVs3KU54tg41u4cgM",
+    "Hv3s7ub9b4hrYYnNykNoiyrdiiraRoEv99v8VqWsMzdp",
+    "GtUEJN5LRt5tjanXDKUNEFrERdFL8MhvN1hyLaNScLvy",
+    "AcB83J57ff2Wof7VejEkiKoX9biPP9U7wa8wM7qFC3vc",
+    "ARiLPsYj6zJ1vyj6GPxaKqoocM6bZnujgZY1W7Yz5AsQ"
   ],
-  "status": "approved_funded_blocked_owner_signer",
-  "lastCheckedAt": "2026-11-11T20:15:22.185447+00:00",
-  "lastCheckedBlockHeight": 277261953,
+  "status": "approved_funded_partial_blocked_wallet_policy",
+  "lastCheckedAt": "2026-11-12T01:16:46.950511+00:00",
+  "lastCheckedBlockHeight": 277293634,
   "funding": {
-    "balanceYocto": "109108852052391552799199995",
+    "balanceYocto": "109106367564840461699199990",
     "requiredYocto": "91705000000000000000000035",
     "shortfallYocto": "0"
   },
   "otherPublicPreconditions": "matched",
-  "blocker": "Existing owner Keychain signer unavailable; owner creation stopped before signing; Chrome Computer Use not approved."
+  "blocker": "Meteor blocks approved new-account AddKey FullAccess actions; no bypass attempted. The existing owner Keychain signer is unavailable; all remaining steps depend on the thirteen missing accounts."
 }

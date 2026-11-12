@@ -1,13 +1,13 @@
 {
-  "recordedAt": "2026-11-11T16:59:52.429976+00:00",
+  "recordedAt": "2026-11-12T01:15:16.099351+00:00",
   "rust": "79 Rust tests passed; exact final case/mock/original USDI artifact hashes recorded before and after all suites.",
   "vitest": "362 Vitest tests passed across 50 files.",
-  "deployment": "14 Node deployment-helper tests passed: ten bounded-batch tests including approved-digest immutability, and four historical USDI helper tests with its exact approved artifact.",
-  "browserDevelopment": "84 of 84 full Playwright tests passed in the supported development environment, 6.9 minutes.",
-  "browserProduction": "39 of 39 production case, wallet, recovery, roulette and Shelf Playwright tests passed, 1.9 minutes.",
+  "deployment": "17 Node tests passed: ten approved-batch tests, four historical USDI helper tests and three browser action/account guard tests.",
+  "browserDevelopment": "84 of 84 full Playwright tests passed after Dragon activation in an isolated development app, 6.8 minutes. Includes Host catalog/live bonus labels, recovery, case isolation, roulette and Shelf/Activity Ledger coverage.",
+  "browserProduction": "Prior implementation evidence: 39 production case/wallet/ledger Playwright tests passed. The post-Dragon rerun used the complete 84-test development suite.",
   "priorFailures": "Initial full-suite failures exposed the removed account page, stale brand and Shelf coordinates, native browser modal traversal, and the development error badge. All were resolved and the complete suite reran green. Production-only full-suite probes were stopped because camera diagnostics are intentionally absent and secure session cookies require HTTPS for the request client.",
-  "productionBuild": "Production Next.js build passed with an isolated migrated SQLite database and the existing Google Fonts network access.",
-  "typecheck": "next typegen and tsc --noEmit passed.",
+  "productionBuild": "Post-Dragon production Next.js build passed in an isolated directory with a disposable migrated SQLite database and no .env files. Installed dependencies were copied locally for Turbopack.",
+  "typecheck": "Post-Dragon next typegen and tsc --noEmit passed.",
   "sandbox": "All three genuine local Sandbox suites passed: five-case collection, original Dragon regressions, and pinned deployed V1 state migration. Includes actual USDI/bonus transfers, failures, same-draw retry, duplicate prevention, inventory isolation and stale refunds.",
   "simulation": "25,000,000 attempted openings passed exact integer conservation and reservation checks across five liquidity scenarios per case, plus forced legendary and bonus-depletion stresses.",
   "commits": [
@@ -26,19 +26,30 @@
     {
       "hash": "1e582f371494a15078f537e8e7a723e1ac53ed8d",
       "subject": "Pin conditional deployment approval and retain the funding gate"
+    },
+    {
+      "hash": "d9d44b285db709397cb9805c816af72256160033",
+      "subject": "Execute approved Dragon registrations and guard deployment resumption"
     }
   ],
   "noMainnetTransactions": true,
   "newPublicStateChanges": [
     "Previously approved SHITZU storage registration",
-    "Approved Dragon RHEA storage registration GCW9EVoGZ8uuZWvkvrMdoNcbrmAEngtDXFfJggUbXMoQ",
-    "Approved Dragon AURORA storage registration 5HsUXkbmwobiuCFqwPuRqLWDgmti2Sa7uQKvARQ1wANn"
+    "dragon-register-RHEA GCW9EVoGZ8uuZWvkvrMdoNcbrmAEngtDXFfJggUbXMoQ",
+    "dragon-register-AURORA 5HsUXkbmwobiuCFqwPuRqLWDgmti2Sa7uQKvARQ1wANn",
+    "dragon-pause 6yR2z3c2bQUeHeEyznUSbSz9YQEbwYvGqZomuckshcy8",
+    "dragon-upgrade EoKEYMLUpD6pBnsPSjUvMhr43paoVs3KU54tg41u4cgM",
+    "dragon-fund-bonus-dragon-tea-SHITZU Hv3s7ub9b4hrYYnNykNoiyrdiiraRoEv99v8VqWsMzdp",
+    "dragon-fund-bonus-dragon-tea-RHEA GtUEJN5LRt5tjanXDKUNEFrERdFL8MhvN1hyLaNScLvy",
+    "dragon-fund-bonus-dragon-tea-AURORA AcB83J57ff2Wof7VejEkiKoX9biPP9U7wa8wM7qFC3vc",
+    "unpause-dragon-tea ARiLPsYj6zJ1vyj6GPxaKqoocM6bZnujgZY1W7Yz5AsQ"
   ],
-  "newCasePublicDeployment": "Funding is sufficient. Two of ninety approved steps are verified; remaining owner-dependent steps are blocked by the unavailable existing owner Keychain signer.",
+  "newCasePublicDeployment": "Eight of ninety approved steps are finalized and verified. Dragon is migrated, funded and active at revision 19. Four new cases and nine new mock accounts remain absent because Meteor blocks FullAccess AddKey actions and the existing owner CLI key is unavailable.",
   "independentReviewer": "gpt-6-astra",
   "unresolvedCodeFindings": [],
   "approvalRecord": "docs/multi-case/approval.json",
   "executionJournal": "docs/multi-case/execution.json",
-  "postActivationTests": "Full post-activation suite awaits completion of deployment; prior implementation verification remains recorded above.",
-  "executionHelper": "16 Python executor unit tests passed after the two registrations; 14 existing Node deployment-helper tests passed. Re-running either already verified registration was checked to skip signing and submission without changing the journal. Full post-activation suites remain pending until the owner signer is available and deployment completes."
+  "postActivationTests": "Passed after Dragon migration/activation:79 Rust tests, three genuine Sandbox suites,25million simulation attempts,362 Vitest tests,84 full Playwright tests,TypeScript,production build,27 Python executor/browser tests and17 Node deployment/action tests. Public code/economics/history/token metadata/supply/balance/storage/inventory audit passed. No public opening or claim outside the manifest was submitted.",
+  "executionHelper": "27 Python executor/browser tests and 17 Node deployment/action tests passed. Actual verified migration, funding and unpause reruns were checked to skip signing and leave the journal unchanged. The receipt-hash fix was independently reviewed and reconciled the existing migration without resubmission.",
+  "verificationSetup": "The isolated rerun required the complete Cargo cache, README fixture, physical dependency copy and fresh build cache; these setup issues were resolved. All final required checks passed."
 }

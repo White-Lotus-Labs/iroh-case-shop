@@ -1,6 +1,6 @@
 # Iroh five-case implementation and Testnet report
 
-Prepared November 11, 2026. The approved Testnet deployment is partially executed: 2 of 90 steps are finalized and verified. Funding is sufficient. Remaining owner-dependent operations are blocked because the existing owner signer is unavailable to the CLI. No new case is claimed deployed or activated.
+Updated November 12, 2026. The approved Testnet deployment is partially executed: 8 of 90 steps are finalized and verified. Dragon is active with funded bonuses. Meteor blocks the approved new-account FullAccess AddKey actions. The owner CLI signer is still unavailable in Keychain. The four new cases and nine new token accounts remain undeployed. Funding is sufficient.
 
 ## Implemented collection
 
@@ -26,7 +26,7 @@ At target liquidity, Common/Rare/Legendary probability counts are `258334 / 7266
 
 Price 1 USDI. Common/Rare/Legendary USDI payouts are 0.1 / 1 / 5. Target available liquidity is 1000 USDI. Maximum USDI exposure per admitted opening is 5 USDI.
 
-Contract `cases-needmore-1-near.testnet`. Status: existing live USDI case; bonus activation pending.
+Contract `cases-needmore-1-near.testnet`. Status: active with funded bonuses.
 
 Bonus quantities by tier:
 
@@ -129,7 +129,7 @@ Independent review by gpt-6-astra found no blocking contract accounting or cross
 
 ## Shelf history
 
-The Shelf aggregates finalized records by case contract, case ID and nonce. Details displays case identity, price, tier, reward, settlement state, contract and transaction information where available. Paginated history can load the full per-account opening chain after upgrade; the current V1 API returns the latest 20. Locally saved verified receipts remain bounded to 60 per deployment and browser. Missing hashes remain unavailable.
+The Shelf aggregates finalized records by case contract, case ID and nonce. Details displays case identity, price, tier, reward, settlement state, contract and transaction information where available. Paginated history can load the full per-account opening chain after upgrade; the historical V1 API returned the latest 20; Dragon now runs the paginated implementation. Locally saved verified receipts remain bounded to 60 per deployment and browser. Missing hashes remain unavailable.
 
 Wallet references use the read-only NearBlocks v3 proxy with cursor pagination. They remain labeled unverified until Details checks the transaction, complete finalized receipt graph, inclusion block and successful NEP-141 event executors through RPC. Historical reads have a fixed archival fallback. Public evidence loaded 10+7 distinct references and verified the original Dragon opening transaction through 12 receipt outcomes, including the real USDI purchase and payout. Indexer coverage can be delayed or omit incoming interactions. This is not a claim of a complete wallet-to-wallet ledger. [Indexer evidence and limits](../multi-case-indexer.md) explain the boundary. The trader board remains accessible.
 
@@ -137,11 +137,11 @@ Wallet references use the read-only NearBlocks v3 proxy with cursor pagination. 
 
 - 79 Rust tests passed; exact final case/mock/original USDI artifact hashes recorded before and after all suites.
 - 362 Vitest tests passed across 50 files.
-- 14 Node deployment-helper tests passed: ten bounded-batch tests including approved-digest immutability, and four historical USDI helper tests with its exact approved artifact.
-- 84 of 84 full Playwright tests passed in the supported development environment, 6.9 minutes.
-- 39 of 39 production case, wallet, recovery, roulette and Shelf Playwright tests passed, 1.9 minutes.
-- next typegen and tsc --noEmit passed.
-- Production Next.js build passed with an isolated migrated SQLite database and the existing Google Fonts network access.
+- 17 Node tests passed: ten approved-batch tests, four historical USDI helper tests and three browser action/account guard tests.
+- 84 of 84 full Playwright tests passed after Dragon activation in an isolated development app, 6.8 minutes. Includes Host catalog/live bonus labels, recovery, case isolation, roulette and Shelf/Activity Ledger coverage.
+- Prior implementation evidence: 39 production case/wallet/ledger Playwright tests passed. The post-Dragon rerun used the complete 84-test development suite.
+- Post-Dragon next typegen and tsc --noEmit passed.
+- Post-Dragon production Next.js build passed in an isolated directory with a disposable migrated SQLite database and no .env files. Installed dependencies were copied locally for Turbopack.
 - All three genuine local Sandbox suites passed: five-case collection, original Dragon regressions, and pinned deployed V1 state migration. Includes actual USDI/bonus transfers, failures, same-draw retry, duplicate prevention, inventory isolation and stale refunds.
 - 25,000,000 attempted openings passed exact integer conservation and reservation checks across five liquidity scenarios per case, plus forced legendary and bonus-depletion stresses.
 
@@ -153,9 +153,9 @@ The final contract verification records before/after artifact hashes around all 
 
 ## Public Testnet state and authorized action
 
-At finalized block `277243023`, Dragon remains revision 13, unpaused, with 995.8 USDI available, 0.2 USDI vested fees, no pending liabilities and the original four completed openings. Historical payouts total 8 USDI. Existing live addresses are USDI `usdi-needmore-1-near.testnet`, case `cases-needmore-1-near.testnet`, and the three existing mock IDs listed above.
+At finalized block 277293634, Dragon is revision 19, paused=false, with 995.8 USDI available, 0.2 USDI vested fees, 0 pending openings and 4 completed payouts. Historical payouts total 8 USDI. The pinned migration preserved the legacy opening and credit records.
 
-The previously approved SHITZU registration remains finalized. The two additional registrations below also finalized in this execution. No account creation, deployment, migration, inventory funding, pause, unpause or paid opening has been submitted.
+The previously approved SHITZU registration remains finalized. Additional completed transactions are listed below. No paid opening, claim, Mainnet transaction or treasury withdrawal was submitted.
 
 ## Approved bounded batch and execution status
 
@@ -163,33 +163,49 @@ The exact proposal is [deployment-batch.json](deployment-batch.json), SHA-256 `4
 
 The maximum native expenditure is **91.705000000000000000000035 test NEAR**, including 73.035000000000000000000035 in attached deposits and 18.67 in maximum fees. New case USDI funding is exactly **1,000 USDI**, allocated 50/150/300/500. Bonus funding covers 100 possible payouts per candidate, including the original Dragon allocations.
 
-The fresh owner balance is 109.108852052391552799199995 test NEAR and 1004 USDI at block 277261953. It covers the approved ceiling. No top-up or new transaction approval is needed. The remaining blocker is availability of the existing owner signer, public key `ed25519:BntboZwnJtLVnBBh4XffXUDwbaygCsQiMmhWXD3xCi6`. The CLI found neither its dedicated Keychain item nor a legacy credential; the first account creation stopped before signing. Finalized checks still showed its target absent and the owner nonce unchanged.
+The finalized owner balance is 109.10636756484046169919999 test NEAR and 1004 USDI at block 277293634. No top-up or replacement batch approval is needed. Meteor blocks the approved new-account FullAccess AddKey actions. The owner CLI signer is still unavailable in Keychain. The four new cases and nine new token accounts remain undeployed.
 
 Case WASM SHA-256: `48e560f15ef75db48d82ab1d57ca119b752059d96c1157c897ce3dbf87b7c06e`. Mock WASM SHA-256: `faa2b5cd6957806b93b8c96067152e21ecda54bd63bb7cb5da385c5ebea6a630`. Exact binaries are archived under `artifacts/testnet/`. USDI is not upgraded.
 
 ## Remaining work that requires authorization or external state
 
-1. Make the existing owner signer available through the trusted Keychain workflow or enable access to its existing browser wallet. Do not disclose private keys, passwords or seed phrases in chat. Existing account permissions will not be expanded.
+1. Make the existing approved owner signer available through a trusted local signing workflow that supports the approved new-account actions. Meteor explicitly blocks them; its protection was not bypassed. Do not disclose private keys, passwords or seed phrases in chat.
 2. Execute its dependency chains, stopping affected operations if code, keys, revision, storage costs or finality differ from the reviewed conditions.
 3. Verify actual deployed code, all legacy records, inventories, receipts and unpaused quotes; only then update verified deployment status.
 4. Obtain separate bounded approval for any real user claim/opening not included in this batch and verify real HOT signing and new public Testnet payouts. No new case is currently represented as live.
 
 ## Verified execution progress
 
-The approved Testnet deployment is partially executed: 2 of 90 steps are finalized and verified. Funding is sufficient. Remaining owner-dependent operations are blocked because the existing owner signer is unavailable to the CLI. No new case is claimed deployed or activated.
+The approved Testnet deployment is partially executed: 8 of 90 steps are finalized and verified. Dragon is active with funded bonuses. Meteor blocks the approved new-account FullAccess AddKey actions. The owner CLI signer is still unavailable in Keychain. The four new cases and nine new token accounts remain undeployed. Funding is sufficient.
 
-- `dragon-register-RHEA`: [transaction `GCW9EVoGZ8uuZWvkvrMdoNcbrmAEngtDXFfJggUbXMoQ`](https://testnet.nearblocks.io/txns/GCW9EVoGZ8uuZWvkvrMdoNcbrmAEngtDXFfJggUbXMoQ), FINAL; fee 0.0002009044679782 test NEAR; storage deposit 0.00125 test NEAR.
-- `dragon-register-AURORA`: [transaction `5HsUXkbmwobiuCFqwPuRqLWDgmti2Sa7uQKvARQ1wANn`](https://testnet.nearblocks.io/txns/5HsUXkbmwobiuCFqwPuRqLWDgmti2Sa7uQKvARQ1wANn), FINAL; fee 0.0002004484679782 test NEAR; storage deposit 0.00125 test NEAR.
+- `dragon-register-RHEA`: [transaction `GCW9EVoGZ8uuZWvkvrMdoNcbrmAEngtDXFfJggUbXMoQ`](https://testnet.nearblocks.io/txns/GCW9EVoGZ8uuZWvkvrMdoNcbrmAEngtDXFfJggUbXMoQ), FINAL; fee 0.0002009044679782 test NEAR; attached 0.00125 test NEAR.
+- `dragon-register-AURORA`: [transaction `5HsUXkbmwobiuCFqwPuRqLWDgmti2Sa7uQKvARQ1wANn`](https://testnet.nearblocks.io/txns/5HsUXkbmwobiuCFqwPuRqLWDgmti2Sa7uQKvARQ1wANn), FINAL; fee 0.0002004484679782 test NEAR; attached 0.00125 test NEAR.
+- `dragon-pause`: [transaction `6yR2z3c2bQUeHeEyznUSbSz9YQEbwYvGqZomuckshcy8`](https://testnet.nearblocks.io/txns/6yR2z3c2bQUeHeEyznUSbSz9YQEbwYvGqZomuckshcy8), FINAL; fee 0.0001919112754613 test NEAR; attached 0.000000000000000000000001 test NEAR.
+- `dragon-upgrade`: [transaction `EoKEYMLUpD6pBnsPSjUvMhr43paoVs3KU54tg41u4cgM`](https://testnet.nearblocks.io/txns/EoKEYMLUpD6pBnsPSjUvMhr43paoVs3KU54tg41u4cgM), FINAL; fee 0.0042227059092395 test NEAR; attached 0 test NEAR.
+- `dragon-fund-bonus-dragon-tea-SHITZU`: [transaction `Hv3s7ub9b4hrYYnNykNoiyrdiiraRoEv99v8VqWsMzdp`](https://testnet.nearblocks.io/txns/Hv3s7ub9b4hrYYnNykNoiyrdiiraRoEv99v8VqWsMzdp), FINAL; fee 0.0006941339800047 test NEAR; attached 0.000000000000000000000001 test NEAR.
+- `dragon-fund-bonus-dragon-tea-RHEA`: [transaction `GtUEJN5LRt5tjanXDKUNEFrERdFL8MhvN1hyLaNScLvy`](https://testnet.nearblocks.io/txns/GtUEJN5LRt5tjanXDKUNEFrERdFL8MhvN1hyLaNScLvy), FINAL; fee 0.0006939056158108 test NEAR; attached 0.000000000000000000000001 test NEAR.
+- `dragon-fund-bonus-dragon-tea-AURORA`: [transaction `AcB83J57ff2Wof7VejEkiKoX9biPP9U7wa8wM7qFC3vc`](https://testnet.nearblocks.io/txns/AcB83J57ff2Wof7VejEkiKoX9biPP9U7wa8wM7qFC3vc), FINAL; fee 0.000693132295579 test NEAR; attached 0.000000000000000000000001 test NEAR.
+- `unpause-dragon-tea`: [transaction `ARiLPsYj6zJ1vyj6GPxaKqoocM6bZnujgZY1W7Yz5AsQ`](https://testnet.nearblocks.io/txns/ARiLPsYj6zJ1vyj6GPxaKqoocM6bZnujgZY1W7Yz5AsQ), FINAL; fee 0.0002114043842353 test NEAR; attached 0.000000000000000000000001 test NEAR.
 
-This execution allocated 0.0025 test NEAR to token registration storage and burned 0.0004013529359564 test NEAR in actual transaction fees, a total native outflow of 0.0029013529359564 test NEAR from the dedicated case account. No new contract storage backing or inventory funding was allocated. The owner's native and USDI balances are unchanged by these case-signed registrations.
+Actual transaction fees total 0.007108546396287 test NEAR. Verified attached deposits total 0.002500000000000000000005 test NEAR, including 0.0025 for token registrations. Total native outflow is 0.009608546396287000000005 test NEAR. Storage backing retained in Dragon's existing account is 5.58269 test NEAR for 558269 bytes; this is retained balance, not an additional transfer.
 
-16 Python executor unit tests passed after the two registrations; 14 existing Node deployment-helper tests passed. Re-running either already verified registration was checked to skip signing and submission without changing the journal. Full post-activation suites remain pending until the owner signer is available and deployment completes.
+27 Python executor/browser tests and 17 Node deployment/action tests passed. Actual verified migration, funding and unpause reruns were checked to skip signing and leave the journal unchanged. The receipt-hash fix was independently reviewed and reconciled the existing migration without resubmission.
 
-At finalized block 277261953, Dragon's 995.8 USDI pool, 0.2 USDI vested fees, zero liabilities and four completed opening records remain intact. All thirteen proposed account names remain absent. SHITZU, RHEA and AURORA now all have the required Dragon storage registration.
+### Finalized Dragon inventory
 
-The transaction journal is [execution.json](execution.json), with append-only events in [execution-journal.jsonl](execution-journal.jsonl) and raw finalized receipt files alongside it. The approved manifest and its checksum remain unchanged. The executor refuses ambiguous resubmissions and will resume only from verified state.
+- `iroh-test-shitzu.testnet`: raw funds `5000000000`, reserved `0`, in flight `0`. The journal verifies actual token balances against each book increment.
+- `iroh-test-rhea.testnet`: raw funds `500000000`, reserved `0`, in flight `0`. The journal verifies actual token balances against each book increment.
+- `iroh-test-aurora.testnet`: raw funds `100000000`, reserved `0`, in flight `0`. The journal verifies actual token balances against each book increment.
 
-Google Chrome Computer Use was not approved, so the existing browser wallet could not be used as a fallback. No browser transaction was attempted. Real HOT Connect signing and new public payouts remain unverified.
+At finalized block 277293634, Dragon's 995.8 USDI pool, 0.2 USDI vested fees and 4 completed opening records remain intact. All thirteen proposed account names remain absent. SHITZU, RHEA and AURORA have the required Dragon storage registration.
+
+The owner-specific quote currently reports can_open=false with reason `Prepay case storage in NEAR`. The pool is healthy and admits openings once the normal user storage prepayment is satisfied. That prepayment and a paid opening are outside this batch and were not submitted.
+
+The canonical journal is [execution.json](execution.json), with append-only events in [execution-journal.jsonl](execution-journal.jsonl) and raw finalized receipt files alongside it. The approved manifest and checksum remain unchanged. Ambiguous requests cannot be resubmitted automatically.
+
+Chrome access was enabled, and the existing Meteor Testnet owner signed the approved Dragon calls. The blocked BLACKDRAGON request was canceled without broadcast. Meteor signing does not establish real HOT Connect signing or a new public paid opening.
+
+The deployment receipt code field is the SHA-256 digest in [nearcore ActionView](https://github.com/near/nearcore/blob/master/core/primitives/src/views.rs). The verifier now handles that representation and still independently downloads and hashes the deployed bytecode before accepting deployment.
 
 ## Commits and changed files
 
@@ -199,5 +215,6 @@ Branch: `codex/multi-case-testnet-expansion`. No merge, push, reset or history r
 - `e864583e64b2e2cc8142de5723eca75ddf29441c`: Integrate five tea cases and verified paginated Shelf history
 - `03825cf5802f7b7fefd95d110fa71118206ef610`: Record bounded Testnet deployment proposal and complete verification evidence
 - `1e582f371494a15078f537e8e7a723e1ac53ed8d`: Pin conditional deployment approval and retain the funding gate
+- `d9d44b285db709397cb9805c816af72256160033`: Execute approved Dragon registrations and guard deployment resumption
 
 Changed task files are listed in [changed-files.txt](changed-files.txt).

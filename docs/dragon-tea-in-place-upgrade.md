@@ -2,7 +2,27 @@
 
 This runbook records the original in-place migration rehearsal for `cases-needmore-1-near.testnet`. The November 11 expansion request supersedes its per-transaction approval policy with one fully specified bounded batch. Use [the current deployment review](multi-case/deployment-review.md) and its exact manifest checksums for new signing approval. The candidate sizes and checksums below are historical rehearsal evidence, not authorization for the current rebuilt artifact. Prepare fresh public RPC checks before signing.
 
-The previously approved SHITZU registration finalized on November 11, 2026 as transaction `9oNjXJASSDQgdu3vh4eZuZYMgkiW1fLpcnkaftEksvPq`. Its exact parameters, finalized receipts and storage balance are recorded in `docs/multi-case/shitzu-registration.json`. The bounded batch has since been approved and funded. RHEA registration finalized as `GCW9EVoGZ8uuZWvkvrMdoNcbrmAEngtDXFfJggUbXMoQ`, and AURORA registration as `5HsUXkbmwobiuCFqwPuRqLWDgmti2Sa7uQKvARQ1wANn`. Pausing, migration, funding and unpausing remain unsubmitted because the existing owner signer is unavailable to the CLI. See `docs/multi-case/execution.json` for verified progress.
+## Verified current deployment, November 12, 2026
+
+The approved Dragon chain is complete on Testnet. The deployed case WASM is 556,769 bytes, SHA-256 `48e560f15ef75db48d82ab1d57ca119b752059d96c1157c897ce3dbf87b7c06e`, code hash `5uZDe3e4UUbrXFQFdAAfwL3YpQXXvo8EkXRwBhgjGTid`. The case is unpaused at revision 19. The 995.8 USDI pool, 0.2 USDI vested fees, legacy credits and four completed openings are preserved. Current inventories contain 5,000 SHITZU, 500 RHEA and 100 AURORA, with zero reserved or in-flight balances.
+
+The finalized owner quote requires a normal case-storage prepayment before the next opening. No storage prepayment, paid opening or claim outside the batch was submitted. Public checks and inventory evidence are in [the execution snapshot](multi-case/execution-preflight.json) and [the audit](multi-case/evidence/final-readonly-audit.json).
+
+- Previously approved SHITZU registration: `9oNjXJASSDQgdu3vh4eZuZYMgkiW1fLpcnkaftEksvPq`.
+- RHEA registration: `GCW9EVoGZ8uuZWvkvrMdoNcbrmAEngtDXFfJggUbXMoQ`.
+- AURORA registration: `5HsUXkbmwobiuCFqwPuRqLWDgmti2Sa7uQKvARQ1wANn`.
+- Pause: `6yR2z3c2bQUeHeEyznUSbSz9YQEbwYvGqZomuckshcy8`.
+- Atomic deployment and migration: `EoKEYMLUpD6pBnsPSjUvMhr43paoVs3KU54tg41u4cgM`.
+- SHITZU inventory: `Hv3s7ub9b4hrYYnNykNoiyrdiiraRoEv99v8VqWsMzdp`.
+- RHEA inventory: `GtUEJN5LRt5tjanXDKUNEFrERdFL8MhvN1hyLaNScLvy`.
+- AURORA inventory: `AcB83J57ff2Wof7VejEkiKoX9biPP9U7wa8wM7qFC3vc`.
+- Unpause: `ARiLPsYj6zJ1vyj6GPxaKqoocM6bZnujgZY1W7Yz5AsQ`.
+
+The eight current-batch transactions cost 0.007108546396287 NEAR in fees plus 0.0025 NEAR and 5 yoctoNEAR in attached deposits. Dragon retains 5.58269 NEAR of storage backing in its existing balance. See [the canonical journal](multi-case/execution.json) for before/after state and raw receipts. Do not repeat these transactions.
+
+The four new cases and nine new mock accounts remain blocked because Meteor rejects their approved FullAccess AddKey actions and the existing owner Keychain signer is unavailable. No wallet protection was bypassed or new owner key added.
+
+The remaining sections are historical rehearsal evidence, including the older candidate binary and command. They are not instructions to redeploy it; the immutable approved manifest and canonical execution journal govern any continuation.
 
 ## Read the baseline
 

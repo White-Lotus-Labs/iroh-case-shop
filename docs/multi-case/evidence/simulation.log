@@ -1,4 +1,3 @@
-   Compiling iroh-economics v0.1.0 (/Users/mark/Documents/iroh-case-shop/contracts/economics)
-    Finished `release` profile [optimized] target(s) in 3.91s
+    Finished `release` profile [optimized] target(s) in 0.13s
      Running `target/release/simulate-collection`
 PASS 25,000,000 opening attempts across five cases; USDI conservation, maximum liabilities, forced legendary depletion, failed callbacks/retry and bonus inventory stops. Report /Users/mark/Documents/iroh-case-shop/contracts/economics/../../docs/multi-case-simulation.json

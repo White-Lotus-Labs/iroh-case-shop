@@ -4,20 +4,27 @@
   "initial_owner_balance_yocto": "109108852052391552799199995",
   "steps": {
     "token-BLACKDRAGON-create": {
-      "status": "blocked_signer",
+      "status": "blocked_wallet_policy",
       "tx_hash": null,
       "signer_id": "needmore_1_near.testnet",
       "receiver_id": "blackdragon.needmore_1_near.testnet",
-      "actual_fee_yocto": "0",
-      "reason": "Owner existing Keychain signer absent. CLI stopped before signing; finalized target absent and owner key nonce unchanged.",
-      "verified_at": "2026-11-11T20:02:37.652850+00:00",
-      "owner_nonce": 276359394000011,
       "before": {
+        "block_hash": "HH76NKfctjbdxYtsLUehR7BFWJmp9G9yr9HZRm3biWUu",
+        "block_height": 277267579,
         "nonce": 276359394000011,
         "target": {
           "absent": true
-        },
-        "evidence": "Finalized owner nonce and absent target were checked after the unsigned CLI signer failure; see blocked_signer journal event."
+        }
+      },
+      "transport": "meteor_browser",
+      "actual_fee_yocto": "0",
+      "reason": "Meteor blocked the exact new-account AddKey FullAccess action and disabled Approve. User canceled; browser displayed User cancelled the action. Finalized block 277267852 showed target absent, original owner nonce 276359394000011, and unchanged native balance. No signing or broadcast observed.",
+      "wallet_cancelled": true,
+      "no_broadcast_check": {
+        "block_height": 277267852,
+        "target_absent": true,
+        "owner_nonce": 276359394000011,
+        "owner_balance_yocto": "109108852052391552799199995"
       }
     },
     "dragon-register-RHEA": {
@@ -59,11 +66,812 @@
         }
       },
       "receipt_file": "docs/multi-case/receipt-dragon-register-AURORA.json"
+    },
+    "dragon-pause": {
+      "status": "verified",
+      "tx_hash": "6yR2z3c2bQUeHeEyznUSbSz9YQEbwYvGqZomuckshcy8",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "cases-needmore-1-near.testnet",
+      "before": {
+        "block_hash": "9cM8KZo4BrNuQR6bMyr5RX4Y98kEWsBifcLFgy1AefBT",
+        "block_height": 277268586,
+        "nonce": 276359394000011,
+        "target": {
+          "amount": "10084559662616482199999996",
+          "code_hash": "EdQrCQ4CDhFLJfJpPxShQVCj1K9DdfF4Cf3z247yh3ow",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 424792
+        },
+        "dragon": {
+          "pool": {
+            "pool_funds": "995800000",
+            "reserved_rewards": "0",
+            "available": "995800000",
+            "target": "1000000000",
+            "health": "Healthy",
+            "pending_fees": "0",
+            "treasury_available": "200000",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "4",
+            "total_paid": "8000000",
+            "revision": "13",
+            "paused": false,
+            "can_open": true,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "996000000",
+            "expected_balance_max": "996000000"
+          },
+          "history": [
+            {
+              "opening_id": "3",
+              "account_id": "needmore_1_near.testnet",
+              "nonce": "3",
+              "accepted_height": "276969565",
+              "accepted_revision": "10",
+              "common": 278239,
+              "rare": 672176,
+              "legendary": 49585,
+              "denominator": 1000000,
+              "status": "Completed",
+              "reward": "1000000",
+              "draw": 688758,
+              "attempt": "1",
+              "reserved": "0"
+            },
+            {
+              "opening_id": "2",
+              "account_id": "needmore_1_near.testnet",
+              "nonce": "2",
+              "accepted_height": "276969510",
+              "accepted_revision": "7",
+              "common": 277789,
+              "rare": 672221,
+              "legendary": 49990,
+              "denominator": 1000000,
+              "status": "Completed",
+              "reward": "5000000",
+              "draw": 980221,
+              "attempt": "1",
+              "reserved": "0"
+            },
+            {
+              "opening_id": "1",
+              "account_id": "needmore_1_near.testnet",
+              "nonce": "1",
+              "accepted_height": "276969464",
+              "accepted_revision": "4",
+              "common": 277784,
+              "rare": 672221,
+              "legendary": 49995,
+              "denominator": 1000000,
+              "status": "Completed",
+              "reward": "1000000",
+              "draw": 282627,
+              "attempt": "1",
+              "reserved": "0"
+            },
+            {
+              "opening_id": "0",
+              "account_id": "needmore_1_near.testnet",
+              "nonce": "0",
+              "accepted_height": "276969413",
+              "accepted_revision": "1",
+              "common": 277778,
+              "rare": 672222,
+              "legendary": 50000,
+              "denominator": 1000000,
+              "status": "Completed",
+              "reward": "1000000",
+              "draw": 494499,
+              "attempt": "1",
+              "reserved": "0"
+            }
+          ],
+          "state": [
+            {
+              "key": "U1RBVEU=",
+              "value": "FwAAAG5lZWRtb3JlXzFfbmVhci50ZXN0bmV0HAAAAHVzZGktbmVlZG1vcmUtMS1uZWFyLnRlc3RuZXQXAAAAbmVlZG1vcmVfMV9uZWFyLnRlc3RuZXTAs1o7AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABADQMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASegAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAADQAAAAAAAAAEAAAAAAAAAAEAAABvAQAAAGEBAAAAbAEAAABj"
+            },
+            {
+              "key": "YxcAAABuZWVkbW9yZV8xX25lYXIudGVzdG5ldA==",
+              "value": "AAAAuJ0NaVWgAQAAAAAAAA=="
+            },
+            {
+              "key": "bBcAAABuZWVkbW9yZV8xX25lYXIudGVzdG5ldA==",
+              "value": "AwAAAAAAAAA="
+            },
+            {
+              "key": "bwAAAAAAAAAA",
+              "value": "AAAAAAAAAAAXAAAAbmVlZG1vcmVfMV9uZWFyLnRlc3RuZXQAAAAAAAAAAADFN4IQAAAAAAEAAAAAAAAAEj0EAN5BCgBQwwAAAwFAQg8AAAAAAAAAAAAAAAAAAaOLBwABAAAAAAAAAA=="
+            },
+            {
+              "key": "bwEAAAAAAAAA",
+              "value": "AQAAAAAAAAAXAAAAbmVlZG1vcmVfMV9uZWFyLnRlc3RuZXQBAAAAAAAAAAEAAAAAAAAAAPg3ghAAAAAABAAAAAAAAAAYPQQA3UEKAEvDAAADAUBCDwAAAAAAAAAAAAAAAAABA1AEAAEAAAAAAAAA"
+            },
+            {
+              "key": "bwIAAAAAAAAA",
+              "value": "AgAAAAAAAAAXAAAAbmVlZG1vcmVfMV9uZWFyLnRlc3RuZXQCAAAAAAAAAAEBAAAAAAAAACY4ghAAAAAABwAAAAAAAAAdPQQA3UEKAEbDAAADAUBLTAAAAAAAAAAAAAAAAAAB/fQOAAEAAAAAAAAA"
+            },
+            {
+              "key": "bwMAAAAAAAAA",
+              "value": "AwAAAAAAAAAXAAAAbmVlZG1vcmVfMV9uZWFyLnRlc3RuZXQDAAAAAAAAAAECAAAAAAAAAF04ghAAAAAACgAAAAAAAADfPgQAsEEKALHBAAADAUBCDwAAAAAAAAAAAAAAAAABdoIKAAEAAAAAAAAA"
+            }
+          ]
+        }
+      },
+      "transport": "meteor_browser",
+      "receipt_file": "docs/multi-case/receipt-dragon-pause.json",
+      "actual_fee_yocto": "191911275461300000000",
+      "after": {
+        "block_hash": "BTz1tX7TnGX1BsoBYv761T3nGADUC1PP758N1rfA5fMj",
+        "dragon": {
+          "pool": {
+            "pool_funds": "995800000",
+            "reserved_rewards": "0",
+            "available": "995800000",
+            "target": "1000000000",
+            "health": "Healthy",
+            "pending_fees": "0",
+            "treasury_available": "200000",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "4",
+            "total_paid": "8000000",
+            "revision": "14",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "996000000",
+            "expected_balance_max": "996000000"
+          },
+          "history": [
+            {
+              "opening_id": "3",
+              "account_id": "needmore_1_near.testnet",
+              "nonce": "3",
+              "accepted_height": "276969565",
+              "accepted_revision": "10",
+              "common": 278239,
+              "rare": 672176,
+              "legendary": 49585,
+              "denominator": 1000000,
+              "status": "Completed",
+              "reward": "1000000",
+              "draw": 688758,
+              "attempt": "1",
+              "reserved": "0"
+            },
+            {
+              "opening_id": "2",
+              "account_id": "needmore_1_near.testnet",
+              "nonce": "2",
+              "accepted_height": "276969510",
+              "accepted_revision": "7",
+              "common": 277789,
+              "rare": 672221,
+              "legendary": 49990,
+              "denominator": 1000000,
+              "status": "Completed",
+              "reward": "5000000",
+              "draw": 980221,
+              "attempt": "1",
+              "reserved": "0"
+            },
+            {
+              "opening_id": "1",
+              "account_id": "needmore_1_near.testnet",
+              "nonce": "1",
+              "accepted_height": "276969464",
+              "accepted_revision": "4",
+              "common": 277784,
+              "rare": 672221,
+              "legendary": 49995,
+              "denominator": 1000000,
+              "status": "Completed",
+              "reward": "1000000",
+              "draw": 282627,
+              "attempt": "1",
+              "reserved": "0"
+            },
+            {
+              "opening_id": "0",
+              "account_id": "needmore_1_near.testnet",
+              "nonce": "0",
+              "accepted_height": "276969413",
+              "accepted_revision": "1",
+              "common": 277778,
+              "rare": 672222,
+              "legendary": 50000,
+              "denominator": 1000000,
+              "status": "Completed",
+              "reward": "1000000",
+              "draw": 494499,
+              "attempt": "1",
+              "reserved": "0"
+            }
+          ],
+          "state": [
+            {
+              "key": "U1RBVEU=",
+              "value": "FwAAAG5lZWRtb3JlXzFfbmVhci50ZXN0bmV0HAAAAHVzZGktbmVlZG1vcmUtMS1uZWFyLnRlc3RuZXQXAAAAbmVlZG1vcmVfMV9uZWFyLnRlc3RuZXTAs1o7AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABADQMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASegAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAABDgAAAAAAAAAEAAAAAAAAAAEAAABvAQAAAGEBAAAAbAEAAABj"
+            },
+            {
+              "key": "YxcAAABuZWVkbW9yZV8xX25lYXIudGVzdG5ldA==",
+              "value": "AAAAuJ0NaVWgAQAAAAAAAA=="
+            },
+            {
+              "key": "bBcAAABuZWVkbW9yZV8xX25lYXIudGVzdG5ldA==",
+              "value": "AwAAAAAAAAA="
+            },
+            {
+              "key": "bwAAAAAAAAAA",
+              "value": "AAAAAAAAAAAXAAAAbmVlZG1vcmVfMV9uZWFyLnRlc3RuZXQAAAAAAAAAAADFN4IQAAAAAAEAAAAAAAAAEj0EAN5BCgBQwwAAAwFAQg8AAAAAAAAAAAAAAAAAAaOLBwABAAAAAAAAAA=="
+            },
+            {
+              "key": "bwEAAAAAAAAA",
+              "value": "AQAAAAAAAAAXAAAAbmVlZG1vcmVfMV9uZWFyLnRlc3RuZXQBAAAAAAAAAAEAAAAAAAAAAPg3ghAAAAAABAAAAAAAAAAYPQQA3UEKAEvDAAADAUBCDwAAAAAAAAAAAAAAAAABA1AEAAEAAAAAAAAA"
+            },
+            {
+              "key": "bwIAAAAAAAAA",
+              "value": "AgAAAAAAAAAXAAAAbmVlZG1vcmVfMV9uZWFyLnRlc3RuZXQCAAAAAAAAAAEBAAAAAAAAACY4ghAAAAAABwAAAAAAAAAdPQQA3UEKAEbDAAADAUBLTAAAAAAAAAAAAAAAAAAB/fQOAAEAAAAAAAAA"
+            },
+            {
+              "key": "bwMAAAAAAAAA",
+              "value": "AwAAAAAAAAAXAAAAbmVlZG1vcmVfMV9uZWFyLnRlc3RuZXQDAAAAAAAAAAECAAAAAAAAAF04ghAAAAAACgAAAAAAAADfPgQAsEEKALHBAAADAUBCDwAAAAAAAAAAAAAAAAABdoIKAAEAAAAAAAAA"
+            }
+          ]
+        }
+      },
+      "verified_at": "2026-11-11T21:10:26.818441+00:00"
+    },
+    "dragon-upgrade": {
+      "status": "verified",
+      "tx_hash": "EoKEYMLUpD6pBnsPSjUvMhr43paoVs3KU54tg41u4cgM",
+      "signer_id": "cases-needmore-1-near.testnet",
+      "receiver_id": "cases-needmore-1-near.testnet",
+      "before": {
+        "block_hash": "Djm62TcGAxoa3oo4vFBuyLrk4aqM4Ux6B57FR3DpdxUf",
+        "block_height": 277268724,
+        "nonce": 276783958000004,
+        "target": {
+          "amount": "10084559662616482199999997",
+          "code_hash": "EdQrCQ4CDhFLJfJpPxShQVCj1K9DdfF4Cf3z247yh3ow",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 424792
+        },
+        "dragon": {
+          "pool": {
+            "pool_funds": "995800000",
+            "reserved_rewards": "0",
+            "available": "995800000",
+            "target": "1000000000",
+            "health": "Healthy",
+            "pending_fees": "0",
+            "treasury_available": "200000",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "4",
+            "total_paid": "8000000",
+            "revision": "14",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "996000000",
+            "expected_balance_max": "996000000"
+          },
+          "history": [
+            {
+              "opening_id": "3",
+              "account_id": "needmore_1_near.testnet",
+              "nonce": "3",
+              "accepted_height": "276969565",
+              "accepted_revision": "10",
+              "common": 278239,
+              "rare": 672176,
+              "legendary": 49585,
+              "denominator": 1000000,
+              "status": "Completed",
+              "reward": "1000000",
+              "draw": 688758,
+              "attempt": "1",
+              "reserved": "0"
+            },
+            {
+              "opening_id": "2",
+              "account_id": "needmore_1_near.testnet",
+              "nonce": "2",
+              "accepted_height": "276969510",
+              "accepted_revision": "7",
+              "common": 277789,
+              "rare": 672221,
+              "legendary": 49990,
+              "denominator": 1000000,
+              "status": "Completed",
+              "reward": "5000000",
+              "draw": 980221,
+              "attempt": "1",
+              "reserved": "0"
+            },
+            {
+              "opening_id": "1",
+              "account_id": "needmore_1_near.testnet",
+              "nonce": "1",
+              "accepted_height": "276969464",
+              "accepted_revision": "4",
+              "common": 277784,
+              "rare": 672221,
+              "legendary": 49995,
+              "denominator": 1000000,
+              "status": "Completed",
+              "reward": "1000000",
+              "draw": 282627,
+              "attempt": "1",
+              "reserved": "0"
+            },
+            {
+              "opening_id": "0",
+              "account_id": "needmore_1_near.testnet",
+              "nonce": "0",
+              "accepted_height": "276969413",
+              "accepted_revision": "1",
+              "common": 277778,
+              "rare": 672222,
+              "legendary": 50000,
+              "denominator": 1000000,
+              "status": "Completed",
+              "reward": "1000000",
+              "draw": 494499,
+              "attempt": "1",
+              "reserved": "0"
+            }
+          ],
+          "state": [
+            {
+              "key": "U1RBVEU=",
+              "value": "FwAAAG5lZWRtb3JlXzFfbmVhci50ZXN0bmV0HAAAAHVzZGktbmVlZG1vcmUtMS1uZWFyLnRlc3RuZXQXAAAAbmVlZG1vcmVfMV9uZWFyLnRlc3RuZXTAs1o7AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABADQMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASegAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAABDgAAAAAAAAAEAAAAAAAAAAEAAABvAQAAAGEBAAAAbAEAAABj"
+            },
+            {
+              "key": "YxcAAABuZWVkbW9yZV8xX25lYXIudGVzdG5ldA==",
+              "value": "AAAAuJ0NaVWgAQAAAAAAAA=="
+            },
+            {
+              "key": "bBcAAABuZWVkbW9yZV8xX25lYXIudGVzdG5ldA==",
+              "value": "AwAAAAAAAAA="
+            },
+            {
+              "key": "bwAAAAAAAAAA",
+              "value": "AAAAAAAAAAAXAAAAbmVlZG1vcmVfMV9uZWFyLnRlc3RuZXQAAAAAAAAAAADFN4IQAAAAAAEAAAAAAAAAEj0EAN5BCgBQwwAAAwFAQg8AAAAAAAAAAAAAAAAAAaOLBwABAAAAAAAAAA=="
+            },
+            {
+              "key": "bwEAAAAAAAAA",
+              "value": "AQAAAAAAAAAXAAAAbmVlZG1vcmVfMV9uZWFyLnRlc3RuZXQBAAAAAAAAAAEAAAAAAAAAAPg3ghAAAAAABAAAAAAAAAAYPQQA3UEKAEvDAAADAUBCDwAAAAAAAAAAAAAAAAABA1AEAAEAAAAAAAAA"
+            },
+            {
+              "key": "bwIAAAAAAAAA",
+              "value": "AgAAAAAAAAAXAAAAbmVlZG1vcmVfMV9uZWFyLnRlc3RuZXQCAAAAAAAAAAEBAAAAAAAAACY4ghAAAAAABwAAAAAAAAAdPQQA3UEKAEbDAAADAUBLTAAAAAAAAAAAAAAAAAAB/fQOAAEAAAAAAAAA"
+            },
+            {
+              "key": "bwMAAAAAAAAA",
+              "value": "AwAAAAAAAAAXAAAAbmVlZG1vcmVfMV9uZWFyLnRlc3RuZXQDAAAAAAAAAAECAAAAAAAAAF04ghAAAAAACgAAAAAAAADfPgQAsEEKALHBAAADAUBCDwAAAAAAAAAAAAAAAAABdoIKAAEAAAAAAAAA"
+            }
+          ]
+        }
+      },
+      "receipt_file": "docs/multi-case/receipt-dragon-upgrade.json",
+      "actual_fee_yocto": "4222705909239500000000",
+      "reason": "Final receipt or postcondition verification incomplete; reconcile the saved hash",
+      "after": {
+        "block_hash": "6FuuMMr2xF2wijpEC5ipAaGTNnNDUG5FXp7fhRSyRic6",
+        "dragon": {
+          "pool": {
+            "pool_funds": "995800000",
+            "reserved_rewards": "0",
+            "available": "995800000",
+            "target": "1000000000",
+            "health": "Healthy",
+            "pending_fees": "0",
+            "treasury_available": "200000",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "4",
+            "total_paid": "8000000",
+            "revision": "15",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "996000000",
+            "expected_balance_max": "996000000"
+          },
+          "history": [
+            {
+              "case_id": "dragon-tea",
+              "case_name": "Dragon Tea Case",
+              "tier": "Rare",
+              "opening_id": "3",
+              "account_id": "needmore_1_near.testnet",
+              "nonce": "3",
+              "accepted_height": "276969565",
+              "accepted_revision": "10",
+              "common": 278239,
+              "rare": 672176,
+              "legendary": 49585,
+              "denominator": 1000000,
+              "status": "Completed",
+              "reward": "1000000",
+              "draw": 688758,
+              "attempt": "1",
+              "usdi_paid": true,
+              "bonus_paid": false,
+              "bonus": null,
+              "reserved": "0"
+            },
+            {
+              "case_id": "dragon-tea",
+              "case_name": "Dragon Tea Case",
+              "tier": "Legendary",
+              "opening_id": "2",
+              "account_id": "needmore_1_near.testnet",
+              "nonce": "2",
+              "accepted_height": "276969510",
+              "accepted_revision": "7",
+              "common": 277789,
+              "rare": 672221,
+              "legendary": 49990,
+              "denominator": 1000000,
+              "status": "Completed",
+              "reward": "5000000",
+              "draw": 980221,
+              "attempt": "1",
+              "usdi_paid": true,
+              "bonus_paid": false,
+              "bonus": null,
+              "reserved": "0"
+            },
+            {
+              "case_id": "dragon-tea",
+              "case_name": "Dragon Tea Case",
+              "tier": "Rare",
+              "opening_id": "1",
+              "account_id": "needmore_1_near.testnet",
+              "nonce": "1",
+              "accepted_height": "276969464",
+              "accepted_revision": "4",
+              "common": 277784,
+              "rare": 672221,
+              "legendary": 49995,
+              "denominator": 1000000,
+              "status": "Completed",
+              "reward": "1000000",
+              "draw": 282627,
+              "attempt": "1",
+              "usdi_paid": true,
+              "bonus_paid": false,
+              "bonus": null,
+              "reserved": "0"
+            },
+            {
+              "case_id": "dragon-tea",
+              "case_name": "Dragon Tea Case",
+              "tier": "Rare",
+              "opening_id": "0",
+              "account_id": "needmore_1_near.testnet",
+              "nonce": "0",
+              "accepted_height": "276969413",
+              "accepted_revision": "1",
+              "common": 277778,
+              "rare": 672222,
+              "legendary": 50000,
+              "denominator": 1000000,
+              "status": "Completed",
+              "reward": "1000000",
+              "draw": 494499,
+              "attempt": "1",
+              "usdi_paid": true,
+              "bonus_paid": false,
+              "bonus": null,
+              "reserved": "0"
+            }
+          ],
+          "state": [
+            {
+              "key": "U1RBVEU=",
+              "value": "FwAAAG5lZWRtb3JlXzFfbmVhci50ZXN0bmV0HAAAAHVzZGktbmVlZG1vcmUtMS1uZWFyLnRlc3RuZXQXAAAAbmVlZG1vcmVfMV9uZWFyLnRlc3RuZXTAs1o7AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABADQMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASegAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAABDwAAAAAAAAAEAAAAAAAAAAEAAAB2AQAAAGEBAAAAbAEAAABjARgAAABpcm9oLXRlc3Qtc2hpdHp1LnRlc3RuZXQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAAAaXJvaC10ZXN0LXJoZWEudGVzdG5ldAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAABpcm9oLXRlc3QtYXVyb3JhLnRlc3RuZXQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBAAAAAAAAAABAAAAbw=="
+            },
+            {
+              "key": "YxcAAABuZWVkbW9yZV8xX25lYXIudGVzdG5ldA==",
+              "value": "AAAAuJ0NaVWgAQAAAAAAAA=="
+            },
+            {
+              "key": "bBcAAABuZWVkbW9yZV8xX25lYXIudGVzdG5ldA==",
+              "value": "AwAAAAAAAAA="
+            },
+            {
+              "key": "bwAAAAAAAAAA",
+              "value": "AAAAAAAAAAAXAAAAbmVlZG1vcmVfMV9uZWFyLnRlc3RuZXQAAAAAAAAAAADFN4IQAAAAAAEAAAAAAAAAEj0EAN5BCgBQwwAAAwFAQg8AAAAAAAAAAAAAAAAAAaOLBwABAAAAAAAAAA=="
+            },
+            {
+              "key": "bwEAAAAAAAAA",
+              "value": "AQAAAAAAAAAXAAAAbmVlZG1vcmVfMV9uZWFyLnRlc3RuZXQBAAAAAAAAAAEAAAAAAAAAAPg3ghAAAAAABAAAAAAAAAAYPQQA3UEKAEvDAAADAUBCDwAAAAAAAAAAAAAAAAABA1AEAAEAAAAAAAAA"
+            },
+            {
+              "key": "bwIAAAAAAAAA",
+              "value": "AgAAAAAAAAAXAAAAbmVlZG1vcmVfMV9uZWFyLnRlc3RuZXQCAAAAAAAAAAEBAAAAAAAAACY4ghAAAAAABwAAAAAAAAAdPQQA3UEKAEbDAAADAUBLTAAAAAAAAAAAAAAAAAAB/fQOAAEAAAAAAAAA"
+            },
+            {
+              "key": "bwMAAAAAAAAA",
+              "value": "AwAAAAAAAAAXAAAAbmVlZG1vcmVfMV9uZWFyLnRlc3RuZXQDAAAAAAAAAAECAAAAAAAAAF04ghAAAAAACgAAAAAAAADfPgQAsEEKALHBAAADAUBCDwAAAAAAAAAAAAAAAAABdoIKAAEAAAAAAAAA"
+            }
+          ]
+        }
+      },
+      "verified_at": "2026-11-12T00:53:35.501183+00:00"
+    },
+    "dragon-fund-bonus-dragon-tea-SHITZU": {
+      "status": "verified",
+      "tx_hash": "Hv3s7ub9b4hrYYnNykNoiyrdiiraRoEv99v8VqWsMzdp",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "iroh-test-shitzu.testnet",
+      "before": {
+        "block_hash": "Brz6MGjw8KwvEqDjqSsjmBh2ZcmMSyjGEuNdWDN24ZmA",
+        "block_height": 277291467,
+        "nonce": 276359394000012,
+        "target": {
+          "amount": "9998675748467156000000000",
+          "code_hash": "5heV1Yf3PxjMLWuyXowJoApj38rggW8GsCoScL6Sxidz",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 322440
+        },
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "995800000",
+            "reserved_rewards": "0",
+            "available": "995800000",
+            "target": "1000000000",
+            "health": "Healthy",
+            "pending_fees": "0",
+            "treasury_available": "200000",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "4",
+            "total_paid": "8000000",
+            "revision": "15",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "996000000",
+            "expected_balance_max": "996000000"
+          }
+        }
+      },
+      "transport": "meteor_browser",
+      "receipt_file": "docs/multi-case/receipt-dragon-fund-bonus-dragon-tea-SHITZU.json",
+      "actual_fee_yocto": "694133980004700000000",
+      "after": {
+        "block_hash": "7EqbQaRC6jvb1S9WfJo3qFshTqjbj4Yc1oiVpeTVrkp8",
+        "book": {
+          "balance": 5000000000,
+          "pool": {
+            "pool_funds": "995800000",
+            "reserved_rewards": "0",
+            "available": "995800000",
+            "target": "1000000000",
+            "health": "Healthy",
+            "pending_fees": "0",
+            "treasury_available": "200000",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "4",
+            "total_paid": "8000000",
+            "revision": "16",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "996000000",
+            "expected_balance_max": "996000000"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T00:56:45.255203+00:00"
+    },
+    "dragon-fund-bonus-dragon-tea-RHEA": {
+      "status": "verified",
+      "tx_hash": "GtUEJN5LRt5tjanXDKUNEFrERdFL8MhvN1hyLaNScLvy",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "iroh-test-rhea.testnet",
+      "before": {
+        "block_hash": "C8M5Vq2QazN6o6EDv4eWfVdwm4qCxr98A2JtYZnEFs1N",
+        "block_height": 277291897,
+        "nonce": 276359394000013,
+        "target": {
+          "amount": "9998674882230381600000000",
+          "code_hash": "5heV1Yf3PxjMLWuyXowJoApj38rggW8GsCoScL6Sxidz",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 322436
+        },
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "995800000",
+            "reserved_rewards": "0",
+            "available": "995800000",
+            "target": "1000000000",
+            "health": "Healthy",
+            "pending_fees": "0",
+            "treasury_available": "200000",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "4",
+            "total_paid": "8000000",
+            "revision": "16",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "996000000",
+            "expected_balance_max": "996000000"
+          }
+        }
+      },
+      "transport": "meteor_browser",
+      "receipt_file": "docs/multi-case/receipt-dragon-fund-bonus-dragon-tea-RHEA.json",
+      "actual_fee_yocto": "693905615810800000000",
+      "after": {
+        "block_hash": "3rYdyPpCQFmVaBZ89WFCcW5sjMaKhDXFepETTfESzqsy",
+        "book": {
+          "balance": 500000000,
+          "pool": {
+            "pool_funds": "995800000",
+            "reserved_rewards": "0",
+            "available": "995800000",
+            "target": "1000000000",
+            "health": "Healthy",
+            "pending_fees": "0",
+            "treasury_available": "200000",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "4",
+            "total_paid": "8000000",
+            "revision": "17",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "996000000",
+            "expected_balance_max": "996000000"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T00:58:57.655771+00:00"
+    },
+    "dragon-fund-bonus-dragon-tea-AURORA": {
+      "status": "verified",
+      "tx_hash": "AcB83J57ff2Wof7VejEkiKoX9biPP9U7wa8wM7qFC3vc",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "iroh-test-aurora.testnet",
+      "before": {
+        "block_hash": "39whsAxJdTkFZk7SDtGwBUwAsaUyWBym1zagitUUpXHW",
+        "block_height": 277292061,
+        "nonce": 276359394000014,
+        "target": {
+          "amount": "9998674829638281200000000",
+          "code_hash": "5heV1Yf3PxjMLWuyXowJoApj38rggW8GsCoScL6Sxidz",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 322440
+        },
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "995800000",
+            "reserved_rewards": "0",
+            "available": "995800000",
+            "target": "1000000000",
+            "health": "Healthy",
+            "pending_fees": "0",
+            "treasury_available": "200000",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "4",
+            "total_paid": "8000000",
+            "revision": "17",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "996000000",
+            "expected_balance_max": "996000000"
+          }
+        }
+      },
+      "transport": "meteor_browser",
+      "receipt_file": "docs/multi-case/receipt-dragon-fund-bonus-dragon-tea-AURORA.json",
+      "actual_fee_yocto": "693132295579000000000",
+      "after": {
+        "block_hash": "FyzjHg7BmM8skLvFRtAoGNrPjk2fa1sqEhDtQFnbGA35",
+        "book": {
+          "balance": 100000000,
+          "pool": {
+            "pool_funds": "995800000",
+            "reserved_rewards": "0",
+            "available": "995800000",
+            "target": "1000000000",
+            "health": "Healthy",
+            "pending_fees": "0",
+            "treasury_available": "200000",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "4",
+            "total_paid": "8000000",
+            "revision": "18",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "996000000",
+            "expected_balance_max": "996000000"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T01:01:19.332568+00:00"
+    },
+    "unpause-dragon-tea": {
+      "status": "verified",
+      "tx_hash": "ARiLPsYj6zJ1vyj6GPxaKqoocM6bZnujgZY1W7Yz5AsQ",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "cases-needmore-1-near.testnet",
+      "before": {
+        "block_hash": "F7UJfCceWLeAKtTC7o3osrFZjvfxgKiRGckVUquGBGmG",
+        "block_height": 277292189,
+        "nonce": 276359394000015,
+        "target": {
+          "amount": "10080336956707242699999997",
+          "code_hash": "5uZDe3e4UUbrXFQFdAAfwL3YpQXXvo8EkXRwBhgjGTid",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 558269
+        }
+      },
+      "transport": "meteor_browser",
+      "receipt_file": "docs/multi-case/receipt-unpause-dragon-tea.json",
+      "actual_fee_yocto": "211404384235300000000",
+      "after": {
+        "block_hash": "BGfAD4ZxnZYBod1s4bSiRyozcwDv5z9YWHGTaqjRRPum"
+      },
+      "verified_at": "2026-11-12T01:01:55.950403+00:00"
     }
   },
-  "status": "blocked_owner_signer",
-  "verified_steps": 2,
-  "remaining_steps": 88,
-  "actual_fees_yocto": "401352935956400000000",
-  "storage_deposits_yocto": "2500000000000000000000"
+  "status": "partial_blocked_wallet_policy",
+  "verified_steps": 8,
+  "remaining_steps": 82,
+  "actual_fees_yocto": "7108546396287000000000",
+  "storage_deposits_yocto": "2500000000000000000000",
+  "blockers": [
+    "Meteor blocks approved new-account AddKey FullAccess actions; no bypass attempted.",
+    "The existing owner Keychain signer is unavailable; all remaining steps depend on the thirteen missing accounts."
+  ],
+  "completed_dependency_chains": [
+    "existing Dragon: pause, pinned V1 migration, three inventory transfers, unpause"
+  ]
 }

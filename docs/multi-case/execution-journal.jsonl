@@ -5,3 +5,26 @@
 {"at": "2026-11-11T20:02:59.866752+00:00", "event": "prepared", "step_id": "dragon-register-AURORA", "signer_id": "cases-needmore-1-near.testnet", "receiver_id": "iroh-test-aurora.testnet", "action": {"type": "FunctionCall", "methodName": "storage_deposit", "args": {"account_id": "cases-needmore-1-near.testnet", "registration_only": true}, "gas": "30000000000000", "deposit": "1250000000000000000000"}}
 {"at": "2026-11-11T20:03:08.987284+00:00", "event": "submitted", "step_id": "dragon-register-AURORA", "tx_hash": "5HsUXkbmwobiuCFqwPuRqLWDgmti2Sa7uQKvARQ1wANn"}
 {"at": "2026-11-11T20:03:09.707104+00:00", "event": "verified", "step_id": "dragon-register-AURORA", "tx_hash": "5HsUXkbmwobiuCFqwPuRqLWDgmti2Sa7uQKvARQ1wANn", "actual_fee_yocto": "200448467978200000000", "storage_deposit_yocto": "1250000000000000000000", "after": {"block_height": 277261760, "storage": {"total": "1250000000000000000000", "available": "0"}}}
+{"at":"2026-11-11T21:00:27.905726+00:00","event":"prepared","step_id":"token-BLACKDRAGON-create","tx_hash":null}
+{"at":"2026-11-11T21:05:36.246211+00:00","event":"blocked_wallet_policy","step_id":"token-BLACKDRAGON-create","tx_hash":null}
+{"at":"2026-11-11T21:09:57.985150+00:00","event":"prepared","step_id":"dragon-pause","tx_hash":null}
+{"at":"2026-11-11T21:10:25.328424+00:00","event":"submitted","step_id":"dragon-pause","tx_hash":"6yR2z3c2bQUeHeEyznUSbSz9YQEbwYvGqZomuckshcy8"}
+{"at":"2026-11-11T21:10:26.820839+00:00","event":"verified","step_id":"dragon-pause","tx_hash":"6yR2z3c2bQUeHeEyznUSbSz9YQEbwYvGqZomuckshcy8"}
+{"at":"2026-11-11T21:11:15.510196+00:00","event":"prepared","step_id":"dragon-upgrade","tx_hash":null}
+{"at":"2026-11-11T21:12:39.224316+00:00","event":"submitted","step_id":"dragon-upgrade","tx_hash":"EoKEYMLUpD6pBnsPSjUvMhr43paoVs3KU54tg41u4cgM"}
+{"at":"2026-11-11T21:12:39.404548+00:00","event":"uncertain","step_id":"dragon-upgrade","tx_hash":"EoKEYMLUpD6pBnsPSjUvMhr43paoVs3KU54tg41u4cgM"}
+{"at":"2026-11-12T00:53:33.821537+00:00","event":"submitted","step_id":"dragon-upgrade","tx_hash":"EoKEYMLUpD6pBnsPSjUvMhr43paoVs3KU54tg41u4cgM"}
+{"at":"2026-11-12T00:53:35.504131+00:00","event":"verified","step_id":"dragon-upgrade","tx_hash":"EoKEYMLUpD6pBnsPSjUvMhr43paoVs3KU54tg41u4cgM"}
+{"at":"2026-11-12T00:54:46.881586+00:00","event":"prepared","step_id":"dragon-fund-bonus-dragon-tea-SHITZU","tx_hash":null}
+{"at":"2026-11-12T00:56:44.078380+00:00","event":"submitted","step_id":"dragon-fund-bonus-dragon-tea-SHITZU","tx_hash":"Hv3s7ub9b4hrYYnNykNoiyrdiiraRoEv99v8VqWsMzdp"}
+{"at":"2026-11-12T00:56:45.257442+00:00","event":"verified","step_id":"dragon-fund-bonus-dragon-tea-SHITZU","tx_hash":"Hv3s7ub9b4hrYYnNykNoiyrdiiraRoEv99v8VqWsMzdp"}
+{"at":"2026-11-12T00:58:45.855201+00:00","event":"prepared","step_id":"dragon-fund-bonus-dragon-tea-RHEA","tx_hash":null}
+{"at":"2026-11-12T00:58:56.143175+00:00","event":"submitted","step_id":"dragon-fund-bonus-dragon-tea-RHEA","tx_hash":"GtUEJN5LRt5tjanXDKUNEFrERdFL8MhvN1hyLaNScLvy"}
+{"at":"2026-11-12T00:58:57.657545+00:00","event":"verified","step_id":"dragon-fund-bonus-dragon-tea-RHEA","tx_hash":"GtUEJN5LRt5tjanXDKUNEFrERdFL8MhvN1hyLaNScLvy"}
+{"at":"2026-11-12T01:00:23.650102+00:00","event":"prepared","step_id":"dragon-fund-bonus-dragon-tea-AURORA","tx_hash":null}
+{"at":"2026-11-12T01:01:17.405780+00:00","event":"submitted","step_id":"dragon-fund-bonus-dragon-tea-AURORA","tx_hash":"AcB83J57ff2Wof7VejEkiKoX9biPP9U7wa8wM7qFC3vc"}
+{"at":"2026-11-12T01:01:19.336357+00:00","event":"verified","step_id":"dragon-fund-bonus-dragon-tea-AURORA","tx_hash":"AcB83J57ff2Wof7VejEkiKoX9biPP9U7wa8wM7qFC3vc"}
+{"at":"2026-11-12T01:01:41.729236+00:00","event":"prepared","step_id":"unpause-dragon-tea","tx_hash":null}
+{"at":"2026-11-12T01:01:55.050200+00:00","event":"submitted","step_id":"unpause-dragon-tea","tx_hash":"ARiLPsYj6zJ1vyj6GPxaKqoocM6bZnujgZY1W7Yz5AsQ"}
+{"at":"2026-11-12T01:01:55.953336+00:00","event":"verified","step_id":"unpause-dragon-tea","tx_hash":"ARiLPsYj6zJ1vyj6GPxaKqoocM6bZnujgZY1W7Yz5AsQ"}
+{"at":"2026-11-12T01:05:42.179669+00:00","event":"partial_blocked_wallet_policy","verified_steps":8,"remaining_steps":82,"dragon_revision":"19","dragon_paused":false,"blockers":["Meteor blocks approved new-account AddKey FullAccess actions; no bypass attempted.","The existing owner Keychain signer is unavailable; all remaining steps depend on the thirteen missing accounts."]}

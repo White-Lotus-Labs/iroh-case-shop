@@ -1,0 +1,62 @@
+{
+  "verified_at": "2026-11-12T01:15:43.519130+00:00",
+  "block_height": 277293634,
+  "network": "testnet",
+  "approved_digest": "4cf07ab44a6dcf3f9aedf970c938808ec2bcb61e6e21fec959bf36d859db5cc9",
+  "verified_steps": 8,
+  "dragon_revision": "19",
+  "pool_allows_admissions": true,
+  "owner_quote_can_open": false,
+  "owner_quote_reason": "Prepay case storage in NEAR",
+  "pool_usdi_raw": "995800000",
+  "vested_fees_usdi_raw": "200000",
+  "completed_history_preserved": 4,
+  "inventory": [
+    {
+      "reward_id": "bonus-shitzu",
+      "token_contract_id": "iroh-test-shitzu.testnet",
+      "token_symbol": "SHITZU",
+      "token_decimals": 6,
+      "amount": "50000000",
+      "display_name": "Test Shitzu",
+      "tier": "Common",
+      "chance_in_tier_bps": 5000,
+      "available": "5000000000",
+      "reserved": "0",
+      "in_flight": "0",
+      "funds": "5000000000"
+    },
+    {
+      "reward_id": "bonus-rhea",
+      "token_contract_id": "iroh-test-rhea.testnet",
+      "token_symbol": "RHEA",
+      "token_decimals": 6,
+      "amount": "5000000",
+      "display_name": "Test Rhea",
+      "tier": "Rare",
+      "chance_in_tier_bps": 5000,
+      "available": "500000000",
+      "reserved": "0",
+      "in_flight": "0",
+      "funds": "500000000"
+    },
+    {
+      "reward_id": "bonus-aurora",
+      "token_contract_id": "iroh-test-aurora.testnet",
+      "token_symbol": "AURORA",
+      "token_decimals": 6,
+      "amount": "1000000",
+      "display_name": "Test Aurora",
+      "tier": "Legendary",
+      "chance_in_tier_bps": 5000,
+      "available": "100000000",
+      "reserved": "0",
+      "in_flight": "0",
+      "funds": "100000000"
+    }
+  ],
+  "existing_token_metadata_supply_balances_storage_code": "matched",
+  "missing_new_case_accounts": 4,
+  "missing_new_token_accounts": 9,
+  "new_paid_openings_submitted": 0
+}

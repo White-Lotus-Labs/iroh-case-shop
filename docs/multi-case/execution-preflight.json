@@ -1,14 +1,15 @@
 {
   "network": "testnet",
   "rpc": "https://rpc.testnet.fastnear.com",
-  "checked_at": "2026-11-11T20:05:02.633646+00:00",
-  "block_height": 277261953,
-  "block_hash": "9RgLvKrw1UFZncGCy4zXw2uqAgsejtWYUJgXiuJKuNUe",
+  "checked_at": "2026-11-12T01:15:35.114971+00:00",
+  "block_height": 277293634,
+  "block_hash": "29mrrogc4i4UzDwhDRhKLTzyn6VeZ9S6MLTf3TPQnJUw",
   "gas_price": "100000000",
+  "storage_amount_per_byte": "10000000000000000000",
   "owner": {
-    "amount": "109108852052391552799199995",
-    "block_hash": "9RgLvKrw1UFZncGCy4zXw2uqAgsejtWYUJgXiuJKuNUe",
-    "block_height": 277261953,
+    "amount": "109106367564840461699199990",
+    "block_hash": "29mrrogc4i4UzDwhDRhKLTzyn6VeZ9S6MLTf3TPQnJUw",
+    "block_height": 277293634,
     "code_hash": "11111111111111111111111111111111",
     "locked": "0",
     "storage_paid_at": 0,
@@ -16,8 +17,8 @@
   },
   "usdi_account": {
     "amount": "10000943884460581900000009",
-    "block_hash": "9RgLvKrw1UFZncGCy4zXw2uqAgsejtWYUJgXiuJKuNUe",
-    "block_height": 277261953,
+    "block_hash": "29mrrogc4i4UzDwhDRhKLTzyn6VeZ9S6MLTf3TPQnJUw",
+    "block_height": 277293634,
     "code_hash": "2z7yWfap6hkGAcow7xFKRghGWv7Uq1uea3Vn7HV6QuaJ",
     "locked": "0",
     "storage_paid_at": 0,
@@ -32,13 +33,13 @@
     },
     "dragon-tea": {
       "account": {
-        "amount": "10084559662616482199999996",
-        "block_hash": "9RgLvKrw1UFZncGCy4zXw2uqAgsejtWYUJgXiuJKuNUe",
-        "block_height": 277261953,
-        "code_hash": "EdQrCQ4CDhFLJfJpPxShQVCj1K9DdfF4Cf3z247yh3ow",
+        "amount": "10080336956707242699999998",
+        "block_hash": "29mrrogc4i4UzDwhDRhKLTzyn6VeZ9S6MLTf3TPQnJUw",
+        "block_height": 277293634,
+        "code_hash": "5uZDe3e4UUbrXFQFdAAfwL3YpQXXvo8EkXRwBhgjGTid",
         "locked": "0",
         "storage_paid_at": 0,
-        "storage_usage": 424792
+        "storage_usage": 558269
       },
       "case": {
         "case_id": "dragon-tea",
@@ -51,20 +52,80 @@
         "probability_denominator": 1000000,
         "rewards": [
           {
-            "tier": "Common",
-            "amount": "100000"
+            "reward_id": "usdi-common",
+            "token_contract_id": "usdi-needmore-1-near.testnet",
+            "token_symbol": "USDI",
+            "token_decimals": 6,
+            "amount": "100000",
+            "display_name": "USD Iroh",
+            "tier": "Common"
           },
           {
-            "tier": "Rare",
-            "amount": "1000000"
+            "reward_id": "usdi-rare",
+            "token_contract_id": "usdi-needmore-1-near.testnet",
+            "token_symbol": "USDI",
+            "token_decimals": 6,
+            "amount": "1000000",
+            "display_name": "USD Iroh",
+            "tier": "Rare"
           },
           {
-            "tier": "Legendary",
-            "amount": "5000000"
+            "reward_id": "usdi-legendary",
+            "token_contract_id": "usdi-needmore-1-near.testnet",
+            "token_symbol": "USDI",
+            "token_decimals": 6,
+            "amount": "5000000",
+            "display_name": "USD Iroh",
+            "tier": "Legendary"
           }
         ],
         "randomness": "NEAR protocol randomness; Testnet demonstration, not production-grade VRF",
-        "quote_policy": "Exact revision, zero slippage; stale quotes are fully refunded"
+        "quote_policy": "Exact revision, zero slippage; stale quotes are fully refunded",
+        "bonus_rewards": [
+          {
+            "reward_id": "bonus-shitzu",
+            "token_contract_id": "iroh-test-shitzu.testnet",
+            "token_symbol": "SHITZU",
+            "token_decimals": 6,
+            "amount": "50000000",
+            "display_name": "Test Shitzu",
+            "tier": "Common",
+            "chance_in_tier_bps": 5000,
+            "available": "5000000000",
+            "reserved": "0",
+            "in_flight": "0",
+            "funds": "5000000000"
+          },
+          {
+            "reward_id": "bonus-rhea",
+            "token_contract_id": "iroh-test-rhea.testnet",
+            "token_symbol": "RHEA",
+            "token_decimals": 6,
+            "amount": "5000000",
+            "display_name": "Test Rhea",
+            "tier": "Rare",
+            "chance_in_tier_bps": 5000,
+            "available": "500000000",
+            "reserved": "0",
+            "in_flight": "0",
+            "funds": "500000000"
+          },
+          {
+            "reward_id": "bonus-aurora",
+            "token_contract_id": "iroh-test-aurora.testnet",
+            "token_symbol": "AURORA",
+            "token_decimals": 6,
+            "amount": "1000000",
+            "display_name": "Test Aurora",
+            "tier": "Legendary",
+            "chance_in_tier_bps": 5000,
+            "available": "100000000",
+            "reserved": "0",
+            "in_flight": "0",
+            "funds": "100000000"
+          }
+        ],
+        "history_pagination": true
       },
       "pool": {
         "pool_funds": "995800000",
@@ -79,7 +140,7 @@
         "pending_openings": 0,
         "completed_payouts": "4",
         "total_paid": "8000000",
-        "revision": "13",
+        "revision": "19",
         "paused": false,
         "can_open": true,
         "storage_per_opening": "20480000000000000000000",
@@ -89,6 +150,9 @@
       },
       "history": [
         {
+          "case_id": "dragon-tea",
+          "case_name": "Dragon Tea Case",
+          "tier": "Rare",
           "opening_id": "3",
           "account_id": "needmore_1_near.testnet",
           "nonce": "3",
@@ -102,9 +166,15 @@
           "reward": "1000000",
           "draw": 688758,
           "attempt": "1",
+          "usdi_paid": true,
+          "bonus_paid": false,
+          "bonus": null,
           "reserved": "0"
         },
         {
+          "case_id": "dragon-tea",
+          "case_name": "Dragon Tea Case",
+          "tier": "Legendary",
           "opening_id": "2",
           "account_id": "needmore_1_near.testnet",
           "nonce": "2",
@@ -118,9 +188,15 @@
           "reward": "5000000",
           "draw": 980221,
           "attempt": "1",
+          "usdi_paid": true,
+          "bonus_paid": false,
+          "bonus": null,
           "reserved": "0"
         },
         {
+          "case_id": "dragon-tea",
+          "case_name": "Dragon Tea Case",
+          "tier": "Rare",
           "opening_id": "1",
           "account_id": "needmore_1_near.testnet",
           "nonce": "1",
@@ -134,9 +210,15 @@
           "reward": "1000000",
           "draw": 282627,
           "attempt": "1",
+          "usdi_paid": true,
+          "bonus_paid": false,
+          "bonus": null,
           "reserved": "0"
         },
         {
+          "case_id": "dragon-tea",
+          "case_name": "Dragon Tea Case",
+          "tier": "Rare",
           "opening_id": "0",
           "account_id": "needmore_1_near.testnet",
           "nonce": "0",
@@ -150,24 +232,86 @@
           "reward": "1000000",
           "draw": 494499,
           "attempt": "1",
+          "usdi_paid": true,
+          "bonus_paid": false,
+          "bonus": null,
           "reserved": "0"
         }
       ],
       "usdi_balance": "996000000",
       "public_keys": {
-        "block_hash": "9RgLvKrw1UFZncGCy4zXw2uqAgsejtWYUJgXiuJKuNUe",
-        "block_height": 277261953,
+        "block_hash": "29mrrogc4i4UzDwhDRhKLTzyn6VeZ9S6MLTf3TPQnJUw",
+        "block_height": 277293634,
         "keys": [
           {
             "access_key": {
-              "nonce": 276783958000004,
+              "nonce": 276783958000005,
               "permission": "FullAccess"
             },
             "public_key": "ed25519:7mkuqApHc4Da4mzL4Xn3jBatX2o49nkJfxYAAoP9puMc"
           }
         ]
       },
-      "wasm_sha256": "ca7bcdef4d3640339318c4589808213df8f8de959de09210770f91e062e2c2aa"
+      "wasm_sha256": "48e560f15ef75db48d82ab1d57ca119b752059d96c1157c897ce3dbf87b7c06e",
+      "reward_inventory": [
+        {
+          "reward_id": "bonus-shitzu",
+          "token_contract_id": "iroh-test-shitzu.testnet",
+          "token_symbol": "SHITZU",
+          "token_decimals": 6,
+          "amount": "50000000",
+          "display_name": "Test Shitzu",
+          "tier": "Common",
+          "chance_in_tier_bps": 5000,
+          "available": "5000000000",
+          "reserved": "0",
+          "in_flight": "0",
+          "funds": "5000000000"
+        },
+        {
+          "reward_id": "bonus-rhea",
+          "token_contract_id": "iroh-test-rhea.testnet",
+          "token_symbol": "RHEA",
+          "token_decimals": 6,
+          "amount": "5000000",
+          "display_name": "Test Rhea",
+          "tier": "Rare",
+          "chance_in_tier_bps": 5000,
+          "available": "500000000",
+          "reserved": "0",
+          "in_flight": "0",
+          "funds": "500000000"
+        },
+        {
+          "reward_id": "bonus-aurora",
+          "token_contract_id": "iroh-test-aurora.testnet",
+          "token_symbol": "AURORA",
+          "token_decimals": 6,
+          "amount": "1000000",
+          "display_name": "Test Aurora",
+          "tier": "Legendary",
+          "chance_in_tier_bps": 5000,
+          "available": "100000000",
+          "reserved": "0",
+          "in_flight": "0",
+          "funds": "100000000"
+        }
+      ],
+      "quote": {
+        "case_id": "dragon-tea",
+        "revision": "19",
+        "expires_at": "277293754",
+        "nonce": "4",
+        "common": 278245,
+        "rare": 672175,
+        "legendary": 49580,
+        "denominator": 1000000,
+        "target_ev": "947900",
+        "expected_numerator": "947899500000",
+        "available": "995800000",
+        "can_open": false,
+        "reason": "Prepay case storage in NEAR"
+      }
     },
     "moon-spirit": {
       "account": {
@@ -189,9 +333,9 @@
     "SHITZU": {
       "account_id": "iroh-test-shitzu.testnet",
       "account": {
-        "amount": "9998675748467156000000000",
-        "block_hash": "9RgLvKrw1UFZncGCy4zXw2uqAgsejtWYUJgXiuJKuNUe",
-        "block_height": 277261953,
+        "amount": "9998675748467156000000001",
+        "block_hash": "29mrrogc4i4UzDwhDRhKLTzyn6VeZ9S6MLTf3TPQnJUw",
+        "block_height": 277293634,
         "code_hash": "5heV1Yf3PxjMLWuyXowJoApj38rggW8GsCoScL6Sxidz",
         "locked": "0",
         "storage_paid_at": 0,
@@ -207,7 +351,7 @@
         "decimals": 6
       },
       "supply": "100000000000",
-      "owner_balance": "100000000000",
+      "owner_balance": "95000000000",
       "storage_bounds": {
         "min": "1250000000000000000000",
         "max": "1250000000000000000000"
@@ -216,14 +360,14 @@
         "total": "1250000000000000000000",
         "available": "0"
       },
-      "dragon_balance": "0"
+      "dragon_balance": "5000000000"
     },
     "RHEA": {
       "account_id": "iroh-test-rhea.testnet",
       "account": {
-        "amount": "9998674882230381600000000",
-        "block_hash": "9RgLvKrw1UFZncGCy4zXw2uqAgsejtWYUJgXiuJKuNUe",
-        "block_height": 277261953,
+        "amount": "9998674882230381600000001",
+        "block_hash": "29mrrogc4i4UzDwhDRhKLTzyn6VeZ9S6MLTf3TPQnJUw",
+        "block_height": 277293634,
         "code_hash": "5heV1Yf3PxjMLWuyXowJoApj38rggW8GsCoScL6Sxidz",
         "locked": "0",
         "storage_paid_at": 0,
@@ -239,7 +383,7 @@
         "decimals": 6
       },
       "supply": "100000000000",
-      "owner_balance": "100000000000",
+      "owner_balance": "99500000000",
       "storage_bounds": {
         "min": "1250000000000000000000",
         "max": "1250000000000000000000"
@@ -248,14 +392,14 @@
         "total": "1250000000000000000000",
         "available": "0"
       },
-      "dragon_balance": "0"
+      "dragon_balance": "500000000"
     },
     "AURORA": {
       "account_id": "iroh-test-aurora.testnet",
       "account": {
-        "amount": "9998674829638281200000000",
-        "block_hash": "9RgLvKrw1UFZncGCy4zXw2uqAgsejtWYUJgXiuJKuNUe",
-        "block_height": 277261953,
+        "amount": "9998674829638281200000001",
+        "block_hash": "29mrrogc4i4UzDwhDRhKLTzyn6VeZ9S6MLTf3TPQnJUw",
+        "block_height": 277293634,
         "code_hash": "5heV1Yf3PxjMLWuyXowJoApj38rggW8GsCoScL6Sxidz",
         "locked": "0",
         "storage_paid_at": 0,
@@ -271,7 +415,7 @@
         "decimals": 6
       },
       "supply": "100000000000",
-      "owner_balance": "100000000000",
+      "owner_balance": "99900000000",
       "storage_bounds": {
         "min": "1250000000000000000000",
         "max": "1250000000000000000000"
@@ -280,7 +424,7 @@
         "total": "1250000000000000000000",
         "available": "0"
       },
-      "dragon_balance": "0"
+      "dragon_balance": "100000000"
     }
   },
   "proposed_tokens": {

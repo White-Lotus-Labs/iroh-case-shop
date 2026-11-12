@@ -1,4 +1,4 @@
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.52s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.49s
      Running `integration/target/debug/iroh-sandbox-integration /private/tmp/iroh-dragon-tea-snapshot-277099127`
 PASS copied deployed V1 code and state; 4 settled openings and 996000000 USDI base units reconcile
 PASS failed atomic batch leaves V1 code and state readable

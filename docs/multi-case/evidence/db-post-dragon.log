@@ -1,0 +1,24 @@
+
+> tea-after-pour@0.1.0 db:migrate
+> node scripts/migrate-db.mjs
+
+Prisma schema loaded from prisma/schema.prisma
+Datasource "db": SQLite database "verify.db" at "file:/private/tmp/iroh-post-dragon-lf41qt25/verify.db"
+
+3 migrations found in prisma/migrations
+
+Applying migration `20260925205300_accounts_auth`
+Applying migration `20260926080000_iroh_chat_history`
+Applying migration `20260927193000_nansen_snapshots`
+
+The following migration(s) have been applied:
+
+migrations/
+  └─ 20260925205300_accounts_auth/
+    └─ migration.sql
+  └─ 20260926080000_iroh_chat_history/
+    └─ migration.sql
+  └─ 20260927193000_nansen_snapshots/
+    └─ migration.sql
+
+All migrations have been successfully applied.

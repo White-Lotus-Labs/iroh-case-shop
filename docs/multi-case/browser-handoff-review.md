@@ -1,0 +1,11 @@
+# Browser wallet handoff review
+
+The user selected the existing Chrome wallet route after the owner Keychain signer was found unavailable. Chrome access succeeded, the user unlocked Meteor, and the existing `needmore_1_near.testnet` Testnet connection was checked without requesting an additional owner key.
+
+The local handoff binds only to `127.0.0.1:4318`. It accepts approved owner transactions from the byte-pinned manifest, uses the canonical execution journal and lock, checks finalized public preconditions, and records preparation before requesting wallet approval. Dedicated accounts continue through the reviewed Keychain executor. Wallet approval remains with the user. Unknown outcomes cannot be resubmitted automatically.
+
+The independent `browser_handoff_review` agent checked the implementation and installed NearConnector action declarations. It found a lock-acquisition bug: a failed reconciliation lock could leave an open handle that a second request mistook for ownership. The regression reproduced that failure. The fix assigns the handle only after successful acquisition and closes it on failure. Two consecutive attempts under a competing lock now both stop without reaching the journal.
+
+The follow-up review found a nonblocking lock-cleanup issue on invalid reconciliation requests. A regression reproduced it; newly acquired locks are now released when the preparation guards fail. The reviewer also confirmed the exact eight-entry Dragon scope and the nearcore deployment-action hash decoding fix. Full deployed bytecode is still independently downloaded and hashed by postconditions.
+
+Validation: 27 Python executor/handoff tests and 17 Node action/deployment-helper tests passed. The exact BLACKDRAGON account-creation request was blocked by Meteor's FullAccess-key policy, then canceled without broadcast. The existing owner signed the approved Dragon pause, three inventory transfers and unpause through Meteor. The dedicated case Keychain signer submitted the pinned atomic migration. All eight current-batch Dragon steps are finalized and verified. No additional owner key was requested or added. Real HOT Connect signing and a new public paid opening remain unverified.

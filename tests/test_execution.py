@@ -159,6 +159,14 @@ class ExecutionTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'checksum'):
             self.e.verify_receipt(self.batch, step, receipt, '2' * 32)
 
+    def test_rpc_deploy_action_hash_matches_the_approved_binary_digest(self):
+        step = next(s for s in self.batch['steps'] if s['id'] == 'dragon-upgrade')
+        receipt = json.loads((ROOT / 'docs/multi-case/receipt-dragon-upgrade.json').read_text())
+        self.assertEqual(base64.b64decode(receipt['transaction']['actions'][0]['DeployContract']['code']).hex(), step['actions'][0]['sha256'])
+        self.assertEqual(self.e.verify_receipt(self.batch, step, receipt, receipt['transaction']['hash']), 4222705909239500000000)
+        receipt['transaction']['actions'][0]['DeployContract']['code'] = base64.b64encode(bytes(32)).decode()
+        with self.assertRaisesRegex(ValueError, 'checksum'): self.e.verify_receipt(self.batch, step, receipt, receipt['transaction']['hash'])
+
     def test_legacy_trie_and_history_must_survive_migration(self):
         pool = {key: '0' for key in ('pool_funds', 'reserved_rewards', 'pending_fees', 'treasury_available', 'treasury_in_flight', 'in_flight_payouts', 'pending_openings', 'completed_payouts', 'total_paid', 'expected_balance_min', 'expected_balance_max')}
         pool.update(paused=True, revision='14')

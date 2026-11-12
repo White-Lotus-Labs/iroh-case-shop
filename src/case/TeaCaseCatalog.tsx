@@ -188,7 +188,10 @@ function TeaCaseView({
                     ))}
                   </ul>
                   <p className="tea-catalog-token-preview">
-                    Bonus preview ·{' '}
+                    {entry.bonusDeploymentStatus === 'verified-live'
+                      ? 'Bonus rewards'
+                      : 'Bonus preview'}{' '}
+                    ·{' '}
                     {entry.bonusRewards
                       .map(({ token_symbol }) => token_symbol)
                       .join(' · ')}

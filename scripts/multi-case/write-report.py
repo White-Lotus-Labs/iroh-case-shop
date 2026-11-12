@@ -113,29 +113,43 @@ def main():
     if execution:
         current = load('docs/multi-case/execution-preflight.json')
         verified = [(step_id, record) for step_id, record in execution['steps'].items() if record['status'] == 'verified']
-        fees = sum(int(record.get('actual_fee_yocto', 0)) for _, record in verified)
+        fees = int(execution['actual_fees_yocto'])
         steps = {step['id']: step for step in batch['steps']}
         deposits = sum(int(action.get('deposit', 0)) for step_id, _ in verified for action in steps[step_id]['actions'])
-        intro = f"The approved Testnet deployment is partially executed: {len(verified)} of {len(batch['steps'])} steps are finalized and verified. Funding is sufficient. Remaining owner-dependent operations are blocked because the existing owner signer is unavailable to the CLI. No new case is claimed deployed or activated."
+        registrations = sum(int(action.get('deposit', 0)) for step_id, _ in verified for action in steps[step_id]['actions'] if action.get('methodName') == 'storage_deposit')
+        dragon = current['cases']['dragon-tea']
+        pool = dragon['pool']
+        upgraded = execution['steps'].get('dragon-upgrade', {}).get('status') == 'verified'
+        activated = execution['steps'].get('unpause-dragon-tea', {}).get('status') == 'verified'
+        state = 'active with funded bonuses' if activated else 'migrated and paused for inventory funding' if upgraded else 'awaiting migration'
+        blocker = 'Meteor blocks the approved new-account FullAccess AddKey actions. The owner CLI signer is still unavailable in Keychain. The four new cases and nine new token accounts remain undeployed.'
+        intro = f"The approved Testnet deployment is partially executed: {len(verified)} of {len(batch['steps'])} steps are finalized and verified. Dragon is {state}. {blocker} Funding is sufficient."
         paragraphs = report.split('\n')
         for i, paragraph in enumerate(paragraphs):
             if paragraph.startswith('Prepared November 11, 2026.'):
-                paragraphs[i] = 'Prepared November 11, 2026. ' + intro
+                paragraphs[i] = 'Updated November 12, 2026. ' + intro
             elif paragraph.startswith('The owner currently has '):
-                paragraphs[i] = f"The fresh owner balance is {units(current['owner']['amount'], 24)} test NEAR and {units(current['owner_usdi'])} USDI at block {current['block_height']}. It covers the approved ceiling. No top-up or new transaction approval is needed. The remaining blocker is availability of the existing owner signer, public key `ed25519:BntboZwnJtLVnBBh4XffXUDwbaygCsQiMmhWXD3xCi6`. The CLI found neither its dedicated Keychain item nor a legacy credential; the first account creation stopped before signing. Finalized checks still showed its target absent and the owner nonce unchanged."
+                paragraphs[i] = f"The finalized owner balance is {units(current['owner']['amount'], 24)} test NEAR and {units(current['owner_usdi'])} USDI at block {current['block_height']}. No top-up or replacement batch approval is needed. {blocker}"
+            elif paragraph.startswith('At finalized block `'):
+                paragraphs[i] = f"At finalized block {current['block_height']}, Dragon is revision {pool['revision']}, paused={str(pool['paused']).lower()}, with {units(pool['available'])} USDI available, {units(pool['treasury_available'])} USDI vested fees, {pool['pending_openings']} pending openings and {pool['completed_payouts']} completed payouts. Historical payouts total {units(pool['total_paid'])} USDI. The pinned migration preserved the legacy opening and credit records."
             elif paragraph.startswith('The only new submitted transaction is '):
-                paragraphs[i] = 'The previously approved SHITZU registration remains finalized. The two additional registrations below also finalized in this execution. No account creation, deployment, migration, inventory funding, pause, unpause or paid opening has been submitted.'
+                paragraphs[i] = 'The previously approved SHITZU registration remains finalized. Additional completed transactions are listed below. No paid opening, claim, Mainnet transaction or treasury withdrawal was submitted.'
             elif paragraph.startswith('1. Fund the known owner account '):
-                paragraphs[i] = '1. Make the existing owner signer available through the trusted Keychain workflow or enable access to its existing browser wallet. Do not disclose private keys, passwords or seed phrases in chat. Existing account permissions will not be expanded.'
+                paragraphs[i] = '1. Make the existing approved owner signer available through a trusted local signing workflow that supports the approved new-account actions. Meteor explicitly blocks them; its protection was not bypassed. Do not disclose private keys, passwords or seed phrases in chat.'
+            elif paragraph.startswith('Contract `cases-needmore-1-near.testnet`. Status:'):
+                paragraphs[i] = f"Contract `cases-needmore-1-near.testnet`. Status: {state}."
         report = '\n'.join(paragraphs).replace('## Approved bounded batch awaiting funding', '## Approved bounded batch and execution status')
+        if upgraded:
+            report = report.replace('the current V1 API returns the latest 20', 'the historical V1 API returned the latest 20; Dragon now runs the paginated implementation')
         progress = ['## Verified execution progress', '', intro, '']
         for step_id, record in verified:
-            progress.append(f"- `{step_id}`: [transaction `{record['tx_hash']}`](https://testnet.nearblocks.io/txns/{record['tx_hash']}), FINAL; fee {units(record['actual_fee_yocto'], 24)} test NEAR; storage deposit 0.00125 test NEAR.")
-        progress += ['', f"This execution allocated {units(deposits, 24)} test NEAR to token registration storage and burned {units(fees, 24)} test NEAR in actual transaction fees, a total native outflow of {units(deposits + fees, 24)} test NEAR from the dedicated case account. No new contract storage backing or inventory funding was allocated. The owner's native and USDI balances are unchanged by these case-signed registrations.", '',
-            verify['executionHelper'], '',
-            f"At finalized block {current['block_height']}, Dragon's 995.8 USDI pool, 0.2 USDI vested fees, zero liabilities and four completed opening records remain intact. All thirteen proposed account names remain absent. SHITZU, RHEA and AURORA now all have the required Dragon storage registration.", '',
-            'The transaction journal is [execution.json](execution.json), with append-only events in [execution-journal.jsonl](execution-journal.jsonl) and raw finalized receipt files alongside it. The approved manifest and its checksum remain unchanged. The executor refuses ambiguous resubmissions and will resume only from verified state.', '',
-            'Google Chrome Computer Use was not approved, so the existing browser wallet could not be used as a fallback. No browser transaction was attempted. Real HOT Connect signing and new public payouts remain unverified.', '']
+            step = steps[step_id]
+            attached = sum(int(a.get('deposit', 0)) for a in step['actions'])
+            progress.append(f"- `{step_id}`: [transaction `{record['tx_hash']}`](https://testnet.nearblocks.io/txns/{record['tx_hash']}), FINAL; fee {units(record['actual_fee_yocto'], 24)} test NEAR; attached {units(attached, 24)} test NEAR.")
+        progress += ['', f"Actual transaction fees total {units(fees, 24)} test NEAR. Verified attached deposits total {units(deposits, 24)} test NEAR, including {units(registrations, 24)} for token registrations. Total native outflow is {units(deposits + fees, 24)} test NEAR. Storage backing retained in Dragon's existing account is {units(int(dragon['account']['storage_usage']) * int(current['storage_amount_per_byte']), 24)} test NEAR for {dragon['account']['storage_usage']} bytes; this is retained balance, not an additional transfer.", '', verify['executionHelper'], '', '### Finalized Dragon inventory', '']
+        for row in dragon.get('reward_inventory', []):
+            progress.append(f"- `{row['token_contract_id']}`: raw funds `{row['funds']}`, reserved `{row['reserved']}`, in flight `{row['in_flight']}`. The journal verifies actual token balances against each book increment.")
+        progress += ['', f"At finalized block {current['block_height']}, Dragon's {units(pool['available'])} USDI pool, {units(pool['treasury_available'])} USDI vested fees and {pool['completed_payouts']} completed opening records remain intact. All thirteen proposed account names remain absent. SHITZU, RHEA and AURORA have the required Dragon storage registration.", '', f"The owner-specific quote currently reports can_open={str(dragon['quote']['can_open']).lower()} with reason `{dragon['quote']['reason']}`. The pool is healthy and admits openings once the normal user storage prepayment is satisfied. That prepayment and a paid opening are outside this batch and were not submitted.", '', 'The canonical journal is [execution.json](execution.json), with append-only events in [execution-journal.jsonl](execution-journal.jsonl) and raw finalized receipt files alongside it. The approved manifest and checksum remain unchanged. Ambiguous requests cannot be resubmitted automatically.', '', 'Chrome access was enabled, and the existing Meteor Testnet owner signed the approved Dragon calls. The blocked BLACKDRAGON request was canceled without broadcast. Meteor signing does not establish real HOT Connect signing or a new public paid opening.', '', 'The deployment receipt code field is the SHA-256 digest in [nearcore ActionView](https://github.com/near/nearcore/blob/master/core/primitives/src/views.rs). The verifier now handles that representation and still independently downloads and hashes the deployed bytecode before accepting deployment.', '']
         report = report.replace('## Commits and changed files', '\n'.join(progress) + '\n## Commits and changed files')
     (ROOT / 'docs/multi-case/report.md').write_text(report)
 
