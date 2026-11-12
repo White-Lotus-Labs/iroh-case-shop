@@ -193,6 +193,7 @@ class PublicSnapshotTests(unittest.TestCase):
 
     def test_absent_proposed_contracts_are_recorded_without_method_calls(self):
         batch, _, data, catalog, registry = fixture()
+        next(token for token in registry['tokens'] if token['asset'] == 'NEKO')['status'] = 'proposed'
         absent = {'neko.needmore_1_near.testnet', 'moon.needmore_1_near.testnet'}
         preflight = module('partial_case_preflight', 'scripts/multi-case/preflight.py')
         snapshot = preflight.snapshot(FakeRpc(batch, data, catalog, registry, absent), catalog, registry)

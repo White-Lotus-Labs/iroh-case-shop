@@ -8,7 +8,7 @@ Read these documents first:
 2. [Application API reference](application-api.md).
 3. [Recorded deployment state](deployment-state.json).
 
-The branch `codex/frontend-handoff` is a local starting branch, not a published remote fork. The backend branch continues as `codex/multi-case-testnet-expansion`. Some historical deployment reports still describe an earlier state; prefer the handoff snapshot and per-step canonical execution records. The deployment is paused. Do not resume a stopped deployment process or submit any deployment transaction.
+The branch `codex/frontend-handoff` is a local starting branch, not a published remote fork. The backend branch continues as `codex/multi-case-testnet-expansion`. Some historical deployment reports still describe an earlier state; prefer the handoff snapshot and per-step canonical execution records. All 90 deployment steps are complete and all five cases are active. Do not repeat deployment transactions or administer on-chain accounts from the frontend branch. Formal security audit is deferred.
 
 Keep the core integrations independently testable:
 
@@ -27,4 +27,4 @@ Do not read or distribute operator `.env` files, local databases, Keychain entri
 
 Before handoff back to the backend team, run unit tests, type checking, a production build, and browser tests for the replacement interface. Preserve behavior assertions even if old visual selectors must change. Include narrow/mobile layouts and keyboard access. Prove case/account switching cannot redirect a pending transaction, a reload cannot pay twice, and failed payout recovery retains the recorded draw.
 
-Report changed integration code, executed checks, failures, mock-only coverage, and anything awaiting backend deployment. Coordinate API changes with the backend team before adopting them. The backend team will deliver reviewed public registry/status updates after funding, activation, and audit; then run separately authorized live wallet and payout verification together.
+Report changed integration code, executed checks, failures, mock-only coverage, and anything awaiting backend deployment. Coordinate API changes with the backend team before adopting them. Verified activation registry updates are now included. Coordinate any later audited release and separately authorized live wallet/payout verification with the backend team.

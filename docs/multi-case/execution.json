@@ -2230,7 +2230,7 @@
       "verified_at": "2026-11-12T18:01:23.263038+00:00"
     },
     "case-fund-bonus-moon-spirit-PURGE": {
-      "status": "submitted",
+      "status": "verified",
       "tx_hash": "mttoMLZFbGD21xLu5b3homhfLDwLuPe5JBAo4XeAB4G",
       "signer_id": "needmore_1_near.testnet",
       "receiver_id": "purge.needmore_1_near.testnet",
@@ -2272,19 +2272,2137 @@
       },
       "transport": "offline_keychain_pinned_testnet_rpc",
       "signed_nonce": 276359394000034,
-      "signed_block_hash": "FakJutCQCTXLd1yBDwgJYJ2PPbN96Zh6H3xcfpzP3AJE"
+      "signed_block_hash": "FakJutCQCTXLd1yBDwgJYJ2PPbN96Zh6H3xcfpzP3AJE",
+      "receipt_file": "docs/multi-case/receipt-case-fund-bonus-moon-spirit-PURGE.json",
+      "actual_fee_yocto": "726065644150300000000",
+      "after": {
+        "block_hash": "5UY4xQ51jJggKLRx8MkqUQJfs52i4j2MYwBbF7RVEwQa",
+        "book": {
+          "balance": 2000000000000000000000,
+          "pool": {
+            "pool_funds": "150000000",
+            "reserved_rewards": "0",
+            "available": "150000000",
+            "target": "2000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "2",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "150000000",
+            "expected_balance_max": "150000000"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T20:12:04.491663+00:00"
+    },
+    "case-fund-bonus-moon-spirit-GEAR": {
+      "status": "verified",
+      "tx_hash": "3Pu6PnZRokeqC8Teq3kGKxMD8rFpG1Aii8H8hC9jkqop",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "gear.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "FwG4zDGnEDLcovLRgwaiTwy6xsqEDHNtxuuGDHy6VhKT",
+        "block_height": 277410750,
+        "nonce": 276359394000034,
+        "target": {
+          "amount": "4998662006001705400000000",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323734
+        },
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "150000000",
+            "reserved_rewards": "0",
+            "available": "150000000",
+            "target": "2000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "2",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "150000000",
+            "expected_balance_max": "150000000"
+          }
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000035,
+      "signed_block_hash": "FwG4zDGnEDLcovLRgwaiTwy6xsqEDHNtxuuGDHy6VhKT",
+      "receipt_file": "docs/multi-case/receipt-case-fund-bonus-moon-spirit-GEAR.json",
+      "actual_fee_yocto": "729471562622300000000",
+      "after": {
+        "block_hash": "HKft8ccRH16Ee2h14rkuSg6skt1KQBHfBiRGztS3QXYB",
+        "book": {
+          "balance": 200000000000000000000,
+          "pool": {
+            "pool_funds": "150000000",
+            "reserved_rewards": "0",
+            "available": "150000000",
+            "target": "2000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "3",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "150000000",
+            "expected_balance_max": "150000000"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T20:13:04.325376+00:00"
+    },
+    "case-fund-bonus-moon-spirit-NEKO": {
+      "status": "verified",
+      "tx_hash": "5hocb7WBbasr23hRCa2mzRNzCndgYkLfQsXe8CmTwnpC",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "neko.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "63HcHRQLMJKo2v5x9zoTDu4fdJMYEjCbhzVDbEVcNL3Y",
+        "block_height": 277410789,
+        "nonce": 276359394000035,
+        "target": {
+          "amount": "4999913587836352800000001",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323825
+        },
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "150000000",
+            "reserved_rewards": "0",
+            "available": "150000000",
+            "target": "2000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "3",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "150000000",
+            "expected_balance_max": "150000000"
+          }
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000036,
+      "signed_block_hash": "63HcHRQLMJKo2v5x9zoTDu4fdJMYEjCbhzVDbEVcNL3Y",
+      "receipt_file": "docs/multi-case/receipt-case-fund-bonus-moon-spirit-NEKO.json",
+      "actual_fee_yocto": "729470546217400000000",
+      "after": {
+        "block_hash": "8MxDwDHJ42ZVJR2cKtYCwj9Lyk1NZKKZnYv33EveoP1e",
+        "book": {
+          "balance": 5000000000000000000000000000,
+          "pool": {
+            "pool_funds": "150000000",
+            "reserved_rewards": "0",
+            "available": "150000000",
+            "target": "2000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "4",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "150000000",
+            "expected_balance_max": "150000000"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T20:13:28.572166+00:00"
+    },
+    "case-fund-bonus-moon-spirit-mpDAO": {
+      "status": "verified",
+      "tx_hash": "8gWb5d3GxCBkMx94moo9XwfFgCWJoe73YJiE26w87kh2",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "mpdao.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "66JuXDCnT4YjDtfHP7BSJcmo6dHW5fcVGkFpHAqKocBF",
+        "block_height": 277410829,
+        "nonce": 276359394000036,
+        "target": {
+          "amount": "4998664283511202400000000",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323736
+        },
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "150000000",
+            "reserved_rewards": "0",
+            "available": "150000000",
+            "target": "2000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "4",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "150000000",
+            "expected_balance_max": "150000000"
+          }
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000037,
+      "signed_block_hash": "66JuXDCnT4YjDtfHP7BSJcmo6dHW5fcVGkFpHAqKocBF",
+      "receipt_file": "docs/multi-case/receipt-case-fund-bonus-moon-spirit-mpDAO.json",
+      "actual_fee_yocto": "726676330844600000000",
+      "after": {
+        "block_hash": "FmqUGZ9Pk3viH6kJ49ZLiQAjohegzQZetivpSgn4ruZk",
+        "book": {
+          "balance": 200000000,
+          "pool": {
+            "pool_funds": "150000000",
+            "reserved_rewards": "0",
+            "available": "150000000",
+            "target": "2000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "5",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "150000000",
+            "expected_balance_max": "150000000"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T20:13:54.238314+00:00"
+    },
+    "case-fund-bonus-moon-spirit-STNEAR": {
+      "status": "verified",
+      "tx_hash": "7GHtuKngRZLiENfjLT4bJcb9URF3CBWps6jCpMtA6yjB",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "stnear.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "4oXfNYxo3YuB93RU5qoCiEFmz7c8o1fvhfgH2DvUvDPt",
+        "block_height": 277410874,
+        "nonce": 276359394000037,
+        "target": {
+          "amount": "4998660527651346000000000",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323791
+        },
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "150000000",
+            "reserved_rewards": "0",
+            "available": "150000000",
+            "target": "2000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "5",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "150000000",
+            "expected_balance_max": "150000000"
+          }
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000038,
+      "signed_block_hash": "4oXfNYxo3YuB93RU5qoCiEFmz7c8o1fvhfgH2DvUvDPt",
+      "receipt_file": "docs/multi-case/receipt-case-fund-bonus-moon-spirit-STNEAR.json",
+      "actual_fee_yocto": "731312684188200000000",
+      "after": {
+        "block_hash": "BL8ri5Kr94tf1Bcp1bAi6Q7Qc9nZ9ZzoZJ8T2eo3x4zC",
+        "book": {
+          "balance": 10000000000000000000000000,
+          "pool": {
+            "pool_funds": "150000000",
+            "reserved_rewards": "0",
+            "available": "150000000",
+            "target": "2000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "6",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "150000000",
+            "expected_balance_max": "150000000"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T20:14:18.317148+00:00"
+    },
+    "case-phoenix-flame-create": {
+      "status": "verified",
+      "tx_hash": "CVnZtvCHoXgtPXdXi4xU8rLWhuCBSkoRCUJaWaVNPBJY",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "phoenix.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "2KCmffAzQP4iKS4kSh2z9ShppsadP2dyCQ48A8iitAjE",
+        "block_height": 277410917,
+        "nonce": 276359394000038,
+        "target": {
+          "absent": true
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000039,
+      "signed_block_hash": "2KCmffAzQP4iKS4kSh2z9ShppsadP2dyCQ48A8iitAjE",
+      "receipt_file": "docs/multi-case/receipt-case-phoenix-flame-create.json",
+      "actual_fee_yocto": "7114989537500000000000",
+      "after": {
+        "block_hash": "Es2DT6PcTjimhcz8HJsonBpenAbVJWtBN9QXmwvnBsN3"
+      },
+      "verified_at": "2026-11-12T20:14:39.026758+00:00"
+    },
+    "case-phoenix-flame-deploy": {
+      "status": "verified",
+      "tx_hash": "CqdawJhi71zCpGjwSnUmy1QjAqorLvD1DRxe1QwM2sia",
+      "signer_id": "phoenix.needmore_1_near.testnet",
+      "receiver_id": "phoenix.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "DWW22DVrqiLmrij95qtCakr4sCnzkLdpmkdKuXHwVgyd",
+        "block_height": 277410953,
+        "nonce": 277410949000000,
+        "target": {
+          "amount": "7000000000000000000000000",
+          "code_hash": "11111111111111111111111111111111",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 182
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277410949000001,
+      "signed_block_hash": "DWW22DVrqiLmrij95qtCakr4sCnzkLdpmkdKuXHwVgyd",
+      "receipt_file": "docs/multi-case/receipt-case-phoenix-flame-deploy.json",
+      "actual_fee_yocto": "4288861407417800000000",
+      "after": {
+        "block_hash": "HwmFa2vkGAZ7eiCn4Mi76gmVtTxTPZFr6zE2pUeEboFW",
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "0",
+            "reserved_rewards": "0",
+            "available": "0",
+            "target": "5000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "0",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "0",
+            "expected_balance_max": "0"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T20:14:59.473442+00:00"
+    },
+    "case-register-usdi-phoenix-flame": {
+      "status": "verified",
+      "tx_hash": "EJkDAryPqh89aM65nveKiph796rCDVi2Hfhiean5yb8k",
+      "signer_id": "phoenix.needmore_1_near.testnet",
+      "receiver_id": "usdi-needmore-1-near.testnet",
+      "before": {
+        "block_hash": "DgfQZsBCJ3RoA7NbMAjt3Kd4Bfo2fkx89XgPZFWvzKwp",
+        "block_height": 277410988,
+        "nonce": 277410949000001,
+        "target": {
+          "amount": "10003443884460581900000011",
+          "code_hash": "2z7yWfap6hkGAcow7xFKRghGWv7Uq1uea3Vn7HV6QuaJ",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 362859
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277410949000002,
+      "signed_block_hash": "DgfQZsBCJ3RoA7NbMAjt3Kd4Bfo2fkx89XgPZFWvzKwp",
+      "receipt_file": "docs/multi-case/receipt-case-register-usdi-phoenix-flame.json",
+      "actual_fee_yocto": "205596959817200000000",
+      "after": {
+        "block_hash": "3injroRxngYweAR5uKjTf7GTMXzZipRMu4VETKiLjmLm"
+      },
+      "verified_at": "2026-11-12T20:15:18.833218+00:00"
+    },
+    "case-register-phoenix-flame-RHEA": {
+      "status": "verified",
+      "tx_hash": "ACBMNDghZG8GGPf3gCYupCihKaeGXHQ1hAsFUjPD9JHq",
+      "signer_id": "phoenix.needmore_1_near.testnet",
+      "receiver_id": "iroh-test-rhea.testnet",
+      "before": {
+        "block_hash": "4ig5VTUMsMj9fPYKFx7ycrptY3gXccQbeKXULWSwmT4A",
+        "block_height": 277411021,
+        "nonce": 277410949000002,
+        "target": {
+          "amount": "9999924882230381600000002",
+          "code_hash": "5heV1Yf3PxjMLWuyXowJoApj38rggW8GsCoScL6Sxidz",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 322527
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277410949000003,
+      "signed_block_hash": "4ig5VTUMsMj9fPYKFx7ycrptY3gXccQbeKXULWSwmT4A",
+      "receipt_file": "docs/multi-case/receipt-case-register-phoenix-flame-RHEA.json",
+      "actual_fee_yocto": "201198038278000000000",
+      "after": {
+        "block_hash": "HeDW1DRrBLEFqWit6gZEKjvGsXyHFjGJh2npEhMerma4"
+      },
+      "verified_at": "2026-11-12T20:15:39.021863+00:00"
+    },
+    "case-register-phoenix-flame-AURORA": {
+      "status": "verified",
+      "tx_hash": "63DJB2ShhHgP9hfK5kujicbyrjiWuvxXxj8ovaSCwnu7",
+      "signer_id": "phoenix.needmore_1_near.testnet",
+      "receiver_id": "iroh-test-aurora.testnet",
+      "before": {
+        "block_hash": "BNLmGPy6TqZghtQepx3VVuXkGB71kKtmHtrDQJufwVYc",
+        "block_height": 277411061,
+        "nonce": 277410949000003,
+        "target": {
+          "amount": "9998674829638281200000001",
+          "code_hash": "5heV1Yf3PxjMLWuyXowJoApj38rggW8GsCoScL6Sxidz",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 322440
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277410949000004,
+      "signed_block_hash": "BNLmGPy6TqZghtQepx3VVuXkGB71kKtmHtrDQJufwVYc",
+      "receipt_file": "docs/multi-case/receipt-case-register-phoenix-flame-AURORA.json",
+      "actual_fee_yocto": "200742038278000000000",
+      "after": {
+        "block_hash": "828wjExg81SAadL5oLnp5QMxUYp8KjR2sAFTbQcLrWe"
+      },
+      "verified_at": "2026-11-12T20:16:02.395149+00:00"
+    },
+    "case-register-phoenix-flame-mpDAO": {
+      "status": "verified",
+      "tx_hash": "7yjQFzSk9a3oACvgrxJXaqFLscHHWvd3BKEHUhfEe5sT",
+      "signer_id": "phoenix.needmore_1_near.testnet",
+      "receiver_id": "mpdao.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "7DifEQChGGMz5s1vyhnGnWhsSitnQAKAvCTGy46NFhsp",
+        "block_height": 277411094,
+        "nonce": 277410949000004,
+        "target": {
+          "amount": "4998664283511202400000001",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323736
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277410949000005,
+      "signed_block_hash": "7DifEQChGGMz5s1vyhnGnWhsSitnQAKAvCTGy46NFhsp",
+      "receipt_file": "docs/multi-case/receipt-case-register-phoenix-flame-mpDAO.json",
+      "actual_fee_yocto": "201339537698500000000",
+      "after": {
+        "block_hash": "8FNGeC6jG3dvruwz8kPUgvfrfsBD69uPF1WHmoZ9cM2U"
+      },
+      "verified_at": "2026-11-12T20:16:21.440933+00:00"
+    },
+    "case-register-phoenix-flame-LINEAR": {
+      "status": "verified",
+      "tx_hash": "5MJz92BLRr1D81Ri8CYsUCEoz9VutoqCtdEoddtga2T3",
+      "signer_id": "phoenix.needmore_1_near.testnet",
+      "receiver_id": "linear.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "8MNPkoqUMK1f73qgoYWtuboi5Wb589ng5uXYNK5n7cxw",
+        "block_height": 277411129,
+        "nonce": 277410949000005,
+        "target": {
+          "amount": "4997409595214506000000000",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323697
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277410949000006,
+      "signed_block_hash": "8MNPkoqUMK1f73qgoYWtuboi5Wb589ng5uXYNK5n7cxw",
+      "receipt_file": "docs/multi-case/receipt-case-register-phoenix-flame-LINEAR.json",
+      "actual_fee_yocto": "202479537698500000000",
+      "after": {
+        "block_hash": "9GhqEqpq9LZUs4TukzTgwZVpfMCCQiB59h7vzdWKkfT1"
+      },
+      "verified_at": "2026-11-12T20:16:43.294581+00:00"
+    },
+    "case-register-phoenix-flame-STNEAR": {
+      "status": "verified",
+      "tx_hash": "DpozEQrq62wpcCg4tgysBAWmFzG743itKLJkfjGNFs5B",
+      "signer_id": "phoenix.needmore_1_near.testnet",
+      "receiver_id": "stnear.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "B18mBczeNhikFsvyC9eAXW2WHrbT8BtzsGjFJnQSC45V",
+        "block_height": 277411165,
+        "nonce": 277410949000006,
+        "target": {
+          "amount": "4998660527651346000000001",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323791
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277410949000007,
+      "signed_block_hash": "B18mBczeNhikFsvyC9eAXW2WHrbT8BtzsGjFJnQSC45V",
+      "receipt_file": "docs/multi-case/receipt-case-register-phoenix-flame-STNEAR.json",
+      "actual_fee_yocto": "202251537698500000000",
+      "after": {
+        "block_hash": "2xNqQdxR5aoP4oMPvuZKrJVBaEs1z3HVyg1x2a5PiV9a"
+      },
+      "verified_at": "2026-11-12T20:17:12.157590+00:00"
+    },
+    "case-register-phoenix-flame-wNEAR": {
+      "status": "verified",
+      "tx_hash": "81K7nSKc8CNzN9Ts1tsK2Qt1xq8bYsby5w2LQ35VLtZi",
+      "signer_id": "phoenix.needmore_1_near.testnet",
+      "receiver_id": "wnear.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "DY4Zxg3u6sTsNLigh5gSLbXV3bpeHMRqeweD1NeCAZxk",
+        "block_height": 277411220,
+        "nonce": 277410949000007,
+        "target": {
+          "amount": "4997411454046885800000000",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323702
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277410949000008,
+      "signed_block_hash": "DY4Zxg3u6sTsNLigh5gSLbXV3bpeHMRqeweD1NeCAZxk",
+      "receipt_file": "docs/multi-case/receipt-case-register-phoenix-flame-wNEAR.json",
+      "actual_fee_yocto": "202023537698500000000",
+      "after": {
+        "block_hash": "Hmc7gvS6WFjy6D9dGqSG3z7HmoLbrMTvSb3z6t8521rH"
+      },
+      "verified_at": "2026-11-12T20:17:34.251829+00:00"
+    },
+    "case-fund-usdi-phoenix-flame": {
+      "status": "verified",
+      "tx_hash": "8m76Ds4zDAujqkaU9EQQMCBBWi6zE9wbDo4WAFsz2a6t",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "usdi-needmore-1-near.testnet",
+      "before": {
+        "block_hash": "GS67oWUcJPRC6FrfKrkw8etuo5oeTqHLAQ5xnCdAdEF3",
+        "block_height": 277411262,
+        "nonce": 276359394000039,
+        "target": {
+          "amount": "10004693884460581900000011",
+          "code_hash": "2z7yWfap6hkGAcow7xFKRghGWv7Uq1uea3Vn7HV6QuaJ",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 362951
+        },
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "0",
+            "reserved_rewards": "0",
+            "available": "0",
+            "target": "5000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "0",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "0",
+            "expected_balance_max": "0"
+          }
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000040,
+      "signed_block_hash": "GS67oWUcJPRC6FrfKrkw8etuo5oeTqHLAQ5xnCdAdEF3",
+      "receipt_file": "docs/multi-case/receipt-case-fund-usdi-phoenix-flame.json",
+      "actual_fee_yocto": "656826879960200000000",
+      "after": {
+        "block_hash": "FcE3qXrtbBAVC2WyuG2hbjJV9GL4CurFJ2s1ZAnoa8P4",
+        "book": {
+          "balance": 300000000,
+          "pool": {
+            "pool_funds": "300000000",
+            "reserved_rewards": "0",
+            "available": "300000000",
+            "target": "5000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "1",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "300000000",
+            "expected_balance_max": "300000000"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T20:18:00.899841+00:00"
+    },
+    "case-fund-bonus-phoenix-flame-RHEA": {
+      "status": "verified",
+      "tx_hash": "3qMtFg8dAugD1EuxTLBaN6H1uGwsmUhzHvqfZHXvsjFt",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "iroh-test-rhea.testnet",
+      "before": {
+        "block_hash": "BNGpKvXQ8nvff1yxxqvumVwVnzqc3sJmWwivJdguAwGF",
+        "block_height": 277411312,
+        "nonce": 276359394000040,
+        "target": {
+          "amount": "10001174882230381600000002",
+          "code_hash": "5heV1Yf3PxjMLWuyXowJoApj38rggW8GsCoScL6Sxidz",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 322619
+        },
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "300000000",
+            "reserved_rewards": "0",
+            "available": "300000000",
+            "target": "5000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "1",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "300000000",
+            "expected_balance_max": "300000000"
+          }
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000041,
+      "signed_block_hash": "BNGpKvXQ8nvff1yxxqvumVwVnzqc3sJmWwivJdguAwGF",
+      "receipt_file": "docs/multi-case/receipt-case-fund-bonus-phoenix-flame-RHEA.json",
+      "actual_fee_yocto": "729969735406600000000",
+      "after": {
+        "block_hash": "GMb6s44Dd4eFaTPwBV7GV6bctrxbAS1NDMDYzcdaCZ1C",
+        "book": {
+          "balance": 200000000,
+          "pool": {
+            "pool_funds": "300000000",
+            "reserved_rewards": "0",
+            "available": "300000000",
+            "target": "5000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "2",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "300000000",
+            "expected_balance_max": "300000000"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T20:18:23.930253+00:00"
+    },
+    "case-fund-bonus-phoenix-flame-AURORA": {
+      "status": "verified",
+      "tx_hash": "nCLJT39JxwH8cY4Unh3uaN49Jz6nj79Yam349NiSrzD",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "iroh-test-aurora.testnet",
+      "before": {
+        "block_hash": "FzNuHtij9hwPuUGJaBVCmA3dYvP618JGA8SZnkjhSCHu",
+        "block_height": 277411351,
+        "nonce": 276359394000041,
+        "target": {
+          "amount": "9999924829638281200000001",
+          "code_hash": "5heV1Yf3PxjMLWuyXowJoApj38rggW8GsCoScL6Sxidz",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 322532
+        },
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "300000000",
+            "reserved_rewards": "0",
+            "available": "300000000",
+            "target": "5000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "2",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "300000000",
+            "expected_balance_max": "300000000"
+          }
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000042,
+      "signed_block_hash": "FzNuHtij9hwPuUGJaBVCmA3dYvP618JGA8SZnkjhSCHu",
+      "receipt_file": "docs/multi-case/receipt-case-fund-bonus-phoenix-flame-AURORA.json",
+      "actual_fee_yocto": "729196497450400000000",
+      "after": {
+        "block_hash": "8uX2anWBb5ykdRULE5LeMj2hSWtw5KuoFq5hAkCqDsAJ",
+        "book": {
+          "balance": 200000000,
+          "pool": {
+            "pool_funds": "300000000",
+            "reserved_rewards": "0",
+            "available": "300000000",
+            "target": "5000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "3",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "300000000",
+            "expected_balance_max": "300000000"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T20:18:48.180616+00:00"
+    },
+    "case-fund-bonus-phoenix-flame-mpDAO": {
+      "status": "verified",
+      "tx_hash": "Bq5gcsKua6nL8iunqgakXwWCqCk1pLpYXEuFiPjQxuQz",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "mpdao.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "6UBNXggJZsYDnJQag2fUuwxYjYNCPNaCSHpq4MhVCZQk",
+        "block_height": 277411647,
+        "nonce": 276359394000042,
+        "target": {
+          "amount": "4999914283511202400000001",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323828
+        },
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "300000000",
+            "reserved_rewards": "0",
+            "available": "300000000",
+            "target": "5000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "3",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "300000000",
+            "expected_balance_max": "300000000"
+          }
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000043,
+      "signed_block_hash": "6UBNXggJZsYDnJQag2fUuwxYjYNCPNaCSHpq4MhVCZQk",
+      "receipt_file": "docs/multi-case/receipt-case-fund-bonus-phoenix-flame-mpDAO.json",
+      "actual_fee_yocto": "730934381880100000000",
+      "after": {
+        "block_hash": "Ci2iwCFV1caVUiFtFysGyUpLZANakFFHA93td74AiEj6",
+        "book": {
+          "balance": 500000000,
+          "pool": {
+            "pool_funds": "300000000",
+            "reserved_rewards": "0",
+            "available": "300000000",
+            "target": "5000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "4",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "300000000",
+            "expected_balance_max": "300000000"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T20:22:13.931474+00:00"
+    },
+    "case-fund-bonus-phoenix-flame-LINEAR": {
+      "status": "verified",
+      "tx_hash": "4LCaDGf4DCzW5Ufy7CcJ2YaRnDvyHuqtVpAJRw9mLkNd",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "linear.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "8rPkmDEL3rUwbFKaeNdsDcjWsQkyEQ5fmX1p5KbYwAXE",
+        "block_height": 277411744,
+        "nonce": 276359394000043,
+        "target": {
+          "amount": "4998659595214506000000000",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323789
+        },
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "300000000",
+            "reserved_rewards": "0",
+            "available": "300000000",
+            "target": "5000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "4",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "300000000",
+            "expected_balance_max": "300000000"
+          }
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000044,
+      "signed_block_hash": "8rPkmDEL3rUwbFKaeNdsDcjWsQkyEQ5fmX1p5KbYwAXE",
+      "receipt_file": "docs/multi-case/receipt-case-fund-bonus-phoenix-flame-LINEAR.json",
+      "actual_fee_yocto": "736498696690100000000",
+      "after": {
+        "block_hash": "BMfdqKfZ5pPpWHj8vu8cj7Gp7gegqEcN6aGMbasf5qCY",
+        "book": {
+          "balance": 20000000000000000000000000,
+          "pool": {
+            "pool_funds": "300000000",
+            "reserved_rewards": "0",
+            "available": "300000000",
+            "target": "5000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "5",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "300000000",
+            "expected_balance_max": "300000000"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T20:23:15.635112+00:00"
+    },
+    "case-fund-bonus-phoenix-flame-STNEAR": {
+      "status": "verified",
+      "tx_hash": "Ai68fV2FovceqS7iB6dVi1MqjcDeZfQ3f6huAbnSsCoU",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "stnear.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "9Gh7fMmE9BV2Gc1GuL28taZVrLJ8LGX21EvSH2aCocwS",
+        "block_height": 277411847,
+        "nonce": 276359394000044,
+        "target": {
+          "amount": "4999910527651346000000001",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323883
+        },
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "300000000",
+            "reserved_rewards": "0",
+            "available": "300000000",
+            "target": "5000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "5",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "300000000",
+            "expected_balance_max": "300000000"
+          }
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000045,
+      "signed_block_hash": "9Gh7fMmE9BV2Gc1GuL28taZVrLJ8LGX21EvSH2aCocwS",
+      "receipt_file": "docs/multi-case/receipt-case-fund-bonus-phoenix-flame-STNEAR.json",
+      "actual_fee_yocto": "735594595147700000000",
+      "after": {
+        "block_hash": "CbsPp9xXa7QxPtRFvsMuxudznGemD8N2iTFCK6rwzZV2",
+        "book": {
+          "balance": 20000000000000000000000000,
+          "pool": {
+            "pool_funds": "300000000",
+            "reserved_rewards": "0",
+            "available": "300000000",
+            "target": "5000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "6",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "300000000",
+            "expected_balance_max": "300000000"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T20:24:14.672713+00:00"
+    },
+    "case-fund-bonus-phoenix-flame-wNEAR": {
+      "status": "verified",
+      "tx_hash": "8y2aH9q2gTSqmc9N4QeKxCrbeMfzGK1ttafju4ZnZ6U5",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "wnear.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "8RKewHXAnTXqXYxXuVEFmSijwqF7r5kYnqQyDVoSWpAd",
+        "block_height": 277411949,
+        "nonce": 276359394000045,
+        "target": {
+          "amount": "4998661454046885800000000",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323794
+        },
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "300000000",
+            "reserved_rewards": "0",
+            "available": "300000000",
+            "target": "5000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "6",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "300000000",
+            "expected_balance_max": "300000000"
+          }
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000046,
+      "signed_block_hash": "8RKewHXAnTXqXYxXuVEFmSijwqF7r5kYnqQyDVoSWpAd",
+      "receipt_file": "docs/multi-case/receipt-case-fund-bonus-phoenix-flame-wNEAR.json",
+      "actual_fee_yocto": "735493784846600000000",
+      "after": {
+        "block_hash": "5ryTQeC5YQRfbHsLGfSXhYBWVKXzGbKH7Qpq1eqGXJrs",
+        "book": {
+          "balance": 25000000000000000000000000,
+          "pool": {
+            "pool_funds": "300000000",
+            "reserved_rewards": "0",
+            "available": "300000000",
+            "target": "5000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "7",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "300000000",
+            "expected_balance_max": "300000000"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T20:25:12.883788+00:00"
+    },
+    "case-uncles-secret-reserve-create": {
+      "status": "verified",
+      "tx_hash": "FBLjjiNoUscvh9oWitJiqR4PM2uU1gEh93A4u5mehnJp",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "reserve.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "CZTGDKUgPVqnYxuLrt1ESHtvUQMCB7vzVgbKezEGuKG1",
+        "block_height": 277412052,
+        "nonce": 276359394000046,
+        "target": {
+          "absent": true
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000047,
+      "signed_block_hash": "CZTGDKUgPVqnYxuLrt1ESHtvUQMCB7vzVgbKezEGuKG1",
+      "receipt_file": "docs/multi-case/receipt-case-uncles-secret-reserve-create.json",
+      "actual_fee_yocto": "7114989537500000000000",
+      "after": {
+        "block_hash": "5aDS4eNHWA8Lw6PuvTAR2XhnXMY2DNBDpcYmjqn8BnH4"
+      },
+      "verified_at": "2026-11-12T20:26:05.795575+00:00"
+    },
+    "case-uncles-secret-reserve-deploy": {
+      "status": "verified",
+      "tx_hash": "46RpkY62Lgw3GCBvq6u3aWACEgL1gJNnHAKSsWuuht6N",
+      "signer_id": "reserve.needmore_1_near.testnet",
+      "receiver_id": "reserve.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "2g3n9Xo4uuz6vY4V6sofySo1pbGjfoPeJeyS5Gm2htc8",
+        "block_height": 277412141,
+        "nonce": 277412130000000,
+        "target": {
+          "amount": "7000000000000000000000000",
+          "code_hash": "11111111111111111111111111111111",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 182
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277412130000001,
+      "signed_block_hash": "2g3n9Xo4uuz6vY4V6sofySo1pbGjfoPeJeyS5Gm2htc8",
+      "receipt_file": "docs/multi-case/receipt-case-uncles-secret-reserve-deploy.json",
+      "actual_fee_yocto": "4294281994357200000000",
+      "after": {
+        "block_hash": "7PXZaYk9m1nqHr2dpCzfTRDzpmqbTd9YJ6f7N1XCtZZ8",
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "0",
+            "reserved_rewards": "0",
+            "available": "0",
+            "target": "10000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "0",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "0",
+            "expected_balance_max": "0"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T20:27:02.685304+00:00"
+    },
+    "case-register-usdi-uncles-secret-reserve": {
+      "status": "verified",
+      "tx_hash": "3hJwNmbjVaFn6wqiMJLx5ytExfuAU6wnCtupomdL4e6x",
+      "signer_id": "reserve.needmore_1_near.testnet",
+      "receiver_id": "usdi-needmore-1-near.testnet",
+      "before": {
+        "block_hash": "8UiAazuA4KmJAjFJkWuPnHupBzZoWpHFt5zXzR36ehF8",
+        "block_height": 277412238,
+        "nonce": 277412130000001,
+        "target": {
+          "amount": "10004693884460581900000012",
+          "code_hash": "2z7yWfap6hkGAcow7xFKRghGWv7Uq1uea3Vn7HV6QuaJ",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 362951
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277412130000002,
+      "signed_block_hash": "8UiAazuA4KmJAjFJkWuPnHupBzZoWpHFt5zXzR36ehF8",
+      "receipt_file": "docs/multi-case/receipt-case-register-usdi-uncles-secret-reserve.json",
+      "actual_fee_yocto": "205824959817200000000",
+      "after": {
+        "block_hash": "GExTpx4fqaRY7k7TgjVe6oqCNyrYBhKD8qsBiC65d7ff"
+      },
+      "verified_at": "2026-11-12T20:28:27.130281+00:00"
+    },
+    "case-register-uncles-secret-reserve-RHEA": {
+      "status": "verified",
+      "tx_hash": "14jqN8tTk62fC3XSna7dBKvLs3CG6hyWKkzmaSRDwmeg",
+      "signer_id": "reserve.needmore_1_near.testnet",
+      "receiver_id": "iroh-test-rhea.testnet",
+      "before": {
+        "block_hash": "6hL3q256pcC2JhwHpbucByGawNsmPZhYCdcPDi8oqhPy",
+        "block_height": 277412377,
+        "nonce": 277412130000002,
+        "target": {
+          "amount": "10001174882230381600000003",
+          "code_hash": "5heV1Yf3PxjMLWuyXowJoApj38rggW8GsCoScL6Sxidz",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 322619
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277412130000003,
+      "signed_block_hash": "6hL3q256pcC2JhwHpbucByGawNsmPZhYCdcPDi8oqhPy",
+      "receipt_file": "docs/multi-case/receipt-case-register-uncles-secret-reserve-RHEA.json",
+      "actual_fee_yocto": "201426038278000000000",
+      "after": {
+        "block_hash": "FRT5CHx3eULLkKiRB3EghY7XszZz8ezZdPZrgT5NTcek"
+      },
+      "verified_at": "2026-11-12T20:31:07.352799+00:00"
+    },
+    "case-register-uncles-secret-reserve-AURORA": {
+      "status": "verified",
+      "tx_hash": "ERkRgtdmtLK1eub6nGtc5uTHZdxYTjDf5h3yfVq2VcHK",
+      "signer_id": "reserve.needmore_1_near.testnet",
+      "receiver_id": "iroh-test-aurora.testnet",
+      "before": {
+        "block_hash": "4EtUUfgpXMbn9WUW39HKHomFSUBwvTzrXDBNsuVziGc1",
+        "block_height": 277412654,
+        "nonce": 277412130000003,
+        "target": {
+          "amount": "9999924829638281200000002",
+          "code_hash": "5heV1Yf3PxjMLWuyXowJoApj38rggW8GsCoScL6Sxidz",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 322532
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277412130000004,
+      "signed_block_hash": "4EtUUfgpXMbn9WUW39HKHomFSUBwvTzrXDBNsuVziGc1",
+      "receipt_file": "docs/multi-case/receipt-case-register-uncles-secret-reserve-AURORA.json",
+      "actual_fee_yocto": "200970038278000000000",
+      "after": {
+        "block_hash": "AjasdAVp2g8gRNf8ud2uCXQBniHfzsjQekWDBTYJjdiu"
+      },
+      "verified_at": "2026-11-12T20:32:05.554748+00:00"
+    },
+    "case-register-uncles-secret-reserve-mpDAO": {
+      "status": "verified",
+      "tx_hash": "uMoe45htjSxvfaZTuxiyMpZP4Soo4s4cP7SQiZQ19T5",
+      "signer_id": "reserve.needmore_1_near.testnet",
+      "receiver_id": "mpdao.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "6CMUgAeGR641edJxj3tf98bvKzqyaFxqw2LKjfcheiAp",
+        "block_height": 277412749,
+        "nonce": 277412130000004,
+        "target": {
+          "amount": "4999914283511202400000002",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323828
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277412130000005,
+      "signed_block_hash": "6CMUgAeGR641edJxj3tf98bvKzqyaFxqw2LKjfcheiAp",
+      "receipt_file": "docs/multi-case/receipt-case-register-uncles-secret-reserve-mpDAO.json",
+      "actual_fee_yocto": "201567537698500000000",
+      "after": {
+        "block_hash": "HkvNC8JHYRjMkJqkykjKVvbeTiJgXEqMUb5oK7sGwZiz"
+      },
+      "verified_at": "2026-11-12T20:32:59.488880+00:00"
+    },
+    "case-register-uncles-secret-reserve-rNEAR": {
+      "status": "verified",
+      "tx_hash": "8ecBTFjNZ8rQ1VhgdS4Lz3gCrUHPemqzFeQYvjLRVrYr",
+      "signer_id": "reserve.needmore_1_near.testnet",
+      "receiver_id": "rnear.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "EewyxSLZM2CMoBcBjuYA1fuJ3updxQ3gsQphjZ257YUk",
+        "block_height": 277412837,
+        "nonce": 277412130000005,
+        "target": {
+          "amount": "4997416898543463000000000",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323706
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277412130000006,
+      "signed_block_hash": "EewyxSLZM2CMoBcBjuYA1fuJ3updxQ3gsQphjZ257YUk",
+      "receipt_file": "docs/multi-case/receipt-case-register-uncles-secret-reserve-rNEAR.json",
+      "actual_fee_yocto": "198831537698500000000",
+      "after": {
+        "block_hash": "66uCqiA56AVsZn6Bu2Rg2KAeesASAHUBLtJQQKubmUCv"
+      },
+      "verified_at": "2026-11-12T20:33:52.429472+00:00"
+    },
+    "case-register-uncles-secret-reserve-STNEAR": {
+      "status": "verified",
+      "tx_hash": "AyQSZ41WMpdPnisZTBTE6sTXfs9f3nKADJVJbuam66xg",
+      "signer_id": "reserve.needmore_1_near.testnet",
+      "receiver_id": "stnear.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "65o4JFL4EBQ4x7ZFkoEkDQwQBnEWkohSoxUs1HM7Yhfh",
+        "block_height": 277412925,
+        "nonce": 277412130000006,
+        "target": {
+          "amount": "4999910527651346000000002",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323883
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277412130000007,
+      "signed_block_hash": "65o4JFL4EBQ4x7ZFkoEkDQwQBnEWkohSoxUs1HM7Yhfh",
+      "receipt_file": "docs/multi-case/receipt-case-register-uncles-secret-reserve-STNEAR.json",
+      "actual_fee_yocto": "202479537698500000000",
+      "after": {
+        "block_hash": "8VdwXMCM1L5yZDk6BqbLvbWqFTCsveTdpFKAnKzDwPZc"
+      },
+      "verified_at": "2026-11-12T20:34:51.263767+00:00"
+    },
+    "case-register-uncles-secret-reserve-LINEAR": {
+      "status": "verified",
+      "tx_hash": "A5VYh1rJCwjtEK7WiHKcvzrYdYpA7qwTrje4Wo6aZqUv",
+      "signer_id": "reserve.needmore_1_near.testnet",
+      "receiver_id": "linear.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "2WhCXsGYYioE9tBkCMDW2rtpcDEZTnDh5WtnQR7pKhwb",
+        "block_height": 277413027,
+        "nonce": 277412130000007,
+        "target": {
+          "amount": "4998659595214506000000001",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323789
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277412130000008,
+      "signed_block_hash": "2WhCXsGYYioE9tBkCMDW2rtpcDEZTnDh5WtnQR7pKhwb",
+      "receipt_file": "docs/multi-case/receipt-case-register-uncles-secret-reserve-LINEAR.json",
+      "actual_fee_yocto": "202935537698500000000",
+      "after": {
+        "block_hash": "5AitH1qt4pfRkuYdb8zoAT2DUFWFJpGWgr118vnfw1SE"
+      },
+      "verified_at": "2026-11-12T20:35:43.325220+00:00"
+    },
+    "case-register-uncles-secret-reserve-wNEAR": {
+      "status": "verified",
+      "tx_hash": "HAcNdeDggcyyu2qcczqUTXS49xJGCrEde8RHZsrYgAa3",
+      "signer_id": "reserve.needmore_1_near.testnet",
+      "receiver_id": "wnear.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "J3f9NLZN9mkaGt4EnvdakKE6XxJQ4WqVL3eW2G7s9WUX",
+        "block_height": 277413121,
+        "nonce": 277412130000008,
+        "target": {
+          "amount": "4998661454046885800000001",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323794
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277412130000009,
+      "signed_block_hash": "J3f9NLZN9mkaGt4EnvdakKE6XxJQ4WqVL3eW2G7s9WUX",
+      "receipt_file": "docs/multi-case/receipt-case-register-uncles-secret-reserve-wNEAR.json",
+      "actual_fee_yocto": "202479537698500000000",
+      "after": {
+        "block_hash": "4WcEU19NJCJKXjkyt9YnShUWVSN3UNd4w2yTWRfJtYae"
+      },
+      "verified_at": "2026-11-12T20:36:37.022965+00:00"
+    },
+    "case-fund-usdi-uncles-secret-reserve": {
+      "status": "verified",
+      "tx_hash": "2mpbgTkFMyQicvVq4wzPwGXKspAFGUoCBkX7XRKVTq91",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "usdi-needmore-1-near.testnet",
+      "before": {
+        "block_hash": "6LDefnAEVUpfjLfmWPskPYKyVRQDAi6dm5Wp2eWQipuF",
+        "block_height": 277413214,
+        "nonce": 276359394000047,
+        "target": {
+          "amount": "10005943884460581900000012",
+          "code_hash": "2z7yWfap6hkGAcow7xFKRghGWv7Uq1uea3Vn7HV6QuaJ",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 363043
+        },
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "0",
+            "reserved_rewards": "0",
+            "available": "0",
+            "target": "10000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "0",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "0",
+            "expected_balance_max": "0"
+          }
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000048,
+      "signed_block_hash": "6LDefnAEVUpfjLfmWPskPYKyVRQDAi6dm5Wp2eWQipuF",
+      "receipt_file": "docs/multi-case/receipt-case-fund-usdi-uncles-secret-reserve.json",
+      "actual_fee_yocto": "657282879960200000000",
+      "after": {
+        "block_hash": "DXBxkwN8HSHzFDMCQarynvQSNBKTh4yFsnCLxtvWHKaE",
+        "book": {
+          "balance": 500000000,
+          "pool": {
+            "pool_funds": "500000000",
+            "reserved_rewards": "0",
+            "available": "500000000",
+            "target": "10000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "1",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "500000000",
+            "expected_balance_max": "500000000"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T20:37:34.156911+00:00"
+    },
+    "case-fund-bonus-uncles-secret-reserve-RHEA": {
+      "status": "verified",
+      "tx_hash": "BjedFc6dKc7kWWog5CQDUNj6VpfGJEMB9SsUcK1zpyXn",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "iroh-test-rhea.testnet",
+      "before": {
+        "block_hash": "912AkkymwMJXx1kEfPXNbyRBzUDc9FMtjhDRhfxRfUkm",
+        "block_height": 277413310,
+        "nonce": 276359394000048,
+        "target": {
+          "amount": "10002424882230381600000003",
+          "code_hash": "5heV1Yf3PxjMLWuyXowJoApj38rggW8GsCoScL6Sxidz",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 322711
+        },
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "500000000",
+            "reserved_rewards": "0",
+            "available": "500000000",
+            "target": "10000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "1",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "500000000",
+            "expected_balance_max": "500000000"
+          }
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000049,
+      "signed_block_hash": "912AkkymwMJXx1kEfPXNbyRBzUDc9FMtjhDRhfxRfUkm",
+      "receipt_file": "docs/multi-case/receipt-case-fund-bonus-uncles-secret-reserve-RHEA.json",
+      "actual_fee_yocto": "736044970304300000000",
+      "after": {
+        "block_hash": "ABxEoyQRpaeKZZ9VwesS1BdqCUfM23DPRmPJeUpbs6vN",
+        "book": {
+          "balance": 1000000000,
+          "pool": {
+            "pool_funds": "500000000",
+            "reserved_rewards": "0",
+            "available": "500000000",
+            "target": "10000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "2",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "500000000",
+            "expected_balance_max": "500000000"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T20:38:32.368741+00:00"
+    },
+    "case-fund-bonus-uncles-secret-reserve-AURORA": {
+      "status": "verified",
+      "tx_hash": "4YB2o6WwUuc2tcV5PYs1r2BuoHUx1dzai6aaTe6DfEGd",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "iroh-test-aurora.testnet",
+      "before": {
+        "block_hash": "J6t6qfG1roQHPnAemL5YDg7PmiFoRRQUTdeuFPXvdyca",
+        "block_height": 277413407,
+        "nonce": 276359394000049,
+        "target": {
+          "amount": "10001174829638281200000002",
+          "code_hash": "5heV1Yf3PxjMLWuyXowJoApj38rggW8GsCoScL6Sxidz",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 322624
+        },
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "500000000",
+            "reserved_rewards": "0",
+            "available": "500000000",
+            "target": "10000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "2",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "500000000",
+            "expected_balance_max": "500000000"
+          }
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000050,
+      "signed_block_hash": "J6t6qfG1roQHPnAemL5YDg7PmiFoRRQUTdeuFPXvdyca",
+      "receipt_file": "docs/multi-case/receipt-case-fund-bonus-uncles-secret-reserve-AURORA.json",
+      "actual_fee_yocto": "735271732348100000000",
+      "after": {
+        "block_hash": "6jPvZcXN8Ush9VGS2ca36hLtuzvKmXfPW49t21KtJG1M",
+        "book": {
+          "balance": 1000000000,
+          "pool": {
+            "pool_funds": "500000000",
+            "reserved_rewards": "0",
+            "available": "500000000",
+            "target": "10000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "3",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "500000000",
+            "expected_balance_max": "500000000"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T20:39:32.806260+00:00"
+    },
+    "case-fund-bonus-uncles-secret-reserve-mpDAO": {
+      "status": "verified",
+      "tx_hash": "4KQ5DJ5qTAhA4CzR6jGDAhNLXYpzRvcNcGE2dpgfAMPG",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "mpdao.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "9N962cLESP7aCgZUiVLaRU6P73BKXU6u5h1m6cKhXT2w",
+        "block_height": 277413509,
+        "nonce": 276359394000050,
+        "target": {
+          "amount": "5001164283511202400000002",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323920
+        },
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "500000000",
+            "reserved_rewards": "0",
+            "available": "500000000",
+            "target": "10000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "3",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "500000000",
+            "expected_balance_max": "500000000"
+          }
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000051,
+      "signed_block_hash": "9N962cLESP7aCgZUiVLaRU6P73BKXU6u5h1m6cKhXT2w",
+      "receipt_file": "docs/multi-case/receipt-case-fund-bonus-uncles-secret-reserve-mpDAO.json",
+      "actual_fee_yocto": "736998345020600000000",
+      "after": {
+        "block_hash": "FMAkx5ZwH6uCof4G9Q8TNaYqC6EFnYrta7RK6QKZyBS3",
+        "book": {
+          "balance": 2000000000,
+          "pool": {
+            "pool_funds": "500000000",
+            "reserved_rewards": "0",
+            "available": "500000000",
+            "target": "10000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "4",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "500000000",
+            "expected_balance_max": "500000000"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T20:40:33.572036+00:00"
+    },
+    "case-fund-bonus-uncles-secret-reserve-rNEAR": {
+      "status": "verified",
+      "tx_hash": "EEqscWFBsbiTVA1Y7Z5XNBTqtvaNLntuQGwMKaY8bp96",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "rnear.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "HTfUtEXza9KjH4Gn52t22dte8dUJFspUmbUS7ym4txiL",
+        "block_height": 277413613,
+        "nonce": 276359394000051,
+        "target": {
+          "amount": "4998666898543463000000000",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323798
+        },
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "500000000",
+            "reserved_rewards": "0",
+            "available": "500000000",
+            "target": "10000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "4",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "500000000",
+            "expected_balance_max": "500000000"
+          }
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000052,
+      "signed_block_hash": "HTfUtEXza9KjH4Gn52t22dte8dUJFspUmbUS7ym4txiL",
+      "receipt_file": "docs/multi-case/receipt-case-fund-bonus-uncles-secret-reserve-rNEAR.json",
+      "actual_fee_yocto": "734561996254600000000",
+      "after": {
+        "block_hash": "JAqAyY6bYGMk1bPcovGnywNQzd11PAybkddgxTP64Gd",
+        "book": {
+          "balance": 50000000000000000000000000,
+          "pool": {
+            "pool_funds": "500000000",
+            "reserved_rewards": "0",
+            "available": "500000000",
+            "target": "10000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "5",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "500000000",
+            "expected_balance_max": "500000000"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T20:41:34.791097+00:00"
+    },
+    "case-fund-bonus-uncles-secret-reserve-STNEAR": {
+      "status": "verified",
+      "tx_hash": "2NtUjgX2eqA63V64bN1ohK3LgzD8CQFnpEgtsgxcgBjB",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "stnear.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "88MLojHoiE8FoF3vq2yRSKuDQJ4wM8Wzh8JEppnotA3m",
+        "block_height": 277413712,
+        "nonce": 276359394000052,
+        "target": {
+          "amount": "5001160527651346000000002",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323975
+        },
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "500000000",
+            "reserved_rewards": "0",
+            "available": "500000000",
+            "target": "10000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "5",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "500000000",
+            "expected_balance_max": "500000000"
+          }
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000053,
+      "signed_block_hash": "88MLojHoiE8FoF3vq2yRSKuDQJ4wM8Wzh8JEppnotA3m",
+      "receipt_file": "docs/multi-case/receipt-case-fund-bonus-uncles-secret-reserve-STNEAR.json",
+      "actual_fee_yocto": "741663001170600000000",
+      "after": {
+        "block_hash": "Fuh7PTxjAQeoqeR5fhrXL3PtLQPKkrsnq48QbapAXa6q",
+        "book": {
+          "balance": 100000000000000000000000000,
+          "pool": {
+            "pool_funds": "500000000",
+            "reserved_rewards": "0",
+            "available": "500000000",
+            "target": "10000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "6",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "500000000",
+            "expected_balance_max": "500000000"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T20:42:33.278836+00:00"
+    },
+    "case-fund-bonus-uncles-secret-reserve-LINEAR": {
+      "status": "verified",
+      "tx_hash": "62RZddXkz7oFDUE2CihiQzbWBwujFCUopHN1htxUqVq1",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "linear.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "3D8MYUktL7ythC16NcQeDFcYPrtwZ7viT1vJN2oC3bYC",
+        "block_height": 277413811,
+        "nonce": 276359394000053,
+        "target": {
+          "amount": "4999909595214506000000001",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323881
+        },
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "500000000",
+            "reserved_rewards": "0",
+            "available": "500000000",
+            "target": "10000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "6",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "500000000",
+            "expected_balance_max": "500000000"
+          }
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000054,
+      "signed_block_hash": "3D8MYUktL7ythC16NcQeDFcYPrtwZ7viT1vJN2oC3bYC",
+      "receipt_file": "docs/multi-case/receipt-case-fund-bonus-uncles-secret-reserve-LINEAR.json",
+      "actual_fee_yocto": "742582899628200000000",
+      "after": {
+        "block_hash": "EMoDZUffgL6dayfRh5uUc5mg4Cwa71c5BHNBEQYzW7PA",
+        "book": {
+          "balance": 100000000000000000000000000,
+          "pool": {
+            "pool_funds": "500000000",
+            "reserved_rewards": "0",
+            "available": "500000000",
+            "target": "10000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "7",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "500000000",
+            "expected_balance_max": "500000000"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T20:43:32.163572+00:00"
+    },
+    "case-fund-bonus-uncles-secret-reserve-wNEAR": {
+      "status": "verified",
+      "tx_hash": "CFPe7TzwHp9YcoRENL7Ziu7E5JMDakym65trqW1mjpCZ",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "wnear.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "DWbvu7TnZwR88eZEu1gdnKGNQ8a97nVGpt4R9oYWUQ4w",
+        "block_height": 277413912,
+        "nonce": 276359394000054,
+        "target": {
+          "amount": "4999911454046885800000001",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323886
+        },
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "500000000",
+            "reserved_rewards": "0",
+            "available": "500000000",
+            "target": "10000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "7",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "500000000",
+            "expected_balance_max": "500000000"
+          }
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000055,
+      "signed_block_hash": "DWbvu7TnZwR88eZEu1gdnKGNQ8a97nVGpt4R9oYWUQ4w",
+      "receipt_file": "docs/multi-case/receipt-case-fund-bonus-uncles-secret-reserve-wNEAR.json",
+      "actual_fee_yocto": "741573051248700000000",
+      "after": {
+        "block_hash": "9zwo4jCaAdnzxtSUMdyX9HsXJQqADc6QrDSCZfAoKdUj",
+        "book": {
+          "balance": 100000000000000000000000000,
+          "pool": {
+            "pool_funds": "500000000",
+            "reserved_rewards": "0",
+            "available": "500000000",
+            "target": "10000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "8",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "500000000",
+            "expected_balance_max": "500000000"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T20:44:31.341430+00:00"
+    },
+    "unpause-bamboo-mist": {
+      "status": "verified",
+      "tx_hash": "AGy26fvn8WisJB1CAG21FeTjnT8QVcNjTXhYPVu4LBkF",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "bamboo.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "8BK4ip8GQszS4CLyumkrY3mabbKfAS6B2P3EojC6yjUo",
+        "block_height": 277414017,
+        "nonce": 276359394000055,
+        "target": {
+          "amount": "6988459606187226300000000",
+          "code_hash": "5uZDe3e4UUbrXFQFdAAfwL3YpQXXvo8EkXRwBhgjGTid",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 558486
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000056,
+      "signed_block_hash": "8BK4ip8GQszS4CLyumkrY3mabbKfAS6B2P3EojC6yjUo",
+      "receipt_file": "docs/multi-case/receipt-unpause-bamboo-mist.json",
+      "actual_fee_yocto": "207036884956200000000",
+      "after": {
+        "block_hash": "67jsGg7KV4J9EhEZ8X6Rxu4Wj6tAb5uuM4ur2kk6SZPC"
+      },
+      "verified_at": "2026-11-12T20:45:40.333210+00:00"
+    },
+    "unpause-moon-spirit": {
+      "status": "verified",
+      "tx_hash": "HFjGnxoRyZ3oo3HhgC77k4W4ADF8cPbrzDzhSxJ6YiCk",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "moon.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "4M4dcw555gojx9PJTXuMUuLDChArMgmJMYEbd6TqTRyr",
+        "block_height": 277414136,
+        "nonce": 276359394000056,
+        "target": {
+          "amount": "6987004815000913700000000",
+          "code_hash": "5uZDe3e4UUbrXFQFdAAfwL3YpQXXvo8EkXRwBhgjGTid",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 558713
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000057,
+      "signed_block_hash": "4M4dcw555gojx9PJTXuMUuLDChArMgmJMYEbd6TqTRyr",
+      "receipt_file": "docs/multi-case/receipt-unpause-moon-spirit.json",
+      "actual_fee_yocto": "207492884956200000000",
+      "after": {
+        "block_hash": "AvnL2Mg2B3VxPy3AR5xxxbWXzpfqzfHSQZpMTHxGtWjB"
+      },
+      "verified_at": "2026-11-12T20:46:51.952987+00:00"
+    },
+    "unpause-phoenix-flame": {
+      "status": "verified",
+      "tx_hash": "7TmZ6Ck1zdGEJXN3dqkBz3HZyE4gZmBtxj98j5uq75Hj",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "phoenix.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "E9BPqKvY7n8V355WiRNudY2WG8vskoJRHXE26oNQx7N",
+        "block_height": 277414258,
+        "nonce": 276359394000057,
+        "target": {
+          "amount": "6985545507405415000000000",
+          "code_hash": "5uZDe3e4UUbrXFQFdAAfwL3YpQXXvo8EkXRwBhgjGTid",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 558910
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000058,
+      "signed_block_hash": "E9BPqKvY7n8V355WiRNudY2WG8vskoJRHXE26oNQx7N",
+      "receipt_file": "docs/multi-case/receipt-unpause-phoenix-flame.json",
+      "actual_fee_yocto": "207264884956200000000",
+      "after": {
+        "block_hash": "DjYNjsE1hfYY2rw8Qvac9e7B66uiSTX2pd6GRqa9Koq6"
+      },
+      "verified_at": "2026-11-12T20:48:04.212400+00:00"
+    },
+    "unpause-uncles-secret-reserve": {
+      "status": "verified",
+      "tx_hash": "C4LDGjP2MM5RPY7M7985d98vAUseCDHn33y1GfuYm5No",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "reserve.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "4HYuGsvmaif29gMy1d25im8LkNGC3othrPGSDaEBPRjg",
+        "block_height": 277414382,
+        "nonce": 276359394000058,
+        "target": {
+          "amount": "6984089203280777100000000",
+          "code_hash": "5uZDe3e4UUbrXFQFdAAfwL3YpQXXvo8EkXRwBhgjGTid",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 559161
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000059,
+      "signed_block_hash": "4HYuGsvmaif29gMy1d25im8LkNGC3othrPGSDaEBPRjg",
+      "receipt_file": "docs/multi-case/receipt-unpause-uncles-secret-reserve.json",
+      "actual_fee_yocto": "207264884956200000000",
+      "after": {
+        "block_hash": "2efepeyAsHEGYEFE9eY3zCrCZRGfEnTYLkYRLxDh8Afv"
+      },
+      "verified_at": "2026-11-12T20:49:19.819314+00:00"
     }
   },
-  "status": "in_progress",
-  "verified_steps": 47,
-  "remaining_steps": 43,
-  "actual_fees_yocto": "123653607630024700000000",
-  "storage_deposits_yocto": "2500000000000000000000",
-  "blockers": [
-    "Meteor blocks approved new-account AddKey FullAccess actions; no bypass attempted.",
-    "The existing owner Keychain signer is unavailable; all remaining steps depend on the thirteen missing accounts."
-  ],
+  "status": "complete",
+  "verified_steps": 90,
+  "remaining_steps": 0,
+  "actual_fees_yocto": "164851425773997200000000",
+  "storage_deposits_yocto": "35000000000000000000000",
+  "blockers": [],
   "completed_dependency_chains": [
-    "existing Dragon: pause, pinned V1 migration, three inventory transfers, unpause"
-  ]
+    "bamboo-mist",
+    "dragon-tea",
+    "moon-spirit",
+    "phoenix-flame",
+    "uncles-secret-reserve"
+  ],
+  "formal_security_audit": "deferred_by_user"
 }

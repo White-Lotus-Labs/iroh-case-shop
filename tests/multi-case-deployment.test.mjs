@@ -26,6 +26,15 @@ test('an approved batch cannot be replaced by a changed generated proposal', () 
 const tokens = JSON.parse(
   await readFile(new URL('../config/tokens.testnet.json', import.meta.url)),
 );
+// This fixture represents the reviewed pre-deployment state, independently of
+// the live registry flags after activation.
+for (const token of tokens.tokens) {
+  if (token.selection === 'included') {
+    token.status = ['SHITZU', 'RHEA', 'AURORA'].includes(token.asset)
+      ? 'verified-live'
+      : 'proposed';
+  }
+}
 const selected = tokens.tokens.filter((t) => t.selection === 'included');
 const keys = JSON.parse(
   await readFile(

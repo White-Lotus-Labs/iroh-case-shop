@@ -34,7 +34,7 @@
         "identityEvidence": "Existing mock identity preserved; canonical metadata read-only; no fresh primary project activity claim."
       },
       "decimalPolicy": "Preserve existing six-decimal deployment; canonical token uses 18 decimals.",
-      "verificationEvidence": "docs/multi-case/live-preflight.json"
+      "verificationEvidence": "docs/multi-case/execution-preflight.json"
     },
     {
       "asset": "RHEA",
@@ -67,7 +67,7 @@
         "blockHash": "5Vw6dwvWUDpM32GLqhKr2YVE8s39EavNgkuXbjH4Y2JP"
       },
       "decimalPolicy": "Preserve existing six-decimal deployment; canonical token uses 18 decimals.",
-      "verificationEvidence": "docs/multi-case/live-preflight.json"
+      "verificationEvidence": "docs/multi-case/execution-preflight.json"
     },
     {
       "asset": "AURORA",
@@ -95,18 +95,18 @@
         "blockHash": "5Vw6dwvWUDpM32GLqhKr2YVE8s39EavNgkuXbjH4Y2JP"
       },
       "decimalPolicy": "Preserve existing six-decimal deployment; canonical token uses 18 decimals.",
-      "verificationEvidence": "docs/multi-case/live-preflight.json"
+      "verificationEvidence": "docs/multi-case/execution-preflight.json"
     },
     {
       "asset": "BLACKDRAGON",
       "selection": "included",
-      "status": "proposed",
+      "status": "verified-live",
       "contractId": "blackdragon.needmore_1_near.testnet",
       "name": "Test Black Dragon",
       "symbol": "BLACKDRAGON",
       "decimals": 24,
       "totalSupplyRaw": "100000000000000000000000000000",
-      "mockStatus": "not-deployed",
+      "mockStatus": "verified-deployed",
       "unofficial": true,
       "hasMonetaryValue": false,
       "derivativeMock": false,
@@ -122,18 +122,19 @@
         "blockHeight": 224058639,
         "blockHash": "46SHegHTkruwp2pLs5Jh1SywGpM6eKHahJks1nTvhzKt"
       },
-      "publicKey": "ed25519:BzFYfhBpT7Y5rchB4v4JH16WNqMHpzP37xrWnM5mZMha"
+      "publicKey": "ed25519:BzFYfhBpT7Y5rchB4v4JH16WNqMHpzP37xrWnM5mZMha",
+      "verificationEvidence": "docs/multi-case/execution-preflight.json"
     },
     {
       "asset": "NEKO",
       "selection": "included",
-      "status": "proposed",
+      "status": "verified-live",
       "contractId": "neko.needmore_1_near.testnet",
       "name": "Test Neko",
       "symbol": "NEKO",
       "decimals": 24,
       "totalSupplyRaw": "100000000000000000000000000000",
-      "mockStatus": "not-deployed",
+      "mockStatus": "verified-deployed",
       "unofficial": true,
       "hasMonetaryValue": false,
       "derivativeMock": false,
@@ -152,18 +153,19 @@
         "blockHeight": 224058639,
         "blockHash": "46SHegHTkruwp2pLs5Jh1SywGpM6eKHahJks1nTvhzKt"
       },
-      "publicKey": "ed25519:HANvB1MeRnUru1U96q1iPyujUSfCRYNrjRwAUqjNJYLr"
+      "publicKey": "ed25519:HANvB1MeRnUru1U96q1iPyujUSfCRYNrjRwAUqjNJYLr",
+      "verificationEvidence": "docs/multi-case/execution-preflight.json"
     },
     {
       "asset": "MPDAO",
       "selection": "included",
-      "status": "proposed",
+      "status": "verified-live",
       "contractId": "mpdao.needmore_1_near.testnet",
       "name": "Test mpDAO",
       "symbol": "mpDAO",
       "decimals": 6,
       "totalSupplyRaw": "100000000000",
-      "mockStatus": "not-deployed",
+      "mockStatus": "verified-deployed",
       "unofficial": true,
       "hasMonetaryValue": false,
       "derivativeMock": false,
@@ -185,18 +187,19 @@
         "blockHeight": 224058639,
         "blockHash": "46SHegHTkruwp2pLs5Jh1SywGpM6eKHahJks1nTvhzKt"
       },
-      "publicKey": "ed25519:Cu7riCyEPzUyLzz3xMGa1En516bchWYT1Nw1mipqs6eY"
+      "publicKey": "ed25519:Cu7riCyEPzUyLzz3xMGa1En516bchWYT1Nw1mipqs6eY",
+      "verificationEvidence": "docs/multi-case/execution-preflight.json"
     },
     {
       "asset": "GEAR",
       "selection": "included",
-      "status": "proposed",
+      "status": "verified-live",
       "contractId": "gear.needmore_1_near.testnet",
       "name": "Test Gear",
       "symbol": "GEAR",
       "decimals": 18,
       "totalSupplyRaw": "100000000000000000000000",
-      "mockStatus": "not-deployed",
+      "mockStatus": "verified-deployed",
       "unofficial": true,
       "hasMonetaryValue": false,
       "derivativeMock": false,
@@ -215,18 +218,19 @@
         "blockHeight": 224058645,
         "blockHash": "xov5jA8xAf8YCvnCgdsgoWSFnQFAGbk6yt58UnfNMsX"
       },
-      "publicKey": "ed25519:BNRrJC51SnjV69hgzHo7JZrsyq7MvrZvs444RAvJv5ru"
+      "publicKey": "ed25519:BNRrJC51SnjV69hgzHo7JZrsyq7MvrZvs444RAvJv5ru",
+      "verificationEvidence": "docs/multi-case/execution-preflight.json"
     },
     {
       "asset": "PURGE",
       "selection": "included",
-      "status": "proposed",
+      "status": "verified-live",
       "contractId": "purge.needmore_1_near.testnet",
       "name": "Test Purge",
       "symbol": "PURGE",
       "decimals": 18,
       "totalSupplyRaw": "100000000000000000000000",
-      "mockStatus": "not-deployed",
+      "mockStatus": "verified-deployed",
       "unofficial": true,
       "hasMonetaryValue": false,
       "derivativeMock": false,
@@ -242,18 +246,19 @@
         "blockHeight": 224058646,
         "blockHash": "46TRc5hCGF2izE1R2y9rJKTsmryVGyjuDz6xydnpSXs8"
       },
-      "publicKey": "ed25519:3JahkkUeThdgzonP4qwVymyDgcvqb13NoTzffz6FmfJY"
+      "publicKey": "ed25519:3JahkkUeThdgzonP4qwVymyDgcvqb13NoTzffz6FmfJY",
+      "verificationEvidence": "docs/multi-case/execution-preflight.json"
     },
     {
       "asset": "WNEAR",
       "selection": "included",
-      "status": "proposed",
+      "status": "verified-live",
       "contractId": "wnear.needmore_1_near.testnet",
       "name": "Test Wrapped NEAR",
       "symbol": "wNEAR",
       "decimals": 24,
       "totalSupplyRaw": "100000000000000000000000000000",
-      "mockStatus": "not-deployed",
+      "mockStatus": "verified-deployed",
       "unofficial": true,
       "hasMonetaryValue": false,
       "derivativeMock": true,
@@ -269,18 +274,19 @@
         "blockHeight": 224058645,
         "blockHash": "xov5jA8xAf8YCvnCgdsgoWSFnQFAGbk6yt58UnfNMsX"
       },
-      "publicKey": "ed25519:Hufga4xjW7XgqYuRSHGoeQBAt3r6HZgadudokD6dcX7q"
+      "publicKey": "ed25519:Hufga4xjW7XgqYuRSHGoeQBAt3r6HZgadudokD6dcX7q",
+      "verificationEvidence": "docs/multi-case/execution-preflight.json"
     },
     {
       "asset": "STNEAR",
       "selection": "included",
-      "status": "proposed",
+      "status": "verified-live",
       "contractId": "stnear.needmore_1_near.testnet",
       "name": "Test Staked NEAR",
       "symbol": "STNEAR",
       "decimals": 24,
       "totalSupplyRaw": "100000000000000000000000000000",
-      "mockStatus": "not-deployed",
+      "mockStatus": "verified-deployed",
       "unofficial": true,
       "hasMonetaryValue": false,
       "derivativeMock": true,
@@ -302,18 +308,19 @@
         "blockHeight": 224058645,
         "blockHash": "xov5jA8xAf8YCvnCgdsgoWSFnQFAGbk6yt58UnfNMsX"
       },
-      "publicKey": "ed25519:HYi4hdPauGQWAupViFNubMSv4xPyibsRh9Tw7tmfBpgQ"
+      "publicKey": "ed25519:HYi4hdPauGQWAupViFNubMSv4xPyibsRh9Tw7tmfBpgQ",
+      "verificationEvidence": "docs/multi-case/execution-preflight.json"
     },
     {
       "asset": "LINEAR",
       "selection": "included",
-      "status": "proposed",
+      "status": "verified-live",
       "contractId": "linear.needmore_1_near.testnet",
       "name": "Test LiNEAR",
       "symbol": "LINEAR",
       "decimals": 24,
       "totalSupplyRaw": "100000000000000000000000000000",
-      "mockStatus": "not-deployed",
+      "mockStatus": "verified-deployed",
       "unofficial": true,
       "hasMonetaryValue": false,
       "derivativeMock": true,
@@ -329,18 +336,19 @@
         "blockHeight": 224058645,
         "blockHash": "xov5jA8xAf8YCvnCgdsgoWSFnQFAGbk6yt58UnfNMsX"
       },
-      "publicKey": "ed25519:5q5R4tuBBnh87uScmLPjYAV8cW8et9UnuYd9He2CeMP9"
+      "publicKey": "ed25519:5q5R4tuBBnh87uScmLPjYAV8cW8et9UnuYd9He2CeMP9",
+      "verificationEvidence": "docs/multi-case/execution-preflight.json"
     },
     {
       "asset": "RNEAR",
       "selection": "included",
-      "status": "proposed",
+      "status": "verified-live",
       "contractId": "rnear.needmore_1_near.testnet",
       "name": "Test Rhea Staked NEAR",
       "symbol": "rNEAR",
       "decimals": 24,
       "totalSupplyRaw": "100000000000000000000000000000",
-      "mockStatus": "not-deployed",
+      "mockStatus": "verified-deployed",
       "unofficial": true,
       "hasMonetaryValue": false,
       "derivativeMock": true,
@@ -356,7 +364,8 @@
         "blockHeight": 224058646,
         "blockHash": "46TRc5hCGF2izE1R2y9rJKTsmryVGyjuDz6xydnpSXs8"
       },
-      "publicKey": "ed25519:6TsDqjRzzNvRhPoryErg3Pbn4WMPathCfWpmJcPx22aw"
+      "publicKey": "ed25519:6TsDqjRzzNvRhPoryErg3Pbn4WMPathCfWpmJcPx22aw",
+      "verificationEvidence": "docs/multi-case/execution-preflight.json"
     },
     {
       "asset": "LONK",

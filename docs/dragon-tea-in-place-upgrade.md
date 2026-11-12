@@ -20,7 +20,7 @@ The finalized owner quote requires a normal case-storage prepayment before the n
 
 The eight current-batch transactions cost 0.007108546396287 NEAR in fees plus 0.0025 NEAR and 5 yoctoNEAR in attached deposits. Dragon retains 5.58269 NEAR of storage backing in its existing balance. See [the canonical journal](multi-case/execution.json) for before/after state and raw receipts. Do not repeat these transactions.
 
-The four new cases and nine new mock accounts remain blocked because Meteor rejects their approved FullAccess AddKey actions and the existing owner Keychain signer is unavailable. No wallet protection was bypassed or new owner key added.
+The existing owner signer was later verified through a non-transaction NEP-413 challenge. The entire 90-step collection deployment is now complete, including the four new cases and nine new mock accounts. No wallet protection was bypassed or new owner key added. Formal security audit is deferred; automated deployment acceptance and functional evidence are recorded in the consolidated report.
 
 The remaining sections are historical rehearsal evidence, including the older candidate binary and command. They are not instructions to redeploy it; the immutable approved manifest and canonical execution journal govern any continuation.
 

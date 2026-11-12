@@ -9,7 +9,7 @@
       "id": "bamboo-mist",
       "name": "Bamboo Mist Case",
       "contractId": "bamboo.needmore_1_near.testnet",
-      "deploymentStatus": "planned",
+      "deploymentStatus": "verified-live",
       "theme": "bamboo-mist",
       "description": "Bamboo, green tea and morning mist.",
       "config": {
@@ -60,7 +60,7 @@
           }
         ]
       },
-      "bonusDeploymentStatus": "planned"
+      "bonusDeploymentStatus": "verified-live"
     },
     {
       "id": "dragon-tea",
@@ -115,7 +115,7 @@
       "id": "moon-spirit",
       "name": "Moon Spirit Case",
       "contractId": "moon.needmore_1_near.testnet",
-      "deploymentStatus": "planned",
+      "deploymentStatus": "verified-live",
       "theme": "moon-spirit",
       "description": "Indigo moonlight and mysterious night blends.",
       "config": {
@@ -174,13 +174,13 @@
           }
         ]
       },
-      "bonusDeploymentStatus": "planned"
+      "bonusDeploymentStatus": "verified-live"
     },
     {
       "id": "phoenix-flame",
       "name": "Phoenix Flame Case",
       "contractId": "phoenix.needmore_1_near.testnet",
-      "deploymentStatus": "planned",
+      "deploymentStatus": "verified-live",
       "theme": "phoenix-flame",
       "description": "Red and gold embers with a wider range of USDI outcomes.",
       "config": {
@@ -247,13 +247,13 @@
           }
         ]
       },
-      "bonusDeploymentStatus": "planned"
+      "bonusDeploymentStatus": "verified-live"
     },
     {
       "id": "uncles-secret-reserve",
       "name": "Uncle's Secret Reserve",
       "contractId": "reserve.needmore_1_near.testnet",
-      "deploymentStatus": "planned",
+      "deploymentStatus": "verified-live",
       "theme": "uncles-secret-reserve",
       "description": "Ancient recipes and rare unofficial Testnet collectibles.",
       "config": {
@@ -328,7 +328,7 @@
           }
         ]
       },
-      "bonusDeploymentStatus": "planned"
+      "bonusDeploymentStatus": "verified-live"
     }
   ]
 }

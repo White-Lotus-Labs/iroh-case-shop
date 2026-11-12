@@ -1,25 +1,19 @@
 {
-  "recordedAt": "2026-11-12T18:39:02.909838+00:00",
+  "recordedAt": "2026-11-12T20:52:41.088971+00:00",
   "network": "testnet",
-  "deploymentPaused": true,
-  "verifiedSteps": 47,
+  "deploymentPaused": false,
+  "verifiedSteps": 90,
   "totalSteps": 90,
   "manifestSha256": "4cf07ab44a6dcf3f9aedf970c938808ec2bcb61e6e21fec959bf36d859db5cc9",
   "paymentToken": "usdi-needmore-1-near.testnet",
-  "unreconciledTransactions": [
-    {
-      "step": "case-fund-bonus-moon-spirit-PURGE",
-      "status": "submitted",
-      "hash": "mttoMLZFbGD21xLu5b3homhfLDwLuPe5JBAo4XeAB4G"
-    }
-  ],
+  "unreconciledTransactions": [],
   "cases": [
     {
       "id": "bamboo-mist",
       "contractId": "bamboo.needmore_1_near.testnet",
-      "frontendStatus": "planned",
+      "frontendStatus": "verified-live",
       "codeDeploymentVerified": true,
-      "activationVerified": false,
+      "activationVerified": true,
       "priceRaw": "500000",
       "usdiRewardsRaw": [
         "200000",
@@ -59,7 +53,8 @@
           "amount": "1000000",
           "tier": 2
         }
-      ]
+      ],
+      "poolUsdiRaw": "50000000"
     },
     {
       "id": "dragon-tea",
@@ -98,14 +93,15 @@
           "amount": "1000000",
           "tier": 2
         }
-      ]
+      ],
+      "poolUsdiRaw": "995800000"
     },
     {
       "id": "moon-spirit",
       "contractId": "moon.needmore_1_near.testnet",
-      "frontendStatus": "planned",
+      "frontendStatus": "verified-live",
       "codeDeploymentVerified": true,
-      "activationVerified": false,
+      "activationVerified": true,
       "priceRaw": "2000000",
       "usdiRewardsRaw": [
         "100000",
@@ -153,14 +149,15 @@
           "amount": "100000000000000000000000",
           "tier": 2
         }
-      ]
+      ],
+      "poolUsdiRaw": "150000000"
     },
     {
       "id": "phoenix-flame",
       "contractId": "phoenix.needmore_1_near.testnet",
-      "frontendStatus": "planned",
-      "codeDeploymentVerified": false,
-      "activationVerified": false,
+      "frontendStatus": "verified-live",
+      "codeDeploymentVerified": true,
+      "activationVerified": true,
       "priceRaw": "5000000",
       "usdiRewardsRaw": [
         "100000",
@@ -216,14 +213,15 @@
           "amount": "250000000000000000000000",
           "tier": 2
         }
-      ]
+      ],
+      "poolUsdiRaw": "300000000"
     },
     {
       "id": "uncles-secret-reserve",
       "contractId": "reserve.needmore_1_near.testnet",
-      "frontendStatus": "planned",
-      "codeDeploymentVerified": false,
-      "activationVerified": false,
+      "frontendStatus": "verified-live",
+      "codeDeploymentVerified": true,
+      "activationVerified": true,
       "priceRaw": "10000000",
       "usdiRewardsRaw": [
         "2000000",
@@ -287,7 +285,8 @@
           "amount": "1000000000000000000000000",
           "tier": 2
         }
-      ]
+      ],
+      "poolUsdiRaw": "500000000"
     }
   ],
   "tokens": [
@@ -363,5 +362,8 @@
       "decimals": 24,
       "unofficialMock": true
     }
-  ]
+  ],
+  "deploymentComplete": true,
+  "formalSecurityAudit": "deferred_by_user",
+  "finalizedBlock": 277414585
 }

@@ -125,6 +125,8 @@ def main():
         require_budget = fees + deposits <= int(batch['budget']['maximumNativeExpenditureYocto'])
         if not require_budget: raise RuntimeError('Recorded native expenditure exceeds approval')
         intro = ('All 90 approved Testnet transactions are FINAL and verified. All five cases and twelve fixed-supply bonus mocks are deployed; every approved pool and inventory allocation is funded, and all five cases are active.' if complete else f"The approved Testnet deployment is in progress: {len(verified)} of 90 steps are FINAL and verified, including {created} of 13 new accounts.")
+        if complete:
+            intro += ' Formal security audit is deferred by the user. Deployment acceptance checks and functional tests do not constitute that audit.'
         if not complete and not signer.get('signerVerified'):
             intro += ' Remaining account creation is blocked by Meteor FullAccess-key policy and the missing owner CLI signer.'
         elif not complete:
@@ -150,7 +152,9 @@ def main():
         if complete: report = report.replace('## Remaining work that requires authorization or external state', '## Follow-up outside the completed batch')
         if execution['steps'].get('dragon-upgrade', {}).get('status') == 'verified':
             report = report.replace('the current V1 API returns the latest 20', 'the historical V1 API returned the latest 20; the upgraded implementation supports pagination')
-        progress = ['## Verified execution progress', '', intro, '', f"Native fees burned: {units(fees, 24)} test NEAR. Verified attached deposits: {units(deposits, 24)} test NEAR, including {units(account_funding, 24)} retained as new-account funding and {units(registrations, 24)} token-registration deposits. The gross approved attached-deposit plus fee total is {units(deposits + fees, 24)} test NEAR, below the original ceiling. Account funding and storage backing are not burned fees.", '', verify['executionHelper'], '', '### Finalized case pools, inventories and quotes', '']
+        progress = ['## Verified execution progress', '', intro, '', f"Receipts record execution fees of {units(fees, 24)} test NEAR. Verified attached deposits: {units(deposits, 24)} test NEAR, including {units(account_funding, 24)} transferred as new-account funding and {units(registrations, 24)} token-registration deposits. The gross approved attached-deposit plus fee total is {units(deposits + fees, 24)} test NEAR, below the original ceiling. Account funding and storage backing are not burned fees.", '', verify['executionHelper'], '', '### Finalized case pools, inventories and quotes', '']
+        owner_decrease = int(execution['initial_owner_balance_yocto']) - int(current['owner']['amount'])
+        progress += [f"Owner balance decreased by {units(owner_decrease, 24)} test NEAR since execution began, including transfers retained on the new accounts. The gross ceiling calculation also adds dedicated-account fees to account funding, so it is a conservative authorization comparison rather than a second charge to the owner.", '']
         storage_total = 0
         for definition in catalog['cases']:
             item = current['cases'][definition['id']]

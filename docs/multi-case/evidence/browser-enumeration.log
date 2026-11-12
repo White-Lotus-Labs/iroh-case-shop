@@ -1,0 +1,87 @@
+Listing tests:
+  auth.spec.ts:4:1 › a guest can use the room and find optional account actions
+  auth.spec.ts:40:1 › register, refresh, logout, and case-insensitive login keep one identity
+  auth.spec.ts:114:1 › duplicate nickname and short password show recoverable errors
+  camera-look.spec.ts:83:1 › free look drags, zooms and walks without leaving the room, then recenters
+  camera-look.spec.ts:153:1 › halos fly to another station, open the current one, and a drag is not a click
+  cases.spec.ts:18:1 › cases with unavailable RPC show no invented data and cannot request signatures
+  cases.spec.ts:57:1 › cases reuse the root Testnet wallet session through reload and disconnect
+  cases.spec.ts:154:3 › cases keep branding and the wallet within a 390px viewport
+  cases.spec.ts:154:3 › cases keep branding and the wallet within a 320px viewport
+  cases.spec.ts:176:3 › tea room keeps Cases navigation and the wallet visible at 390px
+  cases.spec.ts:176:3 › tea room keeps Cases navigation and the wallet visible at 320px
+  cases.spec.ts:203:1 › standalone Cases scrolls and receives input before and after wallet authorization
+  cases.spec.ts:256:1 › standalone Cases accepts keyboard scroll when no wallet is available
+  chain-loading.spec.ts:5:1 › shows balance, claim eligibility and pool while opening history is slow
+  chain-loading.spec.ts:67:1 › backs off a failed balance read and retries without hiding claim or pool data
+  chain-loading.spec.ts:110:1 › a hanging view times out, and rapid refreshes do not restart it
+  chain-loading.spec.ts:154:1 › disconnect and a new account ignore a slow balance from the previous wallet
+  chain-loading.spec.ts:226:1 › recovers a redirected claim receipt and never sends a second claim
+  chain-loading.spec.ts:262:1 › unmount cancels an in-flight wallet read and reopening starts a fresh read
+  deck.spec.ts:38:1 › Counter deck opens a thesis in the panel, expands a leaf, and hands off to Uncle
+  deck.spec.ts:107:1 › deck shows an honest offline state when Nansen answers 503
+  deck.spec.ts:131:1 › a counter card opens the Thesis Desk on all scrolls, and each thesis opens in the same panel
+  deck.spec.ts:209:1 › full motion reading switches theses in place and returns focus to the book
+  deck.spec.ts:322:1 › blocked site storage does not crash the page
+  host-catalog.spec.ts:14:3 › Host catalog and inspection fit a 320px viewport
+  host-catalog.spec.ts:14:3 › Host catalog and inspection fit a 390px viewport
+  host-catalog.spec.ts:14:3 › Host catalog and inspection fit a 820px viewport
+  host-catalog.spec.ts:14:3 › Host catalog and inspection fit a 1366px viewport
+  host-catalog.spec.ts:14:3 › Host catalog and inspection fit a 1920px viewport
+  host-catalog.spec.ts:141:1 › Host verifies claim, pending opening recovery, draw, and payment through the wallet lifecycle
+  host-catalog.spec.ts:278:3 › Host reports a finalized refund without revealing a reward
+  host-catalog.spec.ts:278:3 › Host reports a finalized fail without revealing a reward
+  host-catalog.spec.ts:396:3 › live collection opens Bamboo Mist Case with its exact price, probabilities and token quantities
+  host-catalog.spec.ts:396:3 › live collection opens Dragon Tea Case with its exact price, probabilities and token quantities
+  host-catalog.spec.ts:396:3 › live collection opens Moon Spirit Case with its exact price, probabilities and token quantities
+  host-catalog.spec.ts:396:3 › live collection opens Phoenix Flame Case with its exact price, probabilities and token quantities
+  host-catalog.spec.ts:396:3 › live collection opens Uncle's Secret Reserve with its exact price, probabilities and token quantities
+  host-catalog.spec.ts:476:1 › a case-specific deep link and refresh retain the selected live case
+  host-catalog.spec.ts:493:1 › switching cases preserves the original pending receipt and never resubmits it
+  iroh-guest.spec.ts:4:1 › a guest can open Host and chat with Iroh without signing in
+  iroh.spec.ts:21:1 › Host restores previous chats after reload and switches between them
+  iroh.spec.ts:132:1 › Host immediately shows Iroh chat in the Host panel, keeps history across stations, and resets conversation
+  iroh.spec.ts:196:1 › Iroh shows a live provider error and Stop ends a pending request
+  iroh.spec.ts:254:1 › Iroh offers BYOK after the daily cup and sends the visitor key
+  iroh.spec.ts:322:1 › Iroh keeps a completed answer when Nansen returns no conversation ID
+  iroh.spec.ts:343:1 › Iroh keeps follow-ups in the same saved chat without a conversation ID
+  iroh.spec.ts:386:1 › the Uncle hand-off prefill is used once, not on every reopen
+  journey.spec.ts:26:1 › Entrance to Counter shows the thesis desk placeholder
+  journey.spec.ts:63:1 › dock navigation keeps panels closed until Open is used
+  journey.spec.ts:99:1 › Host panel stays open after an explicit open
+  journey.spec.ts:113:1 › mobile layout remains readable and the WebGL fallback preserves the journey
+  motion.spec.ts:18:1 › all directed station transitions and rapid interruptions preserve navigation
+  motion.spec.ts:56:1 › OS reduced motion sets data-motion reduce; full motion restores panel animation
+  motion.spec.ts:80:1 › system full motion keeps paper-arrive on the Host panel
+  nansen-honesty.spec.ts:14:1 › unconfigured Nansen stays honest on status, Host, and Shelf
+  nansen-honesty.spec.ts:85:1 › a configured Nansen status keeps the live Host, status, and Shelf framing
+  reward-history.spec.ts:14:1 › Host waits for a verified draw and the Shelf retains the purchase receipt
+  reward-history.spec.ts:92:1 › mobile reel skips motion and Shelf prompts a disconnected wallet
+  reward-history.spec.ts:133:1 › Shelf loads older finalized case history and retains the legacy fallback
+  scroll-hint.spec.ts:4:1 › the open hint keeps its name, describes the teaser, and gets focus back after the roll-up
+  shelf.spec.ts:105:1 › the Shelf stays in the room until opened, then reveals ranked wallets without moving again
+  shelf.spec.ts:224:1 › clicking the Shelf in the room starts the focus journey
+  shelf.spec.ts:271:1 › a hanging spirit paper answers hover and opens the Shelf
+  shelf.spec.ts:326:1 › Shelf presents one leader above a ranked list of nine spirits
+  shelf.spec.ts:430:1 › Meme Traders has its own sorts, win rate, chains and profiler links
+  shelf.spec.ts:503:1 › Shelf keeps its parchment for a safe error and exposes a keyboard retry
+  shelf.spec.ts:532:1 › an invalid server response shows a safe parchment error
+  shelf.spec.ts:561:1 › rank ten remains visible at 1280 by 720
+  shelf.spec.ts:592:1 › a stale real snapshot is labelled and small screens keep values readable
+  station-dock.spec.ts:7:1 › station dock magnifies under the pointer and keeps navigation
+  thesis-deep-link.spec.ts:5:1 › ?thesis=ai lands on Counter, opens the panel, and scrolls the AI thesis
+  waiting-room.spec.ts:3:1 › waiting room holds the door until the room is ready, then steps inside
+  waiting-sketchbook.spec.ts:15:1 › sketchbook turns by button, key, drag and index, and links the team
+  waiting-sketchbook.spec.ts:69:1 › on a phone every page is one tap away, not only a swipe
+  waiting-sketchbook.spec.ts:96:1 › the sketchbook starts open, riffles forward once, and lands on the first spread
+  waiting-sketchbook.spec.ts:141:1 › a light machine riffles snapshot strips and skips the page blur
+  waiting-sketchbook.spec.ts:210:1 › on a phone held sideways one page keeps a size its text fits
+  wallet-history.spec.ts:35:1 › Shelf separates indexed references, loads more and verifies receipts on demand
+  wallet-history.spec.ts:166:1 › indexer and receipt failures do not hide finalized case activity
+  wallet-history.spec.ts:226:1 › switching wallets cancels old indexed history and ignores a late response
+  wallet.spec.ts:31:1 › shows Connect Wallet by default and opens the wallet picker once
+  wallet.spec.ts:60:1 › connects, restores after refresh, then disconnects for good
+  wallet.spec.ts:108:1 › keeps the header usable on a narrow screen
+  wallet.spec.ts:122:1 › disables connection while authorization is pending
+  wallet.spec.ts:136:1 › returns to the guest state when wallet authorization is rejected
+Total: 85 tests in 20 files

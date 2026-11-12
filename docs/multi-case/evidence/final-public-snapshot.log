@@ -1,0 +1,34 @@
+{
+  "block_height": 277414585,
+  "owner_near": "35994314652070433399199960",
+  "owner_usdi": "4000000",
+  "cases": {
+    "bamboo-mist": false,
+    "dragon-tea": false,
+    "moon-spirit": false,
+    "phoenix-flame": false,
+    "uncles-secret-reserve": false
+  },
+  "dragon": {
+    "pool_funds": "995800000",
+    "reserved_rewards": "0",
+    "available": "995800000",
+    "target": "1000000000",
+    "health": "Healthy",
+    "pending_fees": "0",
+    "treasury_available": "200000",
+    "treasury_in_flight": "0",
+    "in_flight_payouts": "0",
+    "pending_openings": 0,
+    "completed_payouts": "4",
+    "total_paid": "8000000",
+    "revision": "19",
+    "paused": false,
+    "can_open": true,
+    "storage_per_opening": "20480000000000000000000",
+    "storage_account_cost": "2560000000000000000000",
+    "expected_balance_min": "996000000",
+    "expected_balance_max": "996000000"
+  },
+  "shitzu_registered": true
+}

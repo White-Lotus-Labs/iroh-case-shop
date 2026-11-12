@@ -1,0 +1,63 @@
+{
+  "status": "passed",
+  "real_public_rpc": true,
+  "controlled_wallet": false,
+  "wallet_connected": false,
+  "transactions_submitted": 0,
+  "rpc_methods": [
+    "query",
+    "query",
+    "query",
+    "query",
+    "query",
+    "query",
+    "query",
+    "query",
+    "query",
+    "query",
+    "query",
+    "query",
+    "query",
+    "query",
+    "query",
+    "query",
+    "query",
+    "query",
+    "query",
+    "query",
+    "query",
+    "query",
+    "query",
+    "query",
+    "query",
+    "query",
+    "query"
+  ],
+  "cases": [
+    {
+      "case_id": "bamboo-mist",
+      "pool_usdi": "50",
+      "public_display": "What’s inside\nCommon\n0.2 USDI\n46.1%\nRare\n0.5 USDI\n53.52%\nLegendary\n4 USDI\n0.38%\nTestnet bonus rewards\n\nEach rarity has a 50% bonus chance alongside USDI. Candidates within that rarity share the bonus chance equally. These unofficial test tokens have no monetary value.\n\n犬\n25 SHITZU\nCommon · 50% ÷ 2 in tier · 2500 available\n· Exact token chance 461000 / 4000000 per opening\n龍\n25 BLACKDRAGON\nCommon · 50% ÷ 2 in tier · 2500 available\n· Exact token chance 461000 / 4000000 per opening\n猫\n10 NEKO\nRare · 50% ÷ 1 in tier · 1000 available\n· Exact token chance 535200 / 2000000 per opening\n芽\n1 RHEA\nLegendary · 50% ÷ 1 in tier · 100 available\n· Exact token chance 3800 / 2000000 per opening\n\nExpected USDI reward 0.375 USDI\n\nCritical\n50 USDI available\nOpen Case · 0.5 USDI\n\n0.475 USDI to the pool · 0.025 USDI platform fee · 1 yoctoNEAR plus gas."
+    },
+    {
+      "case_id": "dragon-tea",
+      "pool_usdi": "995.8",
+      "public_display": "What’s inside\nCommon\n0.1 USDI\n27.8245%\nRare\n1 USDI\n67.2175%\nLegendary\n5 USDI\n4.958%\nTestnet bonus rewards\n\nEach rarity has a 50% bonus chance alongside USDI. Candidates within that rarity share the bonus chance equally. These unofficial test tokens have no monetary value.\n\n犬\n50 SHITZU\nCommon · 50% ÷ 1 in tier · 5000 available\n· Exact token chance 278245 / 2000000 per opening\n芽\n5 RHEA\nRare · 50% ÷ 1 in tier · 500 available\n· Exact token chance 672175 / 2000000 per opening\n光\n1 AURORA\nLegendary · 50% ÷ 1 in tier · 100 available\n· Exact token chance 49580 / 2000000 per opening\n\nExpected USDI reward 0.9478995 USDI\n\nHealthy\n995.8 USDI available\nOpen Case · 1 USDI\n\n0.95 USDI to the pool · 0.05 USDI platform fee · 1 yoctoNEAR plus gas."
+    },
+    {
+      "case_id": "moon-spirit",
+      "pool_usdi": "150",
+      "public_display": "What’s inside\nCommon\n0.1 USDI\n56.3027%\nRare\n2 USDI\n42.9348%\nLegendary\n20 USDI\n0.7625%\nTestnet bonus rewards\n\nEach rarity has a 50% bonus chance alongside USDI. Candidates within that rarity share the bonus chance equally. These unofficial test tokens have no monetary value.\n\n霊\n20 PURGE\nCommon · 50% ÷ 2 in tier · 2000 available\n· Exact token chance 563027 / 4000000 per opening\n輪\n2 GEAR\nCommon · 50% ÷ 2 in tier · 200 available\n· Exact token chance 563027 / 4000000 per opening\n猫\n50 NEKO\nRare · 50% ÷ 2 in tier · 5000 available\n· Exact token chance 429348 / 4000000 per opening\n議\n2 mpDAO\nRare · 50% ÷ 2 in tier · 200 available\n· Exact token chance 429348 / 4000000 per opening\n葉\n0.1 STNEAR\nLegendary · 50% ÷ 1 in tier · 10 available\n· Exact token chance 7625 / 2000000 per opening\n\nExpected USDI reward 1.0674987 USDI\n\nCritical\n150 USDI available\nOpen Case · 2 USDI\n\n1.9 USDI to the pool · 0.1 USDI platform fee · 1 yoctoNEAR plus gas."
+    },
+    {
+      "case_id": "phoenix-flame",
+      "pool_usdi": "300",
+      "public_display": "What’s inside\nCommon\n0.1 USDI\n49.7095%\nRare\n3.5 USDI\n49.9225%\nLegendary\n100 USDI\n0.368%\nTestnet bonus rewards\n\nEach rarity has a 50% bonus chance alongside USDI. Candidates within that rarity share the bonus chance equally. These unofficial test tokens have no monetary value.\n\n芽\n2 RHEA\nCommon · 50% ÷ 1 in tier · 200 available\n· Exact token chance 497095 / 2000000 per opening\n光\n2 AURORA\nRare · 50% ÷ 2 in tier · 200 available\n· Exact token chance 499225 / 4000000 per opening\n議\n5 mpDAO\nRare · 50% ÷ 2 in tier · 500 available\n· Exact token chance 499225 / 4000000 per opening\n線\n0.2 LINEAR\nLegendary · 50% ÷ 3 in tier · 20 available\n· Exact token chance 3680 / 6000000 per opening\n葉\n0.2 STNEAR\nLegendary · 50% ÷ 3 in tier · 20 available\n· Exact token chance 3680 / 6000000 per opening\n近\n0.25 wNEAR\nLegendary · 50% ÷ 3 in tier · 25 available\n· Exact token chance 3680 / 6000000 per opening\n\nExpected USDI reward 2.164997 USDI\n\nCritical\n300 USDI available\nOpen Case · 5 USDI\n\n4.75 USDI to the pool · 0.25 USDI platform fee · 1 yoctoNEAR plus gas."
+    },
+    {
+      "case_id": "uncles-secret-reserve",
+      "pool_usdi": "500",
+      "public_display": "What’s inside\nCommon\n2 USDI\n68.35%\nRare\n15 USDI\n31.14%\nLegendary\n120 USDI\n0.51%\nTestnet bonus rewards\n\nEach rarity has a 50% bonus chance alongside USDI. Candidates within that rarity share the bonus chance equally. These unofficial test tokens have no monetary value.\n\n芽\n10 RHEA\nCommon · 50% ÷ 2 in tier · 1000 available\n· Exact token chance 683500 / 4000000 per opening\n光\n10 AURORA\nCommon · 50% ÷ 2 in tier · 1000 available\n· Exact token chance 683500 / 4000000 per opening\n議\n20 mpDAO\nRare · 50% ÷ 2 in tier · 2000 available\n· Exact token chance 311400 / 4000000 per opening\n雨\n0.5 rNEAR\nRare · 50% ÷ 2 in tier · 50 available\n· Exact token chance 311400 / 4000000 per opening\n葉\n1 STNEAR\nLegendary · 50% ÷ 3 in tier · 100 available\n· Exact token chance 5100 / 6000000 per opening\n線\n1 LINEAR\nLegendary · 50% ÷ 3 in tier · 100 available\n· Exact token chance 5100 / 6000000 per opening\n近\n1 wNEAR\nLegendary · 50% ÷ 3 in tier · 100 available\n· Exact token chance 5100 / 6000000 per opening\n\nExpected USDI reward 6.65 USDI\n\nCritical\n500 USDI available\nOpen Case · 10 USDI\n\n9.5 USDI to the pool · 0.5 USDI platform fee · 1 yoctoNEAR plus gas."
+    }
+  ]
+}

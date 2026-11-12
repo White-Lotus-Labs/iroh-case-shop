@@ -201,6 +201,8 @@ In the code, "Iroh" means Uncle.
 
 ## More documentation
 
+- [Frontend agent handoff](docs/frontend-handoff/AGENT-BRIEF.md): integration with application APIs, wallets, five Testnet cases, payouts, and transaction recovery.
+- [Case deployment report](docs/multi-case/report.md) and [execution journal](docs/multi-case/execution.json): verified Testnet activation, balances, receipts, and remaining limits. Formal security audit is deferred.
 - [How the tea shop works](docs/how-it-works.md): every stop, the data rules, and what you see when something fails.
 - [Development notes](docs/development.md): settings, scripts, tests, and deploy details.
 - [Nansen request queue](docs/nansen-request-manager.md): how the server paces its calls to Nansen.

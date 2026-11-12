@@ -1,41 +1,346 @@
 {
   "network": "testnet",
   "rpc": "https://rpc.testnet.fastnear.com",
-  "checked_at": "2026-11-12T01:15:35.114971+00:00",
-  "block_height": 277293634,
-  "block_hash": "29mrrogc4i4UzDwhDRhKLTzyn6VeZ9S6MLTf3TPQnJUw",
+  "checked_at": "2026-11-12T20:50:03.021645+00:00",
+  "block_height": 277414585,
+  "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
   "gas_price": "100000000",
   "storage_amount_per_byte": "10000000000000000000",
   "owner": {
-    "amount": "109106367564840461699199990",
-    "block_hash": "29mrrogc4i4UzDwhDRhKLTzyn6VeZ9S6MLTf3TPQnJUw",
-    "block_height": 277293634,
+    "amount": "35994314652070433399199960",
+    "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+    "block_height": 277414585,
     "code_hash": "11111111111111111111111111111111",
     "locked": "0",
     "storage_paid_at": 0,
     "storage_usage": 182
   },
+  "owner_public_keys": {
+    "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+    "block_height": 277414585,
+    "keys": [
+      {
+        "access_key": {
+          "nonce": 276359394000059,
+          "permission": "FullAccess"
+        },
+        "public_key": "ed25519:BntboZwnJtLVnBBh4XffXUDwbaygCsQiMmhWXD3xCi6"
+      }
+    ]
+  },
   "usdi_account": {
-    "amount": "10000943884460581900000009",
-    "block_hash": "29mrrogc4i4UzDwhDRhKLTzyn6VeZ9S6MLTf3TPQnJUw",
-    "block_height": 277293634,
+    "amount": "10005943884460581900000013",
+    "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+    "block_height": 277414585,
     "code_hash": "2z7yWfap6hkGAcow7xFKRghGWv7Uq1uea3Vn7HV6QuaJ",
     "locked": "0",
     "storage_paid_at": 0,
-    "storage_usage": 362679
+    "storage_usage": 363043
   },
-  "owner_usdi": "1004000000",
+  "owner_usdi": "4000000",
+  "usdi_metadata": {
+    "spec": "ft-1.0.0",
+    "name": "USD Iroh",
+    "symbol": "USDI",
+    "icon": null,
+    "reference": "data:application/json,%7B%22description%22%3A%22USDI%20is%20a%20test-currency%20with%20no%20USD%20backing%20and%20no%20real%20monetary%20value.%22%7D",
+    "reference_hash": "K4x953TZnYMPYVKLYvYCON2trafuF8/eGcDCWm3qEIY=",
+    "decimals": 6
+  },
+  "usdi_supply": "2000000000",
+  "usdi_storage_bounds": {
+    "min": "1250000000000000000000",
+    "max": "1250000000000000000000"
+  },
+  "usdi_case_storage": {
+    "bamboo-mist": {
+      "total": "1250000000000000000000",
+      "available": "0"
+    },
+    "dragon-tea": {
+      "total": "1250000000000000000000",
+      "available": "0"
+    },
+    "moon-spirit": {
+      "total": "1250000000000000000000",
+      "available": "0"
+    },
+    "phoenix-flame": {
+      "total": "1250000000000000000000",
+      "available": "0"
+    },
+    "uncles-secret-reserve": {
+      "total": "1250000000000000000000",
+      "available": "0"
+    }
+  },
   "cases": {
     "bamboo-mist": {
       "account": {
-        "absent": true
+        "amount": "6988459606187226300000001",
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "code_hash": "5uZDe3e4UUbrXFQFdAAfwL3YpQXXvo8EkXRwBhgjGTid",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 558486
+      },
+      "case": {
+        "case_id": "bamboo-mist",
+        "name": "Bamboo Mist Case",
+        "token_id": "usdi-needmore-1-near.testnet",
+        "price": "500000",
+        "pool_contribution": "475000",
+        "platform_fee": "25000",
+        "target": "250000000",
+        "probability_denominator": 1000000,
+        "rewards": [
+          {
+            "reward_id": "usdi-common",
+            "token_contract_id": "usdi-needmore-1-near.testnet",
+            "token_symbol": "USDI",
+            "token_decimals": 6,
+            "amount": "200000",
+            "display_name": "USD Iroh",
+            "tier": "Common"
+          },
+          {
+            "reward_id": "usdi-rare",
+            "token_contract_id": "usdi-needmore-1-near.testnet",
+            "token_symbol": "USDI",
+            "token_decimals": 6,
+            "amount": "500000",
+            "display_name": "USD Iroh",
+            "tier": "Rare"
+          },
+          {
+            "reward_id": "usdi-legendary",
+            "token_contract_id": "usdi-needmore-1-near.testnet",
+            "token_symbol": "USDI",
+            "token_decimals": 6,
+            "amount": "4000000",
+            "display_name": "USD Iroh",
+            "tier": "Legendary"
+          }
+        ],
+        "randomness": "NEAR protocol randomness; Testnet demonstration, not production-grade VRF",
+        "quote_policy": "Exact revision, zero slippage; stale quotes are fully refunded",
+        "bonus_rewards": [
+          {
+            "reward_id": "bonus-shitzu-0",
+            "token_contract_id": "iroh-test-shitzu.testnet",
+            "token_symbol": "SHITZU",
+            "display_name": "Test Shitzu",
+            "token_decimals": 6,
+            "amount": "25000000",
+            "tier": "Common",
+            "chance_in_tier_bps": 5000,
+            "candidates_in_tier": 2,
+            "selection_denominator": 2,
+            "available": "2500000000",
+            "reserved": "0",
+            "in_flight": "0",
+            "funds": "2500000000",
+            "expected_balance_min": "2500000000",
+            "expected_balance_max": "2500000000",
+            "mock": true
+          },
+          {
+            "reward_id": "bonus-blackdragon-1",
+            "token_contract_id": "blackdragon.needmore_1_near.testnet",
+            "token_symbol": "BLACKDRAGON",
+            "display_name": "Test Black Dragon",
+            "token_decimals": 24,
+            "amount": "25000000000000000000000000",
+            "tier": "Common",
+            "chance_in_tier_bps": 5000,
+            "candidates_in_tier": 2,
+            "selection_denominator": 2,
+            "available": "2500000000000000000000000000",
+            "reserved": "0",
+            "in_flight": "0",
+            "funds": "2500000000000000000000000000",
+            "expected_balance_min": "2500000000000000000000000000",
+            "expected_balance_max": "2500000000000000000000000000",
+            "mock": true
+          },
+          {
+            "reward_id": "bonus-neko-2",
+            "token_contract_id": "neko.needmore_1_near.testnet",
+            "token_symbol": "NEKO",
+            "display_name": "Test Neko",
+            "token_decimals": 24,
+            "amount": "10000000000000000000000000",
+            "tier": "Rare",
+            "chance_in_tier_bps": 5000,
+            "candidates_in_tier": 1,
+            "selection_denominator": 1,
+            "available": "1000000000000000000000000000",
+            "reserved": "0",
+            "in_flight": "0",
+            "funds": "1000000000000000000000000000",
+            "expected_balance_min": "1000000000000000000000000000",
+            "expected_balance_max": "1000000000000000000000000000",
+            "mock": true
+          },
+          {
+            "reward_id": "bonus-rhea-3",
+            "token_contract_id": "iroh-test-rhea.testnet",
+            "token_symbol": "RHEA",
+            "display_name": "Test Rhea",
+            "token_decimals": 6,
+            "amount": "1000000",
+            "tier": "Legendary",
+            "chance_in_tier_bps": 5000,
+            "candidates_in_tier": 1,
+            "selection_denominator": 1,
+            "available": "100000000",
+            "reserved": "0",
+            "in_flight": "0",
+            "funds": "100000000",
+            "expected_balance_min": "100000000",
+            "expected_balance_max": "100000000",
+            "mock": true
+          }
+        ],
+        "history_pagination": true
+      },
+      "pool": {
+        "pool_funds": "50000000",
+        "reserved_rewards": "0",
+        "available": "50000000",
+        "target": "250000000",
+        "health": "Critical",
+        "pending_fees": "0",
+        "treasury_available": "0",
+        "treasury_in_flight": "0",
+        "in_flight_payouts": "0",
+        "pending_openings": 0,
+        "completed_payouts": "0",
+        "total_paid": "0",
+        "revision": "6",
+        "paused": false,
+        "can_open": true,
+        "storage_per_opening": "20480000000000000000000",
+        "storage_account_cost": "2560000000000000000000",
+        "expected_balance_min": "50000000",
+        "expected_balance_max": "50000000"
+      },
+      "history": [],
+      "usdi_balance": "50000000",
+      "public_keys": {
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277394596000006,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:G5yBgWyMbxrFg9A1cKY2BtfraL9RkfjAJcgev9AXv13G"
+          }
+        ]
+      },
+      "wasm_sha256": "48e560f15ef75db48d82ab1d57ca119b752059d96c1157c897ce3dbf87b7c06e",
+      "reward_inventory": [
+        {
+          "reward_id": "bonus-shitzu-0",
+          "token_contract_id": "iroh-test-shitzu.testnet",
+          "token_symbol": "SHITZU",
+          "display_name": "Test Shitzu",
+          "token_decimals": 6,
+          "amount": "25000000",
+          "tier": "Common",
+          "chance_in_tier_bps": 5000,
+          "candidates_in_tier": 2,
+          "selection_denominator": 2,
+          "available": "2500000000",
+          "reserved": "0",
+          "in_flight": "0",
+          "funds": "2500000000",
+          "expected_balance_min": "2500000000",
+          "expected_balance_max": "2500000000",
+          "mock": true
+        },
+        {
+          "reward_id": "bonus-blackdragon-1",
+          "token_contract_id": "blackdragon.needmore_1_near.testnet",
+          "token_symbol": "BLACKDRAGON",
+          "display_name": "Test Black Dragon",
+          "token_decimals": 24,
+          "amount": "25000000000000000000000000",
+          "tier": "Common",
+          "chance_in_tier_bps": 5000,
+          "candidates_in_tier": 2,
+          "selection_denominator": 2,
+          "available": "2500000000000000000000000000",
+          "reserved": "0",
+          "in_flight": "0",
+          "funds": "2500000000000000000000000000",
+          "expected_balance_min": "2500000000000000000000000000",
+          "expected_balance_max": "2500000000000000000000000000",
+          "mock": true
+        },
+        {
+          "reward_id": "bonus-neko-2",
+          "token_contract_id": "neko.needmore_1_near.testnet",
+          "token_symbol": "NEKO",
+          "display_name": "Test Neko",
+          "token_decimals": 24,
+          "amount": "10000000000000000000000000",
+          "tier": "Rare",
+          "chance_in_tier_bps": 5000,
+          "candidates_in_tier": 1,
+          "selection_denominator": 1,
+          "available": "1000000000000000000000000000",
+          "reserved": "0",
+          "in_flight": "0",
+          "funds": "1000000000000000000000000000",
+          "expected_balance_min": "1000000000000000000000000000",
+          "expected_balance_max": "1000000000000000000000000000",
+          "mock": true
+        },
+        {
+          "reward_id": "bonus-rhea-3",
+          "token_contract_id": "iroh-test-rhea.testnet",
+          "token_symbol": "RHEA",
+          "display_name": "Test Rhea",
+          "token_decimals": 6,
+          "amount": "1000000",
+          "tier": "Legendary",
+          "chance_in_tier_bps": 5000,
+          "candidates_in_tier": 1,
+          "selection_denominator": 1,
+          "available": "100000000",
+          "reserved": "0",
+          "in_flight": "0",
+          "funds": "100000000",
+          "expected_balance_min": "100000000",
+          "expected_balance_max": "100000000",
+          "mock": true
+        }
+      ],
+      "quote": {
+        "case_id": "bamboo-mist",
+        "revision": "6",
+        "expires_at": "277414705",
+        "nonce": "0",
+        "common": 461000,
+        "rare": 535200,
+        "legendary": 3800,
+        "denominator": 1000000,
+        "target_ev": "375000",
+        "expected_numerator": "375000000000",
+        "available": "50000000",
+        "can_open": false,
+        "reason": "Prepay case storage in NEAR"
       }
     },
     "dragon-tea": {
       "account": {
         "amount": "10080336956707242699999998",
-        "block_hash": "29mrrogc4i4UzDwhDRhKLTzyn6VeZ9S6MLTf3TPQnJUw",
-        "block_height": 277293634,
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
         "code_hash": "5uZDe3e4UUbrXFQFdAAfwL3YpQXXvo8EkXRwBhgjGTid",
         "locked": "0",
         "storage_paid_at": 0,
@@ -240,8 +545,8 @@
       ],
       "usdi_balance": "996000000",
       "public_keys": {
-        "block_hash": "29mrrogc4i4UzDwhDRhKLTzyn6VeZ9S6MLTf3TPQnJUw",
-        "block_height": 277293634,
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
         "keys": [
           {
             "access_key": {
@@ -300,7 +605,7 @@
       "quote": {
         "case_id": "dragon-tea",
         "revision": "19",
-        "expires_at": "277293754",
+        "expires_at": "277414705",
         "nonce": "4",
         "common": 278245,
         "rare": 672175,
@@ -315,17 +620,1013 @@
     },
     "moon-spirit": {
       "account": {
-        "absent": true
+        "amount": "6987004815000913700000001",
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "code_hash": "5uZDe3e4UUbrXFQFdAAfwL3YpQXXvo8EkXRwBhgjGTid",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 558713
+      },
+      "case": {
+        "case_id": "moon-spirit",
+        "name": "Moon Spirit Case",
+        "token_id": "usdi-needmore-1-near.testnet",
+        "price": "2000000",
+        "pool_contribution": "1900000",
+        "platform_fee": "100000",
+        "target": "2000000000",
+        "probability_denominator": 1000000,
+        "rewards": [
+          {
+            "reward_id": "usdi-common",
+            "token_contract_id": "usdi-needmore-1-near.testnet",
+            "token_symbol": "USDI",
+            "token_decimals": 6,
+            "amount": "100000",
+            "display_name": "USD Iroh",
+            "tier": "Common"
+          },
+          {
+            "reward_id": "usdi-rare",
+            "token_contract_id": "usdi-needmore-1-near.testnet",
+            "token_symbol": "USDI",
+            "token_decimals": 6,
+            "amount": "2000000",
+            "display_name": "USD Iroh",
+            "tier": "Rare"
+          },
+          {
+            "reward_id": "usdi-legendary",
+            "token_contract_id": "usdi-needmore-1-near.testnet",
+            "token_symbol": "USDI",
+            "token_decimals": 6,
+            "amount": "20000000",
+            "display_name": "USD Iroh",
+            "tier": "Legendary"
+          }
+        ],
+        "randomness": "NEAR protocol randomness; Testnet demonstration, not production-grade VRF",
+        "quote_policy": "Exact revision, zero slippage; stale quotes are fully refunded",
+        "bonus_rewards": [
+          {
+            "reward_id": "bonus-purge-0",
+            "token_contract_id": "purge.needmore_1_near.testnet",
+            "token_symbol": "PURGE",
+            "display_name": "Test Purge",
+            "token_decimals": 18,
+            "amount": "20000000000000000000",
+            "tier": "Common",
+            "chance_in_tier_bps": 5000,
+            "candidates_in_tier": 2,
+            "selection_denominator": 2,
+            "available": "2000000000000000000000",
+            "reserved": "0",
+            "in_flight": "0",
+            "funds": "2000000000000000000000",
+            "expected_balance_min": "2000000000000000000000",
+            "expected_balance_max": "2000000000000000000000",
+            "mock": true
+          },
+          {
+            "reward_id": "bonus-gear-1",
+            "token_contract_id": "gear.needmore_1_near.testnet",
+            "token_symbol": "GEAR",
+            "display_name": "Test Gear",
+            "token_decimals": 18,
+            "amount": "2000000000000000000",
+            "tier": "Common",
+            "chance_in_tier_bps": 5000,
+            "candidates_in_tier": 2,
+            "selection_denominator": 2,
+            "available": "200000000000000000000",
+            "reserved": "0",
+            "in_flight": "0",
+            "funds": "200000000000000000000",
+            "expected_balance_min": "200000000000000000000",
+            "expected_balance_max": "200000000000000000000",
+            "mock": true
+          },
+          {
+            "reward_id": "bonus-neko-2",
+            "token_contract_id": "neko.needmore_1_near.testnet",
+            "token_symbol": "NEKO",
+            "display_name": "Test Neko",
+            "token_decimals": 24,
+            "amount": "50000000000000000000000000",
+            "tier": "Rare",
+            "chance_in_tier_bps": 5000,
+            "candidates_in_tier": 2,
+            "selection_denominator": 2,
+            "available": "5000000000000000000000000000",
+            "reserved": "0",
+            "in_flight": "0",
+            "funds": "5000000000000000000000000000",
+            "expected_balance_min": "5000000000000000000000000000",
+            "expected_balance_max": "5000000000000000000000000000",
+            "mock": true
+          },
+          {
+            "reward_id": "bonus-mpdao-3",
+            "token_contract_id": "mpdao.needmore_1_near.testnet",
+            "token_symbol": "mpDAO",
+            "display_name": "Test mpDAO",
+            "token_decimals": 6,
+            "amount": "2000000",
+            "tier": "Rare",
+            "chance_in_tier_bps": 5000,
+            "candidates_in_tier": 2,
+            "selection_denominator": 2,
+            "available": "200000000",
+            "reserved": "0",
+            "in_flight": "0",
+            "funds": "200000000",
+            "expected_balance_min": "200000000",
+            "expected_balance_max": "200000000",
+            "mock": true
+          },
+          {
+            "reward_id": "bonus-stnear-4",
+            "token_contract_id": "stnear.needmore_1_near.testnet",
+            "token_symbol": "STNEAR",
+            "display_name": "Test Staked NEAR",
+            "token_decimals": 24,
+            "amount": "100000000000000000000000",
+            "tier": "Legendary",
+            "chance_in_tier_bps": 5000,
+            "candidates_in_tier": 1,
+            "selection_denominator": 1,
+            "available": "10000000000000000000000000",
+            "reserved": "0",
+            "in_flight": "0",
+            "funds": "10000000000000000000000000",
+            "expected_balance_min": "10000000000000000000000000",
+            "expected_balance_max": "10000000000000000000000000",
+            "mock": true
+          }
+        ],
+        "history_pagination": true
+      },
+      "pool": {
+        "pool_funds": "150000000",
+        "reserved_rewards": "0",
+        "available": "150000000",
+        "target": "2000000000",
+        "health": "Critical",
+        "pending_fees": "0",
+        "treasury_available": "0",
+        "treasury_in_flight": "0",
+        "in_flight_payouts": "0",
+        "pending_openings": 0,
+        "completed_payouts": "0",
+        "total_paid": "0",
+        "revision": "7",
+        "paused": false,
+        "can_open": true,
+        "storage_per_opening": "20480000000000000000000",
+        "storage_account_cost": "2560000000000000000000",
+        "expected_balance_min": "150000000",
+        "expected_balance_max": "150000000"
+      },
+      "history": [],
+      "usdi_balance": "150000000",
+      "public_keys": {
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277396681000007,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:7wKGNqCeQVwni17kLHvq2djqixSPsKhzufVLX56X8pPG"
+          }
+        ]
+      },
+      "wasm_sha256": "48e560f15ef75db48d82ab1d57ca119b752059d96c1157c897ce3dbf87b7c06e",
+      "reward_inventory": [
+        {
+          "reward_id": "bonus-purge-0",
+          "token_contract_id": "purge.needmore_1_near.testnet",
+          "token_symbol": "PURGE",
+          "display_name": "Test Purge",
+          "token_decimals": 18,
+          "amount": "20000000000000000000",
+          "tier": "Common",
+          "chance_in_tier_bps": 5000,
+          "candidates_in_tier": 2,
+          "selection_denominator": 2,
+          "available": "2000000000000000000000",
+          "reserved": "0",
+          "in_flight": "0",
+          "funds": "2000000000000000000000",
+          "expected_balance_min": "2000000000000000000000",
+          "expected_balance_max": "2000000000000000000000",
+          "mock": true
+        },
+        {
+          "reward_id": "bonus-gear-1",
+          "token_contract_id": "gear.needmore_1_near.testnet",
+          "token_symbol": "GEAR",
+          "display_name": "Test Gear",
+          "token_decimals": 18,
+          "amount": "2000000000000000000",
+          "tier": "Common",
+          "chance_in_tier_bps": 5000,
+          "candidates_in_tier": 2,
+          "selection_denominator": 2,
+          "available": "200000000000000000000",
+          "reserved": "0",
+          "in_flight": "0",
+          "funds": "200000000000000000000",
+          "expected_balance_min": "200000000000000000000",
+          "expected_balance_max": "200000000000000000000",
+          "mock": true
+        },
+        {
+          "reward_id": "bonus-neko-2",
+          "token_contract_id": "neko.needmore_1_near.testnet",
+          "token_symbol": "NEKO",
+          "display_name": "Test Neko",
+          "token_decimals": 24,
+          "amount": "50000000000000000000000000",
+          "tier": "Rare",
+          "chance_in_tier_bps": 5000,
+          "candidates_in_tier": 2,
+          "selection_denominator": 2,
+          "available": "5000000000000000000000000000",
+          "reserved": "0",
+          "in_flight": "0",
+          "funds": "5000000000000000000000000000",
+          "expected_balance_min": "5000000000000000000000000000",
+          "expected_balance_max": "5000000000000000000000000000",
+          "mock": true
+        },
+        {
+          "reward_id": "bonus-mpdao-3",
+          "token_contract_id": "mpdao.needmore_1_near.testnet",
+          "token_symbol": "mpDAO",
+          "display_name": "Test mpDAO",
+          "token_decimals": 6,
+          "amount": "2000000",
+          "tier": "Rare",
+          "chance_in_tier_bps": 5000,
+          "candidates_in_tier": 2,
+          "selection_denominator": 2,
+          "available": "200000000",
+          "reserved": "0",
+          "in_flight": "0",
+          "funds": "200000000",
+          "expected_balance_min": "200000000",
+          "expected_balance_max": "200000000",
+          "mock": true
+        },
+        {
+          "reward_id": "bonus-stnear-4",
+          "token_contract_id": "stnear.needmore_1_near.testnet",
+          "token_symbol": "STNEAR",
+          "display_name": "Test Staked NEAR",
+          "token_decimals": 24,
+          "amount": "100000000000000000000000",
+          "tier": "Legendary",
+          "chance_in_tier_bps": 5000,
+          "candidates_in_tier": 1,
+          "selection_denominator": 1,
+          "available": "10000000000000000000000000",
+          "reserved": "0",
+          "in_flight": "0",
+          "funds": "10000000000000000000000000",
+          "expected_balance_min": "10000000000000000000000000",
+          "expected_balance_max": "10000000000000000000000000",
+          "mock": true
+        }
+      ],
+      "quote": {
+        "case_id": "moon-spirit",
+        "revision": "7",
+        "expires_at": "277414705",
+        "nonce": "0",
+        "common": 563027,
+        "rare": 429348,
+        "legendary": 7625,
+        "denominator": 1000000,
+        "target_ev": "1067500",
+        "expected_numerator": "1067498700000",
+        "available": "150000000",
+        "can_open": false,
+        "reason": "Prepay case storage in NEAR"
       }
     },
     "phoenix-flame": {
       "account": {
-        "absent": true
+        "amount": "6985545507405415000000001",
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "code_hash": "5uZDe3e4UUbrXFQFdAAfwL3YpQXXvo8EkXRwBhgjGTid",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 558910
+      },
+      "case": {
+        "case_id": "phoenix-flame",
+        "name": "Phoenix Flame Case",
+        "token_id": "usdi-needmore-1-near.testnet",
+        "price": "5000000",
+        "pool_contribution": "4750000",
+        "platform_fee": "250000",
+        "target": "5000000000",
+        "probability_denominator": 1000000,
+        "rewards": [
+          {
+            "reward_id": "usdi-common",
+            "token_contract_id": "usdi-needmore-1-near.testnet",
+            "token_symbol": "USDI",
+            "token_decimals": 6,
+            "amount": "100000",
+            "display_name": "USD Iroh",
+            "tier": "Common"
+          },
+          {
+            "reward_id": "usdi-rare",
+            "token_contract_id": "usdi-needmore-1-near.testnet",
+            "token_symbol": "USDI",
+            "token_decimals": 6,
+            "amount": "3500000",
+            "display_name": "USD Iroh",
+            "tier": "Rare"
+          },
+          {
+            "reward_id": "usdi-legendary",
+            "token_contract_id": "usdi-needmore-1-near.testnet",
+            "token_symbol": "USDI",
+            "token_decimals": 6,
+            "amount": "100000000",
+            "display_name": "USD Iroh",
+            "tier": "Legendary"
+          }
+        ],
+        "randomness": "NEAR protocol randomness; Testnet demonstration, not production-grade VRF",
+        "quote_policy": "Exact revision, zero slippage; stale quotes are fully refunded",
+        "bonus_rewards": [
+          {
+            "reward_id": "bonus-rhea-0",
+            "token_contract_id": "iroh-test-rhea.testnet",
+            "token_symbol": "RHEA",
+            "display_name": "Test Rhea",
+            "token_decimals": 6,
+            "amount": "2000000",
+            "tier": "Common",
+            "chance_in_tier_bps": 5000,
+            "candidates_in_tier": 1,
+            "selection_denominator": 1,
+            "available": "200000000",
+            "reserved": "0",
+            "in_flight": "0",
+            "funds": "200000000",
+            "expected_balance_min": "200000000",
+            "expected_balance_max": "200000000",
+            "mock": true
+          },
+          {
+            "reward_id": "bonus-aurora-1",
+            "token_contract_id": "iroh-test-aurora.testnet",
+            "token_symbol": "AURORA",
+            "display_name": "Test Aurora",
+            "token_decimals": 6,
+            "amount": "2000000",
+            "tier": "Rare",
+            "chance_in_tier_bps": 5000,
+            "candidates_in_tier": 2,
+            "selection_denominator": 2,
+            "available": "200000000",
+            "reserved": "0",
+            "in_flight": "0",
+            "funds": "200000000",
+            "expected_balance_min": "200000000",
+            "expected_balance_max": "200000000",
+            "mock": true
+          },
+          {
+            "reward_id": "bonus-mpdao-2",
+            "token_contract_id": "mpdao.needmore_1_near.testnet",
+            "token_symbol": "mpDAO",
+            "display_name": "Test mpDAO",
+            "token_decimals": 6,
+            "amount": "5000000",
+            "tier": "Rare",
+            "chance_in_tier_bps": 5000,
+            "candidates_in_tier": 2,
+            "selection_denominator": 2,
+            "available": "500000000",
+            "reserved": "0",
+            "in_flight": "0",
+            "funds": "500000000",
+            "expected_balance_min": "500000000",
+            "expected_balance_max": "500000000",
+            "mock": true
+          },
+          {
+            "reward_id": "bonus-linear-3",
+            "token_contract_id": "linear.needmore_1_near.testnet",
+            "token_symbol": "LINEAR",
+            "display_name": "Test LiNEAR",
+            "token_decimals": 24,
+            "amount": "200000000000000000000000",
+            "tier": "Legendary",
+            "chance_in_tier_bps": 5000,
+            "candidates_in_tier": 3,
+            "selection_denominator": 3,
+            "available": "20000000000000000000000000",
+            "reserved": "0",
+            "in_flight": "0",
+            "funds": "20000000000000000000000000",
+            "expected_balance_min": "20000000000000000000000000",
+            "expected_balance_max": "20000000000000000000000000",
+            "mock": true
+          },
+          {
+            "reward_id": "bonus-stnear-4",
+            "token_contract_id": "stnear.needmore_1_near.testnet",
+            "token_symbol": "STNEAR",
+            "display_name": "Test Staked NEAR",
+            "token_decimals": 24,
+            "amount": "200000000000000000000000",
+            "tier": "Legendary",
+            "chance_in_tier_bps": 5000,
+            "candidates_in_tier": 3,
+            "selection_denominator": 3,
+            "available": "20000000000000000000000000",
+            "reserved": "0",
+            "in_flight": "0",
+            "funds": "20000000000000000000000000",
+            "expected_balance_min": "20000000000000000000000000",
+            "expected_balance_max": "20000000000000000000000000",
+            "mock": true
+          },
+          {
+            "reward_id": "bonus-wnear-5",
+            "token_contract_id": "wnear.needmore_1_near.testnet",
+            "token_symbol": "wNEAR",
+            "display_name": "Test Wrapped NEAR",
+            "token_decimals": 24,
+            "amount": "250000000000000000000000",
+            "tier": "Legendary",
+            "chance_in_tier_bps": 5000,
+            "candidates_in_tier": 3,
+            "selection_denominator": 3,
+            "available": "25000000000000000000000000",
+            "reserved": "0",
+            "in_flight": "0",
+            "funds": "25000000000000000000000000",
+            "expected_balance_min": "25000000000000000000000000",
+            "expected_balance_max": "25000000000000000000000000",
+            "mock": true
+          }
+        ],
+        "history_pagination": true
+      },
+      "pool": {
+        "pool_funds": "300000000",
+        "reserved_rewards": "0",
+        "available": "300000000",
+        "target": "5000000000",
+        "health": "Critical",
+        "pending_fees": "0",
+        "treasury_available": "0",
+        "treasury_in_flight": "0",
+        "in_flight_payouts": "0",
+        "pending_openings": 0,
+        "completed_payouts": "0",
+        "total_paid": "0",
+        "revision": "8",
+        "paused": false,
+        "can_open": true,
+        "storage_per_opening": "20480000000000000000000",
+        "storage_account_cost": "2560000000000000000000",
+        "expected_balance_min": "300000000",
+        "expected_balance_max": "300000000"
+      },
+      "history": [],
+      "usdi_balance": "300000000",
+      "public_keys": {
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277410949000008,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:HwUzDmdm2S9ePN7k9ifJ6Eth5jcMdCPNPNjHMX1rH1Yh"
+          }
+        ]
+      },
+      "wasm_sha256": "48e560f15ef75db48d82ab1d57ca119b752059d96c1157c897ce3dbf87b7c06e",
+      "reward_inventory": [
+        {
+          "reward_id": "bonus-rhea-0",
+          "token_contract_id": "iroh-test-rhea.testnet",
+          "token_symbol": "RHEA",
+          "display_name": "Test Rhea",
+          "token_decimals": 6,
+          "amount": "2000000",
+          "tier": "Common",
+          "chance_in_tier_bps": 5000,
+          "candidates_in_tier": 1,
+          "selection_denominator": 1,
+          "available": "200000000",
+          "reserved": "0",
+          "in_flight": "0",
+          "funds": "200000000",
+          "expected_balance_min": "200000000",
+          "expected_balance_max": "200000000",
+          "mock": true
+        },
+        {
+          "reward_id": "bonus-aurora-1",
+          "token_contract_id": "iroh-test-aurora.testnet",
+          "token_symbol": "AURORA",
+          "display_name": "Test Aurora",
+          "token_decimals": 6,
+          "amount": "2000000",
+          "tier": "Rare",
+          "chance_in_tier_bps": 5000,
+          "candidates_in_tier": 2,
+          "selection_denominator": 2,
+          "available": "200000000",
+          "reserved": "0",
+          "in_flight": "0",
+          "funds": "200000000",
+          "expected_balance_min": "200000000",
+          "expected_balance_max": "200000000",
+          "mock": true
+        },
+        {
+          "reward_id": "bonus-mpdao-2",
+          "token_contract_id": "mpdao.needmore_1_near.testnet",
+          "token_symbol": "mpDAO",
+          "display_name": "Test mpDAO",
+          "token_decimals": 6,
+          "amount": "5000000",
+          "tier": "Rare",
+          "chance_in_tier_bps": 5000,
+          "candidates_in_tier": 2,
+          "selection_denominator": 2,
+          "available": "500000000",
+          "reserved": "0",
+          "in_flight": "0",
+          "funds": "500000000",
+          "expected_balance_min": "500000000",
+          "expected_balance_max": "500000000",
+          "mock": true
+        },
+        {
+          "reward_id": "bonus-linear-3",
+          "token_contract_id": "linear.needmore_1_near.testnet",
+          "token_symbol": "LINEAR",
+          "display_name": "Test LiNEAR",
+          "token_decimals": 24,
+          "amount": "200000000000000000000000",
+          "tier": "Legendary",
+          "chance_in_tier_bps": 5000,
+          "candidates_in_tier": 3,
+          "selection_denominator": 3,
+          "available": "20000000000000000000000000",
+          "reserved": "0",
+          "in_flight": "0",
+          "funds": "20000000000000000000000000",
+          "expected_balance_min": "20000000000000000000000000",
+          "expected_balance_max": "20000000000000000000000000",
+          "mock": true
+        },
+        {
+          "reward_id": "bonus-stnear-4",
+          "token_contract_id": "stnear.needmore_1_near.testnet",
+          "token_symbol": "STNEAR",
+          "display_name": "Test Staked NEAR",
+          "token_decimals": 24,
+          "amount": "200000000000000000000000",
+          "tier": "Legendary",
+          "chance_in_tier_bps": 5000,
+          "candidates_in_tier": 3,
+          "selection_denominator": 3,
+          "available": "20000000000000000000000000",
+          "reserved": "0",
+          "in_flight": "0",
+          "funds": "20000000000000000000000000",
+          "expected_balance_min": "20000000000000000000000000",
+          "expected_balance_max": "20000000000000000000000000",
+          "mock": true
+        },
+        {
+          "reward_id": "bonus-wnear-5",
+          "token_contract_id": "wnear.needmore_1_near.testnet",
+          "token_symbol": "wNEAR",
+          "display_name": "Test Wrapped NEAR",
+          "token_decimals": 24,
+          "amount": "250000000000000000000000",
+          "tier": "Legendary",
+          "chance_in_tier_bps": 5000,
+          "candidates_in_tier": 3,
+          "selection_denominator": 3,
+          "available": "25000000000000000000000000",
+          "reserved": "0",
+          "in_flight": "0",
+          "funds": "25000000000000000000000000",
+          "expected_balance_min": "25000000000000000000000000",
+          "expected_balance_max": "25000000000000000000000000",
+          "mock": true
+        }
+      ],
+      "quote": {
+        "case_id": "phoenix-flame",
+        "revision": "8",
+        "expires_at": "277414705",
+        "nonce": "0",
+        "common": 497095,
+        "rare": 499225,
+        "legendary": 3680,
+        "denominator": 1000000,
+        "target_ev": "2165000",
+        "expected_numerator": "2164997000000",
+        "available": "300000000",
+        "can_open": false,
+        "reason": "Prepay case storage in NEAR"
       }
     },
     "uncles-secret-reserve": {
       "account": {
-        "absent": true
+        "amount": "6984089203280777100000001",
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "code_hash": "5uZDe3e4UUbrXFQFdAAfwL3YpQXXvo8EkXRwBhgjGTid",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 559161
+      },
+      "case": {
+        "case_id": "uncles-secret-reserve",
+        "name": "Uncle's Secret Reserve",
+        "token_id": "usdi-needmore-1-near.testnet",
+        "price": "10000000",
+        "pool_contribution": "9500000",
+        "platform_fee": "500000",
+        "target": "10000000000",
+        "probability_denominator": 1000000,
+        "rewards": [
+          {
+            "reward_id": "usdi-common",
+            "token_contract_id": "usdi-needmore-1-near.testnet",
+            "token_symbol": "USDI",
+            "token_decimals": 6,
+            "amount": "2000000",
+            "display_name": "USD Iroh",
+            "tier": "Common"
+          },
+          {
+            "reward_id": "usdi-rare",
+            "token_contract_id": "usdi-needmore-1-near.testnet",
+            "token_symbol": "USDI",
+            "token_decimals": 6,
+            "amount": "15000000",
+            "display_name": "USD Iroh",
+            "tier": "Rare"
+          },
+          {
+            "reward_id": "usdi-legendary",
+            "token_contract_id": "usdi-needmore-1-near.testnet",
+            "token_symbol": "USDI",
+            "token_decimals": 6,
+            "amount": "120000000",
+            "display_name": "USD Iroh",
+            "tier": "Legendary"
+          }
+        ],
+        "randomness": "NEAR protocol randomness; Testnet demonstration, not production-grade VRF",
+        "quote_policy": "Exact revision, zero slippage; stale quotes are fully refunded",
+        "bonus_rewards": [
+          {
+            "reward_id": "bonus-rhea-0",
+            "token_contract_id": "iroh-test-rhea.testnet",
+            "token_symbol": "RHEA",
+            "display_name": "Test Rhea",
+            "token_decimals": 6,
+            "amount": "10000000",
+            "tier": "Common",
+            "chance_in_tier_bps": 5000,
+            "candidates_in_tier": 2,
+            "selection_denominator": 2,
+            "available": "1000000000",
+            "reserved": "0",
+            "in_flight": "0",
+            "funds": "1000000000",
+            "expected_balance_min": "1000000000",
+            "expected_balance_max": "1000000000",
+            "mock": true
+          },
+          {
+            "reward_id": "bonus-aurora-1",
+            "token_contract_id": "iroh-test-aurora.testnet",
+            "token_symbol": "AURORA",
+            "display_name": "Test Aurora",
+            "token_decimals": 6,
+            "amount": "10000000",
+            "tier": "Common",
+            "chance_in_tier_bps": 5000,
+            "candidates_in_tier": 2,
+            "selection_denominator": 2,
+            "available": "1000000000",
+            "reserved": "0",
+            "in_flight": "0",
+            "funds": "1000000000",
+            "expected_balance_min": "1000000000",
+            "expected_balance_max": "1000000000",
+            "mock": true
+          },
+          {
+            "reward_id": "bonus-mpdao-2",
+            "token_contract_id": "mpdao.needmore_1_near.testnet",
+            "token_symbol": "mpDAO",
+            "display_name": "Test mpDAO",
+            "token_decimals": 6,
+            "amount": "20000000",
+            "tier": "Rare",
+            "chance_in_tier_bps": 5000,
+            "candidates_in_tier": 2,
+            "selection_denominator": 2,
+            "available": "2000000000",
+            "reserved": "0",
+            "in_flight": "0",
+            "funds": "2000000000",
+            "expected_balance_min": "2000000000",
+            "expected_balance_max": "2000000000",
+            "mock": true
+          },
+          {
+            "reward_id": "bonus-rnear-3",
+            "token_contract_id": "rnear.needmore_1_near.testnet",
+            "token_symbol": "rNEAR",
+            "display_name": "Test Rhea Staked NEAR",
+            "token_decimals": 24,
+            "amount": "500000000000000000000000",
+            "tier": "Rare",
+            "chance_in_tier_bps": 5000,
+            "candidates_in_tier": 2,
+            "selection_denominator": 2,
+            "available": "50000000000000000000000000",
+            "reserved": "0",
+            "in_flight": "0",
+            "funds": "50000000000000000000000000",
+            "expected_balance_min": "50000000000000000000000000",
+            "expected_balance_max": "50000000000000000000000000",
+            "mock": true
+          },
+          {
+            "reward_id": "bonus-stnear-4",
+            "token_contract_id": "stnear.needmore_1_near.testnet",
+            "token_symbol": "STNEAR",
+            "display_name": "Test Staked NEAR",
+            "token_decimals": 24,
+            "amount": "1000000000000000000000000",
+            "tier": "Legendary",
+            "chance_in_tier_bps": 5000,
+            "candidates_in_tier": 3,
+            "selection_denominator": 3,
+            "available": "100000000000000000000000000",
+            "reserved": "0",
+            "in_flight": "0",
+            "funds": "100000000000000000000000000",
+            "expected_balance_min": "100000000000000000000000000",
+            "expected_balance_max": "100000000000000000000000000",
+            "mock": true
+          },
+          {
+            "reward_id": "bonus-linear-5",
+            "token_contract_id": "linear.needmore_1_near.testnet",
+            "token_symbol": "LINEAR",
+            "display_name": "Test LiNEAR",
+            "token_decimals": 24,
+            "amount": "1000000000000000000000000",
+            "tier": "Legendary",
+            "chance_in_tier_bps": 5000,
+            "candidates_in_tier": 3,
+            "selection_denominator": 3,
+            "available": "100000000000000000000000000",
+            "reserved": "0",
+            "in_flight": "0",
+            "funds": "100000000000000000000000000",
+            "expected_balance_min": "100000000000000000000000000",
+            "expected_balance_max": "100000000000000000000000000",
+            "mock": true
+          },
+          {
+            "reward_id": "bonus-wnear-6",
+            "token_contract_id": "wnear.needmore_1_near.testnet",
+            "token_symbol": "wNEAR",
+            "display_name": "Test Wrapped NEAR",
+            "token_decimals": 24,
+            "amount": "1000000000000000000000000",
+            "tier": "Legendary",
+            "chance_in_tier_bps": 5000,
+            "candidates_in_tier": 3,
+            "selection_denominator": 3,
+            "available": "100000000000000000000000000",
+            "reserved": "0",
+            "in_flight": "0",
+            "funds": "100000000000000000000000000",
+            "expected_balance_min": "100000000000000000000000000",
+            "expected_balance_max": "100000000000000000000000000",
+            "mock": true
+          }
+        ],
+        "history_pagination": true
+      },
+      "pool": {
+        "pool_funds": "500000000",
+        "reserved_rewards": "0",
+        "available": "500000000",
+        "target": "10000000000",
+        "health": "Critical",
+        "pending_fees": "0",
+        "treasury_available": "0",
+        "treasury_in_flight": "0",
+        "in_flight_payouts": "0",
+        "pending_openings": 0,
+        "completed_payouts": "0",
+        "total_paid": "0",
+        "revision": "9",
+        "paused": false,
+        "can_open": true,
+        "storage_per_opening": "20480000000000000000000",
+        "storage_account_cost": "2560000000000000000000",
+        "expected_balance_min": "500000000",
+        "expected_balance_max": "500000000"
+      },
+      "history": [],
+      "usdi_balance": "500000000",
+      "public_keys": {
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277412130000009,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:6aaWCKDbM6KVkD7uUU1qtk93nufqLrzGmbhiiP63cpiu"
+          }
+        ]
+      },
+      "wasm_sha256": "48e560f15ef75db48d82ab1d57ca119b752059d96c1157c897ce3dbf87b7c06e",
+      "reward_inventory": [
+        {
+          "reward_id": "bonus-rhea-0",
+          "token_contract_id": "iroh-test-rhea.testnet",
+          "token_symbol": "RHEA",
+          "display_name": "Test Rhea",
+          "token_decimals": 6,
+          "amount": "10000000",
+          "tier": "Common",
+          "chance_in_tier_bps": 5000,
+          "candidates_in_tier": 2,
+          "selection_denominator": 2,
+          "available": "1000000000",
+          "reserved": "0",
+          "in_flight": "0",
+          "funds": "1000000000",
+          "expected_balance_min": "1000000000",
+          "expected_balance_max": "1000000000",
+          "mock": true
+        },
+        {
+          "reward_id": "bonus-aurora-1",
+          "token_contract_id": "iroh-test-aurora.testnet",
+          "token_symbol": "AURORA",
+          "display_name": "Test Aurora",
+          "token_decimals": 6,
+          "amount": "10000000",
+          "tier": "Common",
+          "chance_in_tier_bps": 5000,
+          "candidates_in_tier": 2,
+          "selection_denominator": 2,
+          "available": "1000000000",
+          "reserved": "0",
+          "in_flight": "0",
+          "funds": "1000000000",
+          "expected_balance_min": "1000000000",
+          "expected_balance_max": "1000000000",
+          "mock": true
+        },
+        {
+          "reward_id": "bonus-mpdao-2",
+          "token_contract_id": "mpdao.needmore_1_near.testnet",
+          "token_symbol": "mpDAO",
+          "display_name": "Test mpDAO",
+          "token_decimals": 6,
+          "amount": "20000000",
+          "tier": "Rare",
+          "chance_in_tier_bps": 5000,
+          "candidates_in_tier": 2,
+          "selection_denominator": 2,
+          "available": "2000000000",
+          "reserved": "0",
+          "in_flight": "0",
+          "funds": "2000000000",
+          "expected_balance_min": "2000000000",
+          "expected_balance_max": "2000000000",
+          "mock": true
+        },
+        {
+          "reward_id": "bonus-rnear-3",
+          "token_contract_id": "rnear.needmore_1_near.testnet",
+          "token_symbol": "rNEAR",
+          "display_name": "Test Rhea Staked NEAR",
+          "token_decimals": 24,
+          "amount": "500000000000000000000000",
+          "tier": "Rare",
+          "chance_in_tier_bps": 5000,
+          "candidates_in_tier": 2,
+          "selection_denominator": 2,
+          "available": "50000000000000000000000000",
+          "reserved": "0",
+          "in_flight": "0",
+          "funds": "50000000000000000000000000",
+          "expected_balance_min": "50000000000000000000000000",
+          "expected_balance_max": "50000000000000000000000000",
+          "mock": true
+        },
+        {
+          "reward_id": "bonus-stnear-4",
+          "token_contract_id": "stnear.needmore_1_near.testnet",
+          "token_symbol": "STNEAR",
+          "display_name": "Test Staked NEAR",
+          "token_decimals": 24,
+          "amount": "1000000000000000000000000",
+          "tier": "Legendary",
+          "chance_in_tier_bps": 5000,
+          "candidates_in_tier": 3,
+          "selection_denominator": 3,
+          "available": "100000000000000000000000000",
+          "reserved": "0",
+          "in_flight": "0",
+          "funds": "100000000000000000000000000",
+          "expected_balance_min": "100000000000000000000000000",
+          "expected_balance_max": "100000000000000000000000000",
+          "mock": true
+        },
+        {
+          "reward_id": "bonus-linear-5",
+          "token_contract_id": "linear.needmore_1_near.testnet",
+          "token_symbol": "LINEAR",
+          "display_name": "Test LiNEAR",
+          "token_decimals": 24,
+          "amount": "1000000000000000000000000",
+          "tier": "Legendary",
+          "chance_in_tier_bps": 5000,
+          "candidates_in_tier": 3,
+          "selection_denominator": 3,
+          "available": "100000000000000000000000000",
+          "reserved": "0",
+          "in_flight": "0",
+          "funds": "100000000000000000000000000",
+          "expected_balance_min": "100000000000000000000000000",
+          "expected_balance_max": "100000000000000000000000000",
+          "mock": true
+        },
+        {
+          "reward_id": "bonus-wnear-6",
+          "token_contract_id": "wnear.needmore_1_near.testnet",
+          "token_symbol": "wNEAR",
+          "display_name": "Test Wrapped NEAR",
+          "token_decimals": 24,
+          "amount": "1000000000000000000000000",
+          "tier": "Legendary",
+          "chance_in_tier_bps": 5000,
+          "candidates_in_tier": 3,
+          "selection_denominator": 3,
+          "available": "100000000000000000000000000",
+          "reserved": "0",
+          "in_flight": "0",
+          "funds": "100000000000000000000000000",
+          "expected_balance_min": "100000000000000000000000000",
+          "expected_balance_max": "100000000000000000000000000",
+          "mock": true
+        }
+      ],
+      "quote": {
+        "case_id": "uncles-secret-reserve",
+        "revision": "9",
+        "expires_at": "277414705",
+        "nonce": "0",
+        "common": 683500,
+        "rare": 311400,
+        "legendary": 5100,
+        "denominator": 1000000,
+        "target_ev": "6650000",
+        "expected_numerator": "6650000000000",
+        "available": "500000000",
+        "can_open": false,
+        "reason": "Prepay case storage in NEAR"
       }
     }
   },
@@ -333,13 +1634,26 @@
     "SHITZU": {
       "account_id": "iroh-test-shitzu.testnet",
       "account": {
-        "amount": "9998675748467156000000001",
-        "block_hash": "29mrrogc4i4UzDwhDRhKLTzyn6VeZ9S6MLTf3TPQnJUw",
-        "block_height": 277293634,
+        "amount": "9999925748467156000000002",
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
         "code_hash": "5heV1Yf3PxjMLWuyXowJoApj38rggW8GsCoScL6Sxidz",
         "locked": "0",
         "storage_paid_at": 0,
-        "storage_usage": 322440
+        "storage_usage": 322531
+      },
+      "public_keys": {
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 276972777000001,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:AjjUQeMQKDgZgcDcPvqeij5BVm73RuyPSJpTQBvM92gT"
+          }
+        ]
       },
       "metadata": {
         "spec": "ft-1.0.0",
@@ -351,11 +1665,32 @@
         "decimals": 6
       },
       "supply": "100000000000",
-      "owner_balance": "95000000000",
+      "owner_balance": "92500000000",
       "storage_bounds": {
         "min": "1250000000000000000000",
         "max": "1250000000000000000000"
       },
+      "case_storage": {
+        "bamboo-mist": {
+          "total": "1250000000000000000000",
+          "available": "0"
+        },
+        "dragon-tea": {
+          "total": "1250000000000000000000",
+          "available": "0"
+        },
+        "moon-spirit": null,
+        "phoenix-flame": null,
+        "uncles-secret-reserve": null
+      },
+      "case_balances": {
+        "bamboo-mist": "2500000000",
+        "dragon-tea": "5000000000",
+        "moon-spirit": "0",
+        "phoenix-flame": "0",
+        "uncles-secret-reserve": "0"
+      },
+      "wasm_sha256": "45d85cb559123ec03db7ea47c8d00eed1db544ee7d8c46a17656dc109c058bad",
       "dragon_storage": {
         "total": "1250000000000000000000",
         "available": "0"
@@ -365,13 +1700,26 @@
     "RHEA": {
       "account_id": "iroh-test-rhea.testnet",
       "account": {
-        "amount": "9998674882230381600000001",
-        "block_hash": "29mrrogc4i4UzDwhDRhKLTzyn6VeZ9S6MLTf3TPQnJUw",
-        "block_height": 277293634,
+        "amount": "10002424882230381600000004",
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
         "code_hash": "5heV1Yf3PxjMLWuyXowJoApj38rggW8GsCoScL6Sxidz",
         "locked": "0",
         "storage_paid_at": 0,
-        "storage_usage": 322436
+        "storage_usage": 322711
+      },
+      "public_keys": {
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 276973866000001,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:CkedPt1PHbXp1zsZtgSxyXYszjAeFYtAkNYVyotmYu2T"
+          }
+        ]
       },
       "metadata": {
         "spec": "ft-1.0.0",
@@ -383,11 +1731,38 @@
         "decimals": 6
       },
       "supply": "100000000000",
-      "owner_balance": "99500000000",
+      "owner_balance": "98200000000",
       "storage_bounds": {
         "min": "1250000000000000000000",
         "max": "1250000000000000000000"
       },
+      "case_storage": {
+        "bamboo-mist": {
+          "total": "1250000000000000000000",
+          "available": "0"
+        },
+        "dragon-tea": {
+          "total": "1250000000000000000000",
+          "available": "0"
+        },
+        "moon-spirit": null,
+        "phoenix-flame": {
+          "total": "1250000000000000000000",
+          "available": "0"
+        },
+        "uncles-secret-reserve": {
+          "total": "1250000000000000000000",
+          "available": "0"
+        }
+      },
+      "case_balances": {
+        "bamboo-mist": "100000000",
+        "dragon-tea": "500000000",
+        "moon-spirit": "0",
+        "phoenix-flame": "200000000",
+        "uncles-secret-reserve": "1000000000"
+      },
+      "wasm_sha256": "45d85cb559123ec03db7ea47c8d00eed1db544ee7d8c46a17656dc109c058bad",
       "dragon_storage": {
         "total": "1250000000000000000000",
         "available": "0"
@@ -397,13 +1772,26 @@
     "AURORA": {
       "account_id": "iroh-test-aurora.testnet",
       "account": {
-        "amount": "9998674829638281200000001",
-        "block_hash": "29mrrogc4i4UzDwhDRhKLTzyn6VeZ9S6MLTf3TPQnJUw",
-        "block_height": 277293634,
+        "amount": "10001174829638281200000003",
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
         "code_hash": "5heV1Yf3PxjMLWuyXowJoApj38rggW8GsCoScL6Sxidz",
         "locked": "0",
         "storage_paid_at": 0,
-        "storage_usage": 322440
+        "storage_usage": 322624
+      },
+      "public_keys": {
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 276974656000001,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:3gwXPAVYJiFXXrzddT3dCa8s4kydaXu6EgL2N8gDEyaC"
+          }
+        ]
       },
       "metadata": {
         "spec": "ft-1.0.0",
@@ -415,71 +1803,710 @@
         "decimals": 6
       },
       "supply": "100000000000",
-      "owner_balance": "99900000000",
+      "owner_balance": "98700000000",
       "storage_bounds": {
         "min": "1250000000000000000000",
         "max": "1250000000000000000000"
       },
+      "case_storage": {
+        "bamboo-mist": null,
+        "dragon-tea": {
+          "total": "1250000000000000000000",
+          "available": "0"
+        },
+        "moon-spirit": null,
+        "phoenix-flame": {
+          "total": "1250000000000000000000",
+          "available": "0"
+        },
+        "uncles-secret-reserve": {
+          "total": "1250000000000000000000",
+          "available": "0"
+        }
+      },
+      "case_balances": {
+        "bamboo-mist": "0",
+        "dragon-tea": "100000000",
+        "moon-spirit": "0",
+        "phoenix-flame": "200000000",
+        "uncles-secret-reserve": "1000000000"
+      },
+      "wasm_sha256": "45d85cb559123ec03db7ea47c8d00eed1db544ee7d8c46a17656dc109c058bad",
       "dragon_storage": {
         "total": "1250000000000000000000",
         "available": "0"
       },
       "dragon_balance": "100000000"
+    },
+    "BLACKDRAGON": {
+      "account_id": "blackdragon.needmore_1_near.testnet",
+      "account": {
+        "amount": "4998656969384922200000001",
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 323751
+      },
+      "public_keys": {
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277393854000001,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:BzFYfhBpT7Y5rchB4v4JH16WNqMHpzP37xrWnM5mZMha"
+          }
+        ]
+      },
+      "metadata": {
+        "spec": "ft-1.0.0",
+        "name": "Test Black Dragon",
+        "symbol": "BLACKDRAGON",
+        "icon": null,
+        "reference": "data:application/json,%7B%22description%22%3A%22Unofficial%20Iroh%20Case%20Shop%20Testnet%20mock.%20No%20monetary%20value.%22%7D",
+        "reference_hash": "tL6Csy+j5SttbY80L8z/MP22N5WfT67O+d9dwaw4XBI=",
+        "decimals": 24
+      },
+      "supply": "100000000000000000000000000000",
+      "owner_balance": "97500000000000000000000000000",
+      "storage_bounds": {
+        "min": "1250000000000000000000",
+        "max": "1250000000000000000000"
+      },
+      "case_storage": {
+        "bamboo-mist": {
+          "total": "1250000000000000000000",
+          "available": "0"
+        },
+        "dragon-tea": null,
+        "moon-spirit": null,
+        "phoenix-flame": null,
+        "uncles-secret-reserve": null
+      },
+      "case_balances": {
+        "bamboo-mist": "2500000000000000000000000000",
+        "dragon-tea": "0",
+        "moon-spirit": "0",
+        "phoenix-flame": "0",
+        "uncles-secret-reserve": "0"
+      },
+      "wasm_sha256": "faa2b5cd6957806b93b8c96067152e21ecda54bd63bb7cb5da385c5ebea6a630",
+      "dragon_storage": null,
+      "dragon_balance": "0"
+    },
+    "NEKO": {
+      "account_id": "neko.needmore_1_near.testnet",
+      "account": {
+        "amount": "4999913587836352800000002",
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 323825
+      },
+      "public_keys": {
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277394035000001,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:HANvB1MeRnUru1U96q1iPyujUSfCRYNrjRwAUqjNJYLr"
+          }
+        ]
+      },
+      "metadata": {
+        "spec": "ft-1.0.0",
+        "name": "Test Neko",
+        "symbol": "NEKO",
+        "icon": null,
+        "reference": "data:application/json,%7B%22description%22%3A%22Unofficial%20Iroh%20Case%20Shop%20Testnet%20mock.%20No%20monetary%20value.%22%7D",
+        "reference_hash": "tL6Csy+j5SttbY80L8z/MP22N5WfT67O+d9dwaw4XBI=",
+        "decimals": 24
+      },
+      "supply": "100000000000000000000000000000",
+      "owner_balance": "94000000000000000000000000000",
+      "storage_bounds": {
+        "min": "1250000000000000000000",
+        "max": "1250000000000000000000"
+      },
+      "case_storage": {
+        "bamboo-mist": {
+          "total": "1250000000000000000000",
+          "available": "0"
+        },
+        "dragon-tea": null,
+        "moon-spirit": {
+          "total": "1250000000000000000000",
+          "available": "0"
+        },
+        "phoenix-flame": null,
+        "uncles-secret-reserve": null
+      },
+      "case_balances": {
+        "bamboo-mist": "1000000000000000000000000000",
+        "dragon-tea": "0",
+        "moon-spirit": "5000000000000000000000000000",
+        "phoenix-flame": "0",
+        "uncles-secret-reserve": "0"
+      },
+      "wasm_sha256": "faa2b5cd6957806b93b8c96067152e21ecda54bd63bb7cb5da385c5ebea6a630",
+      "dragon_storage": null,
+      "dragon_balance": "0"
+    },
+    "MPDAO": {
+      "account_id": "mpdao.needmore_1_near.testnet",
+      "account": {
+        "amount": "5001164283511202400000003",
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 323920
+      },
+      "public_keys": {
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277394110000001,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:Cu7riCyEPzUyLzz3xMGa1En516bchWYT1Nw1mipqs6eY"
+          }
+        ]
+      },
+      "metadata": {
+        "spec": "ft-1.0.0",
+        "name": "Test mpDAO",
+        "symbol": "mpDAO",
+        "icon": null,
+        "reference": "data:application/json,%7B%22description%22%3A%22Unofficial%20Iroh%20Case%20Shop%20Testnet%20mock.%20No%20monetary%20value.%22%7D",
+        "reference_hash": "tL6Csy+j5SttbY80L8z/MP22N5WfT67O+d9dwaw4XBI=",
+        "decimals": 6
+      },
+      "supply": "100000000000",
+      "owner_balance": "97300000000",
+      "storage_bounds": {
+        "min": "1250000000000000000000",
+        "max": "1250000000000000000000"
+      },
+      "case_storage": {
+        "bamboo-mist": null,
+        "dragon-tea": null,
+        "moon-spirit": {
+          "total": "1250000000000000000000",
+          "available": "0"
+        },
+        "phoenix-flame": {
+          "total": "1250000000000000000000",
+          "available": "0"
+        },
+        "uncles-secret-reserve": {
+          "total": "1250000000000000000000",
+          "available": "0"
+        }
+      },
+      "case_balances": {
+        "bamboo-mist": "0",
+        "dragon-tea": "0",
+        "moon-spirit": "200000000",
+        "phoenix-flame": "500000000",
+        "uncles-secret-reserve": "2000000000"
+      },
+      "wasm_sha256": "faa2b5cd6957806b93b8c96067152e21ecda54bd63bb7cb5da385c5ebea6a630",
+      "dragon_storage": null,
+      "dragon_balance": "0"
+    },
+    "GEAR": {
+      "account_id": "gear.needmore_1_near.testnet",
+      "account": {
+        "amount": "4998662006001705400000001",
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 323734
+      },
+      "public_keys": {
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277394183000001,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:BNRrJC51SnjV69hgzHo7JZrsyq7MvrZvs444RAvJv5ru"
+          }
+        ]
+      },
+      "metadata": {
+        "spec": "ft-1.0.0",
+        "name": "Test Gear",
+        "symbol": "GEAR",
+        "icon": null,
+        "reference": "data:application/json,%7B%22description%22%3A%22Unofficial%20Iroh%20Case%20Shop%20Testnet%20mock.%20No%20monetary%20value.%22%7D",
+        "reference_hash": "tL6Csy+j5SttbY80L8z/MP22N5WfT67O+d9dwaw4XBI=",
+        "decimals": 18
+      },
+      "supply": "100000000000000000000000",
+      "owner_balance": "99800000000000000000000",
+      "storage_bounds": {
+        "min": "1250000000000000000000",
+        "max": "1250000000000000000000"
+      },
+      "case_storage": {
+        "bamboo-mist": null,
+        "dragon-tea": null,
+        "moon-spirit": {
+          "total": "1250000000000000000000",
+          "available": "0"
+        },
+        "phoenix-flame": null,
+        "uncles-secret-reserve": null
+      },
+      "case_balances": {
+        "bamboo-mist": "0",
+        "dragon-tea": "0",
+        "moon-spirit": "200000000000000000000",
+        "phoenix-flame": "0",
+        "uncles-secret-reserve": "0"
+      },
+      "wasm_sha256": "faa2b5cd6957806b93b8c96067152e21ecda54bd63bb7cb5da385c5ebea6a630",
+      "dragon_storage": null,
+      "dragon_balance": "0"
+    },
+    "PURGE": {
+      "account_id": "purge.needmore_1_near.testnet",
+      "account": {
+        "amount": "4998665579327602400000001",
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 323736
+      },
+      "public_keys": {
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277394252000001,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:3JahkkUeThdgzonP4qwVymyDgcvqb13NoTzffz6FmfJY"
+          }
+        ]
+      },
+      "metadata": {
+        "spec": "ft-1.0.0",
+        "name": "Test Purge",
+        "symbol": "PURGE",
+        "icon": null,
+        "reference": "data:application/json,%7B%22description%22%3A%22Unofficial%20Iroh%20Case%20Shop%20Testnet%20mock.%20No%20monetary%20value.%22%7D",
+        "reference_hash": "tL6Csy+j5SttbY80L8z/MP22N5WfT67O+d9dwaw4XBI=",
+        "decimals": 18
+      },
+      "supply": "100000000000000000000000",
+      "owner_balance": "98000000000000000000000",
+      "storage_bounds": {
+        "min": "1250000000000000000000",
+        "max": "1250000000000000000000"
+      },
+      "case_storage": {
+        "bamboo-mist": null,
+        "dragon-tea": null,
+        "moon-spirit": {
+          "total": "1250000000000000000000",
+          "available": "0"
+        },
+        "phoenix-flame": null,
+        "uncles-secret-reserve": null
+      },
+      "case_balances": {
+        "bamboo-mist": "0",
+        "dragon-tea": "0",
+        "moon-spirit": "2000000000000000000000",
+        "phoenix-flame": "0",
+        "uncles-secret-reserve": "0"
+      },
+      "wasm_sha256": "faa2b5cd6957806b93b8c96067152e21ecda54bd63bb7cb5da385c5ebea6a630",
+      "dragon_storage": null,
+      "dragon_balance": "0"
+    },
+    "WNEAR": {
+      "account_id": "wnear.needmore_1_near.testnet",
+      "account": {
+        "amount": "4999911454046885800000002",
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 323886
+      },
+      "public_keys": {
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277394312000001,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:Hufga4xjW7XgqYuRSHGoeQBAt3r6HZgadudokD6dcX7q"
+          }
+        ]
+      },
+      "metadata": {
+        "spec": "ft-1.0.0",
+        "name": "Test Wrapped NEAR",
+        "symbol": "wNEAR",
+        "icon": null,
+        "reference": "data:application/json,%7B%22description%22%3A%22Unofficial%20Iroh%20Case%20Shop%20Testnet%20mock.%20No%20monetary%20value.%20No%20yield%2C%20backing%2C%20or%20redemption.%22%7D",
+        "reference_hash": "NN8XGmpvzUQoWjlGfvZm/S0GViiZKV2og4j0Ed+rW1g=",
+        "decimals": 24
+      },
+      "supply": "100000000000000000000000000000",
+      "owner_balance": "99875000000000000000000000000",
+      "storage_bounds": {
+        "min": "1250000000000000000000",
+        "max": "1250000000000000000000"
+      },
+      "case_storage": {
+        "bamboo-mist": null,
+        "dragon-tea": null,
+        "moon-spirit": null,
+        "phoenix-flame": {
+          "total": "1250000000000000000000",
+          "available": "0"
+        },
+        "uncles-secret-reserve": {
+          "total": "1250000000000000000000",
+          "available": "0"
+        }
+      },
+      "case_balances": {
+        "bamboo-mist": "0",
+        "dragon-tea": "0",
+        "moon-spirit": "0",
+        "phoenix-flame": "25000000000000000000000000",
+        "uncles-secret-reserve": "100000000000000000000000000"
+      },
+      "wasm_sha256": "faa2b5cd6957806b93b8c96067152e21ecda54bd63bb7cb5da385c5ebea6a630",
+      "dragon_storage": null,
+      "dragon_balance": "0"
+    },
+    "STNEAR": {
+      "account_id": "stnear.needmore_1_near.testnet",
+      "account": {
+        "amount": "5001160527651346000000003",
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 323975
+      },
+      "public_keys": {
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277394377000001,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:HYi4hdPauGQWAupViFNubMSv4xPyibsRh9Tw7tmfBpgQ"
+          }
+        ]
+      },
+      "metadata": {
+        "spec": "ft-1.0.0",
+        "name": "Test Staked NEAR",
+        "symbol": "STNEAR",
+        "icon": null,
+        "reference": "data:application/json,%7B%22description%22%3A%22Unofficial%20Iroh%20Case%20Shop%20Testnet%20mock.%20No%20monetary%20value.%20No%20yield%2C%20backing%2C%20or%20redemption.%22%7D",
+        "reference_hash": "NN8XGmpvzUQoWjlGfvZm/S0GViiZKV2og4j0Ed+rW1g=",
+        "decimals": 24
+      },
+      "supply": "100000000000000000000000000000",
+      "owner_balance": "99870000000000000000000000000",
+      "storage_bounds": {
+        "min": "1250000000000000000000",
+        "max": "1250000000000000000000"
+      },
+      "case_storage": {
+        "bamboo-mist": null,
+        "dragon-tea": null,
+        "moon-spirit": {
+          "total": "1250000000000000000000",
+          "available": "0"
+        },
+        "phoenix-flame": {
+          "total": "1250000000000000000000",
+          "available": "0"
+        },
+        "uncles-secret-reserve": {
+          "total": "1250000000000000000000",
+          "available": "0"
+        }
+      },
+      "case_balances": {
+        "bamboo-mist": "0",
+        "dragon-tea": "0",
+        "moon-spirit": "10000000000000000000000000",
+        "phoenix-flame": "20000000000000000000000000",
+        "uncles-secret-reserve": "100000000000000000000000000"
+      },
+      "wasm_sha256": "faa2b5cd6957806b93b8c96067152e21ecda54bd63bb7cb5da385c5ebea6a630",
+      "dragon_storage": null,
+      "dragon_balance": "0"
+    },
+    "LINEAR": {
+      "account_id": "linear.needmore_1_near.testnet",
+      "account": {
+        "amount": "4999909595214506000000002",
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 323881
+      },
+      "public_keys": {
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277394459000001,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:5q5R4tuBBnh87uScmLPjYAV8cW8et9UnuYd9He2CeMP9"
+          }
+        ]
+      },
+      "metadata": {
+        "spec": "ft-1.0.0",
+        "name": "Test LiNEAR",
+        "symbol": "LINEAR",
+        "icon": null,
+        "reference": "data:application/json,%7B%22description%22%3A%22Unofficial%20Iroh%20Case%20Shop%20Testnet%20mock.%20No%20monetary%20value.%20No%20yield%2C%20backing%2C%20or%20redemption.%22%7D",
+        "reference_hash": "NN8XGmpvzUQoWjlGfvZm/S0GViiZKV2og4j0Ed+rW1g=",
+        "decimals": 24
+      },
+      "supply": "100000000000000000000000000000",
+      "owner_balance": "99880000000000000000000000000",
+      "storage_bounds": {
+        "min": "1250000000000000000000",
+        "max": "1250000000000000000000"
+      },
+      "case_storage": {
+        "bamboo-mist": null,
+        "dragon-tea": null,
+        "moon-spirit": null,
+        "phoenix-flame": {
+          "total": "1250000000000000000000",
+          "available": "0"
+        },
+        "uncles-secret-reserve": {
+          "total": "1250000000000000000000",
+          "available": "0"
+        }
+      },
+      "case_balances": {
+        "bamboo-mist": "0",
+        "dragon-tea": "0",
+        "moon-spirit": "0",
+        "phoenix-flame": "20000000000000000000000000",
+        "uncles-secret-reserve": "100000000000000000000000000"
+      },
+      "wasm_sha256": "faa2b5cd6957806b93b8c96067152e21ecda54bd63bb7cb5da385c5ebea6a630",
+      "dragon_storage": null,
+      "dragon_balance": "0"
+    },
+    "RNEAR": {
+      "account_id": "rnear.needmore_1_near.testnet",
+      "account": {
+        "amount": "4998666898543463000000001",
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 323798
+      },
+      "public_keys": {
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "keys": [
+          {
+            "access_key": {
+              "nonce": 277394525000001,
+              "permission": "FullAccess"
+            },
+            "public_key": "ed25519:6TsDqjRzzNvRhPoryErg3Pbn4WMPathCfWpmJcPx22aw"
+          }
+        ]
+      },
+      "metadata": {
+        "spec": "ft-1.0.0",
+        "name": "Test Rhea Staked NEAR",
+        "symbol": "rNEAR",
+        "icon": null,
+        "reference": "data:application/json,%7B%22description%22%3A%22Unofficial%20Iroh%20Case%20Shop%20Testnet%20mock.%20No%20monetary%20value.%20No%20yield%2C%20backing%2C%20or%20redemption.%22%7D",
+        "reference_hash": "NN8XGmpvzUQoWjlGfvZm/S0GViiZKV2og4j0Ed+rW1g=",
+        "decimals": 24
+      },
+      "supply": "100000000000000000000000000000",
+      "owner_balance": "99950000000000000000000000000",
+      "storage_bounds": {
+        "min": "1250000000000000000000",
+        "max": "1250000000000000000000"
+      },
+      "case_storage": {
+        "bamboo-mist": null,
+        "dragon-tea": null,
+        "moon-spirit": null,
+        "phoenix-flame": null,
+        "uncles-secret-reserve": {
+          "total": "1250000000000000000000",
+          "available": "0"
+        }
+      },
+      "case_balances": {
+        "bamboo-mist": "0",
+        "dragon-tea": "0",
+        "moon-spirit": "0",
+        "phoenix-flame": "0",
+        "uncles-secret-reserve": "50000000000000000000000000"
+      },
+      "wasm_sha256": "faa2b5cd6957806b93b8c96067152e21ecda54bd63bb7cb5da385c5ebea6a630",
+      "dragon_storage": null,
+      "dragon_balance": "0"
     }
   },
   "proposed_tokens": {
     "BLACKDRAGON": {
       "account_id": "blackdragon.needmore_1_near.testnet",
       "account": {
-        "absent": true
+        "amount": "4998656969384922200000001",
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 323751
       }
     },
     "NEKO": {
       "account_id": "neko.needmore_1_near.testnet",
       "account": {
-        "absent": true
+        "amount": "4999913587836352800000002",
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 323825
       }
     },
     "MPDAO": {
       "account_id": "mpdao.needmore_1_near.testnet",
       "account": {
-        "absent": true
+        "amount": "5001164283511202400000003",
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 323920
       }
     },
     "GEAR": {
       "account_id": "gear.needmore_1_near.testnet",
       "account": {
-        "absent": true
+        "amount": "4998662006001705400000001",
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 323734
       }
     },
     "PURGE": {
       "account_id": "purge.needmore_1_near.testnet",
       "account": {
-        "absent": true
+        "amount": "4998665579327602400000001",
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 323736
       }
     },
     "WNEAR": {
       "account_id": "wnear.needmore_1_near.testnet",
       "account": {
-        "absent": true
+        "amount": "4999911454046885800000002",
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 323886
       }
     },
     "STNEAR": {
       "account_id": "stnear.needmore_1_near.testnet",
       "account": {
-        "absent": true
+        "amount": "5001160527651346000000003",
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 323975
       }
     },
     "LINEAR": {
       "account_id": "linear.needmore_1_near.testnet",
       "account": {
-        "absent": true
+        "amount": "4999909595214506000000002",
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 323881
       }
     },
     "RNEAR": {
       "account_id": "rnear.needmore_1_near.testnet",
       "account": {
-        "absent": true
+        "amount": "4998666898543463000000001",
+        "block_hash": "HmB7uF4oDwwJ9pQ1boivzQpkrCBUw2qreFZT2cXTJaoh",
+        "block_height": 277414585,
+        "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 323798
       }
     }
   }

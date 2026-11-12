@@ -3,27 +3,27 @@
 > vitest run
 
 
- RUN  v5.0.1 /private/tmp/iroh-post-dragon-lf41qt25
+ RUN  v5.0.1 /private/tmp/iroh-activation-final-20261112
 
-(node:8135) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(node:80228) ExperimentalWarning: SQLite is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
-(node:8133) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(node:80222) ExperimentalWarning: SQLite is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
-(node:8129) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(node:80224) ExperimentalWarning: SQLite is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
-(node:8131) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(node:80227) ExperimentalWarning: SQLite is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
-(node:8130) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(node:80223) ExperimentalWarning: SQLite is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
-(node:8134) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(node:80226) ExperimentalWarning: SQLite is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
-(node:8181) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(node:80303) ExperimentalWarning: SQLite is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
-(node:8183) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(node:80305) ExperimentalWarning: SQLite is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
 
  Test Files  50 passed (50)
       Tests  368 passed (368)
-   Start at  18:54:05
-   Duration  9.94s (tests 88%, import 7%, transform 4%, worker 1%)
+   Start at  21:59:49
+   Duration  9.98s (tests 86%, import 8%, transform 5%, worker 1%)
 

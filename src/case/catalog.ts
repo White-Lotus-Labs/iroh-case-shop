@@ -1,5 +1,5 @@
-import registry from '../../config/cases.testnet.json';
-import publicConfig from '../../config/contracts.testnet.json';
+import registry from '../../config/cases.testnet.json' with { type: 'json' };
+import publicConfig from '../../config/contracts.testnet.json' with { type: 'json' };
 import type { Deployment } from './client';
 
 export type RewardTier = 'Common' | 'Rare' | 'Legendary';

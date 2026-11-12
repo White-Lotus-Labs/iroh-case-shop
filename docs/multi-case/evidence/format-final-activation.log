@@ -1,0 +1,6 @@
+
+> tea-after-pour@0.1.0 format:check
+> prettier --check src tests *.ts *.json README.md
+
+Checking formatting...
+All matched files use Prettier code style!

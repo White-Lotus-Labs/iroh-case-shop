@@ -1,8 +1,8 @@
 # Frontend integration handoff
 
-This is the starting reference for agents replacing the entire Iroh frontend. Written on 12 November 2026. The local frontend branch is `codex/frontend-handoff`. Blockchain deployment is paused by the owner. No additional deployment is required to start frontend development.
+This is the starting reference for agents replacing the entire Iroh frontend. Written on 12 November 2026. The local frontend branch is `codex/frontend-handoff`. All 90 approved Testnet deployment steps are complete. Formal security audit is deferred by the owner. No additional deployment is required to start frontend development.
 
-Read [the agent brief](AGENT-BRIEF.md) for implementation boundaries and [the application API reference](application-api.md) for auth, chat streaming, market data, server configuration, and hosting. The contract and wallet integration is described below.
+Read [the agent brief](AGENT-BRIEF.md) for implementation boundaries and [the application API reference](application-api.md) for auth, chat streaming, market data, server configuration, and hosting. The contract and wallet integration is described below. [Player check](player-check.md) lists the manual wallet flow for the activated release.
 
 The interface can change completely. Keep the contract calls, accounting, transaction validation, and recovery behavior intact. The chain remains the source of truth for prices, odds, draws, payouts, and inventories.
 
@@ -10,18 +10,18 @@ The interface can change completely. Keep the contract calls, accounting, transa
 
 The implementation contains one configurable case binary, a fixed-supply mock token binary, and the existing USDI contract. Five independent case accounts use the case API. They do not share a pool or opening IDs.
 
-`deployment-state.json` records the exact local journal state at this handoff. It is a historical snapshot, not a live availability endpoint. The canonical operational record is `docs/multi-case/execution.json` on the backend branch. Its per-step records are authoritative; some older top-level blocker summaries and the consolidated deployment report have not yet been refreshed. At this handoff, 47 of 90 approved steps are verified. One submitted Moon PURGE funding transaction awaits reconciliation. Never repeat it from the frontend.
+`deployment-state.json` records the finalized activation checkpoint, not a live availability endpoint. The canonical operational record is `docs/multi-case/execution.json`. All 90 approved steps and their saved receipts are verified, with no unreconciled transaction.
 
-Dragon is active with its original four completed openings. Bamboo and Moon have deployed code but are not activated; their funding progress differs. Phoenix and Reserve have not been created. All twelve bonus mock contracts are deployed. Registry status intentionally remains `planned` for the four new cases until activation and final audit succeed.
+All five cases are deployed, funded and active, and all twelve bonus mocks are deployed. Dragon retains its original four completed openings and accounting. New case histories are empty until players open them. Registry deployment flags now match finalized activation.
 
-A complete public Testnet opening flow for all five cases still needs the remaining backend deployment, registrations, exact funding, activation, and audit. Frontend agents can implement and test all five flows now with controlled fixtures. Dragon supports live read integration now. Actual user storage, claims, openings, and retries cost Testnet assets and require separate authorization; the deployment authorization does not include them.
+Frontend agents can integrate all five real public contract APIs or use controlled fixtures. Normal players authorize their own storage, claim, opening and recovery transactions in their wallet. Agents submitting automated public test transactions on a person's behalf need a bounded authorization; the deployment batch did not include new paid player tests. Formal security audit and real-wallet public bonus payout verification are still pending.
 
 ## Files that define the integration
 
 Paths below are relative to the repository root so this document works in another checkout.
 
 - `config/cases.testnet.json`: all five IDs, addresses, exact USDI prices, base rewards, bonus candidates, decimals, and deployment flags.
-- `config/tokens.testnet.json`: token identity, fixed supply, decimals, mock labeling, and verification status. Some flags lag actual deployment pending final audit.
+- `config/tokens.testnet.json`: token identity, fixed supply, decimals, mock labeling, and verification status. All included token flags reflect the verified deployment checkpoint.
 - `config/contracts.testnet.json`: payment token, legacy Dragon address, and the RPC used by the current frontend.
 - `src/case/catalog.ts`: `caseCatalog`, `caseById`, and `deploymentForCase`. The last function rejects planned cases.
 - `src/case/client.ts`: transport, validated response types, final receipt verification, and transaction builders.
@@ -114,11 +114,11 @@ The proxy currently uses `https://api-testnet.nearblocks.io/v3/accounts/{account
 
 Other application routes remain in `src/app/api`: auth `POST /auth/register` and `/auth/login` accept nickname/password; `GET /auth/me` reads the session; `POST /auth/logout` clears it. These paths have the `/api` prefix. Auth uses server cookies and a Prisma database, independently of the wallet. Chat routes are `/api/iroh/chats` and `/api/iroh/chats/[chatId]`. Nansen, theses, and leaderboard routes have their own existing contracts in that directory. Preserve their handlers and inspect their schemas before redesigning those screens. Do not expose server credentials to frontend code. A new hosted frontend origin needs an explicit cookie/CORS/proxy design; same-origin local behavior does not establish cross-origin login compatibility.
 
-## Develop before activation
+## Develop and verify independently
 
 `tests/case-fixture-data.ts` provides pure five-case data. `tests/browser/case-fixture.ts` provides controlled wallet/RPC behavior, independent `forCase(id)` states, payout failures, and recovery. These are test helpers, not production data sources.
 
-The new five-live-case browser scenarios in `tests/browser/host-catalog.spec.ts` await the backend activation flags. They have not yet had their final all-live browser run. For frontend development, use a separate test-only registry or dependency injection to enable the five controlled fixtures. Never promote the actual Testnet deployment flags merely to satisfy a mock test.
+All 85 browser tests, including the five-live-case opening journeys in `tests/browser/host-catalog.spec.ts`, passed with controlled RPC/wallet behavior. The candidate registry was checked byte-for-byte against the final activated configuration. Keep mock behavior test-only; it is not evidence of a new wallet-signed public payout.
 
 Useful regression sources are `tests/multi-case.test.ts`, the history and pending tests, and browser specs `cases`, `host-catalog`, `chain-loading`, `reward-history`, `wallet`, and `wallet-history`. Existing contracts passed 79 Rust tests and three genuine local Sandbox suites; simulations covered 25 million attempts. The latest local frontend check passed 368 Vitest tests and TypeScript. Fixture wallet tests do not establish real HOT wallet signing or new public payouts.
 
@@ -130,4 +130,6 @@ Frontend team owns presentation, layout, animation, accessibility, and adapters 
 
 Backend updates can arrive independently of the UI rewrite. Import reviewed public registry/status updates when each case is verified active. Any API-breaking contract change requires an updated integration reference and fixtures before adoption. New visuals do not require a new contract deployment.
 
-Before accepting the replacement frontend, verify five independent case selections, correct decimals and prices, live quote refresh, no signing while unavailable, user storage onboarding, recorded-result animation, partial payout recovery, reload with a pending action, wallet/account switching, and paginated cross-case history. Run the new UI against controlled fixtures first. Run separately authorized public Testnet wallet and payout checks after backend activation. Full public integration readiness and a final security audit are still pending at this handoff.
+Before accepting the replacement frontend, verify five independent case selections, correct decimals and prices, live quote refresh, no signing while unavailable, user storage onboarding, recorded-result animation, partial payout recovery, reload with a pending action, wallet/account switching, and paginated cross-case history. Run the new UI against controlled fixtures first. Run separately authorized public Testnet wallet and payout checks after backend activation. All-five-case deployment acceptance is complete. Formal security audit and a new real-wallet public payout check are separate pending work.
+
+The final production UI was also checked against real public Testnet reads for all five cases, with no connected wallet or submitted transaction. Evidence is in `docs/multi-case/evidence/live-ui-readonly.json`. This validates public display integration; it does not replace a wallet-signed paid payout check or formal security audit.

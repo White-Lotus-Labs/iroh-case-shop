@@ -1,0 +1,21 @@
+✔ exact account creation keeps the dedicated new key and five NEAR deposit (0.540542ms)
+✔ function calls preserve literal args, gas and deposits (0.116834ms)
+✔ wallet accounts must all match the existing owner and any returned public key (0.07425ms)
+✔ an approved batch cannot be replaced by a changed generated proposal (0.451167ms)
+✔ bounded manifest preserves Dragon economics and specifies every new deployment (1.469875ms)
+✔ every budget covers exact deposits and token transfers without mock dollar valuations (0.454333ms)
+✔ rejects a different chain or substituted deployment key (0.187ms)
+✔ prepared commands keep owner signing unsigned and quote apostrophes safely (0.687583ms)
+✔ unsafe pending Dragon state blocks the upgrade and retains paused verification gates (0.254958ms)
+✔ funds each token inventory with exactly 100 potential bonuses and correct decimals (0.176333ms)
+✔ refuses changed Dragon bonus ordering, extra signer keys and invalid base58 key length (0.431792ms)
+✔ marks allocation above a new token fixed supply as not ready (0.268084ms)
+✔ refuses changed deployed USDI or legacy mock code before proposing transfers (0.145042ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 38.294458

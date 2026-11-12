@@ -1,80 +1,80 @@
    Compiling iroh-case-pool v0.1.0 (/Users/mark/Documents/iroh-case-shop/contracts/case-pool)
-    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.33s
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.28s
      Running unittests src/lib.rs (target/debug/deps/iroh_case_pool-61c0827d414f525b)
 
 running 34 tests
-test migration::tests::migration_rejects_an_in_flight_legacy_treasury_transfer - should panic ... ok
+test configured_tests::configured_case_starts_paused_with_exact_price_decimals_and_no_inventory ... ok
 test configured_tests::configured_public_initialization_is_rejected - should panic ... ok
-test migration::tests::migration_rejects_an_in_flight_legacy_payout - should panic ... ok
+test migration::tests::migration_rejects_an_in_flight_legacy_treasury_transfer - should panic ... ok
 test configured_tests::configured_duplicate_token_ids_are_rejected - should panic ... ok
 test tests::bonus_selection_preserves_rarity_boundaries ... ok
 test configured_tests::configured_mainnet_deployment_is_rejected - should panic ... ok
-test configured_tests::configured_case_starts_paused_with_exact_price_decimals_and_no_inventory ... ok
+test migration::tests::migration_rejects_an_in_flight_legacy_payout - should panic ... ok
 test migration::tests::undrawn_v1_opening_only_uses_usdi_after_migration ... ok
-test configured_tests::configured_missing_bonus_inventory_cannot_create_an_obligation ... ok
 test tests::attacker_cannot_forge_ft_payments - should panic ... ok
+test configured_tests::configured_missing_bonus_inventory_cannot_create_an_obligation ... ok
 test tests::critical_and_caution_limits_and_health_recovery ... ok
+test tests::deferred_draw_is_unique_and_accepted_odds_survive_pool_changes ... ok
+test tests::expired_and_excessively_long_quotes_refund ... ok
 test tests::draw_callback_is_private - should panic ... ok
 test configured_tests::configured_admission_reserves_all_candidate_tokens_and_refunds_stale_quote ... ok
-test tests::expired_and_excessively_long_quotes_refund ... ok
-test tests::deferred_draw_is_unique_and_accepted_odds_survive_pool_changes ... ok
 test tests::mainnet_named_deployment_is_disabled - should panic ... ok
 test tests::history_pages_reject_other_accounts_cursor - should panic ... ok
 test tests::failed_transfer_stays_funded_and_retry_never_redraws_or_duplicates ... ok
 test tests::payout_callback_is_private - should panic ... ok
-test tests::pause_and_unregistered_storage_refund_without_fees ... ok
 test configured_tests::configured_usdi_failure_keeps_the_same_draw_and_does_not_repeat_paid_bonus ... ok
-test tests::bonus_inventory_reserves_all_outcomes_and_retries_only_the_failed_leg ... ok
 test tests::pool_is_unfunded_and_cannot_promise_rewards ... ok
-test configured_tests::configured_bonus_failure_retries_only_bonus_and_never_changes_result_or_fee ... ok
 test tests::one_pending_per_user_and_nonce_prevent_replay ... ok
+test tests::pause_and_unregistered_storage_refund_without_fees ... ok
+test configured_tests::configured_bonus_failure_retries_only_bonus_and_never_changes_result_or_fee ... ok
+test tests::bonus_inventory_reserves_all_outcomes_and_retries_only_the_failed_leg ... ok
 test tests::stale_quotes_wrong_amounts_cases_nonces_and_malformed_messages_refund ... ok
-test tests::history_pages_follow_inclusive_account_cursor_without_duplicates ... ok
 test tests::unauthorized_funding_is_refunded ... ok
 test tests::reconciliation_bounds_cover_transfers_in_flight_and_equal_at_quiescence ... ok
-test tests::success_callback_releases_once_and_vests_only_completed_fees ... ok
+test tests::history_pages_follow_inclusive_account_cursor_without_duplicates ... ok
 test tests::valid_payment_consumes_once_and_reserves_maximum_without_spending_fees ... ok
+test tests::success_callback_releases_once_and_vests_only_completed_fees ... ok
 test tests::unknown_in_flight_transfer_cannot_be_retried - should panic ... ok
 test tests::treasury_uses_only_vested_fees_and_failed_withdrawal_restores_once ... ok
 test tests::concurrent_openings_reserve_funds_and_limit_risk ... ok
 
-test result: ok. 34 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 17.75s
+test result: ok. 34 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 19.21s
 
      Running unittests src/lib.rs (target/debug/deps/iroh_economics-7089daeab8caf25e)
 
 running 12 tests
 test tests::health_thresholds_use_available_liquidity ... ok
 test tests::legendary_slope_and_both_clamps_include_boundary_neighbors ... ok
-test configured::tests::invalid_configuration_is_rejected_before_arithmetic ... ok
 test tests::maximum_u128_has_the_same_saturated_distribution ... ok
-test tests::distribution_and_health_serialize_for_quote_views ... ok
+test configured::tests::invalid_configuration_is_rejected_before_arithmetic ... ok
 test tests::reference_distributions_and_equilibrium_are_exact ... ok
-test tests::draw_outside_the_probability_space_is_rejected - should panic ... ok
+test tests::distribution_and_health_serialize_for_quote_views ... ok
 test tests::target_slope_and_both_clamps_include_boundary_neighbors ... ok
+test tests::draw_outside_the_probability_space_is_rejected - should panic ... ok
 test tests::draw_intervals_pay_exactly_the_advertised_counts ... ok
 test configured::tests::configured_economies_normalize_at_all_pool_levels_and_match_exact_targets ... ok
 test configured::tests::draw_intervals_match_all_advertised_counts ... ok
 test tests::every_piecewise_breakpoint_and_neighbor_preserves_the_economy ... ok
 
-test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.42s
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.48s
 
      Running unittests src/bin/simulate.rs (target/debug/deps/simulate-390f4dec00b31086)
 
 running 12 tests
 test tests::splitmix_reference_sequence_is_stable ... ok
 test tests::second_payment_for_the_same_pending_user_is_fully_rejected ... ok
-test tests::failed_transfer_preserves_reward_and_retries_without_a_draw ... ok
 test tests::funded_common_draw_conserves_cash_and_vests_only_paid_fee ... ok
+test tests::failed_transfer_preserves_reward_and_retries_without_a_draw ... ok
 test tests::csv_contains_all_metrics_and_svg_has_accessible_title ... ok
-test tests::empty_pool_rejects_all_payments_without_credits ... ok
 test tests::forced_legendary_streak_rejects_before_insolvency ... ok
+test tests::empty_pool_rejects_all_payments_without_credits ... ok
 test tests::unpaid_rewards_and_fees_stay_reserved ... ok
 test tests::modeled_concurrency_caps_are_64_16_and_4 ... ok
 test tests::faucet_claims_are_permanent_after_unregistration ... ok
-test tests::user_growth_does_not_change_fixed_target_or_sequential_economics ... ok
 test tests::identical_seed_produces_identical_ledger_and_report ... ok
+test tests::user_growth_does_not_change_fixed_target_or_sequential_economics ... ok
 
-test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
 
      Running unittests src/bin/simulate-collection.rs (target/debug/deps/simulate_collection-fea6bdda722faa51)
 
@@ -95,25 +95,25 @@ test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
      Running unittests src/lib.rs (target/debug/deps/iroh_usdi-708811332bcd5228)
 
 running 17 tests
-test tests::initialization_accepts_implicit_owner ... ok
 test tests::initializes_finite_bootstrap_and_test_currency_metadata ... ok
-test tests::insufficient_deposit_changes_no_state_or_receipts ... ok
-test tests::claim_credits_registered_accounts_and_refunds_only_excess ... ok
+test tests::initialization_accepts_implicit_owner ... ok
 test tests::overflow_is_rejected_before_registering_or_marking_claimed ... ok
+test tests::insufficient_deposit_changes_no_state_or_receipts ... ok
+test tests::initialization_rejects_mainnet_contract_and_owner ... ok
 test tests::maximum_length_claim_storage_is_covered_and_registration_fully_refundable ... ok
 test tests::first_claim_registers_and_mints_to_predecessor_with_events ... ok
-test tests::duplicates_are_atomic_and_accounts_claim_independently ... ok
-test tests::initialization_rejects_mainnet_contract_and_owner ... ok
 test tests::insufficient_balance_cannot_schedule_a_paid_opening ... ok
+test tests::claim_credits_registered_accounts_and_refunds_only_excess ... ok
+test tests::duplicates_are_atomic_and_accounts_claim_independently ... ok
 test tests::resolver_rejects_external_callers_before_mutation ... ok
+test tests::standard_transfer_requires_one_yocto_and_registered_receiver ... ok
 test tests::standard_storage_registration_refunds_excess_and_withdraw_has_no_available_balance ... ok
 test tests::unregistered_claim_cost_covers_standard_refundable_minimum_and_refunds_excess_once ... ok
-test tests::standard_transfer_requires_one_yocto_and_registered_receiver ... ok
-test tests::transfers_and_unregister_preserve_permanent_claim ... ok
 test tests::resolver_refunds_receiver_failure_using_standard_accounting ... ok
+test tests::transfers_and_unregister_preserve_permanent_claim ... ok
 test tests::transfer_call_schedules_receiver_and_private_resolver_and_partial_refund ... ok
 
-test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.14s
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.15s
 
    Doc-tests iroh_case_pool
 
