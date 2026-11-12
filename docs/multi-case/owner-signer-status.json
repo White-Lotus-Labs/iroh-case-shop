@@ -1,0 +1,16 @@
+{
+  "checkedAt": "2026-11-12T13:54:06.232826+00:00",
+  "network": "testnet",
+  "accountId": "needmore_1_near.testnet",
+  "expectedPublicKey": "ed25519:BntboZwnJtLVnBBh4XffXUDwbaygCsQiMmhWXD3xCi6",
+  "onChainPermission": "FullAccess",
+  "onChainBlockHeight": 277371336,
+  "onChainNonce": 276359394000016,
+  "keychainService": "near-testnet-needmore_1_near.testnet",
+  "keychainAccount": "needmore_1_near.testnet:ed25519:BntboZwnJtLVnBBh4XffXUDwbaygCsQiMmhWXD3xCi6",
+  "keychainEntryPresent": false,
+  "signerVerified": false,
+  "status": "awaiting_user_private_setup",
+  "secretsReadByAssistant": false,
+  "transactionsSubmittedDuringSetup": 0
+}

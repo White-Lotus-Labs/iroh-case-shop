@@ -63,6 +63,8 @@ docs/multi-case/execution.json
 docs/multi-case/executor-review.md
 docs/multi-case/implementation-plan.md
 docs/multi-case/live-preflight.json
+docs/multi-case/owner-keychain-setup.md
+docs/multi-case/owner-signer-status.json
 docs/multi-case/post-shitzu-preflight.json
 docs/multi-case/receipt-dragon-fund-bonus-dragon-tea-AURORA.json
 docs/multi-case/receipt-dragon-fund-bonus-dragon-tea-RHEA.json
