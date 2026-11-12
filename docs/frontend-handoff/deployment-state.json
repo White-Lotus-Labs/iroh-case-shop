@@ -1,0 +1,367 @@
+{
+  "recordedAt": "2026-11-12T18:39:02.909838+00:00",
+  "network": "testnet",
+  "deploymentPaused": true,
+  "verifiedSteps": 47,
+  "totalSteps": 90,
+  "manifestSha256": "4cf07ab44a6dcf3f9aedf970c938808ec2bcb61e6e21fec959bf36d859db5cc9",
+  "paymentToken": "usdi-needmore-1-near.testnet",
+  "unreconciledTransactions": [
+    {
+      "step": "case-fund-bonus-moon-spirit-PURGE",
+      "status": "submitted",
+      "hash": "mttoMLZFbGD21xLu5b3homhfLDwLuPe5JBAo4XeAB4G"
+    }
+  ],
+  "cases": [
+    {
+      "id": "bamboo-mist",
+      "contractId": "bamboo.needmore_1_near.testnet",
+      "frontendStatus": "planned",
+      "codeDeploymentVerified": true,
+      "activationVerified": false,
+      "priceRaw": "500000",
+      "usdiRewardsRaw": [
+        "200000",
+        "500000",
+        "4000000"
+      ],
+      "bonusRewards": [
+        {
+          "token_contract_id": "iroh-test-shitzu.testnet",
+          "token_symbol": "SHITZU",
+          "display_name": "Test Shitzu",
+          "token_decimals": 6,
+          "amount": "25000000",
+          "tier": 0
+        },
+        {
+          "token_contract_id": "blackdragon.needmore_1_near.testnet",
+          "token_symbol": "BLACKDRAGON",
+          "display_name": "Test Black Dragon",
+          "token_decimals": 24,
+          "amount": "25000000000000000000000000",
+          "tier": 0
+        },
+        {
+          "token_contract_id": "neko.needmore_1_near.testnet",
+          "token_symbol": "NEKO",
+          "display_name": "Test Neko",
+          "token_decimals": 24,
+          "amount": "10000000000000000000000000",
+          "tier": 1
+        },
+        {
+          "token_contract_id": "iroh-test-rhea.testnet",
+          "token_symbol": "RHEA",
+          "display_name": "Test Rhea",
+          "token_decimals": 6,
+          "amount": "1000000",
+          "tier": 2
+        }
+      ]
+    },
+    {
+      "id": "dragon-tea",
+      "contractId": "cases-needmore-1-near.testnet",
+      "frontendStatus": "verified-live",
+      "codeDeploymentVerified": true,
+      "activationVerified": true,
+      "priceRaw": "1000000",
+      "usdiRewardsRaw": [
+        "100000",
+        "1000000",
+        "5000000"
+      ],
+      "bonusRewards": [
+        {
+          "token_contract_id": "iroh-test-shitzu.testnet",
+          "token_symbol": "SHITZU",
+          "display_name": "Test Shitzu",
+          "token_decimals": 6,
+          "amount": "50000000",
+          "tier": 0
+        },
+        {
+          "token_contract_id": "iroh-test-rhea.testnet",
+          "token_symbol": "RHEA",
+          "display_name": "Test Rhea",
+          "token_decimals": 6,
+          "amount": "5000000",
+          "tier": 1
+        },
+        {
+          "token_contract_id": "iroh-test-aurora.testnet",
+          "token_symbol": "AURORA",
+          "display_name": "Test Aurora",
+          "token_decimals": 6,
+          "amount": "1000000",
+          "tier": 2
+        }
+      ]
+    },
+    {
+      "id": "moon-spirit",
+      "contractId": "moon.needmore_1_near.testnet",
+      "frontendStatus": "planned",
+      "codeDeploymentVerified": true,
+      "activationVerified": false,
+      "priceRaw": "2000000",
+      "usdiRewardsRaw": [
+        "100000",
+        "2000000",
+        "20000000"
+      ],
+      "bonusRewards": [
+        {
+          "token_contract_id": "purge.needmore_1_near.testnet",
+          "token_symbol": "PURGE",
+          "display_name": "Test Purge",
+          "token_decimals": 18,
+          "amount": "20000000000000000000",
+          "tier": 0
+        },
+        {
+          "token_contract_id": "gear.needmore_1_near.testnet",
+          "token_symbol": "GEAR",
+          "display_name": "Test Gear",
+          "token_decimals": 18,
+          "amount": "2000000000000000000",
+          "tier": 0
+        },
+        {
+          "token_contract_id": "neko.needmore_1_near.testnet",
+          "token_symbol": "NEKO",
+          "display_name": "Test Neko",
+          "token_decimals": 24,
+          "amount": "50000000000000000000000000",
+          "tier": 1
+        },
+        {
+          "token_contract_id": "mpdao.needmore_1_near.testnet",
+          "token_symbol": "mpDAO",
+          "display_name": "Test mpDAO",
+          "token_decimals": 6,
+          "amount": "2000000",
+          "tier": 1
+        },
+        {
+          "token_contract_id": "stnear.needmore_1_near.testnet",
+          "token_symbol": "STNEAR",
+          "display_name": "Test Staked NEAR",
+          "token_decimals": 24,
+          "amount": "100000000000000000000000",
+          "tier": 2
+        }
+      ]
+    },
+    {
+      "id": "phoenix-flame",
+      "contractId": "phoenix.needmore_1_near.testnet",
+      "frontendStatus": "planned",
+      "codeDeploymentVerified": false,
+      "activationVerified": false,
+      "priceRaw": "5000000",
+      "usdiRewardsRaw": [
+        "100000",
+        "3500000",
+        "100000000"
+      ],
+      "bonusRewards": [
+        {
+          "token_contract_id": "iroh-test-rhea.testnet",
+          "token_symbol": "RHEA",
+          "display_name": "Test Rhea",
+          "token_decimals": 6,
+          "amount": "2000000",
+          "tier": 0
+        },
+        {
+          "token_contract_id": "iroh-test-aurora.testnet",
+          "token_symbol": "AURORA",
+          "display_name": "Test Aurora",
+          "token_decimals": 6,
+          "amount": "2000000",
+          "tier": 1
+        },
+        {
+          "token_contract_id": "mpdao.needmore_1_near.testnet",
+          "token_symbol": "mpDAO",
+          "display_name": "Test mpDAO",
+          "token_decimals": 6,
+          "amount": "5000000",
+          "tier": 1
+        },
+        {
+          "token_contract_id": "linear.needmore_1_near.testnet",
+          "token_symbol": "LINEAR",
+          "display_name": "Test LiNEAR",
+          "token_decimals": 24,
+          "amount": "200000000000000000000000",
+          "tier": 2
+        },
+        {
+          "token_contract_id": "stnear.needmore_1_near.testnet",
+          "token_symbol": "STNEAR",
+          "display_name": "Test Staked NEAR",
+          "token_decimals": 24,
+          "amount": "200000000000000000000000",
+          "tier": 2
+        },
+        {
+          "token_contract_id": "wnear.needmore_1_near.testnet",
+          "token_symbol": "wNEAR",
+          "display_name": "Test Wrapped NEAR",
+          "token_decimals": 24,
+          "amount": "250000000000000000000000",
+          "tier": 2
+        }
+      ]
+    },
+    {
+      "id": "uncles-secret-reserve",
+      "contractId": "reserve.needmore_1_near.testnet",
+      "frontendStatus": "planned",
+      "codeDeploymentVerified": false,
+      "activationVerified": false,
+      "priceRaw": "10000000",
+      "usdiRewardsRaw": [
+        "2000000",
+        "15000000",
+        "120000000"
+      ],
+      "bonusRewards": [
+        {
+          "token_contract_id": "iroh-test-rhea.testnet",
+          "token_symbol": "RHEA",
+          "display_name": "Test Rhea",
+          "token_decimals": 6,
+          "amount": "10000000",
+          "tier": 0
+        },
+        {
+          "token_contract_id": "iroh-test-aurora.testnet",
+          "token_symbol": "AURORA",
+          "display_name": "Test Aurora",
+          "token_decimals": 6,
+          "amount": "10000000",
+          "tier": 0
+        },
+        {
+          "token_contract_id": "mpdao.needmore_1_near.testnet",
+          "token_symbol": "mpDAO",
+          "display_name": "Test mpDAO",
+          "token_decimals": 6,
+          "amount": "20000000",
+          "tier": 1
+        },
+        {
+          "token_contract_id": "rnear.needmore_1_near.testnet",
+          "token_symbol": "rNEAR",
+          "display_name": "Test Rhea Staked NEAR",
+          "token_decimals": 24,
+          "amount": "500000000000000000000000",
+          "tier": 1
+        },
+        {
+          "token_contract_id": "stnear.needmore_1_near.testnet",
+          "token_symbol": "STNEAR",
+          "display_name": "Test Staked NEAR",
+          "token_decimals": 24,
+          "amount": "1000000000000000000000000",
+          "tier": 2
+        },
+        {
+          "token_contract_id": "linear.needmore_1_near.testnet",
+          "token_symbol": "LINEAR",
+          "display_name": "Test LiNEAR",
+          "token_decimals": 24,
+          "amount": "1000000000000000000000000",
+          "tier": 2
+        },
+        {
+          "token_contract_id": "wnear.needmore_1_near.testnet",
+          "token_symbol": "wNEAR",
+          "display_name": "Test Wrapped NEAR",
+          "token_decimals": 24,
+          "amount": "1000000000000000000000000",
+          "tier": 2
+        }
+      ]
+    }
+  ],
+  "tokens": [
+    {
+      "asset": "SHITZU",
+      "contractId": "iroh-test-shitzu.testnet",
+      "decimals": 6,
+      "unofficialMock": true
+    },
+    {
+      "asset": "RHEA",
+      "contractId": "iroh-test-rhea.testnet",
+      "decimals": 6,
+      "unofficialMock": true
+    },
+    {
+      "asset": "AURORA",
+      "contractId": "iroh-test-aurora.testnet",
+      "decimals": 6,
+      "unofficialMock": true
+    },
+    {
+      "asset": "BLACKDRAGON",
+      "contractId": "blackdragon.needmore_1_near.testnet",
+      "decimals": 24,
+      "unofficialMock": true
+    },
+    {
+      "asset": "NEKO",
+      "contractId": "neko.needmore_1_near.testnet",
+      "decimals": 24,
+      "unofficialMock": true
+    },
+    {
+      "asset": "MPDAO",
+      "contractId": "mpdao.needmore_1_near.testnet",
+      "decimals": 6,
+      "unofficialMock": true
+    },
+    {
+      "asset": "GEAR",
+      "contractId": "gear.needmore_1_near.testnet",
+      "decimals": 18,
+      "unofficialMock": true
+    },
+    {
+      "asset": "PURGE",
+      "contractId": "purge.needmore_1_near.testnet",
+      "decimals": 18,
+      "unofficialMock": true
+    },
+    {
+      "asset": "WNEAR",
+      "contractId": "wnear.needmore_1_near.testnet",
+      "decimals": 24,
+      "unofficialMock": true
+    },
+    {
+      "asset": "STNEAR",
+      "contractId": "stnear.needmore_1_near.testnet",
+      "decimals": 24,
+      "unofficialMock": true
+    },
+    {
+      "asset": "LINEAR",
+      "contractId": "linear.needmore_1_near.testnet",
+      "decimals": 24,
+      "unofficialMock": true
+    },
+    {
+      "asset": "RNEAR",
+      "contractId": "rnear.needmore_1_near.testnet",
+      "decimals": 24,
+      "unofficialMock": true
+    }
+  ]
+}

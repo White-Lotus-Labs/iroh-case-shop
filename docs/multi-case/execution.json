@@ -4,28 +4,54 @@
   "initial_owner_balance_yocto": "109108852052391552799199995",
   "steps": {
     "token-BLACKDRAGON-create": {
-      "status": "blocked_wallet_policy",
-      "tx_hash": null,
+      "status": "verified",
+      "tx_hash": "EaRaXfVSA3wiWaRp3Q8uVGkpP8buHsCLD4EsGPg85BTD",
       "signer_id": "needmore_1_near.testnet",
       "receiver_id": "blackdragon.needmore_1_near.testnet",
       "before": {
-        "block_hash": "HH76NKfctjbdxYtsLUehR7BFWJmp9G9yr9HZRm3biWUu",
-        "block_height": 277267579,
-        "nonce": 276359394000011,
+        "block_hash": "6kvccBLuSgmX1VyFCv3zwh1cFkbhsPfEeQmP7rzhyBCC",
+        "block_height": 277393417,
+        "nonce": 276359394000016,
         "target": {
           "absent": true
         }
       },
-      "transport": "meteor_browser",
-      "actual_fee_yocto": "0",
-      "reason": "Meteor blocked the exact new-account AddKey FullAccess action and disabled Approve. User canceled; browser displayed User cancelled the action. Finalized block 277267852 showed target absent, original owner nonce 276359394000011, and unchanged native balance. No signing or broadcast observed.",
-      "wallet_cancelled": true,
-      "no_broadcast_check": {
-        "block_height": 277267852,
-        "target_absent": true,
-        "owner_nonce": 276359394000011,
-        "owner_balance_yocto": "109108852052391552799199995"
-      }
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000017,
+      "signed_block_hash": "6kvccBLuSgmX1VyFCv3zwh1cFkbhsPfEeQmP7rzhyBCC",
+      "receipt_file": "docs/multi-case/receipt-token-BLACKDRAGON-create.json",
+      "actual_fee_yocto": "7114989537500000000000",
+      "after": {
+        "block_hash": "7HXAxeikdWP9x4RTUPbZHZyVsmyanHPptaZEuLPw1ffY"
+      },
+      "verified_at": "2026-11-12T17:28:55.108557+00:00",
+      "previous_attempts": [
+        {
+          "status": "blocked_wallet_policy",
+          "tx_hash": null,
+          "signer_id": "needmore_1_near.testnet",
+          "receiver_id": "blackdragon.needmore_1_near.testnet",
+          "before": {
+            "block_hash": "HH76NKfctjbdxYtsLUehR7BFWJmp9G9yr9HZRm3biWUu",
+            "block_height": 277267579,
+            "nonce": 276359394000011,
+            "target": {
+              "absent": true
+            }
+          },
+          "transport": "meteor_browser",
+          "actual_fee_yocto": "0",
+          "reason": "Meteor blocked the exact new-account AddKey FullAccess action and disabled Approve. User canceled; browser displayed User cancelled the action. Finalized block 277267852 showed target absent, original owner nonce 276359394000011, and unchanged native balance. No signing or broadcast observed.",
+          "wallet_cancelled": true,
+          "no_broadcast_check": {
+            "block_height": 277267852,
+            "target_absent": true,
+            "owner_nonce": 276359394000011,
+            "owner_balance_yocto": "109108852052391552799199995"
+          }
+        }
+      ],
+      "resumption_reconciliation": "Canceled wallet request had no broadcast; owner nonce increases 12 through16 belonged only to verified approved Dragon steps; fresh key, funding, code and absent target checks passed before resuming."
     },
     "dragon-register-RHEA": {
       "status": "verified",
@@ -860,12 +886,1399 @@
         "block_hash": "BGfAD4ZxnZYBod1s4bSiRyozcwDv5z9YWHGTaqjRRPum"
       },
       "verified_at": "2026-11-12T01:01:55.950403+00:00"
+    },
+    "token-BLACKDRAGON-deploy": {
+      "status": "verified",
+      "tx_hash": "BwxYr2jHBESrDiqw7x3LPic4ixeYtF5kykWhyu32Tx6F",
+      "signer_id": "blackdragon.needmore_1_near.testnet",
+      "receiver_id": "blackdragon.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "D2xjMAVGpB2kYsdkYJtMyi943caAFVHcJxU67fAjbDxd",
+        "block_height": 277393961,
+        "nonce": 277393854000000,
+        "target": {
+          "amount": "5000000000000000000000000",
+          "code_hash": "11111111111111111111111111111111",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 182
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277393854000001,
+      "signed_block_hash": "D2xjMAVGpB2kYsdkYJtMyi943caAFVHcJxU67fAjbDxd",
+      "receipt_file": "docs/multi-case/receipt-token-BLACKDRAGON-deploy.json",
+      "actual_fee_yocto": "2593030615077800000000",
+      "after": {
+        "block_hash": "EfzaR73nzYpYnZhKU7sHKogYsCo4UvELAUsXC8QgmhxM"
+      },
+      "verified_at": "2026-11-12T17:30:14.278012+00:00"
+    },
+    "token-NEKO-create": {
+      "status": "verified",
+      "tx_hash": "Gz6T9NKfntG4BEQ7WAww7FVx5QsYLTZkXHNjbYNPEJYJ",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "neko.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "CtsFhDnhdtsoreDshhjsPEqauYUCvEoEoPo9hDWifpdZ",
+        "block_height": 277393994,
+        "nonce": 276359394000017,
+        "target": {
+          "absent": true
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000018,
+      "signed_block_hash": "CtsFhDnhdtsoreDshhjsPEqauYUCvEoEoPo9hDWifpdZ",
+      "receipt_file": "docs/multi-case/receipt-token-NEKO-create.json",
+      "actual_fee_yocto": "7114989537500000000000",
+      "after": {
+        "block_hash": "7VZRReFmH9D57wztW2PD1aUjRNrdhKrVEvLxDpsBcG9c"
+      },
+      "verified_at": "2026-11-12T17:30:40.616647+00:00"
+    },
+    "token-NEKO-deploy": {
+      "status": "verified",
+      "tx_hash": "9MWmiGZkaTM6H1t93zKMufzNiVzyRvkAYTmmBtRD11AH",
+      "signer_id": "neko.needmore_1_near.testnet",
+      "receiver_id": "neko.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "v2bfzQ3NeqKTVJaoCDE1d5f7ein8w65LzXyfr5wPVJ6",
+        "block_height": 277394039,
+        "nonce": 277394035000000,
+        "target": {
+          "amount": "5000000000000000000000000",
+          "code_hash": "11111111111111111111111111111111",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 182
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277394035000001,
+      "signed_block_hash": "v2bfzQ3NeqKTVJaoCDE1d5f7ein8w65LzXyfr5wPVJ6",
+      "receipt_file": "docs/multi-case/receipt-token-NEKO-deploy.json",
+      "actual_fee_yocto": "2586412163647200000000",
+      "after": {
+        "block_hash": "4YoTNPS6ait6MYQsG6mFQkDupWpmU1zBpLCPEvsFwZRC"
+      },
+      "verified_at": "2026-11-12T17:30:58.840085+00:00"
+    },
+    "token-MPDAO-create": {
+      "status": "verified",
+      "tx_hash": "BDD8vXgEvn41ySJXJuqe8GLWqD8e9A2h3JBVoZebGViw",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "mpdao.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "3XCVyo8zF3ZX2WbBo6oSZwAXS3LStqQKtPFmJevctT2X",
+        "block_height": 277394073,
+        "nonce": 276359394000018,
+        "target": {
+          "absent": true
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000019,
+      "signed_block_hash": "3XCVyo8zF3ZX2WbBo6oSZwAXS3LStqQKtPFmJevctT2X",
+      "receipt_file": "docs/multi-case/receipt-token-MPDAO-create.json",
+      "actual_fee_yocto": "7114989537500000000000",
+      "after": {
+        "block_hash": "3nSZ6EfwhQby5a4oo8oTPnB4GHujKpWHMcaQpt4ygpau"
+      },
+      "verified_at": "2026-11-12T17:31:20.512751+00:00"
+    },
+    "token-MPDAO-deploy": {
+      "status": "verified",
+      "tx_hash": "HoNUG6rC6aLwYAsTkKbFCyvxSPXCZjvyY1chsYKidMBL",
+      "signer_id": "mpdao.needmore_1_near.testnet",
+      "receiver_id": "mpdao.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "9LmHiFq5fBjyPt1B1KNtJeNYcdoZw7Kuw4FZgN23NQLc",
+        "block_height": 277394114,
+        "nonce": 277394110000000,
+        "target": {
+          "amount": "5000000000000000000000000",
+          "code_hash": "11111111111111111111111111111111",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 182
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277394110000001,
+      "signed_block_hash": "9LmHiFq5fBjyPt1B1KNtJeNYcdoZw7Kuw4FZgN23NQLc",
+      "receipt_file": "docs/multi-case/receipt-token-MPDAO-deploy.json",
+      "actual_fee_yocto": "2585716488797600000000",
+      "after": {
+        "block_hash": "9TmqVtTBt8FuKHQyLtRxELb5m3towPmQuGp4FUNuudpT"
+      },
+      "verified_at": "2026-11-12T17:31:44.633497+00:00"
+    },
+    "token-GEAR-create": {
+      "status": "verified",
+      "tx_hash": "ZyjSTWyyHAfiXfcmTPaeyN7sU4SzCwYvHGPZ2kytTVq",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "gear.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "EnqrAMjTBbYFsGbjb9bzYrAwuPiasGZ6MbuY8AVVnfhu",
+        "block_height": 277394156,
+        "nonce": 276359394000019,
+        "target": {
+          "absent": true
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000020,
+      "signed_block_hash": "EnqrAMjTBbYFsGbjb9bzYrAwuPiasGZ6MbuY8AVVnfhu",
+      "receipt_file": "docs/multi-case/receipt-token-GEAR-create.json",
+      "actual_fee_yocto": "7114989537500000000000",
+      "after": {
+        "block_hash": "8JNzCjLCFPXo7N4hGjduVo2cdrxRkS1dq763ZJGWNqyD"
+      },
+      "verified_at": "2026-11-12T17:32:03.139585+00:00"
+    },
+    "token-GEAR-deploy": {
+      "status": "verified",
+      "tx_hash": "hcDQ1pLqKFYGKp5wxh2FXh5Djz4xyqHSVcVSEDi2j6T",
+      "signer_id": "gear.needmore_1_near.testnet",
+      "receiver_id": "gear.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "3aFaHpQ5117RaEzcfvVrerBUZJg11L647awwFv9v4uUZ",
+        "block_height": 277394187,
+        "nonce": 277394183000000,
+        "target": {
+          "amount": "5000000000000000000000000",
+          "code_hash": "11111111111111111111111111111111",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 182
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277394183000001,
+      "signed_block_hash": "3aFaHpQ5117RaEzcfvVrerBUZJg11L647awwFv9v4uUZ",
+      "receipt_file": "docs/multi-case/receipt-token-GEAR-deploy.json",
+      "actual_fee_yocto": "2587993998294600000000",
+      "after": {
+        "block_hash": "CPcaNRqEwdx5JGAeQ3gRqvw9F68gnNWDEEwEabNAExFq"
+      },
+      "verified_at": "2026-11-12T17:32:23.662816+00:00"
+    },
+    "token-PURGE-create": {
+      "status": "verified",
+      "tx_hash": "FbAkwbSdWDDUq2NqZWBHGDPcr4hNgJ18AH9JBpr51q22",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "purge.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "EmBG3QDXRAvPiAdZpCgRjBBedXNK9juvQTjjSj1er1Ty",
+        "block_height": 277394222,
+        "nonce": 276359394000020,
+        "target": {
+          "absent": true
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000021,
+      "signed_block_hash": "EmBG3QDXRAvPiAdZpCgRjBBedXNK9juvQTjjSj1er1Ty",
+      "receipt_file": "docs/multi-case/receipt-token-PURGE-create.json",
+      "actual_fee_yocto": "7114989537500000000000",
+      "after": {
+        "block_hash": "GYF2gGpiUQRbZWLhirVbVPzJWcAgHcrH3aXgtcrbgsD8"
+      },
+      "verified_at": "2026-11-12T17:32:42.336317+00:00"
+    },
+    "token-PURGE-deploy": {
+      "status": "verified",
+      "tx_hash": "D62DjTCCvnsWdXoBzCv5NgVb7aJk3mou1wkfnyfTHaZ1",
+      "signer_id": "purge.needmore_1_near.testnet",
+      "receiver_id": "purge.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "YxyCBe9iB7uq8n3yzAxqzcRQCkJrRJdP5Z1VAm5QCPb",
+        "block_height": 277394256,
+        "nonce": 277394252000000,
+        "target": {
+          "amount": "5000000000000000000000000",
+          "code_hash": "11111111111111111111111111111111",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 182
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277394252000001,
+      "signed_block_hash": "YxyCBe9iB7uq8n3yzAxqzcRQCkJrRJdP5Z1VAm5QCPb",
+      "receipt_file": "docs/multi-case/receipt-token-PURGE-deploy.json",
+      "actual_fee_yocto": "2584420672397600000000",
+      "after": {
+        "block_hash": "61EnuurjPw2G7sMvT5KKyehv9aef8RuTxx835N8PySnA"
+      },
+      "verified_at": "2026-11-12T17:33:00.502657+00:00"
+    },
+    "token-WNEAR-create": {
+      "status": "verified",
+      "tx_hash": "G91eUEjAVDNsqAtKrxyC53vRCsZx4Mtknq9BEEFL9y5C",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "wnear.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "9nxa92eRdMeWqDB5t2fnMTtyZCEZ4awZgxjo8J1bAMFC",
+        "block_height": 277394286,
+        "nonce": 276359394000021,
+        "target": {
+          "absent": true
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000022,
+      "signed_block_hash": "9nxa92eRdMeWqDB5t2fnMTtyZCEZ4awZgxjo8J1bAMFC",
+      "receipt_file": "docs/multi-case/receipt-token-WNEAR-create.json",
+      "actual_fee_yocto": "7114989537500000000000",
+      "after": {
+        "block_hash": "4A47MYXJibQNxrJmywSjjVTV1wx75tJK5XTZSiupbdVs"
+      },
+      "verified_at": "2026-11-12T17:33:19.365451+00:00"
+    },
+    "token-WNEAR-deploy": {
+      "status": "verified",
+      "tx_hash": "7SQZQs6gprjwy8p2oynE1a6tDDfCVP1FggMuCfUDLyaV",
+      "signer_id": "wnear.needmore_1_near.testnet",
+      "receiver_id": "wnear.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "5ksSnwCWhLJfhDybqfXe1vsdZGbFgcSKHwFWyhn86EWx",
+        "block_height": 277394317,
+        "nonce": 277394312000000,
+        "target": {
+          "amount": "5000000000000000000000000",
+          "code_hash": "11111111111111111111111111111111",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 182
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277394312000001,
+      "signed_block_hash": "5ksSnwCWhLJfhDybqfXe1vsdZGbFgcSKHwFWyhn86EWx",
+      "receipt_file": "docs/multi-case/receipt-token-WNEAR-deploy.json",
+      "actual_fee_yocto": "2588545953114200000000",
+      "after": {
+        "block_hash": "8Jd5V8PRsuvuJ9HdMnFrEZJgpuZgRkfM7v4nR63BzsL"
+      },
+      "verified_at": "2026-11-12T17:33:40.309323+00:00"
+    },
+    "token-STNEAR-create": {
+      "status": "verified",
+      "tx_hash": "AAM9gDZUjQEd3eukiCs672mFKGrcKXfFe2BWM5sSSBAz",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "stnear.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "9c4c1Kbv2bxhXcvgS6dqjoKoMT8Jf5HDS4anWxL1WZcc",
+        "block_height": 277394352,
+        "nonce": 276359394000022,
+        "target": {
+          "absent": true
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000023,
+      "signed_block_hash": "9c4c1Kbv2bxhXcvgS6dqjoKoMT8Jf5HDS4anWxL1WZcc",
+      "receipt_file": "docs/multi-case/receipt-token-STNEAR-create.json",
+      "actual_fee_yocto": "7114989537500000000000",
+      "after": {
+        "block_hash": "5isvhe2cBzRisoWvsNmvXRf6c1doY2yLVQyfDwjU5VNi"
+      },
+      "verified_at": "2026-11-12T17:33:58.172117+00:00"
+    },
+    "token-STNEAR-deploy": {
+      "status": "verified",
+      "tx_hash": "28fKwyyeAjmg36GfTqwN5vVsLf7zjindSjcfbuKogjHF",
+      "signer_id": "stnear.needmore_1_near.testnet",
+      "receiver_id": "stnear.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "ArLr5Ug8qo5M1rNKaCjgmGixqJh2joqZkXHe5D7PtaYq",
+        "block_height": 277394381,
+        "nonce": 277394377000000,
+        "target": {
+          "amount": "5000000000000000000000000",
+          "code_hash": "11111111111111111111111111111111",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 182
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277394377000001,
+      "signed_block_hash": "ArLr5Ug8qo5M1rNKaCjgmGixqJh2joqZkXHe5D7PtaYq",
+      "receipt_file": "docs/multi-case/receipt-token-STNEAR-deploy.json",
+      "actual_fee_yocto": "2589472348654000000000",
+      "after": {
+        "block_hash": "4PpuWbKphX87L3cyzWhq4KXb2pCPJpwauACzYf26WE4F"
+      },
+      "verified_at": "2026-11-12T17:34:18.653174+00:00"
+    },
+    "token-LINEAR-create": {
+      "status": "verified",
+      "tx_hash": "CCeriMQfX9mtSa9NrmB5CUSNnNmF1oaCqVtMDvWqKtfX",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "linear.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "8LSX2hRLN34ifSkUyLxu9gvDCGbKjXRCeA8iPGHyFyse",
+        "block_height": 277394415,
+        "nonce": 276359394000023,
+        "target": {
+          "absent": true
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000024,
+      "signed_block_hash": "8LSX2hRLN34ifSkUyLxu9gvDCGbKjXRCeA8iPGHyFyse",
+      "receipt_file": "docs/multi-case/receipt-token-LINEAR-create.json",
+      "actual_fee_yocto": "7114989537500000000000",
+      "after": {
+        "block_hash": "Ece4NxNSfkeGMcSY992nF3MoUWFrj52YyAnG8vHzgDSV"
+      },
+      "verified_at": "2026-11-12T17:34:44.845900+00:00"
+    },
+    "token-LINEAR-deploy": {
+      "status": "verified",
+      "tx_hash": "6JuQZ4ayyxGrBa4zp94Lfp4wg6nakSMdaLB9FMFJpeKN",
+      "signer_id": "linear.needmore_1_near.testnet",
+      "receiver_id": "linear.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "4EGfsvFW3saoqCi9C9Vd2FDNkQFtPXF38L1u9zvGc2h9",
+        "block_height": 277394463,
+        "nonce": 277394459000000,
+        "target": {
+          "amount": "5000000000000000000000000",
+          "code_hash": "11111111111111111111111111111111",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 182
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277394459000001,
+      "signed_block_hash": "4EGfsvFW3saoqCi9C9Vd2FDNkQFtPXF38L1u9zvGc2h9",
+      "receipt_file": "docs/multi-case/receipt-token-LINEAR-deploy.json",
+      "actual_fee_yocto": "2590404785494000000000",
+      "after": {
+        "block_hash": "CZaN5Sxf4VLSvN2Eg8Qfb87zWvMwB2hbA6pGhpAwFogC"
+      },
+      "verified_at": "2026-11-12T17:35:04.304346+00:00"
+    },
+    "token-RNEAR-create": {
+      "status": "verified",
+      "tx_hash": "3N5WBo7rL3Ga82a3NtKkqnEnhHGjunnwY39cnasJ6drd",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "rnear.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "7qrfv5GsbJXwoYBPxtNm8nGKCPfEjqzakp7TtXhYvjMX",
+        "block_height": 277394497,
+        "nonce": 276359394000024,
+        "target": {
+          "absent": true
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000025,
+      "signed_block_hash": "7qrfv5GsbJXwoYBPxtNm8nGKCPfEjqzakp7TtXhYvjMX",
+      "receipt_file": "docs/multi-case/receipt-token-RNEAR-create.json",
+      "actual_fee_yocto": "7114989537500000000000",
+      "after": {
+        "block_hash": "6eTCJpWMm7u2Z9LK6FDgCNK1uMXXkrJDcgWP2LXi7nW2"
+      },
+      "verified_at": "2026-11-12T17:35:23.239839+00:00"
+    },
+    "token-RNEAR-deploy": {
+      "status": "verified",
+      "tx_hash": "26iJiGNJhi8L7V8Z3rgAXnnEwqbWyiTH11N5zz2z9NRG",
+      "signer_id": "rnear.needmore_1_near.testnet",
+      "receiver_id": "rnear.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "HqZnSCkx7bK5gYzTTy3snHcAuNTmdRcQ4ANoe7YqUH6Z",
+        "block_height": 277394529,
+        "nonce": 277394525000000,
+        "target": {
+          "amount": "5000000000000000000000000",
+          "code_hash": "11111111111111111111111111111111",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 182
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277394525000001,
+      "signed_block_hash": "HqZnSCkx7bK5gYzTTy3snHcAuNTmdRcQ4ANoe7YqUH6Z",
+      "receipt_file": "docs/multi-case/receipt-token-RNEAR-deploy.json",
+      "actual_fee_yocto": "2583101456537000000000",
+      "after": {
+        "block_hash": "EhtqyrqwbWNb1LuDuvz9npZDfJCMoJHa9TB195LACJcj"
+      },
+      "verified_at": "2026-11-12T17:35:45.670901+00:00"
+    },
+    "case-bamboo-mist-create": {
+      "status": "verified",
+      "tx_hash": "2MaaH9WtZv9pd7fu5HVQ887Xz3e3eyXfM5tXSsdnW7Mi",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "bamboo.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "DuzYwjE64stJsTZDTXzXYXrStZQDFdSy1SrZYWcLnnDQ",
+        "block_height": 277394566,
+        "nonce": 276359394000025,
+        "target": {
+          "absent": true
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000026,
+      "signed_block_hash": "DuzYwjE64stJsTZDTXzXYXrStZQDFdSy1SrZYWcLnnDQ",
+      "receipt_file": "docs/multi-case/receipt-case-bamboo-mist-create.json",
+      "actual_fee_yocto": "7114989537500000000000",
+      "after": {
+        "block_hash": "2aWBnvxusbETrLwakeQbnkG9oxk9pED7P72wemp6cpVw"
+      },
+      "verified_at": "2026-11-12T17:36:06.413130+00:00"
+    },
+    "case-bamboo-mist-deploy": {
+      "status": "verified",
+      "tx_hash": "BLw6UsDLtDq11BvB1LUVAV36Xc3BE7hZe7NdxeTuq1mf",
+      "signer_id": "bamboo.needmore_1_near.testnet",
+      "receiver_id": "bamboo.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "GExGKcfDq6SvbosSPHRZgvqcuMLcKvPM6siKZ6UKc1V3",
+        "block_height": 277394600,
+        "nonce": 277394596000000,
+        "target": {
+          "amount": "7000000000000000000000000",
+          "code_hash": "11111111111111111111111111111111",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 182
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277394596000001,
+      "signed_block_hash": "GExGKcfDq6SvbosSPHRZgvqcuMLcKvPM6siKZ6UKc1V3",
+      "submission_response": "Unconfirmed; querying the saved transaction hash without resubmission",
+      "reason": "Final receipt or postcondition verification incomplete; reconcile the saved hash",
+      "same_hash_recovery": {
+        "checked_at": "2026-11-12T17:46:09.016977+00:00",
+        "unknown_on_both_rpcs": [
+          {
+            "rpc": "https://rpc.testnet.fastnear.com",
+            "status": "UNKNOWN_TRANSACTION"
+          },
+          {
+            "rpc": "https://rpc.testnet.near.org",
+            "status": "UNKNOWN_TRANSACTION"
+          }
+        ],
+        "nonce_unchanged": true,
+        "target_unchanged": true,
+        "same_signed_hash": true,
+        "rpc": "https://rpc.testnet.near.org",
+        "single_recovery_attempt": true
+      },
+      "receipt_file": "docs/multi-case/receipt-case-bamboo-mist-deploy.json",
+      "actual_fee_yocto": "4277140987815000000000",
+      "after": {
+        "block_hash": "GQW4qBeApF8jG7SH35fijmVKfUejZECgHWdUNNfUZwzD",
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "0",
+            "reserved_rewards": "0",
+            "available": "0",
+            "target": "250000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "0",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "0",
+            "expected_balance_max": "0"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T17:46:38.915577+00:00"
+    },
+    "case-register-usdi-bamboo-mist": {
+      "status": "verified",
+      "tx_hash": "8LygBAXXcb7dSZmCp6QJ1UJnbkT75dbzHcE6DwSAt3Ls",
+      "signer_id": "bamboo.needmore_1_near.testnet",
+      "receiver_id": "usdi-needmore-1-near.testnet",
+      "before": {
+        "block_hash": "HresmP7cSL3wyP1phhEcWfDyfqeg86icME7497J4jLZJ",
+        "block_height": 277396286,
+        "nonce": 277394596000001,
+        "target": {
+          "amount": "10000943884460581900000009",
+          "code_hash": "2z7yWfap6hkGAcow7xFKRghGWv7Uq1uea3Vn7HV6QuaJ",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 362679
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277394596000002,
+      "signed_block_hash": "HresmP7cSL3wyP1phhEcWfDyfqeg86icME7497J4jLZJ",
+      "receipt_file": "docs/multi-case/receipt-case-register-usdi-bamboo-mist.json",
+      "actual_fee_yocto": "205565902454900000000",
+      "after": {
+        "block_hash": "CDcjB8duPoHHWXLBSQHoeUwqoXDnxczqAYWAUtZwNysW"
+      },
+      "verified_at": "2026-11-12T17:52:56.598042+00:00"
+    },
+    "case-register-bamboo-mist-SHITZU": {
+      "status": "verified",
+      "tx_hash": "Dgex13pXHngiv8HubAuZ2SBkwKCmnA8zpgVpcNKVT3hR",
+      "signer_id": "bamboo.needmore_1_near.testnet",
+      "receiver_id": "iroh-test-shitzu.testnet",
+      "before": {
+        "block_hash": "ECFs7BWmHXkKRbzMsnZZpQsaES734b1NBgCX6DP8UdT8",
+        "block_height": 277396335,
+        "nonce": 277394596000002,
+        "target": {
+          "amount": "9998675748467156000000001",
+          "code_hash": "5heV1Yf3PxjMLWuyXowJoApj38rggW8GsCoScL6Sxidz",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 322440
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277394596000003,
+      "signed_block_hash": "ECFs7BWmHXkKRbzMsnZZpQsaES734b1NBgCX6DP8UdT8",
+      "receipt_file": "docs/multi-case/receipt-case-register-bamboo-mist-SHITZU.json",
+      "actual_fee_yocto": "201166980915700000000",
+      "after": {
+        "block_hash": "AXZ48ovavk2SZT8FdDM6ckzwnusL4ziRwerQ3H2DyXKH"
+      },
+      "verified_at": "2026-11-12T17:53:16.997522+00:00"
+    },
+    "case-register-bamboo-mist-BLACKDRAGON": {
+      "status": "verified",
+      "tx_hash": "GAKyrHntXC9sEY9bzCPjTUfv62BAeYUVjP3EpXtFbZDP",
+      "signer_id": "bamboo.needmore_1_near.testnet",
+      "receiver_id": "blackdragon.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "3JiTuNq6AoFT52QXeNgZmU5DBEc3oefa6bw5nTrveo8z",
+        "block_height": 277396369,
+        "nonce": 277394596000003,
+        "target": {
+          "amount": "4997406969384922200000000",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323660
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277394596000004,
+      "signed_block_hash": "3JiTuNq6AoFT52QXeNgZmU5DBEc3oefa6bw5nTrveo8z",
+      "receipt_file": "docs/multi-case/receipt-case-register-bamboo-mist-BLACKDRAGON.json",
+      "actual_fee_yocto": "204272480336200000000",
+      "after": {
+        "block_hash": "FSziGGszd9cHaFpi32AdKHkiVsM3BcRMmT6ysguJ7Vve"
+      },
+      "verified_at": "2026-11-12T17:53:37.271458+00:00"
+    },
+    "case-register-bamboo-mist-NEKO": {
+      "status": "verified",
+      "tx_hash": "99Cq6KCtht46LE5JLCupN6jLKxTvWUA6sbsno2TS2Lch",
+      "signer_id": "bamboo.needmore_1_near.testnet",
+      "receiver_id": "neko.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "E8E7wsn13jWyC4XUdxJjuSiNs5aqGm3j5kMSaovAo53h",
+        "block_height": 277396402,
+        "nonce": 277394596000004,
+        "target": {
+          "amount": "4997413587836352800000000",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323645
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277394596000005,
+      "signed_block_hash": "E8E7wsn13jWyC4XUdxJjuSiNs5aqGm3j5kMSaovAo53h",
+      "receipt_file": "docs/multi-case/receipt-case-register-bamboo-mist-NEKO.json",
+      "actual_fee_yocto": "201080480336200000000",
+      "after": {
+        "block_hash": "HupN8JVX7muw1QWJZnbVNUXjiXv8j1MzGvSZCSXx1fuu"
+      },
+      "verified_at": "2026-11-12T17:53:57.447072+00:00"
+    },
+    "case-register-bamboo-mist-RHEA": {
+      "status": "verified",
+      "tx_hash": "HDABeuYwuYywAuRBx6dSGHTNHgme2qZnt3bcTDfHKAvs",
+      "signer_id": "bamboo.needmore_1_near.testnet",
+      "receiver_id": "iroh-test-rhea.testnet",
+      "before": {
+        "block_hash": "HupN8JVX7muw1QWJZnbVNUXjiXv8j1MzGvSZCSXx1fuu",
+        "block_height": 277396435,
+        "nonce": 277394596000005,
+        "target": {
+          "amount": "9998674882230381600000001",
+          "code_hash": "5heV1Yf3PxjMLWuyXowJoApj38rggW8GsCoScL6Sxidz",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 322436
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277394596000006,
+      "signed_block_hash": "HupN8JVX7muw1QWJZnbVNUXjiXv8j1MzGvSZCSXx1fuu",
+      "receipt_file": "docs/multi-case/receipt-case-register-bamboo-mist-RHEA.json",
+      "actual_fee_yocto": "201166980915700000000",
+      "after": {
+        "block_hash": "2aVPpMuJJG7hGZQaFQ5VYL2eYWgohp6GTdwgsr2EGBnC"
+      },
+      "verified_at": "2026-11-12T17:54:17.093055+00:00"
+    },
+    "case-fund-usdi-bamboo-mist": {
+      "status": "verified",
+      "tx_hash": "vhZWBfU9HsNmm2DYiqoLCAWr9HF3PGcvpRQ4MhmfXrg",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "usdi-needmore-1-near.testnet",
+      "before": {
+        "block_hash": "GUPmTBYGanSzfYXjof9AaLqAUig2tqLjTdE156JkhQve",
+        "block_height": 277396469,
+        "nonce": 276359394000026,
+        "target": {
+          "amount": "10002193884460581900000009",
+          "code_hash": "2z7yWfap6hkGAcow7xFKRghGWv7Uq1uea3Vn7HV6QuaJ",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 362770
+        },
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "0",
+            "reserved_rewards": "0",
+            "available": "0",
+            "target": "250000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "0",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "0",
+            "expected_balance_max": "0"
+          }
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000027,
+      "signed_block_hash": "GUPmTBYGanSzfYXjof9AaLqAUig2tqLjTdE156JkhQve",
+      "receipt_file": "docs/multi-case/receipt-case-fund-usdi-bamboo-mist.json",
+      "actual_fee_yocto": "656335742936200000000",
+      "after": {
+        "block_hash": "FyKeRHkjWrXUy7HzFW3Li9NXSGREWf4dWSc1zMP1gRu1",
+        "book": {
+          "balance": 50000000,
+          "pool": {
+            "pool_funds": "50000000",
+            "reserved_rewards": "0",
+            "available": "50000000",
+            "target": "250000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "1",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "50000000",
+            "expected_balance_max": "50000000"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T17:54:37.689290+00:00"
+    },
+    "case-fund-bonus-bamboo-mist-SHITZU": {
+      "status": "verified",
+      "tx_hash": "5NzwykqBDYkXMmX5yq3xhCvPyJR7xtrufnVUD3u8wgd",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "iroh-test-shitzu.testnet",
+      "before": {
+        "block_hash": "FByrkcADgXmPSYdfX7uq87paqrDpY1yHaBS6m6mnrNBS",
+        "block_height": 277396505,
+        "nonce": 276359394000027,
+        "target": {
+          "amount": "9999925748467156000000001",
+          "code_hash": "5heV1Yf3PxjMLWuyXowJoApj38rggW8GsCoScL6Sxidz",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 322531
+        },
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "50000000",
+            "reserved_rewards": "0",
+            "available": "50000000",
+            "target": "250000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "1",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "50000000",
+            "expected_balance_max": "50000000"
+          }
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000028,
+      "signed_block_hash": "FByrkcADgXmPSYdfX7uq87paqrDpY1yHaBS6m6mnrNBS",
+      "receipt_file": "docs/multi-case/receipt-case-fund-bonus-bamboo-mist-SHITZU.json",
+      "actual_fee_yocto": "719666309742000000000",
+      "after": {
+        "block_hash": "HVhemJEkKpXLAakUawk25ntWop65kVbhpCceP6FXtCqA",
+        "book": {
+          "balance": 2500000000,
+          "pool": {
+            "pool_funds": "50000000",
+            "reserved_rewards": "0",
+            "available": "50000000",
+            "target": "250000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "2",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "50000000",
+            "expected_balance_max": "50000000"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T17:54:59.690092+00:00"
+    },
+    "case-fund-bonus-bamboo-mist-BLACKDRAGON": {
+      "status": "verified",
+      "tx_hash": "3FAWWsDx85PkTvXvYpctHVdCtxeFqoq32jQmRMx5Dr4x",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "blackdragon.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "6sT6gBwChYqGx8bBc5ehP9LrQLspHH7nFYYeStcfZvKB",
+        "block_height": 277396544,
+        "nonce": 276359394000028,
+        "target": {
+          "amount": "4998656969384922200000000",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323751
+        },
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "50000000",
+            "reserved_rewards": "0",
+            "available": "50000000",
+            "target": "250000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "2",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "50000000",
+            "expected_balance_max": "50000000"
+          }
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000029,
+      "signed_block_hash": "6sT6gBwChYqGx8bBc5ehP9LrQLspHH7nFYYeStcfZvKB",
+      "receipt_file": "docs/multi-case/receipt-case-fund-bonus-bamboo-mist-BLACKDRAGON.json",
+      "actual_fee_yocto": "730204450728900000000",
+      "after": {
+        "block_hash": "EMh3jWDXoMnkSdUy1NdK1VsZPcWgYKQ8WLVRWWgCxSok",
+        "book": {
+          "balance": 2500000000000000000000000000,
+          "pool": {
+            "pool_funds": "50000000",
+            "reserved_rewards": "0",
+            "available": "50000000",
+            "target": "250000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "3",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "50000000",
+            "expected_balance_max": "50000000"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T17:55:22.233591+00:00"
+    },
+    "case-fund-bonus-bamboo-mist-NEKO": {
+      "status": "verified",
+      "tx_hash": "3SAD5GsRmdNjnnnWMFsGx214ZMWZvj6wriYbSSKe3nmK",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "neko.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "FnHATwNQifvVv4UvYgSTvYTRFqSZEb54uP4PuEuFBPcL",
+        "block_height": 277396581,
+        "nonce": 276359394000029,
+        "target": {
+          "amount": "4998663587836352800000000",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323736
+        },
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "50000000",
+            "reserved_rewards": "0",
+            "available": "50000000",
+            "target": "250000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "3",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "50000000",
+            "expected_balance_max": "50000000"
+          }
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000030,
+      "signed_block_hash": "FnHATwNQifvVv4UvYgSTvYTRFqSZEb54uP4PuEuFBPcL",
+      "receipt_file": "docs/multi-case/receipt-case-fund-bonus-bamboo-mist-NEKO.json",
+      "actual_fee_yocto": "723148347066000000000",
+      "after": {
+        "block_hash": "4EQstnye3PNSmqwCBUgZ5vxtSJgQjL3gjM2akgF1PBdA",
+        "book": {
+          "balance": 1000000000000000000000000000,
+          "pool": {
+            "pool_funds": "50000000",
+            "reserved_rewards": "0",
+            "available": "50000000",
+            "target": "250000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "4",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "50000000",
+            "expected_balance_max": "50000000"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T17:55:44.367117+00:00"
+    },
+    "case-fund-bonus-bamboo-mist-RHEA": {
+      "status": "verified",
+      "tx_hash": "2Z81VBnX1BSYjfuTny3osCz4Mv8gDXLRN52DzneXyTzs",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "iroh-test-rhea.testnet",
+      "before": {
+        "block_hash": "D2gNsMzNDbXWFRu78rSZQU3hVtcK1SE35XJHsedEfmpn",
+        "block_height": 277396617,
+        "nonce": 276359394000030,
+        "target": {
+          "amount": "9999924882230381600000001",
+          "code_hash": "5heV1Yf3PxjMLWuyXowJoApj38rggW8GsCoScL6Sxidz",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 322527
+        },
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "50000000",
+            "reserved_rewards": "0",
+            "available": "50000000",
+            "target": "250000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "4",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "50000000",
+            "expected_balance_max": "50000000"
+          }
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000031,
+      "signed_block_hash": "D2gNsMzNDbXWFRu78rSZQU3hVtcK1SE35XJHsedEfmpn",
+      "receipt_file": "docs/multi-case/receipt-case-fund-bonus-bamboo-mist-RHEA.json",
+      "actual_fee_yocto": "719402155662100000000",
+      "after": {
+        "block_hash": "BCXPaVAW8BrK8gYyr4TLVLDXJNQcr3kjqt1dkyhiqrhQ",
+        "book": {
+          "balance": 100000000,
+          "pool": {
+            "pool_funds": "50000000",
+            "reserved_rewards": "0",
+            "available": "50000000",
+            "target": "250000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "5",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "50000000",
+            "expected_balance_max": "50000000"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T17:56:07.114470+00:00"
+    },
+    "case-moon-spirit-create": {
+      "status": "verified",
+      "tx_hash": "EGgAMuCYt4EC5af82c8ZgYRTmNQedg9KJb68EhjbNct5",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "moon.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "7bSTjCL4BPPbj2WYPcdZd5hGCJGQVj2pwNUFeAqEkGnb",
+        "block_height": 277396655,
+        "nonce": 276359394000031,
+        "target": {
+          "absent": true
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000032,
+      "signed_block_hash": "7bSTjCL4BPPbj2WYPcdZd5hGCJGQVj2pwNUFeAqEkGnb",
+      "receipt_file": "docs/multi-case/receipt-case-moon-spirit-create.json",
+      "actual_fee_yocto": "7114989537500000000000",
+      "after": {
+        "block_hash": "9Tp2YvRoSJsBeYrHwgjtu6F7KPvtwfXMz3gheCtRAMhR"
+      },
+      "verified_at": "2026-11-12T17:56:25.393020+00:00"
+    },
+    "case-moon-spirit-deploy": {
+      "status": "verified",
+      "tx_hash": "3ns1JzvwAhiQkoZzr59iHsi3Rx2BpGWJaZ6c6wug7zHP",
+      "signer_id": "moon.needmore_1_near.testnet",
+      "receiver_id": "moon.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "DHpJxEuz8f9EVUbK942m3c8pLk96LTaLTbveB9zAqWU2",
+        "block_height": 277396685,
+        "nonce": 277396681000000,
+        "target": {
+          "amount": "7000000000000000000000000",
+          "code_hash": "11111111111111111111111111111111",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 182
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277396681000001,
+      "signed_block_hash": "DHpJxEuz8f9EVUbK942m3c8pLk96LTaLTbveB9zAqWU2",
+      "receipt_file": "docs/multi-case/receipt-case-moon-spirit-deploy.json",
+      "actual_fee_yocto": "4284376686559600000000",
+      "after": {
+        "block_hash": "8xSbEAcKjxaCgPy3CeWrXmhNmkmb8iGNpt2PAKuUpz4k",
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "0",
+            "reserved_rewards": "0",
+            "available": "0",
+            "target": "2000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "0",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "0",
+            "expected_balance_max": "0"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T17:56:50.194468+00:00"
+    },
+    "case-register-usdi-moon-spirit": {
+      "status": "verified",
+      "tx_hash": "Fj19QaCCcwkY4EaHx64brFrq6NCXKVg9Tx5g8sGJxRQq",
+      "signer_id": "moon.needmore_1_near.testnet",
+      "receiver_id": "usdi-needmore-1-near.testnet",
+      "before": {
+        "block_hash": "4nga3NZ4wyAbE1uuDmrA7BZtH7D5WcXMF86jXbrMBu6X",
+        "block_height": 277396726,
+        "nonce": 277396681000001,
+        "target": {
+          "amount": "10002193884460581900000010",
+          "code_hash": "2z7yWfap6hkGAcow7xFKRghGWv7Uq1uea3Vn7HV6QuaJ",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 362770
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277396681000002,
+      "signed_block_hash": "4nga3NZ4wyAbE1uuDmrA7BZtH7D5WcXMF86jXbrMBu6X",
+      "receipt_file": "docs/multi-case/receipt-case-register-usdi-moon-spirit.json",
+      "actual_fee_yocto": "205501237186700000000",
+      "after": {
+        "block_hash": "Cw8MZc2EATJp9rNCK7yoAPY7Qq2MmkcYWHey3cuedmVK"
+      },
+      "verified_at": "2026-11-12T17:57:08.911950+00:00"
+    },
+    "case-register-moon-spirit-PURGE": {
+      "status": "verified",
+      "tx_hash": "BreK16v41hYA7bbH2FkHcxTZWa2KYjtwvpCzaf5pFJLS",
+      "signer_id": "moon.needmore_1_near.testnet",
+      "receiver_id": "purge.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "Cw8MZc2EATJp9rNCK7yoAPY7Qq2MmkcYWHey3cuedmVK",
+        "block_height": 277396756,
+        "nonce": 277396681000002,
+        "target": {
+          "amount": "4997415579327602400000000",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323647
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277396681000003,
+      "signed_block_hash": "Cw8MZc2EATJp9rNCK7yoAPY7Qq2MmkcYWHey3cuedmVK",
+      "receipt_file": "docs/multi-case/receipt-case-register-moon-spirit-PURGE.json",
+      "actual_fee_yocto": "199647815068000000000",
+      "after": {
+        "block_hash": "5tLyDN8kpygRy4232pN6YZ67hubRNsagZQyt8Fh76P2c"
+      },
+      "verified_at": "2026-11-12T17:57:28.116513+00:00"
+    },
+    "case-register-moon-spirit-GEAR": {
+      "status": "verified",
+      "tx_hash": "zkQPVRJGYRwK6awmVK5DK8e4HUuKvrgEXuUgKimfpDj",
+      "signer_id": "moon.needmore_1_near.testnet",
+      "receiver_id": "gear.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "BvKFTkU1yCDnwLKFiyL12MoD98qGb2v4e4qsqxy2Twv2",
+        "block_height": 277396788,
+        "nonce": 277396681000003,
+        "target": {
+          "amount": "4997412006001705400000000",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323645
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277396681000004,
+      "signed_block_hash": "BvKFTkU1yCDnwLKFiyL12MoD98qGb2v4e4qsqxy2Twv2",
+      "receipt_file": "docs/multi-case/receipt-case-register-moon-spirit-GEAR.json",
+      "actual_fee_yocto": "201471815068000000000",
+      "after": {
+        "block_hash": "76nRKfUj7o28Nsq1qDmT2MJaHxyXEwvuc9ft6ycJbMEC"
+      },
+      "verified_at": "2026-11-12T17:57:58.026495+00:00"
+    },
+    "case-register-moon-spirit-NEKO": {
+      "status": "verified",
+      "tx_hash": "CMe3feprWxsrKRPAScxRMNm78Kda7vCnGLmz5ZqDNLm",
+      "signer_id": "moon.needmore_1_near.testnet",
+      "receiver_id": "neko.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "9NxGwdm1Ks8S2UwTiouWinZtrdcpVxbfa58g2Pff2Hmb",
+        "block_height": 277396842,
+        "nonce": 277396681000004,
+        "target": {
+          "amount": "4998663587836352800000001",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323736
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277396681000005,
+      "signed_block_hash": "9NxGwdm1Ks8S2UwTiouWinZtrdcpVxbfa58g2Pff2Hmb",
+      "receipt_file": "docs/multi-case/receipt-case-register-moon-spirit-NEKO.json",
+      "actual_fee_yocto": "201243815068000000000",
+      "after": {
+        "block_hash": "D9LTVjJSsuYF6aKXiZpr1zs388qmPe289mthYTZbQP5r"
+      },
+      "verified_at": "2026-11-12T17:58:39.785242+00:00"
+    },
+    "case-register-moon-spirit-mpDAO": {
+      "status": "verified",
+      "tx_hash": "At2VtHpeTSP8XC1jvWWNGXcXdK4QscVdRkuqftJ1bUdH",
+      "signer_id": "moon.needmore_1_near.testnet",
+      "receiver_id": "mpdao.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "ERkLQQXfznekKhTNZoDuupo9L1chBQoteGiMQnRssB18",
+        "block_height": 277396916,
+        "nonce": 277396681000005,
+        "target": {
+          "amount": "4997414283511202400000000",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323647
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277396681000006,
+      "signed_block_hash": "ERkLQQXfznekKhTNZoDuupo9L1chBQoteGiMQnRssB18",
+      "receipt_file": "docs/multi-case/receipt-case-register-moon-spirit-mpDAO.json",
+      "actual_fee_yocto": "201015815068000000000",
+      "after": {
+        "block_hash": "97SsrRhSnKF1HiQ7j5W5Tn7hweccFggJvkjKcLGTXncx"
+      },
+      "verified_at": "2026-11-12T17:59:08.111693+00:00"
+    },
+    "case-register-moon-spirit-STNEAR": {
+      "status": "verified",
+      "tx_hash": "95N4iQGMrQEU6XVWR9h6dArNPWV1XzV4CpgvqQypge9M",
+      "signer_id": "moon.needmore_1_near.testnet",
+      "receiver_id": "stnear.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "DrnsyRZ2Yg8y8JyZ1tdC5QbjM3PXTCpSMDeNDfr6pHDZ",
+        "block_height": 277397124,
+        "nonce": 277396681000006,
+        "target": {
+          "amount": "4997410527651346000000000",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323702
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 277396681000007,
+      "signed_block_hash": "DrnsyRZ2Yg8y8JyZ1tdC5QbjM3PXTCpSMDeNDfr6pHDZ",
+      "receipt_file": "docs/multi-case/receipt-case-register-moon-spirit-STNEAR.json",
+      "actual_fee_yocto": "201927815068000000000",
+      "after": {
+        "block_hash": "8wZ7U7kwdmBjdt6Fr8ZZFfwCiLz22add9xbU9GATjre2"
+      },
+      "verified_at": "2026-11-12T18:00:58.306132+00:00"
+    },
+    "case-fund-usdi-moon-spirit": {
+      "status": "verified",
+      "tx_hash": "4zM8AehftxzBXU6W6LW3utMKYnHYcWpbhjAx8fGsmiCM",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "usdi-needmore-1-near.testnet",
+      "before": {
+        "block_hash": "8wZ7U7kwdmBjdt6Fr8ZZFfwCiLz22add9xbU9GATjre2",
+        "block_height": 277397161,
+        "nonce": 276359394000032,
+        "target": {
+          "amount": "10003443884460581900000010",
+          "code_hash": "2z7yWfap6hkGAcow7xFKRghGWv7Uq1uea3Vn7HV6QuaJ",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 362859
+        },
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "0",
+            "reserved_rewards": "0",
+            "available": "0",
+            "target": "2000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "0",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "0",
+            "expected_balance_max": "0"
+          }
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000033,
+      "signed_block_hash": "8wZ7U7kwdmBjdt6Fr8ZZFfwCiLz22add9xbU9GATjre2",
+      "receipt_file": "docs/multi-case/receipt-case-fund-usdi-moon-spirit.json",
+      "actual_fee_yocto": "656742021228500000000",
+      "after": {
+        "block_hash": "AQDGrc5Wa6TS5Qz6JjKxPUFFVvsdPTdtF3uthMTvGxSx",
+        "book": {
+          "balance": 150000000,
+          "pool": {
+            "pool_funds": "150000000",
+            "reserved_rewards": "0",
+            "available": "150000000",
+            "target": "2000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "1",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "150000000",
+            "expected_balance_max": "150000000"
+          }
+        }
+      },
+      "verified_at": "2026-11-12T18:01:23.263038+00:00"
+    },
+    "case-fund-bonus-moon-spirit-PURGE": {
+      "status": "submitted",
+      "tx_hash": "mttoMLZFbGD21xLu5b3homhfLDwLuPe5JBAo4XeAB4G",
+      "signer_id": "needmore_1_near.testnet",
+      "receiver_id": "purge.needmore_1_near.testnet",
+      "before": {
+        "block_hash": "FakJutCQCTXLd1yBDwgJYJ2PPbN96Zh6H3xcfpzP3AJE",
+        "block_height": 277397203,
+        "nonce": 276359394000033,
+        "target": {
+          "amount": "4998665579327602400000000",
+          "code_hash": "HsNpv7y7Zv1USqe8cVb1FpZZ1RQUEYWr2sYmvrAbKAjR",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 323736
+        },
+        "book": {
+          "balance": 0,
+          "pool": {
+            "pool_funds": "150000000",
+            "reserved_rewards": "0",
+            "available": "150000000",
+            "target": "2000000000",
+            "health": "Critical",
+            "pending_fees": "0",
+            "treasury_available": "0",
+            "treasury_in_flight": "0",
+            "in_flight_payouts": "0",
+            "pending_openings": 0,
+            "completed_payouts": "0",
+            "total_paid": "0",
+            "revision": "1",
+            "paused": true,
+            "can_open": false,
+            "storage_per_opening": "20480000000000000000000",
+            "storage_account_cost": "2560000000000000000000",
+            "expected_balance_min": "150000000",
+            "expected_balance_max": "150000000"
+          }
+        }
+      },
+      "transport": "offline_keychain_pinned_testnet_rpc",
+      "signed_nonce": 276359394000034,
+      "signed_block_hash": "FakJutCQCTXLd1yBDwgJYJ2PPbN96Zh6H3xcfpzP3AJE"
     }
   },
-  "status": "partial_blocked_wallet_policy",
-  "verified_steps": 8,
-  "remaining_steps": 82,
-  "actual_fees_yocto": "7108546396287000000000",
+  "status": "in_progress",
+  "verified_steps": 47,
+  "remaining_steps": 43,
+  "actual_fees_yocto": "123653607630024700000000",
   "storage_deposits_yocto": "2500000000000000000000",
   "blockers": [
     "Meteor blocks approved new-account AddKey FullAccess actions; no bypass attempted.",
